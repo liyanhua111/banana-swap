@@ -2,11 +2,11 @@ import React from "react";
 import "./App.less";
 import GitHubButton from "react-github-btn";
 import { Routes } from "./routes";
-
+import {AppMenu} from './components/menu'
 function App() {
   return (
     <div className="App">
-      <div className="Banner">
+      {/* <div className="Banner">
         <div
           className="Banner-description"
           style={{
@@ -36,9 +36,14 @@ function App() {
             </ul>
           </div>
         </div>
+      </div> */}
+      <div className="main-content">
+        <AppMenu></AppMenu>
+        <div className="main-body">
+          <Routes />
+        </div>
       </div>
-      <Routes />
-      <div className="social-buttons">
+      {/* <div className="social-buttons">
         <GitHubButton
           href="https://github.com/project-serum/oyster-swap"
           data-color-scheme="no-preference: light; light: light; dark: light;"
@@ -57,7 +62,7 @@ function App() {
         >
           Fork
         </GitHubButton>
-      </div>
+      </div> */}
     </div>
   );
 }

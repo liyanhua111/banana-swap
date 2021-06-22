@@ -24,6 +24,13 @@ export const ExchangeView = (props: {}) => {
         return <AddToLiquidity />;
       },
     },
+    {
+      key: "assets",
+      tab: <div style={tabStyle}>资产桥</div>,
+      render: () => {
+        return <AddToLiquidity />;
+      },
+    },
   ];
 
   const location = useLocation();
@@ -72,7 +79,9 @@ export const ExchangeView = (props: {}) => {
           handleTabChange(key);
         }}
       >
-        {tabList.find((t) => t.key === activeTab)?.render()}
+        <div className="contentBox">
+          {tabList.find((t) => t.key === activeTab)?.render()}
+        </div>
       </Card>
     </>
   );

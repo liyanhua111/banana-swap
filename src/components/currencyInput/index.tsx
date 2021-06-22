@@ -46,9 +46,11 @@ export const TokenDisplay = (props: {
           justifyContent: "space-between",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center" }}>
-          {icon || <TokenIcon mintAddress={mintAddress} />}
-          {name}
+        <div style={{ display: "flex", alignItems: "center"}}>
+          <div>
+            {icon || <TokenIcon mintAddress={mintAddress} />}
+            {name}
+          </div>
         </div>
         {showBalance ? (
           <span
@@ -179,7 +181,7 @@ export const CurrencyInput = (props: {
   return (
     <Card
       className="ccy-input"
-      style={{ borderRadius: 20 }}
+      style={{ borderRadius: 8 }}
       bodyStyle={{ padding: 0 }}
     >
       <div className="ccy-input-header">
@@ -207,6 +209,7 @@ export const CurrencyInput = (props: {
             boxShadow: "none",
             borderColor: "transparent",
             outline: "transpaernt",
+            color:"#FFA624"
           }}
           placeholder="0.00"
         />
@@ -215,7 +218,7 @@ export const CurrencyInput = (props: {
             <Select
               size="large"
               showSearch
-              style={{ minWidth: 150 }}
+              style={{ minWidth: 130 }}
               placeholder="CCY"
               value={props.mint}
               onChange={(item) => {
@@ -272,7 +275,7 @@ export const PoolCurrencyInput = (props: {
   return (
     <Card
       className="ccy-input"
-      style={{ borderRadius: 20 }}
+      style={{ borderRadius: 8 }}
       bodyStyle={{ padding: 0 }}
     >
       <div className="ccy-input-header">

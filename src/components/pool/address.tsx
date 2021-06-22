@@ -115,10 +115,10 @@ export const AdressesPopover = (props: { pool?: PoolInfo }) => {
       }
     >
       <Button
+        style={{color:'#FFC000'}}
         shape="circle"
         size="large"
         type="text"
-        className={"trade-address-info-button"}
         icon={<InfoCircleOutlined />}
       />
     </Popover>

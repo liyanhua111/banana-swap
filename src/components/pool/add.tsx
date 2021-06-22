@@ -191,18 +191,17 @@ export const AddToLiquidity = () => {
       className="add-button"
       onClick={() => executeAction(pool)}
       trigger={["click"]}
-      // disabled={
-      //   connected &&
-      //   (depositType === "both"
-      //     ? pendingTx ||
-      //       !A.account ||
-      //       !B.account ||
-      //       A.account === B.account ||
-      //       !hasSufficientBalance
-      //     : !getDepositToken()?.account ||
-      //       !getDepositToken()?.sufficientBalance())
-      // }
-      disabled={true}
+      disabled={
+        connected &&
+        (depositType === "both"
+          ? pendingTx ||
+            !A.account ||
+            !B.account ||
+            A.account === B.account ||
+            !hasSufficientBalance
+          : !getDepositToken()?.account ||
+            !getDepositToken()?.sufficientBalance())
+      }
       type="primary"
       size="large"
       overlay={
@@ -213,17 +212,16 @@ export const AddToLiquidity = () => {
         />
       }
     >
-      {/*{depositType === "both"*/}
-      {/*  ? generateActionLabel(*/}
-      {/*      pool ? ADD_LIQUIDITY_LABEL : CREATE_POOL_LABEL,*/}
-      {/*      connected,*/}
-      {/*      tokenMap,*/}
-      {/*      A,*/}
-      {/*      B*/}
-      {/*    )*/}
-      {/*  : generateExactOneLabel(connected, tokenMap, getDepositToken())}*/}
-      {/*{pendingTx && <Spin indicator={antIcon} className="add-spinner" />}*/}
-      Swap is being deprecated
+      {depositType === "both"
+        ? generateActionLabel(
+            pool ? ADD_LIQUIDITY_LABEL : CREATE_POOL_LABEL,
+            connected,
+            tokenMap,
+            A,
+            B
+          )
+        : generateExactOneLabel(connected, tokenMap, getDepositToken())}
+      {pendingTx && <Spin indicator={antIcon} className="add-spinner" />}
     </Dropdown.Button>
   );
 
@@ -258,21 +256,27 @@ export const AddToLiquidity = () => {
   return (
     <>
       <div className="input-card">
-        <AdressesPopover pool={pool} />
-        <Popover
-          trigger="hover"
-          content={
-            <div style={{ width: 300 }}>
-              Liquidity providers earn a fixed percentage fee on all trades
-              proportional to their share of the pool. Fees are added to the
-              pool, accrue in real time and can be claimed by withdrawing your
-              liquidity.
-            </div>
-          }
-        >
-          <Button type="text">Read more about providing liquidity.</Button>
-        </Popover>
-        {isLatestLayout && pool && (
+        <div className="desBox">
+          <div className="desL"></div>
+          <div className="desC font1">增加流动性</div>
+          <div className="desR">
+            <Popover
+              trigger="hover"
+              content={
+                <div style={{ width: 300 }}>
+                  Liquidity providers earn a fixed percentage fee on all trades
+                  proportional to their share of the pool. Fees are added to the
+                  pool, accrue in real time and can be claimed by withdrawing your
+                  liquidity.
+                </div>
+              }
+            >
+              <img src={require('../../assets/img/icon3.png')} alt="" style={{marginRight:0}}/>
+            </Popover>
+            <AdressesPopover pool={pool} />
+          </div>
+        </div>
+        {/* {isLatestLayout && pool && (
           <div className="flex-row-center">
             <Radio.Group
               style={{ margin: "10px 0" }}
@@ -286,7 +290,7 @@ export const AddToLiquidity = () => {
               {getTokenOptions()}
             </Radio.Group>
           </div>
-        )}
+        )} */}
         {depositType === "both" && (
           <>
             <CurrencyInput
@@ -304,7 +308,7 @@ export const AddToLiquidity = () => {
                 A.setMint(item);
               }}
             />
-            <div>+</div>
+            <div style={{fontSize:"30px"}}>+</div>
             <CurrencyInput
               title={
                 options.curveType === CurveType.ConstantProductWithOffset

@@ -33,7 +33,7 @@ export const WalletConnect: FunctionComponent = ({ children }) => {
 
   if (connected) {
     return (
-      <Dropdown overlay={menu} trigger={["hover"]}>
+      <Dropdown  overlay={menu} trigger={["hover"]}>
         <div style={{ cursor: "pointer" }}>{children}</div>
       </Dropdown>
     );

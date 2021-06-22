@@ -103,7 +103,17 @@ export const TradeEntry = () => {
   return (
     <>
       <div className="input-card">
-        <AdressesPopover pool={pool} />
+        <div className="desBox">
+          <div className="desL">
+            <div className="font1">兑换</div>
+            <div className="font2">即时兑换代币</div>
+          </div>
+          <div className="desR">
+            <img src={require('../../assets/img/icon1.png')} alt=""/>
+            <img src={require('../../assets/img/icon2.png')} alt="" />
+            <AdressesPopover pool={pool} />
+          </div>
+        </div>
         <CurrencyInput
           title="Input"
           onInputChange={(val: any) => {
@@ -146,23 +156,22 @@ export const TradeEntry = () => {
         size="large"
         onClick={connected ? handleSwap : connect}
         style={{ width: "100%" }}
-      // disabled={true}
-      // disabled={
-      //   connected &&
-      //   (pendingTx ||
-      //     !A.account ||
-      //     !B.mintAddress ||
-      //     A.account === B.account ||
-      //     !A.sufficientBalance() ||
-      //     !pool)
-      // }
+        disabled={
+          connected &&
+          (pendingTx ||
+            !A.account ||
+            !B.mintAddress ||
+            A.account === B.account ||
+            !A.sufficientBalance() ||
+            !pool)
+        }
       >
         {generateActionLabel(
           !pool
             ? POOL_NOT_AVAILABLE(
-              getTokenName(tokenMap, A.mintAddress),
-              getTokenName(tokenMap, B.mintAddress)
-            )
+                getTokenName(tokenMap, A.mintAddress),
+                getTokenName(tokenMap, B.mintAddress)
+              )
             : SWAP_LABEL,
           connected,
           tokenMap,
@@ -171,7 +180,6 @@ export const TradeEntry = () => {
           true
         )}
         {pendingTx && <Spin indicator={antIcon} className="add-spinner" />}
-        {/* Swap is being deprecated */}
       </Button>
       <TradeInfo pool={pool} />
     </>

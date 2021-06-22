@@ -1,7 +1,9 @@
 .ccy-input {
   margin-top: 10px;
   margin-bottom: 10px;
-  
+  background: #F7F7F7;
+  color: #222;
+
   .ant-select-selector,
   .ant-select-selector:focus,
   .ant-select-selector:active {
@@ -10,13 +12,15 @@
   };
   .ant-select-selection-item {
     display: flex;
-    
+    color: #222 !important;
     .token-balance {
       display: none;
     };
   };
 }
-
+.ant-card-bordered{
+  border: none;
+}
 .token-balance {
   color: grey;
 }
@@ -55,6 +59,13 @@
   align-items: center;
   justify-self: flex-end;
   justify-content: flex-end;
+  input{
+    color: #222;
+  }
+}
+
+.ccy-input-header .ant-select-arrow .anticon{
+  color: #190B0D;
 }
 
 .ant-select-dropdown {
