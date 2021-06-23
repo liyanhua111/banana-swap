@@ -25,35 +25,35 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
           <Menu.Item key="1" icon={<img src={require('../../assets/img/nav/nav1.png')} className="navIcon" />}>
               <Link
                   to={{
-                    pathname: "/",
+                    pathname: "/home",
                   }}
             >
                   首页
               </Link>
           </Menu.Item>
           <SubMenu key="sub1" icon={<img src={require('../../assets/img/nav/nav2.png')} className="navIcon" />} title="交易">
-              <Menu.Item key="/">
+              <Menu.Item key="/swap">
                 <Link
                   to={{
-                    pathname: "/",
+                    pathname: "/swap/",
                   }}
                 >
                   兑换
                 </Link>
               </Menu.Item>
-              <Menu.Item key="/add">
+              <Menu.Item key="/swap/add">
                 <Link
                   to={{
-                    pathname: "/add",
+                    pathname: "/swap/add",
                   }}
                 >
                   流动性
                 </Link>
               </Menu.Item>
-              <Menu.Item key="/info">
+              <Menu.Item key="/swap/info">
                 <Link
                   to={{
-                    pathname: "/info",
+                    pathname: "/swap/info",
                   }}
                 >
                 资产桥

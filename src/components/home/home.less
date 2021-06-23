@@ -1,0 +1,468 @@
+.homePage{
+  width: 100%;
+  background: #FFE38D;
+  margin: 0 auto;
+  color: #000;
+  .homeContent{
+    position: relative;
+    background: url(../../assets/img/homeBg.png) no-repeat center;
+    background-size: cover;
+    .footBg{
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 9.65rem;
+    }
+  }
+  .homeHeader{
+    display: flex;
+    align-items: center;
+    padding: 0.4rem 0;
+    .homeLogo{
+      width: 2.62rem;
+    }
+  }
+  .bannerBox{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.4rem;
+    .banner{
+      width: 10rem;
+      text-align: left;
+      margin-top: 0.7rem;
+      &>div{
+        margin-bottom: 25px;
+      }
+      .font1{
+        font-size: 0.88rem;
+        font-weight: 800;
+        color: #FFC000;
+      }
+      .font2{
+        font-size: 0.5rem;
+        color: #FFC000;
+      }
+      .font3{
+        font-size: 0.3rem;
+      }
+      .font4{
+        font-size: 0.5rem;
+        color: #000000;
+      }
+      .font5{
+        font-size: 0.88rem;
+        font-weight: 800;
+      }
+      .handBtn{
+        width: 5.68rem;
+        height: 1.42rem;
+        line-height: 1.42rem;
+        color: #fff;
+        font-size: 0.4rem;
+        font-weight: 800;
+        margin-top: 1.84rem;
+        background: #FFC100;
+        text-align: center;
+        border-radius: 0.71rem;
+        box-shadow: rgba(255, 192, 0,1) 4px 28px 58px -17px;
+        cursor: pointer;
+      }
+    }
+    img{
+      width: 7.23rem;
+    }
+  }
+  .section1{
+    margin-top: 2.3rem;
+    .font1{
+      font-size: 0.56rem;
+      color: #000;
+      .subfont{
+        color:#FFC000;
+        font-weight: 800;
+      }
+    }
+    .cardBox{
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      margin-top: 0.67rem;
+      .cardItem{
+        width:4.88rem;
+        background: #fff;
+        padding:0 0.48rem;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px 0px;
+        border-radius: 0.07rem;
+        margin-right: 0.67rem;
+        &:hover{
+          box-shadow: rgba(255, 192, 0,1) 15px 80px 154px -75px;
+        }
+        &:last-child{
+          margin-right: 0;
+        }
+        img{
+          width: 150px;
+          margin-top: 0.96rem;
+          margin-bottom: 0.4rem;
+        }
+        .cardFont1{
+          font-size: 0.32rem;
+          margin-bottom: 0.5rem;
+        }
+        .cardFont2{
+          font-size: 0.24rem;
+          font-weight: 300;
+          text-align: left;
+          color: #010101;
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+  .section2{
+    margin-top: 1.9rem;
+    .barBox{
+      position: relative;
+      width: 100%;
+      height: 1.8rem;
+      line-height: 1.8rem;
+      border-radius: 0.9rem;
+      font-size:0.56rem;
+      color: #fff;
+      background: #FFC000;
+      text-align: center;
+      .addImg{
+        position: absolute;
+        right: -0.2rem;
+        top: -0.1rem;
+        img{
+          width: 2.36rem;
+        }
+      }
+    }
+    .moduleBox{
+      margin-top: 2.13rem;
+      .tabTitle{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.32rem;
+        margin-bottom: 2.29rem;
+      }
+      .tabContent{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .tabLeft{
+          width: 6.2rem;
+          text-align: left;
+          .font1{
+            font-size: 0.56rem;
+          }
+          .font2{
+            font-size: 0.24rem;
+            font-weight: 300;
+          }
+        }
+        .switchBox{
+          position: relative;
+          width: 11.56rem;
+          height: 9rem;
+          .switch{
+            width: 100%;
+            height: 8rem;
+          }
+          .tabImg{
+            position: absolute;
+            width: 10.6rem;
+            z-index: 1;
+            right: 0;
+            top: 0;
+            box-shadow: 0.4rem 0.4rem 0.8rem 0px rgba(2, 8, 22, 0.5);
+            border-radius: 0.06rem;
+            cursor: pointer;
+            transition: all .3s;
+          }
+          .tabImg:first-child{
+            z-index:2 ;
+            left: 0;
+            top: 1.62rem;
+          }
+          .tabImg:hover{
+            z-index:3 !important;
+            // left: 0 !important;
+            // top: 1.62rem !important;
+            transition: all .3s;
+          }
+        }
+      }
+    }
+  }
+  .section3{
+    margin-top:3rem;
+    .contentBox{
+      display: flex;
+      justify-content: space-between;
+      img{
+        width: 7.84rem;
+      }
+      .content{
+        width: 9.8rem;
+        .font1{
+          font-size: 0.56rem;
+          color: #1D1930;
+          margin-bottom: 0.76rem;
+        }
+        .font2{
+          font-size: 0.3rem;
+          color: #2D2D2D;
+          margin-bottom: 0.7rem;
+          font-weight: 300;
+        }
+      }
+    }
+  }
+  .section4{
+    height: 13.5rem;
+    margin-top: 2.3rem;
+    .title{
+      font-size: 0.56rem;
+      color: #1D1930;
+      margin-bottom: 1.5rem;
+    }
+    .equity{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .equityL{
+        position: relative;
+        flex: 1;
+        top: 0.7rem;
+        .equityLItem{
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          margin-bottom: 0.2rem;
+          p:first-child{
+            width: 2.56rem;
+            height: 1.04rem;
+            line-height: 1.04rem;
+            background: #fff;
+            border-radius: 0.52rem;
+            text-align: center;
+            color: #FFC000;
+            font-size: 0.44rem;
+            font-weight: 500;
+            margin-bottom: 0;
+          }
+          .placeholder{
+            width: 1rem;
+            margin-left: 0.14rem;
+          }
+          .dian{
+            width: 2.56rem;
+            display: flex;
+            justify-content: center;
+            span{
+              display: inline-block;
+              width: 0.09rem;
+              height: 0.09rem;
+              background: #000000;
+              border: 1px solid #030000;
+              border-radius: 50%;
+              margin-right: 0.2rem;
+              margin-top: 0.57rem;
+              margin-bottom: 0.2rem;
+              &:last-child{
+                margin-right: 0;
+              }
+            }
+          }
+        }
+        .position1{
+          top: -1.3rem;
+          right: 1.4rem;
+        }
+        .position2{
+          top: 1rem;
+          right: 4.4rem;
+        }
+        .position3{
+          bottom: 0.5rem;
+          right: 5rem;
+        }
+      }
+      .equityC{
+        width: 4.8rem;
+        background: #fff;
+        box-shadow: 0px 14px 36px 4px rgba(119, 90, 0, 0.5);
+        border-radius: 0.34rem;
+        padding: 0.86rem;
+        margin: 0 0.26rem;
+        .font1{
+          font-size: 0.4rem;
+          font-weight: 800;
+          margin-bottom: 0.6rem;
+          line-height: 0.4rem;
+        }
+        .font2{
+          font-size: 0.3rem;
+          margin-bottom: 0.5rem;
+        }
+        .font3{
+          font-size: 0.3rem;
+          color: #2D2D2D;
+          font-weight: 200;
+        }
+      }
+      .equityR{
+        position: relative;
+        top: 0.5rem;
+        .equityRItem{
+          display: flex;
+          align-items: center;
+          margin-bottom: 0.75rem;
+          font-weight: 500;
+          &:last-child{
+            margin-bottom: 0;
+          }
+          .placeholder{
+            width: 1rem;
+            margin-right: 0.14rem;
+          }
+          .equityRSubItem{
+            display: flex;
+            align-items: center;
+            width: 6rem;
+            height: 1.14rem;
+            background: #fff;
+            color: #FFC000;
+            font-size: 0.3rem;
+            .classify{
+              width: 2.52rem;
+              height: 1rem;
+              line-height: 1rem;
+              margin-left: 0.07rem;
+              background: #FFC100;
+              color: #fff;
+              font-size: 0.44rem;
+              margin-bottom: 0;
+            }
+            .classifyInfo{
+              flex: 1;
+              margin-bottom: 0;
+            }
+          }
+        }
+        .position1{
+          top: -1.3rem;
+          left: 2.2rem;
+        }
+      }
+      .position{
+        position: absolute;
+        font-weight: 600;
+        font-size: 0.3rem;
+      }
+    }
+  }
+  .section5{
+    text-align: left;
+    .hen{
+      width: 0.54rem;
+      height: 0.18rem;
+      background: #FFC000;
+    }
+    .font1{
+      font-size: 0.56rem;
+    }
+    .headerBox{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 0.86rem;
+      line-height: 0.86rem;
+      background: #fff;
+      border-radius: 4px;
+      p{
+        flex: 1;
+        margin-bottom: 0;
+        font-size: 0.3rem;
+        color: #1D1930;
+        text-align: left;
+        padding-left: 0.26rem;
+      }
+      .active{
+        background: #FFC000;
+        border-radius: 4px;
+        box-shadow: rgba(255, 192, 0,1) 4px 45px 58px -17px;
+      }
+    }
+    .contentBox{
+      display: flex;
+      justify-content: space-between;
+      ul{
+        margin-top: 0.5rem;
+        flex: 1;
+        padding-left: 0;
+        li{
+          position: relative;
+          list-style: none;
+          text-align: left;
+          padding-left: 0.15rem;
+          line-height: 0.5rem;
+          font-size: 0.24rem;
+          &::after{
+            display: inline-block;
+            overflow: hidden;
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-top: -0.025rem;
+            width: 0.05rem;
+            height: 0.05rem;
+            background: #FFC000;
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+  }
+  .section6{
+    height: 4rem;
+    margin-top: 2.25rem;
+    padding-bottom: 2.25rem;
+    .line{
+      width: 100%;
+      border: 0.03rem solid #000000;
+      margin-bottom: 0.76rem;
+    }
+    .logoBox{
+      text-align: left;
+      img{
+        width: 2.62rem;
+        margin-bottom: 0.67rem;
+      }
+      p{
+        font-size: 0.3rem;
+        color: #1D1930;
+      }
+    }
+  }
+}
+.maxWidth{
+  max-width: 19.6rem;
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 3001px) {
+  .homePage{
+    .homeContent{
+      background: url(../../assets/img/homeBg.png) no-repeat center;
+      background-size: contain;
+    }
+  }
+}

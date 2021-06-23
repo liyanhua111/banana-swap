@@ -53,6 +53,14 @@
       integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
       crossorigin="anonymous"
     />
+    <script>
+      font();
+      window.addEventListener('resize', () => font());
+      function font(){
+        var deviceMax = document.documentElement.clientWidth >2800?2800: document.documentElement.clientWidth
+        document.documentElement.style.fontSize = deviceMax / 28 + 'px'
+      }
+    </script>
   </head>
 
   <body>
