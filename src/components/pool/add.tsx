@@ -59,67 +59,70 @@ export const AddToLiquidity = () => {
   const executeAction = !connected
     ? connect
     : async (instance?: PoolInfo) => {
-        const currentDepositToken = getDepositToken();
-        if (
-          isLatestLayout &&
-          depositType === "one" &&
-          currentDepositToken?.account &&
-          currentDepositToken.mint
-        ) {
-          setPendingTx(true);
-          const components = [
-            {
-              account: currentDepositToken.account,
-              mintAddress: currentDepositToken.mintAddress,
-              amount: currentDepositToken.convertAmount(),
-            },
-          ];
-          addLiquidity(
-            connection,
-            wallet,
-            components,
-            slippage,
-            instance,
-            options,
-            depositType
-          )
-            .then(() => {
-              setPendingTx(false);
-            })
-            .catch((e) => {
-              console.log("Transaction failed", e);
-              notify({
-                description:
-                  "Please try again and approve transactions from your wallet",
-                message: "Adding liquidity cancelled.",
-                type: "error",
-              });
-              setPendingTx(false);
+      const currentDepositToken = getDepositToken();
+      console.log("step", 1);
+      if (
+        isLatestLayout &&
+        depositType === "one" &&
+        currentDepositToken?.account &&
+        currentDepositToken.mint
+      ) {
+
+        setPendingTx(true);
+        const components = [
+          {
+            account: currentDepositToken.account,
+            mintAddress: currentDepositToken.mintAddress,
+            amount: currentDepositToken.convertAmount(),
+          },
+        ];
+        addLiquidity(
+          connection,
+          wallet,
+          components,
+          slippage,
+          instance,
+          options,
+          depositType
+        )
+          .then(() => {
+            setPendingTx(false);
+          })
+          .catch((e) => {
+            console.log("Transaction failed", e);
+            notify({
+              description:
+                "Please try again and approve transactions from your wallet",
+              message: "Adding liquidity cancelled.",
+              type: "error",
             });
-        } else if (A.account && B.account && A.mint && B.mint) {
-          setPendingTx(true);
-          const components = [
-            {
-              account: A.account,
-              mintAddress: A.mintAddress,
-              amount: A.convertAmount(),
-            },
-            {
-              account: B.account,
-              mintAddress: B.mintAddress,
-              amount: B.convertAmount(),
-            },
-          ];
+            setPendingTx(false);
+          });
+      } else if (A.account && B.account && A.mint && B.mint) {
+        console.log("step", 2);
+        setPendingTx(true);
+        const components = [
+          {
+            account: A.account,
+            mintAddress: A.mintAddress,
+            amount: A.convertAmount(),
+          },
+          {
+            account: B.account,
+            mintAddress: B.mintAddress,
+            amount: B.convertAmount(),
+          },
+        ];
 
-          // use input from B as offset during pool init for curve with offset
-          if (
-            options.curveType === CurveType.ConstantProductWithOffset &&
-            !instance
-          ) {
-            options.token_b_offset = components[1].amount;
-            components[1].amount = 0;
-          }
-
+        // use input from B as offset during pool init for curve with offset
+        if (
+          options.curveType === CurveType.ConstantProductWithOffset &&
+          !instance
+        ) {
+          options.token_b_offset = components[1].amount;
+          components[1].amount = 0;
+        }
+        try {
           addLiquidity(
             connection,
             wallet,
@@ -141,8 +144,12 @@ export const AddToLiquidity = () => {
               });
               setPendingTx(false);
             });
+        } catch (err) {
+
         }
-      };
+
+      }
+    };
 
   const hasSufficientBalance = A.sufficientBalance() && B.sufficientBalance();
   const getDepositToken = () => {
@@ -195,12 +202,12 @@ export const AddToLiquidity = () => {
         connected &&
         (depositType === "both"
           ? pendingTx ||
-            !A.account ||
-            !B.account ||
-            A.account === B.account ||
-            !hasSufficientBalance
+          !A.account ||
+          !B.account ||
+          A.account === B.account ||
+          !hasSufficientBalance
           : !getDepositToken()?.account ||
-            !getDepositToken()?.sufficientBalance())
+          !getDepositToken()?.sufficientBalance())
       }
       type="primary"
       size="large"
@@ -214,12 +221,12 @@ export const AddToLiquidity = () => {
     >
       {depositType === "both"
         ? generateActionLabel(
-            pool ? ADD_LIQUIDITY_LABEL : CREATE_POOL_LABEL,
-            connected,
-            tokenMap,
-            A,
-            B
-          )
+          pool ? ADD_LIQUIDITY_LABEL : CREATE_POOL_LABEL,
+          connected,
+          tokenMap,
+          A,
+          B
+        )
         : generateExactOneLabel(connected, tokenMap, getDepositToken())}
       {pendingTx && <Spin indicator={antIcon} className="add-spinner" />}
     </Dropdown.Button>
@@ -271,7 +278,7 @@ export const AddToLiquidity = () => {
                 </div>
               }
             >
-              <img src={require('../../assets/img/icon3.png')} alt="" style={{marginRight:0}}/>
+              <img src={require('../../assets/img/icon3.png')} alt="" style={{ marginRight: 0 }} />
             </Popover>
             <AdressesPopover pool={pool} />
           </div>
@@ -308,7 +315,7 @@ export const AddToLiquidity = () => {
                 A.setMint(item);
               }}
             />
-            <div style={{fontSize:"30px"}}>+</div>
+            <div style={{ fontSize: "30px" }}>+</div>
             <CurrencyInput
               title={
                 options.curveType === CurveType.ConstantProductWithOffset
