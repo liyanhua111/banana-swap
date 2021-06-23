@@ -19,12 +19,12 @@ export function Routes() {
             <AccountsProvider>
               <MarketProvider>
                 <CurrencyPairProvider>
-                  <Route exact path="/" component={ExchangeView} />
-                  <Route exact path="/add" component={ExchangeView} />
-                  <Route exact path="/info" component={() => <ChartsView />} />
+                  <Route exact path="/swap/" component={ExchangeView} />
+                  <Route exact path="/swap/add" component={ExchangeView} />
+                  <Route exact path="/swap/info" component={() => <ChartsView />} />
                   <Route
                     exact
-                    path="/pool"
+                    path="/swap/pool"
                     component={() => <PoolOverview />}
                   />
                 </CurrencyPairProvider>
