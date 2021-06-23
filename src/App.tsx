@@ -9,9 +9,9 @@ function App() {
       {/* <Link className="list-group-item" to="/"></Link> */}
       {/* <Link className="list-group-item" to="/swap">swap</Link> */}
       <Switch>
-        <Route path="/" component={Home} />
+        <Route path="/home" component={Home} />
         <Route path="/swap" component={Main} />
-        <Redirect to="/"/>
+        <Redirect to="/home"/>
       </Switch>
     </div>
   );
