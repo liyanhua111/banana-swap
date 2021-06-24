@@ -23,14 +23,7 @@ export const ExchangeView = (props: {}) => {
       render: () => {
         return <AddToLiquidity />;
       },
-    },
-    {
-      key: "assets",
-      tab: <div style={tabStyle}>资产桥</div>,
-      render: () => {
-        return <AddToLiquidity />;
-      },
-    },
+    }
   ];
 
   const location = useLocation();
@@ -40,9 +33,9 @@ export const ExchangeView = (props: {}) => {
   const handleTabChange = (key: any) => {
     if (activeTab !== key) {
       if (key === "trade") {
-        history.push("/");
+        history.push("/swap/");
       } else {
-        history.push("/add");
+        history.push("/swap/add");
       }
     }
   };

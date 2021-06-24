@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "antd";
 import { useSlippageConfig } from "./../../utils/connection";
 import { NumericInput } from "./../numericInput";
+import './style.less'
 
 const MAX_SLIPPAGE = 25.0
 const DEFAULT_MIN_SLIPPAGE = 0.1
@@ -34,12 +35,13 @@ export const Slippage = () => {
             style={itemStyle}
             type={isSelected(item)}
             onClick={() => setSlippage(item / 100.0)}
+            className="sliderBtn"
           >
             {item}%
           </Button>
         );
       })}
-      <div style={{ padding: "3px 10px 3px 3px", border: "1px solid #434343" }}>
+      <div className="slippage-input-box">
         <NumericInput
           className="slippage-input"
           size="small"

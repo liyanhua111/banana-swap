@@ -1,4 +1,4 @@
-import { Button, Card, Popover, Spin, Typography } from "antd";
+import { Button, Card, Popover, Spin, Typography,Modal } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
 import {
   useConnection,
@@ -99,9 +99,18 @@ export const TradeEntry = () => {
       }
     }
   };
-
+  const [isModalVisible,setIsModalVisible] = useState(false);
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
   return (
     <>
+      <Modal title="设置" visible={isModalVisible} onCancel={handleCancel} footer={null}>
+        <Settings />
+      </Modal>
       <div className="input-card">
         <div className="desBox">
           <div className="desL">
@@ -109,7 +118,7 @@ export const TradeEntry = () => {
             <div className="font2">即时兑换代币</div>
           </div>
           <div className="desR">
-            <img src={require('../../assets/img/icon1.png')} alt=""/>
+            <img src={require('../../assets/img/icon1.png')} onClick={showModal} alt=""/>
             <img src={require('../../assets/img/icon2.png')} alt="" />
             <AdressesPopover pool={pool} />
           </div>
