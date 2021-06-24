@@ -194,10 +194,12 @@ export const AddToLiquidity = () => {
   );
 
   const addLiquidityButton = (
-    <Dropdown.Button
+    <Button
       className="add-button"
+      type="primary"
+      size="large"
       onClick={() => executeAction(pool)}
-      trigger={["click"]}
+      style={{ width: "100%" }}
       disabled={
         connected &&
         (depositType === "both"
@@ -209,17 +211,8 @@ export const AddToLiquidity = () => {
           : !getDepositToken()?.account ||
           !getDepositToken()?.sufficientBalance())
       }
-      type="primary"
-      size="large"
-      overlay={
-        <PoolConfigCard
-          options={options}
-          setOptions={setOptions}
-          action={createPoolButton}
-        />
-      }
     >
-      {depositType === "both"
+        {depositType === "both"
         ? generateActionLabel(
           pool ? ADD_LIQUIDITY_LABEL : CREATE_POOL_LABEL,
           connected,
@@ -228,8 +221,44 @@ export const AddToLiquidity = () => {
           B
         )
         : generateExactOneLabel(connected, tokenMap, getDepositToken())}
-      {pendingTx && <Spin indicator={antIcon} className="add-spinner" />}
-    </Dropdown.Button>
+       {pendingTx && <Spin indicator={antIcon} className="add-spinner" />}
+    </Button>
+    // <Dropdown.Button
+    //   className="add-button"
+    //   onClick={() => executeAction(pool)}
+    //   trigger={["click"]}
+    //   disabled={
+    //     connected &&
+    //     (depositType === "both"
+    //       ? pendingTx ||
+    //       !A.account ||
+    //       !B.account ||
+    //       A.account === B.account ||
+    //       !hasSufficientBalance
+    //       : !getDepositToken()?.account ||
+    //       !getDepositToken()?.sufficientBalance())
+    //   }
+    //   type="primary"
+    //   size="large"
+    //   overlay={
+    //     <PoolConfigCard
+    //       options={options}
+    //       setOptions={setOptions}
+    //       action={createPoolButton}
+    //     />
+    //   }
+    // >
+    //   {depositType === "both"
+    //     ? generateActionLabel(
+    //       pool ? ADD_LIQUIDITY_LABEL : CREATE_POOL_LABEL,
+    //       connected,
+    //       tokenMap,
+    //       A,
+    //       B
+    //     )
+    //     : generateExactOneLabel(connected, tokenMap, getDepositToken())}
+    //   {pendingTx && <Spin indicator={antIcon} className="add-spinner" />}
+    // </Dropdown.Button>
   );
 
   const getTokenOptions = () => {

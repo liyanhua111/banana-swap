@@ -6,8 +6,6 @@ import {Home} from "./components/home";
 function App() {
   return (
     <div className="App">
-      {/* <Link className="list-group-item" to="/"></Link> */}
-      {/* <Link className="list-group-item" to="/swap">swap</Link> */}
       <Switch>
         <Route path="/home" component={Home} />
         <Route path="/swap" component={Main} />

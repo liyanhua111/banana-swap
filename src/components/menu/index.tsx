@@ -50,15 +50,6 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                   流动性
                 </Link>
               </Menu.Item>
-              <Menu.Item key="/swap/info">
-                <Link
-                  to={{
-                    pathname: "/swap/info",
-                  }}
-                >
-                资产桥
-                </Link>
-              </Menu.Item>
           </SubMenu>
         </Menu>
         <div className="bottomBox">

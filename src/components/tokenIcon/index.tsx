@@ -23,8 +23,8 @@ export const TokenIcon = (props: {
         height="20"
         src={icon}
         style={{
-          marginRight: "0.5rem",
-          marginTop: "0.11rem",
+          marginRight: "0.12rem",
+          // marginTop: "0.11rem",
           borderRadius: "1rem",
           backgroundColor: "white",
           backgroundClip: "padding-box",
