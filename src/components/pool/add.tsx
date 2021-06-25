@@ -4,7 +4,7 @@ import {
   usePoolForBasket,
   PoolOperation,
 } from "../../utils/pools";
-import { Button, Card, Col, Dropdown, Popover, Radio, Row } from "antd";
+import { Button, Card, Col, Dropdown, Popover, Radio, Row, Modal } from "antd";
 import { useWallet } from "../../context/wallet";
 import {
   useConnection,
@@ -12,7 +12,7 @@ import {
   useSlippageConfig,
 } from "../../utils/connection";
 import { Spin } from "antd";
-import { LoadingOutlined, SettingOutlined , LeftOutlined} from "@ant-design/icons";
+import { LoadingOutlined, SettingOutlined , LeftOutlined,QuestionCircleOutlined} from "@ant-design/icons";
 import { notify } from "../../utils/notifications";
 import { SupplyOverview } from "./supplyOverview";
 import { CurrencyInput } from "../currencyInput";
@@ -289,15 +289,26 @@ export const AddToLiquidity = () => {
       </>
     );
   };
+  const [isModalVisible,setIsModalVisible] = useState(false);
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
   return (
     <>
+      <Modal title="设置" visible={isModalVisible} centered onCancel={handleCancel} footer={null}>
+        <Settings />
+      </Modal>
       <div className="input-card">
         <div className="desBox">
           <div className="desL">
-           <LeftOutlined className="arrowL" />
+           {/* <LeftOutlined className="arrowL" /> */}
           </div>
           <div className="desC font1">增加流动性</div>
           <div className="desR">
+            <img src={require('../../assets/img/icon1.png')} onClick={showModal} className="img1" alt=""/>
             <Popover
               trigger="hover"
               content={
@@ -309,7 +320,7 @@ export const AddToLiquidity = () => {
                 </div>
               }
             >
-              <img src={require('../../assets/img/icon3.png')} alt="" style={{ marginRight: 0 }} />
+              <QuestionCircleOutlined className="CircleOutlined"/>
             </Popover>
             <AdressesPopover pool={pool} />
           </div>
@@ -346,7 +357,7 @@ export const AddToLiquidity = () => {
                 A.setMint(item);
               }}
             />
-            <div style={{ fontSize: "30px" }}>+</div>
+            <div style={{ fontSize: "20px" }}>+</div>
             <CurrencyInput
               title={
                 options.curveType === CurveType.ConstantProductWithOffset
@@ -386,9 +397,10 @@ export const AddToLiquidity = () => {
         )}
         {addLiquidityButton}
         {pool && <PoolPrice pool={pool} />}
-        <SupplyOverview pool={pool} />
+        {/* 统计图 */}
+        {/* <SupplyOverview pool={pool} /> */}
       </div>
-
+      <PoolNum pool={pool} />
       <YourPosition pool={pool} />
     </>
   );
@@ -415,24 +427,24 @@ export const PoolPrice = (props: { pool: PoolInfo }) => {
   }
   return (
     <Card
-      className="ccy-input"
+      className="ccy-input pool-share"
       style={{ borderRadius: 20, width: "100%" }}
       bodyStyle={{ padding: "7px" }}
       size="small"
       title="Prices and pool share"
     >
       <Row style={{ width: "100%" }}>
-        <Col span={8}>
+        <Col span={8} className="font1">
           {formatPriceNumber.format(
             parseFloat(enriched.liquidityA) / parseFloat(enriched.liquidityB)
           )}
         </Col>
-        <Col span={8}>
+        <Col span={8} className="font1">
           {formatPriceNumber.format(
             parseFloat(enriched.liquidityB) / parseFloat(enriched.liquidityA)
           )}
         </Col>
-        <Col span={8}>
+        <Col span={8} className="font1">
           {ratio * 100 < 0.001 && ratio > 0 ? "<" : ""}
           &nbsp;{formatPriceNumber.format(ratio * 100)}%
         </Col>
@@ -450,6 +462,44 @@ export const PoolPrice = (props: { pool: PoolInfo }) => {
   );
 };
 
+export const PoolNum = (props: { pool?: PoolInfo }) => {
+  const { pool } = props;
+  const pools = useMemo(() => (pool ? [pool] : []), [pool]);
+  const enriched = useEnrichedPools(pools);
+  if (!pool || !enriched || enriched.length==0) {
+    return null;
+  }
+  const data = [
+    {
+      name: enriched[0].names[0],
+      value: enriched[0].liquidityAinUsd,
+      tokens: enriched[0].liquidityA,
+    },
+    {
+      name: enriched[0].names[1],
+      value: enriched[0].liquidityBinUsd,
+      tokens: enriched[0].liquidityB,
+    },
+  ];
+  return (
+    <Card
+      className="ccy-input pool-share pool-num"
+      style={{ borderRadius: 20, width: "100%" }}
+      bodyStyle={{ padding: "7px" }}
+      size="small"
+      title="pool Supply"
+    >
+      <Row style={{ width: "100%" }}>
+        <Col span={8}>
+        {data[1].name}：<span className="font1">{Number((parseFloat(data[1].tokens)).toFixed(2))}</span>
+        </Col>
+        <Col span={8}>
+        {data[0].name}：<span className="font1">{Number((parseFloat(data[0].tokens)).toFixed(2))}</span>
+        </Col>
+      </Row>
+    </Card>
+  );
+};
 export const YourPosition = (props: { pool?: PoolInfo }) => {
   const { pool } = props;
   const pools = useMemo(() => [props.pool].filter((p) => p) as PoolInfo[], [
@@ -473,42 +523,42 @@ export const YourPosition = (props: { pool?: PoolInfo }) => {
 
   return (
     <Card
-      className="ccy-input"
+      className="ccy-input pool-share pool-position"
       style={{ borderRadius: 20, width: "100%" }}
       bodyStyle={{ padding: "7px" }}
       size="small"
       title="Your Position"
     >
       <div className="pool-card" style={{ width: "initial" }}>
-        <div className="pool-card-row">
+        <div className="pool-card-row" style={{ margin: 0 }}>
           <div className="pool-card-cell">
-            <div style={{ display: "flex", alignItems: "center" }}>
+            <div style={{ display: "flex", alignItems: "center",paddingLeft:"12px" }}>
               <PoolIcon mintA={baseMintAddress} mintB={quoteMintAddress} />
-              <h3 style={{ margin: 0 }}>{enriched?.name}</h3>
+              <h3 style={{ margin: 0,marginLeft:"10px" }}>{enriched?.name}</h3>
             </div>
           </div>
           <div className="pool-card-cell">
-            <h3 style={{ margin: 0 }}>
+            <h3 style={{ margin: 0 }} className="font1">
               {formatPriceNumber.format(ratio * enriched.supply)}
             </h3>
           </div>
         </div>
         <div className="pool-card-row" style={{ margin: 0 }}>
           <div className="pool-card-cell">Your Share:</div>
-          <div className="pool-card-cell">
+          <div className="pool-card-cell font1">
             {ratio * 100 < 0.001 && ratio > 0 ? "<" : ""}
             {formatPriceNumber.format(ratio * 100)}%
           </div>
         </div>
         <div className="pool-card-row" style={{ margin: 0 }}>
           <div className="pool-card-cell">{enriched.names[0]}:</div>
-          <div className="pool-card-cell">
+          <div className="pool-card-cell font1">
             {formatPriceNumber.format(ratio * enriched.liquidityA)}
           </div>
         </div>
         <div className="pool-card-row" style={{ margin: 0 }}>
           <div className="pool-card-cell">{enriched.names[1]}:</div>
-          <div className="pool-card-cell">
+          <div className="pool-card-cell font1">
             {formatPriceNumber.format(ratio * enriched.liquidityB)}
           </div>
         </div>

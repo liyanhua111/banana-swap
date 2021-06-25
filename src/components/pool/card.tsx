@@ -250,8 +250,8 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
               </div>
             </div>
           </div>
-
-          <SupplyOverview pool={pool} />
+          {/* 统计 */}
+          {/* <SupplyOverview pool={pool} /> */}
           <div className="pool-card-row">
             {/* {item && <Button type="default" onClick={setPair}>Add</Button>} */}
             {props.account && (

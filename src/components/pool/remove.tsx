@@ -492,7 +492,7 @@ export const RemoveLiquidityEntry = (props: {
       {inputType === "input" && (
         <div className="input-card">
           Remove Liquidity
-          {isLatestLayout && pool && (
+          {/* {isLatestLayout && pool && (
             <div className="flex-row-center">
               <Radio.Group
                 style={{ margin: "10px 0" }}
@@ -506,7 +506,7 @@ export const RemoveLiquidityEntry = (props: {
                 {getTokenOptions()}
               </Radio.Group>
             </div>
-          )}
+          )} */}
           <Card
             className="ccy-input"
             style={{ borderRadius: 20, width: "100%" }}

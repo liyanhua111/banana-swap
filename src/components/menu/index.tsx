@@ -7,32 +7,31 @@ const { SubMenu } = Menu;
 
 
 export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
-  // const location = useLocation();
+  const location = useLocation();
   // const history = useHistory();
-  const handleClick =()=>{
-    
-  }
+  const state = {current: location.pathname};
   const LeftMenu = (
     <div className="App-Menu">
       <div className="App-Menu-left">
         <Menu
-          onClick={handleClick}
+          // onClick={handleClick}
           style={{ width: 240 }}
           defaultSelectedKeys={['/']}
           defaultOpenKeys={['sub1']}
+          selectedKeys={[state.current]}
           mode="inline"
         >
-          <Menu.Item key="1" icon={<img src={require('../../assets/img/nav/nav1.png')} className="navIcon" />}>
+          <Menu.Item key="/swap/index" icon={<img src={require('../../assets/img/nav/nav1.png')} className="navIcon" />}>
               <Link
                   to={{
-                    pathname: "/home",
+                    pathname: "/swap/index",
                   }}
             >
                   首页
               </Link>
           </Menu.Item>
           <SubMenu key="sub1" icon={<img src={require('../../assets/img/nav/nav2.png')} className="navIcon" />} title="交易">
-              <Menu.Item key="/swap">
+              <Menu.Item key="/swap/">
                 <Link
                   to={{
                     pathname: "/swap/",

@@ -7,13 +7,13 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 
 export const AppBar = (props: { left?: JSX.Element; right?: JSX.Element }) => {
   const { connected } = useWallet();
-  const location = useLocation();
+  // const location = useLocation();
   const history = useHistory();
 
   const TopBar = (
     <div className="App-Bar">
       <div className="App-Bar-left">
-        <div className="App-logo" />
+        <div className="App-logo" onClick={() => history.push({ pathname: "/home" })} />
         
         {props.left}
       </div>

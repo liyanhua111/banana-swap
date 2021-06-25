@@ -47,7 +47,7 @@ export const TokenDisplay = (props: {
         }}
       >
         <div style={{ display: "flex", alignItems: "center"}}>
-          <div>
+          <div style={{ display: "flex", alignItems: "center"}}>
             {icon || <TokenIcon mintAddress={mintAddress} />}
             {name}
           </div>
