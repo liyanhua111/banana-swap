@@ -12,7 +12,7 @@ import {
   useSlippageConfig,
 } from "../../utils/connection";
 import { Spin } from "antd";
-import { LoadingOutlined, SettingOutlined } from "@ant-design/icons";
+import { LoadingOutlined, SettingOutlined , LeftOutlined} from "@ant-design/icons";
 import { notify } from "../../utils/notifications";
 import { SupplyOverview } from "./supplyOverview";
 import { CurrencyInput } from "../currencyInput";
@@ -293,7 +293,9 @@ export const AddToLiquidity = () => {
     <>
       <div className="input-card">
         <div className="desBox">
-          <div className="desL"></div>
+          <div className="desL">
+           <LeftOutlined className="arrowL" />
+          </div>
           <div className="desC font1">增加流动性</div>
           <div className="desR">
             <Popover

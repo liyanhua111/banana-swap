@@ -9,9 +9,9 @@ export const Settings = () => {
   return (
     <>
       <div>
-        Transactions: Settings:
+        <span style={{display:"inline-block",fontSize:'16px',marginBottom:'10px'}}>Transactions Settings:</span>
         <div>
-          Slippage:
+        <span style={{fontSize:'14px'}}>Slippage:</span>
           <Slippage />
         </div>
       </div>

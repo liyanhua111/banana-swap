@@ -108,7 +108,7 @@ export const TradeEntry = () => {
   };
   return (
     <>
-      <Modal title="设置" visible={isModalVisible} onCancel={handleCancel} footer={null}>
+      <Modal title="设置" visible={isModalVisible} centered onCancel={handleCancel} footer={null}>
         <Settings />
       </Modal>
       <div className="input-card">

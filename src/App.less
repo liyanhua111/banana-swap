@@ -32,6 +32,7 @@ body {
 }
 
 .App-Bar {
+  position: fixed;
   display: grid;
   grid-template-columns: 1fr 120px;
   -webkit-box-pack: justify;
@@ -41,11 +42,12 @@ body {
   flex-direction: row;
   width: 100%;
   top: 0px;
-  position: relative;
+  left: 0;
   height: 60px;
   border-bottom: 2px solid #E8E8E8;
   z-index: 2; 
   border-bottom: 2px solid #E8E8E8;
+  background: #F7F7F7;
   .ant-menu-horizontal {
     border-bottom-color: transparent;
     background-color: transparent;
@@ -280,4 +282,8 @@ body {
   background:#FCE8A5;
   color: #fff;
   border-color: #FCE8A5;
+}
+.ant-modal-content{
+  overflow:hidden;
+  border-radius: 6px;
 }
