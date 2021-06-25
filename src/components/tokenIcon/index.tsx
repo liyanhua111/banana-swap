@@ -38,7 +38,7 @@ export const TokenIcon = (props: {
     <Identicon
       address={props.mintAddress}
       style={{
-        marginRight: "0.5rem",
+        marginRight: "10px",
         display: "flex",
         alignSelf: "center",
         width: 20,
@@ -60,7 +60,7 @@ export const PoolIcon = (props: {
     <div className={props.className} style={{ display: "flex" }}>
       <TokenIcon
         mintAddress={props.mintA}
-        style={{ marginRight: "-0.5rem", ...props.style }}
+        style={{ marginRight: "-10px", ...props.style }}
       />
       <TokenIcon mintAddress={props.mintB} />
     </div>

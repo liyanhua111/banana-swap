@@ -28,7 +28,7 @@ export const SupplyOverview = (props: { pool?: PoolInfo }) => {
     if (!instance) {
       instance = echarts.init(chartDiv.current as any);
     }
-
+   
     const data = [
       {
         name: enriched[0].names[0],
