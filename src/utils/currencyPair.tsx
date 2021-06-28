@@ -105,17 +105,26 @@ export function CurrencyPairProvider({ children = null as any }) {
   const [options, setOptions] = useState<PoolConfig>({
     curveType: CurveType.ConstantProduct,
     fees: {
-      tradeFeeNumerator: 25,
-      tradeFeeDenominator: DEFAULT_DENOMINATOR,
-      ownerTradeFeeNumerator: 5,
-      ownerTradeFeeDenominator: DEFAULT_DENOMINATOR,
+      tradeFeeNumerator: 30,
+      tradeFeeDenominator: 10_000 ,
+      ownerTradeFeeNumerator: 0,
+      ownerTradeFeeDenominator: 0,
       ownerWithdrawFeeNumerator: 0,
       ownerWithdrawFeeDenominator: 0,
-      hostFeeNumerator: 20,
-      hostFeeDenominator: 100,
+      hostFeeNumerator: 0,
+      hostFeeDenominator: 0,
     },
   });
-
+  // fees: {
+  //   tradeFeeNumerator: 25,
+  //   tradeFeeDenominator: DEFAULT_DENOMINATOR,
+  //   ownerTradeFeeNumerator: 5,
+  //   ownerTradeFeeDenominator: DEFAULT_DENOMINATOR,
+  //   ownerWithdrawFeeNumerator: 0,
+  //   ownerWithdrawFeeDenominator: 0,
+  //   hostFeeNumerator: 20,
+  //   hostFeeDenominator: 100,
+  // },
   const base = useCurrencyLeg(options);
   const mintAddressA = base.mintAddress;
   const setMintAddressA = base.setMint;
