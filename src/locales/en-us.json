@@ -1,0 +1,9 @@
+{
+  "home":"Home",
+  "Transaction":"Transaction",
+  "Exchange":"Exchange",
+  "Pools":"Pools",
+  "AddLiquidity":"Add Liquidity",
+  "ExchangeTokens":"Instant exchange of tokens",
+  "ConnectWallet":"Connect Wallet"
+}

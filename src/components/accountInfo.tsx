@@ -22,7 +22,7 @@ export const AccountInfo = (props: {}) => {
         {shortenAddress(`${wallet.publicKey}`)}
         <Identicon
           address={wallet.publicKey.toBase58()}
-          style={{ marginLeft: "0.5rem" }}
+          style={{ marginLeft: "15px" }}
         />
       </div>
     </div>

@@ -29,7 +29,6 @@ export function Routes() {
                     path="/swap/pool"
                     component={() => <PoolOverview />}
                   />
-                  <Redirect to="/swap/"/>
                 </CurrencyPairProvider>
               </MarketProvider>
             </AccountsProvider>
