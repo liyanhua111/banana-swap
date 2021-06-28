@@ -29,7 +29,7 @@ export function Routes() {
                     path="/swap/pool"
                     component={() => <PoolOverview />}
                   />
-                  <Redirect to="/swap/"/>
+                  {/* <Redirect to="/swap/"/> */}
                 </CurrencyPairProvider>
               </MarketProvider>
             </AccountsProvider>
