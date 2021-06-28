@@ -47,7 +47,7 @@ const { connect, connected } = useWallet();
             <p className="font1">钱包中的 Banana:</p>
             <p className="font2">已锁定</p>
             <p className="font3">~$ 0</p>
-            <Button
+            {!connected&&<Button
               className="connect-button"
               type="primary"
               size="large"
@@ -55,7 +55,7 @@ const { connect, connected } = useWallet();
               style={{ width: "100%" }}
             >
               {connected?'已连接':'解锁钱包'}
-            </Button>
+            </Button>}
             <img src={require("../../assets/img/logo2.png")} className="bgImg" alt=""/>
           </div>
           <div className="card indexPageR">

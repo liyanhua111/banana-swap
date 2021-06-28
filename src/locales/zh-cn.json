@@ -1,0 +1,9 @@
+{
+  "home":"首页",
+  "Transaction":"交易",
+  "Exchange":"兑换",
+  "Pools":"流动性",
+  "AddLiquidity":"增加流动性",
+  "ExchangeTokens":"即时兑换代币",
+  "ConnectWallet":"连接钱包"
+}

@@ -17,7 +17,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               <div className="font1">满足一切金融需求的<span className="font5">DEX</span></div>
               <div className="font2">AMM<span className="font4"> | </span>IDO<span className="font4"> | </span>DeF<span className="font4"> | 高易用性链上基础设施</span></div>
               <div className="font3">BANANASWAP 致力于为用户提供超 CEX 级别的交易体验，以建立一个简单易用、可组合性强、可灵活定制的去中心化金融基础设施，满足不同用户间的去中心化金融服务需求。</div>
-              {/* <div className="handBtn" onClick={() => history.push({ pathname: "/swap" })}>LAUNCH APP</div> */}
+              {/* <div className="handBtn" onClick={() => history.push({ pathname: "/swap/index" })}>LAUNCH APP</div> */}
               <div className="handBtn">LAUNCH APP</div>
             </div>
             <img src={require('../../assets/img/homeSubBg1.png')} alt=""/>
