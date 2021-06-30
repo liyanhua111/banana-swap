@@ -370,7 +370,7 @@ const precacheUserTokenAccounts = async (
   const accounts = await connection.getTokenAccountsByOwner(owner, {
     programId: programIds().token,
   });
-
+   console.log(accounts,'=================')
   accounts.value
     .map((info) => {
       const data = deserializeAccount(info.account.data);

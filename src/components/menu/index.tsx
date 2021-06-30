@@ -36,7 +36,7 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                   {t('home')}
               </Link>
           </Menu.Item>
-          <SubMenu key="sub1" icon={<img src={require('../../assets/img/nav/nav2.png')} className="navIcon" />} title={t("Transaction")}>
+          <SubMenu key="sub1" icon={<img src={require('../../assets/img/nav/nav2.png')} className="navIcon" />} title={t("Trade")}>
               <Menu.Item key="/swap/">
                 <Link
                   to={{
@@ -52,7 +52,7 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                     pathname: "/swap/add",
                   }}
                 >
-                  {t("Pools")}
+                  {t("Liquidity")}
                 </Link>
               </Menu.Item>
           </SubMenu>
@@ -61,7 +61,7 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
           <div className="infor">
             <p className="logoImg">
               <img src={require('../../assets/img/nav/logo.png')} alt="" />
-              $18.356
+              $0
             </p>
             <p className="lang" onClick={()=>i18n.changeLanguage(i18n.language=='en'?'zh':'en')}>
               <img src={require('../../assets/img/nav/lang.png')} alt="" />

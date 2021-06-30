@@ -43,7 +43,6 @@ export const TokenIcon = (props: {
         alignSelf: "center",
         width: 20,
         height: 20,
-        marginTop: 2,
         ...props.style,
       }}
     />

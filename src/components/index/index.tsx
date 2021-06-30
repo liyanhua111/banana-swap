@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Popover } from "antd";
 import { SettingOutlined } from "@ant-design/icons";
+import { useTranslation } from 'react-i18next'
 import { useWallet } from "../../context/wallet";
 import { AccountInfo } from "../accountInfo";
 import { WalletConnect } from "../walletConnect";
@@ -9,7 +10,8 @@ import { Settings } from "../settings";
 import { AppBar } from "../appBar";
 import './style.less'
 export const IndexPage = (props: { left?: JSX.Element; right?: JSX.Element }) => {
-const { connect, connected } = useWallet();
+  const { t } = useTranslation();
+  const { connect, connected } = useWallet();
   // const location = useLocation();
   const history = useHistory();
 
@@ -35,17 +37,17 @@ const { connect, connected } = useWallet();
       <div className="indexPageBox">
         <div className="indexTitle">
           <img src={require('../../assets/img/bananaTxt.png')} className="img1" alt="" />
-          <p>Solana 上排名第一的 AMM 和收益农场。</p>
+          <p>{t("IndexTip1")}</p>
         </div>
         <div className="indexPageT">
           <div className="card indexPageL">
-            <p className="title">挖矿和质押</p>
+            <p className="title">{t("MiningandDeposit")}</p>
             <img src={require("../../assets/img/nav/logo.png")} className="logo" alt="" />
-            <p className="font1">待收割的 Banana:</p>
-            <p className="font2">已锁定</p>
+            <p className="font1">{t("Fortheharvest")} Banana:</p>
+            <p className="font2">{ t("locked")}</p>
             <p className="font3">~$ 0</p>
-            <p className="font1">钱包中的 Banana:</p>
-            <p className="font2">已锁定</p>
+            <p className="font1">{t("InWallet")} Banana:</p>
+            <p className="font2">{ t("locked")}</p>
             <p className="font3">~$ 0</p>
             {!connected&&<Button
               className="connect-button"
@@ -54,20 +56,20 @@ const { connect, connected } = useWallet();
               onClick={connect}
               style={{ width: "100%" }}
             >
-              {connected?'已连接':'解锁钱包'}
+              {connected?t("connected"):t("ConnectWallet")}
             </Button>}
             <img src={require("../../assets/img/logo2.png")} className="bgImg" alt=""/>
           </div>
           <div className="card indexPageR">
-            <p className="title">公告</p>
+            <p className="title">{t("announcement")}</p>
             <p className="line"></p>
             <div className="noticeBox">
               <div className="noticeItem">
                 <img src={require("../../assets/img/nav/logo.png")} className="logo" alt="" />
                 <div>
                   <p className="font4">BananaSwap #SOL<br /> @BananaSwap</p>
-                  <p className="font5">我们正在做一个新的设计 <span className="font3">#BananaSwap</span></p>
-                  <p className="font5">如果能留下您的反馈它的赞赏。<span className="font3">＃sol  ＃ <br />sol  ＃DEFI  ＃SRM ＃ <br /> YieldFarming  ＃bananaswap  ＃bananaswap</span></p>
+                  <p className="font5">{t("IndexTip2")} <span className="font3">#BananaSwap</span></p>
+                  <p className="font5">{t("IndexTip3")}<span className="font3">＃sol  ＃ <br />sol  ＃DEFI  ＃SRM ＃ <br /> YieldFarming  ＃bananaswap  ＃bananaswap</span></p>
                   <img src={require("../../assets/img/indexBg1.png")} className="noticeImg" alt=""/>
                 </div>
               </div>

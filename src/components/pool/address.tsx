@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Col, Popover, Row } from "antd";
+import { useTranslation } from 'react-i18next'
 import { PoolInfo } from "../../models";
 import { CopyOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import { ExplorerLink } from "./../explorerLink";
@@ -96,6 +97,7 @@ export const AccountsAddress = (props: {
 };
 
 export const AdressesPopover = (props: { pool?: PoolInfo }) => {
+  const { t } = useTranslation();
   const { pool } = props;
 
   if (!pool) {
@@ -105,7 +107,7 @@ export const AdressesPopover = (props: { pool?: PoolInfo }) => {
   return (
     <Popover
       placement="topRight"
-      title={"Addresses"}
+      title={t("Addresses")}
       trigger="hover"
       content={
         <>
