@@ -1,0 +1,1 @@
+export const CHANGEHAMBURGER = "changeHamburger";

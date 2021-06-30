@@ -45,7 +45,7 @@ body {
   left: 0;
   height: 60px;
   border-bottom: 2px solid #E8E8E8;
-  z-index: 2; 
+  z-index: 20; 
   border-bottom: 2px solid #E8E8E8;
   background: #F7F7F7;
   .ant-menu-horizontal {
@@ -262,12 +262,6 @@ body {
   }
 }
 
-@media only screen and (max-width: 600px) {
-  .exchange-card {
-    width: 360px;
-  }
-}
-
 .ant-btn-primary{
   background: #FFC000;
   border-color: #FFC000;
@@ -289,4 +283,45 @@ body {
 .ant-modal-content{
   overflow:hidden;
   border-radius: 6px;
+}
+.cell-menu{
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .exchange-card {
+    width: 360px;
+  }
+  .App-logo{
+    width: 28px;
+    height: 34px;
+    background-image: url("./assets/img/logo2.png");
+    background-size: contain;
+    margin-left: 10px;
+  }
+  .cell-menu{
+    display: inline-block;
+    font-size: 26px;
+    margin-left: 5px;
+    margin-right: 10px;
+  }
+  .App-Bar-right{
+    font-size: 12px;
+    .ant-btn-lg{
+      padding: 6.4px 8px;
+    }
+    .ant-btn>span{
+      font-size: 12px;
+    }
+    .wallet-wrapper{
+      padding-left: 5px;
+    }
+    .wallet-key{
+      padding: 8px 5px;
+      margin-left: 5px;
+      &>div{
+        margin-left: 5px;
+      }
+    }
+  }
 }
