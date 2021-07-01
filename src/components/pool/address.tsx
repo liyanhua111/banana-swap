@@ -117,7 +117,7 @@ export const AdressesPopover = (props: { pool?: PoolInfo }) => {
       }
     >
       <Button
-        style={{color:'#FFC000'}}
+        style={{color:'#FFC000',marginTop:"3px"}}
         shape="circle"
         size="large"
         type="text"

@@ -3,6 +3,8 @@ import { Menu } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import { useTranslation, Trans, Translation } from 'react-i18next'
 import { Link, useHistory, useLocation } from "react-router-dom";
+import {changeHamburgerFunc} from '../../redux/action'
+import {useSelector,useDispatch} from 'react-redux'
 import './styles.less'
 import emitter from "../../utils/ev"
 
@@ -95,24 +97,17 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
 };
 
 export const AppMenuCell = () => {
-  const mobileHamburgerbb = true
-  const [hamburgerState, setHamburgerState] = useState("fadeOut");
-  const [hamburger, setHamburger] = useState(false);
-  const changeHamburgerFunc = () => {
-    emitter.emit("changeHamburger",true)
-  }
-  emitter.addListener("changeHamburger", (data) => {
-    setHamburger(data)
-    hamburger?setHamburgerState("fadeOut"):setHamburgerState("fadeIn")
-  });
+  const hamburger = useSelector(state => state);
+  const dispatch = useDispatch();
+  
   const LeftMenu = (
     <div className="navBox">
       <div className="nav-Box-m">
-        <div className={`overlay ${hamburgerState}`} onClick={changeHamburgerFunc}></div>
-        <div  className={`popup-right ${hamburgerState}`}>
+        <div className={`overlay ${hamburger?'fadeOut':'fadeIn'}`} onClick={() => dispatch(changeHamburgerFunc(!hamburger))}></div>
+        <div  className={`popup-right ${hamburger?'fadeOut':'fadeIn'}`}>
           <div>
             <div className="closeBox">
-              <CloseOutlined onClick={changeHamburgerFunc} className="closeIcon" />
+              <CloseOutlined onClick={() => dispatch(changeHamburgerFunc(!hamburger))} className="closeIcon" />
             </div>
             <div className="NavPc">
               <AppMenu />

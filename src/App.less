@@ -48,6 +48,7 @@ body {
   z-index: 20; 
   border-bottom: 2px solid #E8E8E8;
   background: #F7F7F7;
+  padding-right: 10px;
   .ant-menu-horizontal {
     border-bottom-color: transparent;
     background-color: transparent;
@@ -289,38 +290,42 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
-  .exchange-card {
-    width: 360px;
-  }
-  .App-logo{
-    width: 28px;
-    height: 34px;
-    background-image: url("./assets/img/logo2.png");
-    background-size: contain;
-    margin-left: 10px;
-  }
-  .cell-menu{
-    display: inline-block;
-    font-size: 26px;
-    margin-left: 5px;
-    margin-right: 10px;
-  }
-  .App-Bar-right{
-    font-size: 12px;
-    .ant-btn-lg{
-      padding: 6.4px 8px;
+  #root{
+    .exchange-card {
+      width:100%;
     }
-    .ant-btn>span{
-      font-size: 12px;
+    .ant-card-body{
+      padding: 10px !important;
     }
-    .wallet-wrapper{
-      padding-left: 5px;
+    .App-logo{
+      width: 28px;
+      height: 34px;
+      background-image: url("./assets/img/logo2.png");
+      background-size: contain;
+      margin-left: 10px;
     }
-    .wallet-key{
-      padding: 8px 5px;
+    .cell-menu{
+      display: inline-block;
+      font-size: 26px;
       margin-left: 5px;
-      &>div{
+    }
+    .App-Bar-right{
+      font-size: 12px;
+      .ant-btn-lg{
+        padding: 6.4px 8px;
+      }
+      .ant-btn>span{
+        font-size: 12px;
+      }
+      .wallet-wrapper{
+        padding-left: 5px;
+      }
+      .wallet-key{
+        padding: 8px 5px;
         margin-left: 5px;
+        &>div{
+          margin-left: 5px;
+        }
       }
     }
   }

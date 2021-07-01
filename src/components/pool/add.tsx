@@ -319,7 +319,7 @@ export const AddToLiquidity = () => {
                 </div>
               }
             >
-              <QuestionCircleOutlined className="CircleOutlined"/>
+              <QuestionCircleOutlined className="CircleOutlined" style={{marginTop:"3px"}}/>
             </Popover>
             <AdressesPopover pool={pool} />
           </div>
@@ -490,11 +490,11 @@ export const PoolNum = (props: { pool?: PoolInfo }) => {
       size="small"
       title={t("PoolLiquidity")}
     >
-      <Row style={{ width: "100%",paddingLeft:"11px" }}>
-        <Col span={8}>
+      <Row style={{ width: "100%",padding:"0 12px" }}>
+        <Col span={12} style={{textAlign:"left"}}>
         {data[1].name}：<span className="font1">{Number((parseFloat(data[1].tokens)).toFixed(2))}</span>
         </Col>
-        <Col span={8}>
+        <Col span={12} style={{textAlign:"right"}}>
         {data[0].name}：<span className="font1">{Number((parseFloat(data[0].tokens)).toFixed(2))}</span>
         </Col>
       </Row>

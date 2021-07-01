@@ -1,29 +1,25 @@
-import React,{useState} from "react";
+import React from "react";
 import { Button, Menu } from "antd";
-import { MenuUnfoldOutlined } from "@ant-design/icons";
+import { MenuOutlined } from "@ant-design/icons";
 import { useWallet } from "../context/wallet";
 import { AccountInfo } from "./accountInfo";
 import { WalletConnect } from "./walletConnect";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import emitter from "../utils/ev"
+import {changeHamburgerFunc} from '../redux/action'
+import {useSelector,useDispatch} from 'react-redux'
 
 
 export const AppBar = (props: { left?: JSX.Element; right?: JSX.Element }) => {
+  const hamburger = useSelector(state => state);
+  const dispatch = useDispatch();
   const { connected } = useWallet();
   const location = useLocation();
   const history = useHistory();
-  const [hamburger, setHamburger] = useState(true);
   let collapsed = false
   const toggleCollapsed = () => {
     collapsed=!collapsed
     emitter.emit("changeCollapsed",collapsed)
-  }
-  emitter.addListener("changeHamburger", (data) => {
-    setHamburger(data)
-  });
-  const changeHamburgerFunc = () => {
-    let data =  setHamburger(!hamburger)
-    emitter.emit("changeHamburger",data)
   }
   const TopBar = (
     <div className="App-Bar">
@@ -47,7 +43,7 @@ export const AppBar = (props: { left?: JSX.Element; right?: JSX.Element }) => {
             My Pools
           </Button>
         )}
-        <MenuUnfoldOutlined className="cell-menu" onClick={changeHamburgerFunc} />
+        <MenuOutlined className="cell-menu" onClick={() => dispatch(changeHamburgerFunc(!hamburger))} />
         {/* {props.right} */}
       </div>
     </div>

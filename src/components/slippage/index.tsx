@@ -26,6 +26,7 @@ export const Slippage = () => {
 
   return (
     <div
+      className="slippage-box"
       style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
     >
       {[0.1, 0.5, 1.0].map((item) => {
