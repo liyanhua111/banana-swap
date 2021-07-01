@@ -5,12 +5,8 @@ import './locales/i18n'
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-
 import store from './redux/store'
 import {Provider} from 'react-redux'
-import { changeHamburgerFunc } from './redux/action'
-
-store.dispatch(changeHamburgerFunc())
 
 ReactDOM.render(
   <React.StrictMode>

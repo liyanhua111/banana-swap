@@ -3,22 +3,18 @@ import { Menu } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import { useTranslation, Trans, Translation } from 'react-i18next'
 import { Link, useHistory, useLocation } from "react-router-dom";
-import {changeHamburgerFunc} from '../../redux/action'
-import {useSelector,useDispatch} from 'react-redux'
+import {changeHamburgerFunc,toggleCollapsedFunc} from '../../redux/action'
+import {useSelector,useDispatch,RootStateOrAny} from 'react-redux'
 import './styles.less'
-import emitter from "../../utils/ev"
 
 const { SubMenu } = Menu;
 
 
 export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
+  const collapsed = useSelector((state: RootStateOrAny) => state.collapsed);
   const { t, i18n } = useTranslation();
   const location = useLocation();
   const current = location.pathname;
-  const [collapsed, setCollapsed] = useState(false);
-  emitter.addListener("changeCollapsed",(data)=>{
-    setCollapsed(data)
-  });
   const LeftMenu = (
     <div className="App-Menu">
       <div className="App-Menu-left">
@@ -97,7 +93,7 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
 };
 
 export const AppMenuCell = () => {
-  const hamburger = useSelector(state => state);
+  const hamburger = useSelector((state:RootStateOrAny)=>state.hamburger);
   const dispatch = useDispatch();
   
   const LeftMenu = (

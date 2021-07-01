@@ -8,3 +8,13 @@ export const changeHamburgerFunc = (data) => {
     })();
   };
 };
+export const toggleCollapsedFunc = (data) => {
+  return (dispatch) => {
+    (() => {
+      dispatch({
+        type: "toggleCollapsed",
+        data,
+      });
+    })();
+  };
+};
