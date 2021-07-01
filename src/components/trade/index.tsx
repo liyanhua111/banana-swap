@@ -1,5 +1,6 @@
 import { Button, Card, Popover, Spin, Typography,Modal } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
+import { useTranslation } from 'react-i18next'
 import {
   useConnection,
   useConnectionConfig,
@@ -36,6 +37,7 @@ const { Text } = Typography;
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 export const TradeEntry = () => {
+  const { t } = useTranslation();
   const { wallet, connect, connected } = useWallet();
   const connection = useConnection();
   const [pendingTx, setPendingTx] = useState(false);
@@ -108,14 +110,14 @@ export const TradeEntry = () => {
   };
   return (
     <>
-      <Modal title="设置" visible={isModalVisible} centered onCancel={handleCancel} footer={null}>
+      <Modal title={t("Settings")} visible={isModalVisible} centered onCancel={handleCancel} footer={null}>
         <Settings />
       </Modal>
       <div className="input-card">
         <div className="desBox">
           <div className="desL">
-            <div className="font1">兑换</div>
-            <div className="font2">即时兑换代币</div>
+            <div className="font1">{t("Exchange")}</div>
+            <div className="font2">{t("ExchangeTokens")}</div>
           </div>
           <div className="desR">
             <img src={require('../../assets/img/icon1.png')} onClick={showModal} className="img1" alt=""/>
@@ -196,6 +198,7 @@ export const TradeEntry = () => {
 };
 
 export const TradeInfo = (props: { pool?: PoolInfo }) => {
+  const { t } = useTranslation();
   const { A, B } = useCurrencyPairState();
   const { pool } = props;
   const { slippage } = useSlippageConfig();
@@ -248,7 +251,7 @@ export const TradeInfo = (props: { pool?: PoolInfo }) => {
   return !!parseFloat(B.amount) ? (
     <div className="pool-card" style={{ width: "initial" }}>
       <div className="pool-card-row">
-        <Text className="pool-card-cell">Price</Text>
+        <Text className="pool-card-cell">{t("Price")}</Text>
         <div className="pool-card-cell " title={exchangeRate.toString()}>
           <Button
             shape="circle"
@@ -268,13 +271,10 @@ export const TradeInfo = (props: { pool?: PoolInfo }) => {
           <Popover
             trigger="hover"
             content={
-              <div style={{ width: 300 }}>
-                You transaction will revert if there is a large, unfavorable
-                price movement before it is confirmed.
-              </div>
+              <div style={{ width: 300 }}>{t("exchangeTip1")}</div>
             }
           >
-            Minimum Received <QuestionCircleOutlined />
+            {t("MinimumReceived")} <QuestionCircleOutlined />
           </Popover>
         </Text>
         <div className="pool-card-cell " title={amountOut.toString()}>
@@ -286,13 +286,10 @@ export const TradeInfo = (props: { pool?: PoolInfo }) => {
           <Popover
             trigger="hover"
             content={
-              <div style={{ width: 300 }}>
-                The difference between the market price and estimated price due
-                to trade size.
-              </div>
+              <div style={{ width: 300 }}>{t("exchangeTip2")}</div>
             }
           >
-            Price Impact <QuestionCircleOutlined />
+            {t("PriceImpact")} <QuestionCircleOutlined />
           </Popover>
         </Text>
         <div
@@ -309,12 +306,11 @@ export const TradeInfo = (props: { pool?: PoolInfo }) => {
             trigger="hover"
             content={
               <div style={{ width: 300 }}>
-                A portion of each trade ({LIQUIDITY_PROVIDER_FEE * 100}%) goes
-                to liquidity providers as a protocol incentive.
+                {t("exchangeTip3a")} ({LIQUIDITY_PROVIDER_FEE * 100}%) {t("exchangeTip3b")}
               </div>
             }
           >
-            Liquidity Provider Fee <QuestionCircleOutlined />
+            {t("LiquidityProviderFee")} <QuestionCircleOutlined />
           </Popover>
         </Text>
         <div className="pool-card-cell " title={lpFee.toString()}>

@@ -84,7 +84,6 @@ export const CurrencyInput = (props: {
   const mint = cache.getMint(props.mint);
 
   const { tokens, tokenMap } = useConnectionConfig();
-
   const renderPopularTokens = tokens.map((item) => {
     return (
       <Option
@@ -150,10 +149,9 @@ export const CurrencyInput = (props: {
         .sort();
       icon = <PoolIcon mintA={sorted[0]} mintB={sorted[1]} />;
     } else {
-      name = getTokenName(tokenMap, mint, true, 3);
+      name = getTokenName(tokenMap, mint, true, 9);
       icon = <TokenIcon mintAddress={mint} />;
     }
-
     return (
       <Option key={mint} value={mint} name={name}>
         <TokenDisplay

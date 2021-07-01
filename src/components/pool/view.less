@@ -63,7 +63,6 @@
       margin: 0px;
       min-width: 0px;
       font-size: 14px;
-      font-weight: 500;
     }
 
     .left {
@@ -117,5 +116,28 @@
   .font3{
     font-size: 14px;
     color: #999999;
+  }
+}
+@media only screen and (max-width: 600px) {
+  #root{
+    .pool-grid{
+      max-width: 100%;
+      .pool-card{
+        width: 100%;
+        margin: 10px;
+      }
+      .noDataBox{
+        width: 100%;
+        margin: 10px;
+        .img1{
+          width: 70%;
+          left: 0;
+        }
+        .img2{
+          width: 30%;
+        }
+      }
+    }
+    
   }
 }

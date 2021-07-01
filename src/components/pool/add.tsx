@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { useTranslation } from 'react-i18next'
 import {
   addLiquidity,
   usePoolForBasket,
@@ -38,6 +39,7 @@ import { programIds } from "../../utils/ids";
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 export const AddToLiquidity = () => {
+  const { t } = useTranslation();
   const { wallet, connect, connected } = useWallet();
   const connection = useConnection();
   const [pendingTx, setPendingTx] = useState(false);
@@ -298,29 +300,26 @@ export const AddToLiquidity = () => {
   };
   return (
     <>
-      <Modal title="设置" visible={isModalVisible} centered onCancel={handleCancel} footer={null}>
+      <Modal title={ t("Settings") } visible={isModalVisible} centered onCancel={handleCancel} footer={null}>
         <Settings />
       </Modal>
       <div className="input-card">
         <div className="desBox">
-          <div className="desL">
-           {/* <LeftOutlined className="arrowL" /> */}
-          </div>
-          <div className="desC font1">增加流动性</div>
+          {/* <div className="desL">
+           <LeftOutlined className="arrowL" />
+          </div> */}
+          <div className="desC font1">{ t("AddLiquidity") }</div>
           <div className="desR">
             <img src={require('../../assets/img/icon1.png')} onClick={showModal} className="img1" alt=""/>
             <Popover
               trigger="hover"
               content={
                 <div style={{ width: 300 }}>
-                  Liquidity providers earn a fixed percentage fee on all trades
-                  proportional to their share of the pool. Fees are added to the
-                  pool, accrue in real time and can be claimed by withdrawing your
-                  liquidity.
+                  {t("LiquidityTip1")}
                 </div>
               }
             >
-              <QuestionCircleOutlined className="CircleOutlined"/>
+              <QuestionCircleOutlined className="CircleOutlined" style={{marginTop:"3px"}}/>
             </Popover>
             <AdressesPopover pool={pool} />
           </div>
@@ -407,6 +406,7 @@ export const AddToLiquidity = () => {
 };
 
 export const PoolPrice = (props: { pool: PoolInfo }) => {
+  const { t } = useTranslation();
   const pool = props.pool;
   const pools = useMemo(() => [props.pool].filter((p) => p) as PoolInfo[], [
     props.pool,
@@ -431,7 +431,7 @@ export const PoolPrice = (props: { pool: PoolInfo }) => {
       style={{ borderRadius: 20, width: "100%" }}
       bodyStyle={{ padding: "7px" }}
       size="small"
-      title="Prices and pool share"
+      title={t("Pricesandpoolshare")}
     >
       <Row style={{ width: "100%" }}>
         <Col span={8} className="font1">
@@ -463,6 +463,7 @@ export const PoolPrice = (props: { pool: PoolInfo }) => {
 };
 
 export const PoolNum = (props: { pool?: PoolInfo }) => {
+  const { t } = useTranslation();
   const { pool } = props;
   const pools = useMemo(() => (pool ? [pool] : []), [pool]);
   const enriched = useEnrichedPools(pools);
@@ -487,13 +488,13 @@ export const PoolNum = (props: { pool?: PoolInfo }) => {
       style={{ borderRadius: 20, width: "100%" }}
       bodyStyle={{ padding: "7px" }}
       size="small"
-      title="pool Supply"
+      title={t("PoolLiquidity")}
     >
-      <Row style={{ width: "100%" }}>
-        <Col span={8}>
+      <Row style={{ width: "100%",padding:"0 12px" }}>
+        <Col span={12} style={{textAlign:"left"}}>
         {data[1].name}：<span className="font1">{Number((parseFloat(data[1].tokens)).toFixed(2))}</span>
         </Col>
-        <Col span={8}>
+        <Col span={12} style={{textAlign:"right"}}>
         {data[0].name}：<span className="font1">{Number((parseFloat(data[0].tokens)).toFixed(2))}</span>
         </Col>
       </Row>
@@ -501,6 +502,7 @@ export const PoolNum = (props: { pool?: PoolInfo }) => {
   );
 };
 export const YourPosition = (props: { pool?: PoolInfo }) => {
+  const { t } = useTranslation();
   const { pool } = props;
   const pools = useMemo(() => [props.pool].filter((p) => p) as PoolInfo[], [
     props.pool,
@@ -520,19 +522,19 @@ export const YourPosition = (props: { pool?: PoolInfo }) => {
       .filter((f) => pool.pubkeys.mint.equals(f.info.mint))
       .reduce((acc, item) => item.info.amount.toNumber() + acc, 0) /
     (lpMint?.supply.toNumber() || 0);
-
+  console.log(enriched,'=============')
   return (
     <Card
       className="ccy-input pool-share pool-position"
       style={{ borderRadius: 20, width: "100%" }}
       bodyStyle={{ padding: "7px" }}
       size="small"
-      title="Your Position"
+      title={t("YourLiquidity")}
     >
       <div className="pool-card" style={{ width: "initial" }}>
         <div className="pool-card-row" style={{ margin: 0 }}>
           <div className="pool-card-cell">
-            <div style={{ display: "flex", alignItems: "center",paddingLeft:"12px" }}>
+            <div style={{ display: "flex", alignItems: "center" }}>
               <PoolIcon mintA={baseMintAddress} mintB={quoteMintAddress} />
               <h3 style={{ margin: 0,marginLeft:"10px" }}>{enriched?.name}</h3>
             </div>
@@ -544,7 +546,7 @@ export const YourPosition = (props: { pool?: PoolInfo }) => {
           </div>
         </div>
         <div className="pool-card-row" style={{ margin: 0 }}>
-          <div className="pool-card-cell">Your Share:</div>
+          <div className="pool-card-cell">{t("YourShare")}</div>
           <div className="pool-card-cell font1">
             {ratio * 100 < 0.001 && ratio > 0 ? "<" : ""}
             {formatPriceNumber.format(ratio * 100)}%

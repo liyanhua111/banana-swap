@@ -15,6 +15,11 @@
     color: #fff;
   }
 }
+.slippage-box{
+  display: "flex"; 
+  flex-direction:"row";
+  align-items: center;
+}
 .slippage-input-box{
   flex: 1;
   height: 48px;
@@ -27,5 +32,15 @@
     line-height: 46px;
     background: transparent;
     font-size: 16px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .slippage-box{
+    .sliderBtn{
+      width: 50px !important;
+    }
+    .slippage-input{
+      width: 70% !important;
+    }
   }
 }
