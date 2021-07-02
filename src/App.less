@@ -95,6 +95,23 @@ body {
   -webkit-box-align: center;
   align-items: center;
   justify-self: flex-end;
+  .ant-dropdown-button{
+    .ant-btn{
+      border-radius: 20px 0 0 20px !important;
+      background: #FFC000;
+      border: none;
+      border-right: 1px solid #F5A12F;
+    }
+    .ant-btn-icon-only{
+      border-radius: 0 20px 20px 0 !important;
+      background: #FFC000;
+      border: none;
+      border-left: 1px solid #F5A12F;
+    }
+    .ant-btn:hover, .ant-btn:focus,.ant-btn:active{
+      color: rgba(0, 0, 0, 0.85) !important;
+    }
+  }
 }
 
 .ant-tabs-nav-scroll {
@@ -288,7 +305,9 @@ body {
 .cell-menu{
   display: none;
 }
-
+.walletBtn{
+  border-radius: 5px !important;
+}
 @media only screen and (max-width: 600px) {
   #root{
     .exchange-card {

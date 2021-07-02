@@ -97,7 +97,7 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
       <hr />
     </>
   );
-
+  console.log(enriched, 'enrichedenrichedenrichedenrichedenrichedenriched')
   return (
     <Card
       className="pool-card"
@@ -109,7 +109,7 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
             className="left-icon"
           />
           {enriched?.name}
-          <Popover
+          {/* <Popover
             placement="topRight"
             trigger="hover"
             className="right-icon"
@@ -140,7 +140,7 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
                 onClick={handleSwitchChartMode}
               />
             )}
-          </Popover>
+          </Popover> */}
         </>
       }
     >
@@ -174,6 +174,7 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
               LP Supply:
             </Text>
             <div className="pool-card-cell " title={enriched.supply}>
+              <span>{enriched.supply}</span>
               {formatNumber.format(enriched.supply)}
             </div>
           </div>
@@ -182,6 +183,8 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
               Value per token:
             </Text>
             <div className="pool-card-cell ">
+              <span>{ enriched.liquidity}</span>
+              <span>{ enriched.supply}</span>
               {formatUSD.format(enriched.liquidity / enriched.supply)}
             </div>
           </div>
