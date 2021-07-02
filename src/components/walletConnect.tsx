@@ -1,9 +1,11 @@
 import React, { FunctionComponent } from "react";
-import { Dropdown, Menu } from "antd";
+import { Dropdown, Menu,ConfigProvider } from "antd";
+import { useTranslation } from 'react-i18next';
 import { useWallet } from "../context/wallet";
 import { ExplorerLink } from "./explorerLink";
 
 export const WalletConnect: FunctionComponent = ({ children }) => {
+  const { t } = useTranslation();
   const { connected, wallet, select, connect, disconnect } = useWallet();
   const publicKey = (connected && wallet?.publicKey?.toBase58()) || "";
 
@@ -17,7 +19,7 @@ export const WalletConnect: FunctionComponent = ({ children }) => {
         />
       )}
       <Menu.Item key="3" onClick={select}>
-        Change Wallet
+        {t("ChangeWallet")}
       </Menu.Item>
       {connected && (
         <Menu.Item
@@ -25,7 +27,7 @@ export const WalletConnect: FunctionComponent = ({ children }) => {
           style={{ color: "rgba(255, 0, 0, 0.7)" }}
           onClick={disconnect}
         >
-          Disconnect
+          {t("Disconnect")}
         </Menu.Item>
       )}
     </Menu>
@@ -40,8 +42,10 @@ export const WalletConnect: FunctionComponent = ({ children }) => {
   }
 
   return (
-    <Dropdown.Button onClick={connected ? disconnect : connect} overlay={menu}>
-      {connected ? "Disconnect" : "Connect"}
-    </Dropdown.Button>
+    <ConfigProvider autoInsertSpaceInButton = { false }> 
+      <Dropdown.Button onClick={connected ? disconnect : connect} overlay={menu}>
+      {connected ? t("Disconnect") : t("Connect")}
+      </Dropdown.Button>
+    </ConfigProvider>
   );
 };

@@ -6,6 +6,7 @@ import React, {
   useState,
 } from "react";
 import Wallet from "@project-serum/sol-wallet-adapter";
+import { useTranslation } from 'react-i18next';
 import { Button, Modal } from "antd";
 import {
   WalletAdapter,
@@ -18,41 +19,39 @@ import { useConnectionConfig } from "../utils/connection";
 import { useLocalStorageState } from "../utils/utils";
 import { notify } from "../utils/notifications";
 
-const ASSET_URL =
-  "https://cdn.jsdelivr.net/gh/solana-labs/oyster@main/assets/wallets";
 export const WALLET_PROVIDERS = [
   {
     name: "sollet.io",
     url: "https://www.sollet.io",
-    icon: `${ASSET_URL}/sollet.svg`,
+    icon: require("../assets/img/wallet/Sollet.png"),
   },
   {
     name: "Solflare",
     url: "https://solflare.com/access-wallet",
-    icon: `${ASSET_URL}/solflare.svg`,
+    icon: require("../assets/img/wallet/Solflare.png")
   },
   {
     name: "Ledger",
     url: "https://www.ledger.com",
-    icon: `${ASSET_URL}/ledger.svg`,
+    icon: require("../assets/img/wallet/Ledger.png"),
     adapter: LedgerWalletAdapter,
   },
   {
     name: "Solong",
     url: "https://www.solong.com",
-    icon: `${ASSET_URL}/solong.png`,
+    icon: require("../assets/img/wallet/Solong.png"),
     adapter: SolongWalletAdapter,
   },
   {
     name: "MathWallet",
     url: "https://www.mathwallet.org",
-    icon: `${ASSET_URL}/mathwallet.svg`,
+    icon: require("../assets/img/wallet/MathWallet.png"),
     adapter: MathWalletAdapter,
   },
   {
     name: "Phantom",
     url: "https://www.phantom.app",
-    icon: `https://www.phantom.app/img/logo.png`,
+    icon: require("../assets/img/wallet/Phantom.png"),
     adapter: PhantomWalletAdapter,
   },
 ];
@@ -60,6 +59,7 @@ export const WALLET_PROVIDERS = [
 const WalletContext = React.createContext<any>(null);
 
 export function WalletProvider({ children = null as any }) {
+  const { t } = useTranslation();
   const { endpoint } = useConnectionConfig();
 
   const [autoConnect, setAutoConnect] = useState(false);
@@ -158,7 +158,7 @@ export function WalletProvider({ children = null as any }) {
     >
       {children}
       <Modal
-        title="Select Wallet"
+        title={t("SelectWallet")}
         okText="Connect"
         visible={isModalVisible}
         okButtonProps={{ style: { display: "none" } }}
@@ -177,6 +177,7 @@ export function WalletProvider({ children = null as any }) {
               size="large"
               type={providerUrl === provider.url ? "primary" : "ghost"}
               onClick={onClick}
+              className="walletBtn"
               icon={
                 <img
                   alt={`${provider.name}`}

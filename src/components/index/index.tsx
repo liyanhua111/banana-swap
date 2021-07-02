@@ -1,20 +1,45 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { Button, Popover } from "antd";
 import { SettingOutlined } from "@ant-design/icons";
 import { useTranslation } from 'react-i18next'
 import { useWallet } from "../../context/wallet";
-import { AccountInfo } from "../accountInfo";
-import { WalletConnect } from "../walletConnect";
-import { Link, useHistory, useLocation } from "react-router-dom";
 import { Settings } from "../settings";
 import { AppBar } from "../appBar";
+import { useEnrichedPools } from "../../context/market";
+import { usePools } from "../../utils/pools";
+import {
+  formatUSD
+} from "../../utils/utils";
 import './style.less'
+
+interface Totals {
+  liquidity: number;
+  volume: number;
+  fees: number;
+}
 export const IndexPage = (props: { left?: JSX.Element; right?: JSX.Element }) => {
   const { t } = useTranslation();
   const { connect, connected } = useWallet();
-  // const location = useLocation();
-  const history = useHistory();
-
+  const [totals, setTotals] = useState<Totals>(() => ({
+    liquidity: 0,
+    volume: 0,
+    fees: 0,
+  }));
+  const { pools } = usePools();
+  const enriched = useEnrichedPools(pools);
+  useEffect(() => {
+    setTotals(
+      enriched.reduce(
+        (acc, item) => {
+          acc.liquidity = acc.liquidity + item.liquidity;
+          acc.volume = acc.volume + item.volume24h;
+          acc.fees = acc.fees + item.fees;
+          return acc;
+        },
+        { liquidity: 0, volume: 0, fees: 0 } as Totals
+      )
+    );
+  }, [enriched]);
   const IndexPage = (
     <>
       <AppBar
@@ -78,20 +103,20 @@ export const IndexPage = (props: { left?: JSX.Element; right?: JSX.Element }) =>
         </div>
         <div className="indexPageB">
           <div className="card indexPageL">
-            <p className="font1">平台锁仓量</p>
-            <p className="font2">$7,563,329,401</p>
+            <p className="font1">{t("TVL")}</p>
+            <p className="font2">{formatUSD.format(totals.liquidity)}</p>
             <p className="font3">Across all Farms and Pools</p>
           </div>
           <div className="card indexPageR">
-            <p className="font1">DEX流动性</p>
-            <div className="dataItem">
-              <p>总流动性</p>
-              <p className="font4">$7,563,329,401</p>
+            <p className="font1">{t("DEX")}</p>
+            <div className="dataItem" style={{marginTop:"22px",fontWeight: 600}}>
+              <p>{t("TotalLiquidity")}</p>
+              <p className="font4">{formatUSD.format(totals.liquidity)}</p>
             </div>
-            <div className="dataItem">
+            {/* <div className="dataItem">
               <p>24小时交易量</p>
-              <p className="font4">$7,563,329,401</p>
-            </div>
+              <p className="font4">{formatUSD.format(totals.volume)}</p>
+            </div> */}
           </div>
         </div>
       </div>
