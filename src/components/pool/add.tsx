@@ -451,12 +451,12 @@ export const PoolPrice = (props: { pool: PoolInfo }) => {
       </Row>
       <Row style={{ width: "100%" }}>
         <Col span={8}>
-          {enriched.names[0]} per {enriched.names[1]}
+          {enriched.names[0]} {t("per")} {enriched.names[1]}
         </Col>
         <Col span={8}>
-          {enriched.names[1]} per {enriched.names[0]}
+          {enriched.names[1]} {t("per")} {enriched.names[0]}
         </Col>
-        <Col span={8}>Share of pool</Col>
+        <Col span={8}>{t("Shareofpool")}</Col>
       </Row>
     </Card>
   );
@@ -522,7 +522,6 @@ export const YourPosition = (props: { pool?: PoolInfo }) => {
       .filter((f) => pool.pubkeys.mint.equals(f.info.mint))
       .reduce((acc, item) => item.info.amount.toNumber() + acc, 0) /
     (lpMint?.supply.toNumber() || 0);
-  console.log(enriched,'=============')
   return (
     <Card
       className="ccy-input pool-share pool-position"

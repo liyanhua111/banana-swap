@@ -41,5 +41,7 @@
   "TVL":"平台锁仓量",
   "DEX":"DEX流动性",
   "TotalLiquidity":"总流动性",
-  "24HVolume":"24小时交易量"
+  "24HVolume":"24小时交易量",
+  "per":"每",
+  "Shareofpool":"流动池份额"
 }

@@ -97,12 +97,14 @@ body {
   justify-self: flex-end;
   .ant-dropdown-button{
     .ant-btn{
+      width: 75px;
       border-radius: 20px 0 0 20px !important;
       background: #FFC000;
       border: none;
       border-right: 1px solid #F5A12F;
     }
     .ant-btn-icon-only{
+      width: 40px;
       border-radius: 0 20px 20px 0 !important;
       background: #FFC000;
       border: none;
@@ -344,6 +346,14 @@ body {
         margin-left: 5px;
         &>div{
           margin-left: 5px;
+        }
+      }
+      .ant-dropdown-button{
+        .ant-btn{
+          width: auto;
+        }
+        .ant-btn-icon-only{
+          width: 32px;
         }
       }
     }

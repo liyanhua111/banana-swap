@@ -120,8 +120,8 @@ export const TradeEntry = () => {
             <div className="font2">{t("ExchangeTokens")}</div>
           </div>
           <div className="desR">
-            <img src={require('../../assets/img/icon1.png')} onClick={showModal} className="img1" alt=""/>
-            <img src={require('../../assets/img/icon2.png')} alt="" />
+            <img src={require('../../assets/img/icon1.png')} onClick={showModal} className="img1" style={{marginRight:0}} alt=""/>
+            {/* <img src={require('../../assets/img/icon2.png')} alt="" /> */}
             <AdressesPopover pool={pool} />
           </div>
         </div>

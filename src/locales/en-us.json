@@ -41,5 +41,7 @@
   "TVL":"TVL",
   "DEX":"DEX Stats",
   "TotalLiquidity":"Total Liquidity",
-  "24HVolume":"24H Volume"
+  "24HVolume":"24H Volume",
+  "per":"per",
+  "Shareofpool":"Share of pool"
 }
