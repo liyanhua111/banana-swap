@@ -319,7 +319,7 @@ export const swap = async (
   const minAmountOut = components[1].amount * (1 - SLIPPAGE);
   const holdingA =
     pool.pubkeys.holdingMints[0]?.toBase58() ===
-    components[0].account.info.mint.toBase58()
+      components[0].account.info.mint.toBase58()
       ? pool.pubkeys.holdingAccounts[0]
       : pool.pubkeys.holdingAccounts[1];
   const holdingB =
@@ -376,14 +376,14 @@ export const swap = async (
 
   let hostFeeAccount = SWAP_HOST_FEE_ADDRESS
     ? findOrCreateAccountByMint(
-        wallet.publicKey,
-        SWAP_HOST_FEE_ADDRESS,
-        instructions,
-        cleanupInstructions,
-        accountRentExempt,
-        pool.pubkeys.mint,
-        signers
-      )
+      wallet.publicKey,
+      SWAP_HOST_FEE_ADDRESS,
+      instructions,
+      cleanupInstructions,
+      accountRentExempt,
+      pool.pubkeys.mint,
+      signers
+    )
     : undefined;
 
   // swap
@@ -493,15 +493,15 @@ export const usePools = () => {
             data: undefined as any,
             account: item.account,
             pubkey: item.pubkey,
-            init: async () => {},
+            init: async () => { },
           };
 
           const layout =
             item.account.data.length === TokenSwapLayout.span
               ? TokenSwapLayout
               : item.account.data.length === TokenSwapLayoutV1.span
-              ? TokenSwapLayoutV1
-              : TokenSwapLayoutV0;
+                ? TokenSwapLayoutV1
+                : TokenSwapLayoutV0;
 
           // handling of legacy layout can be removed soon...
           if (layout === TokenSwapLayoutV0) {
@@ -1063,7 +1063,7 @@ function estimateProceedsFromInput(
   inputAmount: number
 ): number {
   return (
-    (proceedsQuantityInPool * inputAmount) / (inputQuantityInPool + inputAmount)
+    (proceedsQuantityInPool * 997 * inputAmount) / (inputQuantityInPool * 1000 + inputAmount * 997)
   );
 }
 
