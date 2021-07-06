@@ -67,7 +67,7 @@ export function getPoolName(
   pool: PoolInfo,
   shorten = true
 ) {
-  const sorted = pool.pubkeys.holdingMints.map((a) => a.toBase58()).sort();
+  const sorted = pool.pubkeys.holdingMints.map((a) => a.toBase58());
   return sorted.map((item) => getTokenName(map, item, shorten)).join("/");
 }
 

@@ -369,8 +369,7 @@ function createEnrichedPools(
     .filter((p) => p.pubkeys.holdingMints && p.pubkeys.holdingMints.length > 1)
     .map((p, index) => {
       const mints = (p.pubkeys.holdingMints || [])
-        .map((a) => a.toBase58())
-        .sort();
+        .map((a) => a.toBase58());
       const mintA = cache.getMint(mints[0]);
       const mintB = cache.getMint(mints[1]);
 
