@@ -29,7 +29,6 @@ export class NumericInput extends React.Component<any, any> {
   render() {
     return (
       <Input
-        type="number"
         {...this.props}
         onChange={this.onChange}
         onBlur={this.onBlur}

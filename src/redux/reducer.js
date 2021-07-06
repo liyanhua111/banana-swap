@@ -23,9 +23,10 @@ const collapsed = (state = init.collapsed, action) => {
   }
 };
 const myPoolsLoading = (state = init.myPoolsLoading, action) => {
-  switch (action.type) {
+  const { type, data } = action;
+  switch (type) {
     case "myPoolsLoading":
-      return action.data;
+      return data;
     default:
       return state;
   }

@@ -277,7 +277,7 @@ export const RemoveLiquidityEntry = (props: {
     switch (inputSource) {
       case "pool": {
         setInputInfo({
-          liquidityPercentage: (val * 100) / (enriched.supply * ratio),
+          liquidityPercentage: (val.replace(/,/g, '') * 100) / (enriched.supply * ratio),
           amount: val,
           lastTyped: "pool",
         });
@@ -285,7 +285,7 @@ export const RemoveLiquidityEntry = (props: {
       }
       case "tokenA": {
         setInputInfo({
-          liquidityPercentage: (val * 100) / (enriched.liquidityA * ratio),
+          liquidityPercentage: (val.replace(/,/g, '') * 100) / (enriched.liquidityA * ratio),
           amount: val,
           lastTyped: "tokenA",
         });
@@ -293,7 +293,7 @@ export const RemoveLiquidityEntry = (props: {
       }
       case "tokenB": {
         setInputInfo({
-          liquidityPercentage: (val * 100) / (enriched.liquidityB * ratio),
+          liquidityPercentage: (val.replace(/,/g, '') * 100) / (enriched.liquidityB * ratio),
           amount: val,
           lastTyped: "tokenB",
         });
