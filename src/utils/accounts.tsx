@@ -5,6 +5,8 @@ import React, {
   useMemo,
   useState,
 } from "react";
+import { useDispatch } from 'react-redux'
+import {myPoolsLoadingFunc} from '../redux/action'
 import { useConnection } from "./connection";
 import { useWallet } from "../context/wallet";
 import { AccountInfo, Connection, PublicKey } from "@solana/web3.js";
@@ -365,12 +367,10 @@ const precacheUserTokenAccounts = async (
 
   // used for filtering account updates over websocket
   PRECACHED_OWNERS.add(owner.toBase58());
-
   // user accounts are update via ws subscription
   const accounts = await connection.getTokenAccountsByOwner(owner, {
     programId: programIds().token,
   });
-   console.log(accounts,'=================')
   accounts.value
     .map((info) => {
       const data = deserializeAccount(info.account.data);
@@ -391,13 +391,13 @@ const precacheUserTokenAccounts = async (
 };
 
 export function AccountsProvider({ children = null as any }) {
+  const dispatch = useDispatch();
   const connection = useConnection();
   const { wallet, connected } = useWallet();
   const [tokenAccounts, setTokenAccounts] = useState<TokenAccount[]>([]);
   const [userAccounts, setUserAccounts] = useState<TokenAccount[]>([]);
   const { nativeAccount } = UseNativeAccount();
   const { pools } = usePools();
-
   const publicKey = wallet?.publicKey;
 
   const selectUserAccounts = useCallback(() => {
@@ -418,16 +418,15 @@ export function AccountsProvider({ children = null as any }) {
     if (!connection || !publicKey) {
       setTokenAccounts([]);
     } else {
+      if (connected)dispatch(myPoolsLoadingFunc(true))
       // cache host accounts to avoid query during swap
       precacheUserTokenAccounts(connection, SWAP_HOST_FEE_ADDRESS);
 
       precacheUserTokenAccounts(connection, publicKey).then(async () => {
         const accounts = selectUserAccounts();
         const mints = [...new Set(accounts.map(a => a.info.mint.toBase58())
-          .filter(a => cache.getMint(a) === undefined))]
-          .sort();
+          .filter(a => cache.getMint(a) === undefined))];
         const response = await getMultipleAccounts(connection, mints, 'single');
-
         response.keys.forEach((key, index) => {
           if (response.array[index]) {
             try {
@@ -437,7 +436,7 @@ export function AccountsProvider({ children = null as any }) {
             }
           }
         });
-
+        dispatch(myPoolsLoadingFunc(false))
         setTokenAccounts(accounts);
       });
 

@@ -43,5 +43,8 @@
   "TotalLiquidity":"Total Liquidity",
   "24HVolume":"24H Volume",
   "per":"per",
-  "Shareofpool":"Share of pool"
+  "Shareofpool":"Share of pool",
+  "Nodata":"no data",
+  "Nofluidity":"You haven't added liquidity yet",
+  "ConnectTip":"Connect to a wallet to \nview your liquidity."
 }

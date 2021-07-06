@@ -18,3 +18,13 @@ export const toggleCollapsedFunc = (data) => {
     })();
   };
 };
+export const myPoolsLoadingFunc = (data) => {
+  return (dispatch) => {
+    (() => {
+      dispatch({
+        type: "myPoolsLoading",
+        data,
+      });
+    })();
+  };
+};

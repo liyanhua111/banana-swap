@@ -696,14 +696,12 @@ export const usePoolForBasket = (mints: (string | undefined)[]) => {
 export const useOwnedPools = (legacy = false) => {
   const { pools } = useCachedPool(legacy);
   const { userAccounts } = useUserAccounts();
-
   const ownedPools = useMemo(() => {
     const map = userAccounts.reduce((acc, item) => {
       const key = item.info.mint.toBase58();
       acc.set(key, [...(acc.get(key) || []), item]);
       return acc;
     }, new Map<string, TokenAccount[]>());
-
     return pools
       .filter((p) => map.has(p.pubkeys.mint.toBase58()) && p.legacy === legacy)
       .map((item) => {
@@ -722,7 +720,6 @@ export const useOwnedPools = (legacy = false) => {
       })
       .flat();
   }, [pools, userAccounts, legacy]);
-
   return ownedPools;
 };
 

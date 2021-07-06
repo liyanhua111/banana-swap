@@ -43,5 +43,8 @@
   "TotalLiquidity":"总流动性",
   "24HVolume":"24小时交易量",
   "per":"每",
-  "Shareofpool":"流动池份额"
+  "Shareofpool":"流动池份额",
+  "Nodata":"暂无数据",
+  "Nofluidity":"您暂时还没添加流动性",
+  "ConnectTip":"连接钱包， \n查看您的流动性。"
 }
