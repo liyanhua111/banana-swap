@@ -1059,6 +1059,10 @@ function estimateProceedsFromInput(
   proceedsQuantityInPool: number,
   inputAmount: number
 ): number {
+  console.log('===================================================================')
+  console.log(`(proceedsQuantityInPool * 997 * inputAmount) / (inputQuantityInPool * 1000 + inputAmount * 997)`)
+  console.log(`(${proceedsQuantityInPool} * 997 * ${inputAmount}) / (${inputQuantityInPool} * 1000 + ${inputAmount} * 997)= `, (proceedsQuantityInPool * 997 * inputAmount) / (inputQuantityInPool * 1000 + inputAmount * 997))
+  console.log('===================================================================')
   return (
     (proceedsQuantityInPool * 997 * inputAmount) / (inputQuantityInPool * 1000 + inputAmount * 997)
   );
@@ -1072,7 +1076,11 @@ function estimateInputFromProceeds(
   if (proceedsAmount >= proceedsQuantityInPool) {
     return "Not possible";
   }
+  console.log('===================================================================')
 
+  console.log(`(inputQuantityInPool * proceedsAmount) / (proceedsQuantityInPool - proceedsAmount)`)
+  console.log(`(${inputQuantityInPool} * ${proceedsAmount}) / (${proceedsQuantityInPool} - ${proceedsAmount})= `, (inputQuantityInPool * proceedsAmount) / (proceedsQuantityInPool - proceedsAmount))
+  console.log('===================================================================')
   return (
     (inputQuantityInPool * proceedsAmount) /
     (proceedsQuantityInPool - proceedsAmount)
@@ -1163,6 +1171,7 @@ export async function calculateDependentAmount(
           indBasketQuantity,
           indAdjustedAmount
         );
+        console.log(depAdjustedAmount,'SwapGivenProceeds1')
         break;
       case PoolOperation.SwapGivenInput:
         depAdjustedAmount = estimateProceedsFromInput(
@@ -1170,6 +1179,7 @@ export async function calculateDependentAmount(
           depBasketQuantity,
           indAdjustedAmount
         );
+        console.log(depAdjustedAmount,'SwapGivenInput2')
         break;
     }
   }
