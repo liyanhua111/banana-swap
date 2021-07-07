@@ -15,6 +15,7 @@
   "connected":"connected",
   "ChangeWallet":"Change Wallet",
   "SelectWallet":"Select Wallet",
+  "Cancel":"Cancel",
   "Insufficientfunds":"Not enough ",
   "Settings":"Settings",
   "TransactionsSettings":"Transactions Settings:",

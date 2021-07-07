@@ -1,10 +1,14 @@
-import React from "react";
+import React,{useState} from "react";
 import { useHistory } from "react-router-dom";
 import './home.less'
 
 
 export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
   const history = useHistory();
+  const [activeIndex,changeActiveIndex]=useState(1)
+  const changeActive = () => {
+    changeActiveIndex(activeIndex===1?2:1)
+  }
   const HomePage = (
     <div className="homePage">
       <div className="homeContent">
@@ -65,8 +69,8 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                 </div>
                 <div className="switchBox">
                   <div className="switch">
-                    <img src={require('../../assets/img/dome1.png')} alt="" className="tabImg"/>
-                    <img src={require('../../assets/img/dome2.png')} alt="" className="tabImg"/>
+                    <img src={require('../../assets/img/dome1.png')} alt="" className={`tabImg ${activeIndex===1 ?'active':''}`}  onClick={changeActive} />
+                    <img src={require('../../assets/img/dome2.png')} alt="" className={`tabImg ${activeIndex===2 ?'active':''}`}  onClick={changeActive} />
                   </div>
                   <div className="slickBox">
                     <span className="slickDots active"></span>
