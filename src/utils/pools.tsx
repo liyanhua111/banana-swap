@@ -14,6 +14,7 @@ import {
   cache,
   getCachedAccount,
   useUserAccounts,
+  useAccountByMint,
   useCachedPool,
   getMultipleAccounts,
 } from "./accounts";
@@ -295,8 +296,7 @@ export const removeExactOneLiquidity = async (
     ? (wallet.publicKey as PublicKey)
     : toAccount;
 };
-
-export const swap = async (
+const swapInfo = async (
   connection: Connection,
   wallet: any,
   components: LiquidityComponent[],
@@ -312,22 +312,22 @@ export const swap = async (
     return;
   }
 
-  // Uniswap whitepaper: https://uniswap.org/whitepaper.pdf
-  // see: https://uniswap.org/docs/v2/advanced-topics/pricing/
-  // as well as native uniswap v2 oracle: https://uniswap.org/docs/v2/core-concepts/oracles/
   const amountIn = components[0].amount; // these two should include slippage
   const minAmountOut = components[1].amount * (1 - SLIPPAGE);
-  const holdingA =
-    pool.pubkeys.holdingMints[0]?.toBase58() ===
-      components[0].account.info.mint.toBase58()
-      ? pool.pubkeys.holdingAccounts[0]
-      : pool.pubkeys.holdingAccounts[1];
-  const holdingB =
-    holdingA === pool.pubkeys.holdingAccounts[0]
-      ? pool.pubkeys.holdingAccounts[1]
-      : pool.pubkeys.holdingAccounts[0];
+  // const amountIn = 1000000000; // these two should include slippage
+  // const minAmountOut = 0;
 
-  const poolMint = await cache.queryMint(connection, pool.pubkeys.mint);
+  const holdingA =     // @ts-ignore
+    pool.pubkeys.holdingMints[0]?.toBase58() ===     // @ts-ignore
+      components[0].account.info.mint.toBase58()     // @ts-ignore
+      ? pool.pubkeys.holdingAccounts[0]     // @ts-ignore
+      : pool.pubkeys.holdingAccounts[1];
+  const holdingB =     // @ts-ignore
+    holdingA === pool.pubkeys.holdingAccounts[0]     // @ts-ignore
+      ? pool.pubkeys.holdingAccounts[1]     // @ts-ignore
+      : pool.pubkeys.holdingAccounts[0];
+  // @ts-ignore
+  const poolMint = await cache.queryMint(connection, pool.pubkeys.mint);     // @ts-ignore
   if (!poolMint.mintAuthority || !pool.pubkeys.feeAccount) {
     throw new Error("Mint doesnt have authority");
   }
@@ -344,6 +344,7 @@ export const swap = async (
   const fromAccount = getWrappedAccount(
     instructions,
     cleanupInstructions,
+    // @ts-ignore
     components[0].account,
     wallet.publicKey,
     amountIn + accountRentExempt,
@@ -359,7 +360,7 @@ export const swap = async (
     new PublicKey(components[1].mintAddress),
     signers
   );
-
+  // @ts-ignore
   const isLatestSwap = isLatest(pool.raw.account);
   // create approval for transfer transactions
   const transferAuthority = approveAmount(
@@ -380,24 +381,23 @@ export const swap = async (
       SWAP_HOST_FEE_ADDRESS,
       instructions,
       cleanupInstructions,
-      accountRentExempt,
+      accountRentExempt,     // @ts-ignore
       pool.pubkeys.mint,
       signers
     )
     : undefined;
-
-  // swap
   instructions.push(
-    swapInstruction(
+    swapInstruction(     // @ts-ignore
       pool.pubkeys.account,
       authority,
       transferAuthority.publicKey,
       fromAccount,
+      // @ts-ignore
       holdingA,
       holdingB,
-      toAccount,
-      pool.pubkeys.mint,
-      pool.pubkeys.feeAccount,
+      toAccount,     // @ts-ignore
+      pool.pubkeys.mint,     // @ts-ignore
+      pool.pubkeys.feeAccount,     // @ts-ignore
       pool.pubkeys.program,
       programIds().token,
       amountIn,
@@ -406,12 +406,44 @@ export const swap = async (
       isLatestSwap
     )
   );
-
+  var instructionsData = instructions.concat(cleanupInstructions);
+  return { instructionsData, signers };
+};
+export const swap = async (
+  connection: Connection,
+  wallet: any,
+  components: LiquidityComponent[],
+  SLIPPAGE: number,
+  pool?: PoolInfo,
+  routePool?: PoolInfo,
+  componentsR?: LiquidityComponent[],
+) => {
+  let swapData = await swapInfo(
+    connection,
+    wallet,
+    components,
+    SLIPPAGE,
+    pool
+  );
+  // @ts-ignore
+  // let swapData1 =
+  //   await swapInfo(
+  //     connection,
+  //     wallet,        // @ts-ignore
+  //     components,
+  //     SLIPPAGE,
+  //     pool
+  //   )
+  // @ts-ignore
+  // console.log(swapData, "instructionsData======");
+  // console.log(swapData1, "instructionsData1======");
   let tx = await sendTransaction(
     connection,
     wallet,
-    instructions.concat(cleanupInstructions),
-    signers
+    // @ts-ignore
+    swapData.instructionsData,
+    // @ts-ignore
+    swapData.signers
   );
 
   notify({
@@ -546,45 +578,48 @@ export const usePools = () => {
           return result;
         });
 
-      const toQuery = [...poolsArray
-        .map(
-          (p) =>
-            [
-              ...p.pubkeys.holdingAccounts.map((h) => h.toBase58()),
-              ...p.pubkeys.holdingMints.map((h) => h.toBase58()),
-              p.pubkeys.feeAccount?.toBase58(), // used to calculate volume approximation
-              p.pubkeys.mint.toBase58(),
-            ].filter((p) => p) as string[]
-        )
-        .flat()
-        .filter(acc => cache.get(acc) === undefined)
-        .reduce((acc, item) => {
-          acc.add(item);
-          return acc;
-        }, new Set<string>())
-        .keys()]
-        .sort();
+      const toQuery = [
+        ...poolsArray
+          .map(
+            (p) =>
+              [
+                ...p.pubkeys.holdingAccounts.map((h) => h.toBase58()),
+                ...p.pubkeys.holdingMints.map((h) => h.toBase58()),
+                p.pubkeys.feeAccount?.toBase58(), // used to calculate volume approximation
+                p.pubkeys.mint.toBase58(),
+              ].filter((p) => p) as string[]
+          )
+          .flat()
+          .filter((acc) => cache.get(acc) === undefined)
+          .reduce((acc, item) => {
+            acc.add(item);
+            return acc;
+          }, new Set<string>())
+          .keys(),
+      ].sort();
 
       // This will pre-cache all accounts used by pools
       // All those accounts are updated whenever there is a change
       await getMultipleAccounts(connection, toQuery, "single").then(
         ({ keys, array }) => {
-          return array.map((obj, index) => {
-            if (!obj) {
-              return undefined;
-            }
-
-            const pubKey = new PublicKey(keys[index]);
-            if (obj.data.length === AccountLayout.span) {
-              return cache.addAccount(pubKey, obj);
-            } else if (obj.data.length === MintLayout.span) {
-              if (!cache.getMint(pubKey)) {
-                return cache.addMint(pubKey, obj);
+          return array
+            .map((obj, index) => {
+              if (!obj) {
+                return undefined;
               }
-            }
 
-            return obj;
-          }).filter(a => !!a) as any[];
+              const pubKey = new PublicKey(keys[index]);
+              if (obj.data.length === AccountLayout.span) {
+                return cache.addAccount(pubKey, obj);
+              } else if (obj.data.length === MintLayout.span) {
+                if (!cache.getMint(pubKey)) {
+                  return cache.addMint(pubKey, obj);
+                }
+              }
+
+              return obj;
+            })
+            .filter((a) => !!a) as any[];
         }
       );
 
@@ -1064,7 +1099,8 @@ function estimateProceedsFromInput(
   console.log(`(${proceedsQuantityInPool} * 997 * ${inputAmount}) / (${inputQuantityInPool} * 1000 + ${inputAmount} * 997)= `, (proceedsQuantityInPool * 997 * inputAmount) / (inputQuantityInPool * 1000 + inputAmount * 997))
   console.log('===================================================================')
   return (
-    (proceedsQuantityInPool * 997 * inputAmount) / (inputQuantityInPool * 1000 + inputAmount * 997)
+    (proceedsQuantityInPool * 997 * inputAmount) /
+    (inputQuantityInPool * 1000 + inputAmount * 997)
   );
 }
 
@@ -1157,7 +1193,7 @@ export async function calculateDependentAmount(
     if (isFirstIndependent) {
       depAdjustedAmount = (amount * depPrecision) / constantPrice.token_b_price;
     } else {
-      depAdjustedAmount = (amount * depPrecision) * constantPrice.token_b_price;
+      depAdjustedAmount = amount * depPrecision * constantPrice.token_b_price;
     }
   } else {
     switch (+op) {
