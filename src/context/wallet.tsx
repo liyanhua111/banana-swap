@@ -25,35 +25,35 @@ export const WALLET_PROVIDERS = [
     url: "https://www.sollet.io",
     icon: require("../assets/img/wallet/Sollet.png"),
   },
-  {
-    name: "Solflare",
-    url: "https://solflare.com/access-wallet",
-    icon: require("../assets/img/wallet/Solflare.png")
-  },
-  {
-    name: "Ledger",
-    url: "https://www.ledger.com",
-    icon: require("../assets/img/wallet/Ledger.png"),
-    adapter: LedgerWalletAdapter,
-  },
-  {
-    name: "Solong",
-    url: "https://www.solong.com",
-    icon: require("../assets/img/wallet/Solong.png"),
-    adapter: SolongWalletAdapter,
-  },
+  // {
+  //   name: "Solflare",
+  //   url: "https://solflare.com/access-wallet",
+  //   icon: require("../assets/img/wallet/Solflare.png")
+  // },
+  // {
+  //   name: "Ledger",
+  //   url: "https://www.ledger.com",
+  //   icon: require("../assets/img/wallet/Ledger.png"),
+  //   adapter: LedgerWalletAdapter,
+  // },
+  // {
+  //   name: "Solong",
+  //   url: "https://www.solong.com",
+  //   icon: require("../assets/img/wallet/Solong.png"),
+  //   adapter: SolongWalletAdapter,
+  // },
   {
     name: "MathWallet",
     url: "https://www.mathwallet.org",
     icon: require("../assets/img/wallet/MathWallet.png"),
     adapter: MathWalletAdapter,
   },
-  {
-    name: "Phantom",
-    url: "https://www.phantom.app",
-    icon: require("../assets/img/wallet/Phantom.png"),
-    adapter: PhantomWalletAdapter,
-  },
+  // {
+  //   name: "Phantom",
+  //   url: "https://www.phantom.app",
+  //   icon: require("../assets/img/wallet/Phantom.png"),
+  //   adapter: PhantomWalletAdapter,
+  // },
 ];
 
 const WalletContext = React.createContext<any>(null);
@@ -162,6 +162,7 @@ export function WalletProvider({ children = null as any }) {
         okText="Connect"
         visible={isModalVisible}
         okButtonProps={{ style: { display: "none" } }}
+        cancelText={t("Cancel")}
         onCancel={close}
         width={400}
       >

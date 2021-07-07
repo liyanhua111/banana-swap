@@ -182,19 +182,25 @@
             box-shadow: 0.4rem 0.4rem 0.8rem 0px rgba(2, 8, 22, 0.5);
             border-radius: 0.06rem;
             cursor: pointer;
-            transition: all .3s;
+            transition: all .3s ease-out;
+            &.active{
+              z-index:3 !important;
+              left: 0 !important;
+              top: 1.62rem !important;
+              transition: all .3s ease-out;
+            }
           }
-          .tabImg:first-child{
-            z-index:2 ;
-            left: 0;
-            top: 1.62rem;
-          }
-          .tabImg:hover{
-            z-index:3 !important;
-            // left: 0 !important;
-            // top: 1.62rem !important;
-            transition: all .3s;
-          }
+          // .tabImg:first-child{
+          //   z-index:2 ;
+          //   left: 0;
+          //   top: 1.62rem;
+          // }
+          // .tabImg:hover{
+          //   z-index:3 !important;
+          //   left: 0 !important;
+          //   top: 1.62rem !important;
+          //   transition: all .3s;
+          // }
         }
       }
     }
