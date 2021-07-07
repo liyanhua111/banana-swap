@@ -14,9 +14,9 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
           </div>
           <div className="bannerBox">
             <div className="banner">
-              <div className="font1">满足一切金融需求的<span className="font5">DEX</span></div>
-              <div className="font2">AMM<span className="font4"> | </span>IDO<span className="font4"> | </span>DeF<span className="font4"> | 高易用性链上基础设施</span></div>
-              <div className="font3">BANANASWAP 致力于为用户提供超 CEX 级别的交易体验，以建立一个简单易用、可组合性强、可灵活定制的去中心化金融基础设施，满足不同用户间的去中心化金融服务需求。</div>
+              <div className="font1">从这里打开你的<span style={{color:"#222"}}>DeFi</span>乐园</div>
+              <div className="font2">AMM<span className="font4"> | </span>IBO<span className="font4"> | </span>Social<span className="font4"> | 高易用性链上基础设施</span></div>
+              <div className="font3">BananaSwap 是一个运行在 Solana 上、采用聚合流动性设计的AMM资产交易平台。其新特性支持区间做市、限价单、NFT LP等功能，此外，BananaSwap还提供一套聚合型Dashboard交易数据看板，提供真正的一站式交易体验。</div>
               {/* <div className="handBtn" onClick={() => history.push({ pathname: "/swap/index" })}>LAUNCH APP</div> */}
               <div className="handBtn">LAUNCH APP</div>
             </div>
@@ -81,13 +81,13 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               <img src={require('../../assets/img/homeImg4.png')} alt="" className="tabImg" />
               <div className="content">
                 <p className="font1">BANA CLUB</p>
-                <p className="font2">BANANA CLUB是一个基于去中心化治理的会员联盟。BANANA CLUB由三种类型的角色构成，也代表整个系统中的三个生态，平台、会员、委员会，带动Solana生态乃至整个DeFi世界的良性发展。 </p>
-                <p className="font2">vBANA 是俱乐部联盟中的身份识别卡片。持有 vBANA，将享有手续费分红折扣、IDO认购份额、提案和投票权以及诸如预言机、仪表盘数据调用权限等各平台独立权益。 </p>
+                <p className="font2">BANA CLUB是一个Solana上的链上会员联盟，基于BANA DAO衍生生态，引入了一套去中心化的产品会员体系和DID链上信用评级系统，首创链上社交化金融，加速DeFi 3.0基础建设。</p>
+                <p className="font2">BANA CARD 是俱乐部联盟中的身份识别卡片。持有 BANA CARD，享受额外的DeFi平台专属权益，手续费折扣等权益，IBO的认购份额，将享有手续费分红折扣、IBO认购份额、提案和投票权以及诸如预言机、仪表盘数据调用权限等各平台独立权益。</p>
               </div>
             </div>
           </div>
           <div className="section4">
-            <p className="title">VBANA权益联盟</p>
+            <p className="title">BANA CARD权益联盟</p>
             <div className="equity">
               <div className="equityL">
                 <div className="equityLItem">
@@ -115,9 +115,9 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                 <div className="position position3"><i>资格评定<br />（白名单）</i></div>
               </div>
               <div className="equityC">
-                <p className="font1"><i>vBANA <br /> BANANA CLUB</i></p>
+                <p className="font1"><i>BANA CARD <br /> BANANA CLUB</i></p>
                 <p className="font2"><i>全品牌会员生态联盟</i></p>
-                <p className="font3"><i>按照不同资产成分铸造合成vBANA，根据vBANA类型享受生态联盟中的所有平台权益委员会</i></p>
+                <p className="font3"><i>按照不同资产成分铸造合成BANA CARD，根据BANA CARD类型享受生态联盟中的所有平台权益委员会</i></p>
               </div>
               <div className="equityR">
                 <div className="equityRItem">
@@ -149,46 +149,45 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
             <p className="hen"></p>
             <p className="font1">路线图</p>
             <div className="headerBox">
-              <p>2021 Q3</p>
-              <p className="active">2021 Q4</p>
+              <p>2021 Q2</p>
+              <p className="active">2021 Q3</p>
+              <p>2021 Q4</p>
               <p>2022 Q1</p>
               <p>2022 Q2</p>
-              <p>2022 Q3</p>
             </div>
             <div className="contentBox">
               <ul>
-                <li>完成BANANASWAP整体设计架构</li>
-                <li>发布SOLANA上的测试版本</li>
-                <li>合约代码审计</li>
-                <li>AMM去中心化交易平台</li>
+                <li>完成整体设计架构</li>
+                <li>solana上的测试版本合约代码审计</li>
+                <li>合作预言机接入</li>
+                <li>BananaSwap Farm</li>
+                <li>上线IBO资产发行</li>
               </ul>
               <ul>
                 <li>AMM流动性聚合</li>
                 <li>支持范围限价订单</li>
-                <li>价格区间流动性</li>
-                <li>提供非同质化流动性证明</li>
+                <li>价格区间流动性提供</li>
+                <li>非同质化流动性证明</li>
                 <li>引入多级费率模型</li>
-                <li>TWAP历史预言机</li>
               </ul>
               <ul>
                 <li>BNANACLUB</li>
-                <li>NFT交易拍卖</li>
-                <li>NFT游戏分发平台</li>
-                <li>NFT包装资产收益管理</li>
+                <li>发行首期BANA CARD</li>
+                <li>BANA CARD铸造池</li>
                 <li>NFT碎片化解决方案</li>
+                <li>引入链上DID信用评级</li>
               </ul>
               <ul>
-                <li>衍生品</li>
-                <li>合成资产</li>
-                <li>杠杆借贷</li>
-                <li>永续合约</li>
-                <li>二元期权</li>
+                <li>NFT包装资产收益管理</li>
+                <li>NFT收益策略</li>
+                <li>主动性LP管理平台</li>
+                <li>自托管投资机枪池</li>
               </ul>
               <ul>
                 <li>启动多链部署计划</li>
                 <li>混合型跨链桥</li>
                 <li>跨链资产兑换</li>
-                <li>聚合交易</li>
+                <li>聚合交易仪表盘</li>
               </ul>
             </div>
           </div>
