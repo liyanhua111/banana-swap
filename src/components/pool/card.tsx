@@ -97,7 +97,6 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
       <hr />
     </>
   );
-  console.log(enriched, 'enrichedenrichedenrichedenrichedenrichedenriched')
   return (
     <Card
       className="pool-card"

@@ -130,7 +130,7 @@ export const CurrencyInput = (props: {
   ) {
     additionalAccounts.push(props.mint);
   }
-
+  
   const renderAdditionalTokens = additionalAccounts.map((mint) => {
     let pool: PoolInfo | undefined;
     const list = grouppedUserAccounts.get(mint);
@@ -152,6 +152,7 @@ export const CurrencyInput = (props: {
       name = getTokenName(tokenMap, mint, true, 9);
       icon = <TokenIcon mintAddress={mint} />;
     }
+    if (name.indexOf('/')>-1)return
     return (
       <Option key={mint} value={mint} name={name}>
         <TokenDisplay
