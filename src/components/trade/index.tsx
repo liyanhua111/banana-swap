@@ -1,10 +1,11 @@
-import { Button, Card, Popover, Spin, Typography,Modal } from "antd";
+import { Button, Card, Popover, Spin, Typography, Modal } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from 'react-i18next'
 import {
   useConnection,
   useConnectionConfig,
   useSlippageConfig,
+  sendTransaction,
 } from "../../utils/connection";
 import { useWallet } from "../../context/wallet";
 import { CurrencyInput } from "../currencyInput";
@@ -18,6 +19,7 @@ import {
   swap,
   usePoolForBasket,
   PoolOperation,
+  calculateDependentAmount,
   LIQUIDITY_PROVIDER_FEE,
 } from "../../utils/pools";
 import { notify } from "../../utils/notifications";
@@ -48,9 +50,13 @@ export const TradeEntry = () => {
     setPoolOperation,
   } = useCurrencyPairState();
   const pool = usePoolForBasket([A?.mintAddress, B?.mintAddress]);
+  const routeAddress = "So11111111111111111111111111111111111111112";
+  const poolA = usePoolForBasket([A?.mintAddress, routeAddress]);
+  const poolB = usePoolForBasket([routeAddress, B?.mintAddress]);
+  let swapList: any[] = [];
+
   const { slippage } = useSlippageConfig();
   const { tokenMap } = useConnectionConfig();
-
   const swapAccounts = () => {
     const tempMint = A.mintAddress;
     const tempAmount = A.amount;
@@ -87,8 +93,14 @@ export const TradeEntry = () => {
             amount: B.convertAmount(),
           },
         ];
-
+        if (!pool) {
+          // @ts-ignore
+          await swap(connection, wallet, components, slippage, pool, swapList);
+          return;
+        }
+        console.log(components, "-------");
         await swap(connection, wallet, components, slippage, pool);
+
       } catch {
         notify({
           description:
@@ -101,13 +113,16 @@ export const TradeEntry = () => {
       }
     }
   };
-  const [isModalVisible,setIsModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const showModal = () => {
     setIsModalVisible(true);
   };
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+  useEffect(() => {
+    console.log(pool, "pool info-------", A, B);
+  });
   return (
     <>
       <Modal title={t("Settings")} visible={isModalVisible} centered onCancel={handleCancel} footer={null}>
@@ -120,19 +135,18 @@ export const TradeEntry = () => {
             <div className="font2">{t("ExchangeTokens")}</div>
           </div>
           <div className="desR">
-            <img src={require('../../assets/img/icon1.png')} onClick={showModal} className="img1" style={{marginRight:0}} alt=""/>
+            <img src={require('../../assets/img/icon1.png')} onClick={showModal} className="img1" style={{ marginRight: 0 }} alt="" />
             {/* <img src={require('../../assets/img/icon2.png')} alt="" /> */}
             <AdressesPopover pool={pool} />
           </div>
         </div>
         <CurrencyInput
           title="Input"
-          onInputChange={(val: any) => {
+          onInputChange={async (val: any) => {
             setPoolOperation(PoolOperation.SwapGivenInput);
             if (A.amount !== val) {
               setLastTypedAccount(A.mintAddress);
             }
-
             A.setAmount(val);
           }}
           amount={A.amount}
@@ -151,7 +165,6 @@ export const TradeEntry = () => {
             if (B.amount !== val) {
               setLastTypedAccount(B.mintAddress);
             }
-
             B.setAmount(val);
           }}
           amount={B.amount}
@@ -173,16 +186,17 @@ export const TradeEntry = () => {
             !A.account ||
             !B.mintAddress ||
             A.account === B.account ||
-            !A.sufficientBalance() ||
-            !pool)
+            !A.sufficientBalance())
+          // ||
+          // !pool && !poolA && !poolA
         }
       >
         {generateActionLabel(
           !pool
             ? POOL_NOT_AVAILABLE(
-                getTokenName(tokenMap, A.mintAddress),
-                getTokenName(tokenMap, B.mintAddress)
-              )
+              getTokenName(tokenMap, A.mintAddress),
+              getTokenName(tokenMap, B.mintAddress)
+            )
             : SWAP_LABEL,
           connected,
           tokenMap,
