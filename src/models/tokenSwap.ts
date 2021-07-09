@@ -142,16 +142,16 @@ export const createInitSwapInstruction = (
     const commandDataLayout = BufferLayout.struct(fields);
     data = Buffer.alloc(commandDataLayout.span);
     const { fees, ...rest } = config;
-
+    console.log(fees,"=========");
     const encodeLength = commandDataLayout.encode(
       {
         instruction: 0, // InitializeSwap instruction
         nonce,
         ...fees,
-        ...rest,
       },
       data
     );
+    console.log(encodeLength,"======");
     data = data.slice(0, encodeLength);
   } else {
     const commandDataLayout = BufferLayout.struct([
