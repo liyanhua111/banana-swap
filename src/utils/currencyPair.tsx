@@ -221,6 +221,7 @@ export function CurrencyPairProvider({ children = null as any }) {
         pool,
         poolOperation
       );
+      console.log(independent,amount,"independent========");
       if (typeof result === "string") {
         setDependent(result);
       } else if (result !== undefined && Number.isFinite(result)) {
