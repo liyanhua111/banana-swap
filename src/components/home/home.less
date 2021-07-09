@@ -5,13 +5,13 @@
   color: #000;
   .homeContent{
     position: relative;
-    background: url(../../assets/img/homeBg.png) no-repeat center;
+    background: url(../../assets/img/homeBg.jpg) no-repeat center top;
     background-size: cover;
     .footBg{
       position: absolute;
       bottom: 0;
       right: 0;
-      width: 9.65rem;
+      width: 8rem;
     }
   }
   .homeHeader{
@@ -26,13 +26,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 0.4rem;
     .banner{
       width: 10rem;
       text-align: left;
       margin-top: 0.7rem;
       &>div{
-        margin-bottom: 25px;
+        margin-bottom: 0.25rem;
       }
       .font1{
         font-size: 0.88rem;
@@ -74,7 +73,7 @@
     }
   }
   .section1{
-    margin-top: 2.3rem;
+    margin-top: 3.3rem;
     .font1{
       font-size: 0.56rem;
       color: #000;
@@ -121,7 +120,7 @@
     }
   }
   .section2{
-    margin-top: 1.9rem;
+    margin-top: 2.1rem;
     .barBox{
       position: relative;
       width: 100%;
@@ -206,15 +205,19 @@
     }
   }
   .section3{
-    margin-top:3rem;
+    margin-top:2.4rem;
     .contentBox{
       display: flex;
       justify-content: space-between;
       img{
         width: 7.84rem;
+        height: auto;
       }
       .content{
         width: 9.8rem;
+        .title{
+          letter-spacing: 6px;
+        }
         .font1{
           font-size: 0.56rem;
           color: #1D1930;
@@ -231,12 +234,13 @@
     }
   }
   .section4{
-    height: 13.5rem;
-    margin-top: 2.3rem;
+    min-height: 13rem;
+    margin-top: 2.8rem;
     .title{
       font-size: 0.56rem;
       color: #1D1930;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      letter-spacing: 6px;
     }
     .equity{
       display: flex;
@@ -375,7 +379,64 @@
     }
   }
   .section5{
+    .title{
+      font-size: 0.56rem;
+      color: #1D1930;
+      margin-bottom: 0.7rem;
+      letter-spacing: 6px;
+    }
+    .teamBox{
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      width: 16.5rem;
+      margin: 0 auto;
+      a:nth-child(3n){
+        .teamItem{
+          margin-right: 0;
+        }
+      }
+      .teamItem{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 4.88rem;
+        height: 4.8rem;
+        margin-right: 0.8rem;
+        margin-bottom: 0.72rem;
+        background: #fff;
+        border-radius: 7px;
+        box-shadow: rgba(255, 192, 0,0.6) 0px 28px 30px -12px;
+        img{
+          display: block;
+          height: 2.3rem;
+          margin-bottom: 0.4rem;
+        }
+        .teamName{
+          display: inline-block;
+          position: relative;
+          font-size: 0.3rem;
+          font-weight: bold;
+          padding-right: 0.4rem;
+          &::after{
+            display: inline-block;
+            overflow: hidden;
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0.3rem;
+            height: 100%;
+            background: url("../../assets/img/nav/b3.png") no-repeat center;
+            background-size: contain;
+          }
+        }
+      }
+    }
+  }
+  .section6{
     text-align: left;
+    padding-top: 1rem;
     .hen{
       width: 0.54rem;
       height: 0.18rem;
@@ -438,14 +499,31 @@
       }
     }
   }
-  .section6{
-    height: 4rem;
+  .section7{
     margin-top: 2.25rem;
-    padding-bottom: 2.25rem;
     .line{
       width: 100%;
       border: 0.03rem solid #000000;
-      margin-bottom: 0.76rem;
+      margin-bottom: 1.7rem;
+    }
+    .contactBox{
+      margin-bottom: 2rem;
+      .title{
+        font-size: 0.56rem;
+        color: #1D1930;
+        text-align: left;
+        margin-bottom: 2rem;
+        letter-spacing: 6px;
+      }
+      .contact{
+        position: relative;
+        z-index: 1;
+        display: flex;
+        justify-content: space-between;
+        img{
+          height: 0.9rem;
+        }
+      }
     }
     .logoBox{
       text-align: left;
@@ -468,8 +546,16 @@
 @media only screen and (min-width: 3001px) {
   .homePage{
     .homeContent{
-      background: url(../../assets/img/homeBg.png) no-repeat center;
+      background: url(../../assets/img/homeBg.jpg) no-repeat center top;
       background-size: contain;
+    }
+  }
+}
+@media only screen and (max-width: 600px) {
+  .homePage{
+    .section6 .contentBox ul li{
+      line-height: 1rem;
+      margin-bottom:5px;
     }
   }
 }

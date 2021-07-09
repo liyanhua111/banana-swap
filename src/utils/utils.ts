@@ -195,3 +195,13 @@ export const colorWarning = (value = 0, valueCheckpoints = [1, 3, 5, 100]) => {
   }
   return colorCodes[defaultIndex];
 };
+
+export const toNdecimalString = (num:number, digits=8) => {
+  if (!num || Number.isNaN(Number(num)) || !Number.isFinite(Number(num))) {
+    return 0
+  }
+  let newNum = Number(Number(num).toFixed(digits))
+  var m = newNum.toExponential().match(/\d(?:\.(\d*))?e([+-]\d+)/)
+  let result = newNum.toFixed(Math.max(0, (m?.[1] || '').length - Number(m?.[2])))
+  return Number(result)
+}

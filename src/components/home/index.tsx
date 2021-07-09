@@ -84,7 +84,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
             <div className="contentBox">
               <img src={require('../../assets/img/homeImg4.png')} alt="" className="tabImg" />
               <div className="content">
-                <p className="font1">BANA CLUB</p>
+                <p className="font1 title">BANA CLUB</p>
                 <p className="font2">BANA CLUB是一个Solana上的链上会员联盟，基于BANA DAO衍生生态，引入了一套去中心化的产品会员体系和DID链上信用评级系统，首创链上社交化金融，加速DeFi 3.0基础建设。</p>
                 <p className="font2">BANA CARD 是俱乐部联盟中的身份识别卡片。持有 BANA CARD，享受额外的DeFi平台专属权益，手续费折扣等权益，IBO的认购份额，将享有手续费分红折扣、IBO认购份额、提案和投票权以及诸如预言机、仪表盘数据调用权限等各平台独立权益。</p>
               </div>
@@ -150,6 +150,59 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
             </div>
           </div>
           <div className="section5">
+            <div className="title">BANANA MAN</div>
+            <div className="teamBox">
+              <a href="https://twitter.com/0xbana" target="_blank" >
+                <div className="teamItem">
+                  <div>
+                    <img src={require('../../assets/img/team1.png')} alt="" />
+                    <p className="teamName">0xbana</p>
+                  </div>
+                </div>
+              </a>
+              <a href="https://twitter.com/0xSakuya" target="_blank" >
+                <div className="teamItem">
+                  <div>
+                    <img src={require('../../assets/img/team2.png')} alt="" />
+                    <p className="teamName">0xsakuya</p>
+                  </div>
+                </div>
+              </a>
+              <a href="https://twitter.com/0xPeter101" target="_blank" >
+                <div className="teamItem">
+                  <div>
+                    <img src={require('../../assets/img/team3.png')} alt="" />
+                    <p className="teamName">0xpeter</p>
+                  </div>
+                </div>
+              </a>
+              <a href="https://twitter.com/0xBruce" target="_blank" >
+                <div className="teamItem">
+                  <div>
+                    <img src={require('../../assets/img/team4.png')} alt="" />
+                    <p className="teamName">0xbruce</p>
+                  </div>
+                </div>
+              </a>
+              <a href="https://twitter.com/0xSelena" target="_blank" >
+                <div className="teamItem">
+                  <div>
+                    <img src={require('../../assets/img/team5.png')} alt="" />
+                    <p className="teamName">0xselena</p>
+                  </div>
+                </div>
+              </a>
+              <a href="https://twitter.com/0xPlantain" target="_blank" >
+                <div className="teamItem">
+                  <div>
+                    <img src={require('../../assets/img/team6.png')} alt="" />
+                    <p className="teamName">0xplantain</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div className="section6">
             <p className="hen"></p>
             <p className="font1">路线图</p>
             <div className="headerBox">
@@ -195,11 +248,23 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               </ul>
             </div>
           </div>
-          <div className="section6">
+          <div className="section7">
             <p className="line"></p>
+            <div className="contactBox">
+              <p className="title">CONTACT US</p>
+              <div className="contact">
+              <a href="https://twitter.com/BananaSwap_net" target="_blank" ><img src={require("../../assets/img/relative/1.png")} alt="" /></a>
+              <a href="https://discord.gg/AWmXjCECgm" target="_blank"><img src={require("../../assets/img/relative/2.png")} alt=""/></a>
+              <a href="https://github.com/bananadefilabs-001/banana" target="_blank"><img src={require("../../assets/img/relative/3.png")} alt=""/></a>
+              <a href="contact@bananaswap.net" target="_blank"><img src={require("../../assets/img/relative/4.png")} alt=""/></a>
+              <a href="https://www.facebook.com/BananaSwap" target="_blank"><img src={require("../../assets/img/relative/5.png")} alt=""/></a>
+              <a href="https://t.me/banana_swap" target="_blank"><img src={require("../../assets/img/relative/6.png")} alt=""/></a>
+              <a href="https://bananaswap-net.medium.com/" target="_blank"><img src={require("../../assets/img/relative/7.png")} alt=""/></a>
+              </div>
+            </div>
             <div className="logoBox">
               <img src={require('../../assets/img/logo.png')} alt="" />
-              <p>EMAIL：CONTACT@BANANASWAP.NET</p>
+              {/* <p>EMAIL：CONTACT@BANANASWAP.NET</p> */}
             </div>
           </div>
         </div>
