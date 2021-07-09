@@ -138,19 +138,7 @@ export const createInitSwapInstruction = (
       BufferLayout.nu64("ownerWithdrawFeeDenominator"),
       BufferLayout.nu64("hostFeeNumerator"),
       BufferLayout.nu64("hostFeeDenominator"),
-      BufferLayout.u8("curveType"),
     ];
-
-    if (config.curveType === CurveType.ConstantProductWithOffset) {
-      fields.push(BufferLayout.nu64("token_b_offset"));
-      fields.push(BufferLayout.blob(24, "padding"));
-    } else if (config.curveType === CurveType.ConstantPrice) {
-      fields.push(BufferLayout.nu64("token_b_price"));
-      fields.push(BufferLayout.blob(24, "padding"));
-    } else {
-      fields.push(BufferLayout.blob(32, "padding"));
-    }
-
     const commandDataLayout = BufferLayout.struct(fields);
 
     const { fees, ...rest } = config;
@@ -166,6 +154,7 @@ export const createInitSwapInstruction = (
     );
     data = data.slice(0, encodeLength);
   } else {
+    console.log(3433222222)
     const commandDataLayout = BufferLayout.struct([
       BufferLayout.u8("instruction"),
       BufferLayout.u8("nonce"),
