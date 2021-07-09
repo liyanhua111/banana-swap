@@ -415,37 +415,40 @@ export const swap = async (
   components: LiquidityComponent[],
   SLIPPAGE: number,
   pool?: PoolInfo,
-  routePool?: PoolInfo,
-  componentsR?: LiquidityComponent[],
+  swapList?: any,
 ) => {
-  let swapData = await swapInfo(
-    connection,
-    wallet,
-    components,
-    SLIPPAGE,
-    pool
-  );
-  // @ts-ignore
-  // let swapData1 =
-  //   await swapInfo(
-  //     connection,
-  //     wallet,        // @ts-ignore
-  //     components,
-  //     SLIPPAGE,
-  //     pool
-  //   )
-  // @ts-ignore
-  // console.log(swapData, "instructionsData======");
-  // console.log(swapData1, "instructionsData1======");
+  let swapData = [];
+  if (swapList) { // @ts-ignore
+    swapList.forEach(async (item) => {
+      swapData.push(await swapInfo(
+        connection,
+        wallet,
+        item.components,
+        SLIPPAGE,
+        item.pool
+      ))
+    })
+  } else {
+    swapData.push(await swapInfo(
+      connection,
+      wallet,
+      components,
+      SLIPPAGE,
+      pool
+    ))
+  }
+  let instructionsData: TransactionInstruction[] = [];
+  let signers: Account[] = []
+  swapData.forEach(item => {   // @ts-ignore
+    instructionsData.push(...item.instructionsData);// @ts-ignore
+    signers.push(...item.signers);
+  })
   let tx = await sendTransaction(
     connection,
-    wallet,
-    // @ts-ignore
-    swapData.instructionsData,
-    // @ts-ignore
-    swapData.signers
+    wallet,// @ts-ignore
+    instructionsData,// @ts-ignore
+    signers
   );
-
   notify({
     message: "Trade executed.",
     type: "success",
@@ -1207,7 +1210,7 @@ export async function calculateDependentAmount(
           indBasketQuantity,
           indAdjustedAmount
         );
-        console.log(depAdjustedAmount,'SwapGivenProceeds1')
+        console.log(depAdjustedAmount, 'SwapGivenProceeds1')
         break;
       case PoolOperation.SwapGivenInput:
         depAdjustedAmount = estimateProceedsFromInput(
@@ -1215,7 +1218,7 @@ export async function calculateDependentAmount(
           depBasketQuantity,
           indAdjustedAmount
         );
-        console.log(depAdjustedAmount,'SwapGivenInput2')
+        console.log(depAdjustedAmount, 'SwapGivenInput2')
         break;
     }
   }
@@ -1287,7 +1290,7 @@ async function _addLiquidityNewPool(
       null
     )
   );
-
+  console.log("createInitMintInstruction=======");
   // Create holding accounts for
   const accountRentExempt = await connection.getMinimumBalanceForRentExemption(
     AccountLayout.span
@@ -1334,7 +1337,7 @@ async function _addLiquidityNewPool(
     SWAP_PROGRAM_OWNER_FEE_ADDRESS || wallet.publicKey,
     AccountLayout.span
   );
-
+  console.log("init-info=======");
   // create all accounts in one transaction
   let tx = await sendTransaction(connection, wallet, instructions, [
     liquidityTokenMint,
