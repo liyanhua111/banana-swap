@@ -1,6 +1,6 @@
 import { Button, Card, Popover, Spin, Typography, Modal } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from "react-i18next";
 import {
   useConnection,
   useConnectionConfig,
@@ -23,7 +23,10 @@ import {
   LIQUIDITY_PROVIDER_FEE,
 } from "../../utils/pools";
 import { notify } from "../../utils/notifications";
-import { useCurrencyPairState } from "../../utils/currencyPair";
+import {
+  useCurrencyPairState,
+  CurrencyContextState,
+} from "../../utils/currencyPair";
 import { generateActionLabel, POOL_NOT_AVAILABLE, SWAP_LABEL } from "../labels";
 import "./trade.less";
 import { colorWarning, getTokenName } from "../../utils/utils";
@@ -43,6 +46,7 @@ export const TradeEntry = () => {
   const { wallet, connect, connected } = useWallet();
   const connection = useConnection();
   const [pendingTx, setPendingTx] = useState(false);
+  const [toInfo, setToInfo] = useState({});
   const {
     A,
     B,
@@ -100,7 +104,6 @@ export const TradeEntry = () => {
         }
         console.log(components, "-------");
         await swap(connection, wallet, components, slippage, pool);
-
       } catch {
         notify({
           description:
@@ -120,12 +123,45 @@ export const TradeEntry = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+  const getToInfoResult = async () => {
+    // @ts-ignore
+    const pool: PoolInfo = poolA;
+    if (!pool) {
+      return;
+    }
+    const independent = A.mintAddress; // @ts-ignore  froma ddress
+    const poolOperation = 1; // @ts-ignore
+    const amount: number = A.amount;
+    const result = await calculateDependentAmount(
+      connection,
+      independent,
+      amount,
+      pool,
+      poolOperation
+    );
+    console.log(result, "result==========");
+  };
   useEffect(() => {
-    console.log(pool, "pool info-------", A, B);
+    if (!pool) {
+      // setNextInfo();
+      // setPoolOperation(PoolOperation.SwapGivenInput);
+      // setLastTypedAccount(A.mintAddress);
+      // A.setAmount(val);
+    }
+    getToInfoResult();
+    // @ts-ignore
+    setToInfo(B);
   });
+
   return (
     <>
-      <Modal title={t("Settings")} visible={isModalVisible} centered onCancel={handleCancel} footer={null}>
+      <Modal
+        title={t("Settings")}
+        visible={isModalVisible}
+        centered
+        onCancel={handleCancel}
+        footer={null}
+      >
         <Settings />
       </Modal>
       <div className="input-card">
@@ -135,7 +171,13 @@ export const TradeEntry = () => {
             <div className="font2">{t("ExchangeTokens")}</div>
           </div>
           <div className="desR">
-            <img src={require('../../assets/img/icon1.png')} onClick={showModal} className="img1" style={{ marginRight: 0 }} alt="" />
+            <img
+              src={require("../../assets/img/icon1.png")}
+              onClick={showModal}
+              className="img1"
+              style={{ marginRight: 0 }}
+              alt=""
+            />
             {/* <img src={require('../../assets/img/icon2.png')} alt="" /> */}
             <AdressesPopover pool={pool} />
           </div>
@@ -161,16 +203,18 @@ export const TradeEntry = () => {
         <CurrencyInput
           title="To (Estimate)"
           onInputChange={(val: any) => {
-            setPoolOperation(PoolOperation.SwapGivenProceeds);
-            if (B.amount !== val) {
-              setLastTypedAccount(B.mintAddress);
-            }
-            B.setAmount(val);
-          }}
-          amount={B.amount}
-          mint={B.mintAddress}
+            setPoolOperation(PoolOperation.SwapGivenProceeds); // @ts-ignore
+            if (toInfo.amount !== val) {
+              // @ts-ignore
+              setLastTypedAccount(toInfo.mintAddress); // @ts-ignore
+            } // @ts-ignore
+            toInfo.setAmount(val);
+          }} // @ts-ignore
+          amount={toInfo.amount} // @ts-ignore
+          mint={toInfo.mintAddress} // @ts-ignore
           onMintChange={(item) => {
-            B.setMint(item);
+            // @ts-ignore
+            toInfo.setMint(item);
           }}
         />
       </div>
@@ -194,9 +238,9 @@ export const TradeEntry = () => {
         {generateActionLabel(
           !pool
             ? POOL_NOT_AVAILABLE(
-              getTokenName(tokenMap, A.mintAddress),
-              getTokenName(tokenMap, B.mintAddress)
-            )
+                getTokenName(tokenMap, A.mintAddress),
+                getTokenName(tokenMap, B.mintAddress)
+              )
             : SWAP_LABEL,
           connected,
           tokenMap,
@@ -284,9 +328,7 @@ export const TradeInfo = (props: { pool?: PoolInfo }) => {
         <Text className="pool-card-cell">
           <Popover
             trigger="hover"
-            content={
-              <div style={{ width: 300 }}>{t("exchangeTip1")}</div>
-            }
+            content={<div style={{ width: 300 }}>{t("exchangeTip1")}</div>}
           >
             {t("MinimumReceived")} <QuestionCircleOutlined />
           </Popover>
@@ -299,9 +341,7 @@ export const TradeInfo = (props: { pool?: PoolInfo }) => {
         <Text className="pool-card-cell">
           <Popover
             trigger="hover"
-            content={
-              <div style={{ width: 300 }}>{t("exchangeTip2")}</div>
-            }
+            content={<div style={{ width: 300 }}>{t("exchangeTip2")}</div>}
           >
             {t("PriceImpact")} <QuestionCircleOutlined />
           </Popover>
@@ -320,7 +360,8 @@ export const TradeInfo = (props: { pool?: PoolInfo }) => {
             trigger="hover"
             content={
               <div style={{ width: 300 }}>
-                {t("exchangeTip3a")} ({LIQUIDITY_PROVIDER_FEE * 100}%) {t("exchangeTip3b")}
+                {t("exchangeTip3a")} ({LIQUIDITY_PROVIDER_FEE * 100}%){" "}
+                {t("exchangeTip3b")}
               </div>
             }
           >
