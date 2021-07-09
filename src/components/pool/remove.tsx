@@ -13,6 +13,7 @@ import {
   formatPriceNumber,
   getPoolName,
   getTokenName,
+  toNdecimalString
 } from "../../utils/utils";
 import { PoolCurrencyInput } from "../currencyInput";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -180,6 +181,7 @@ export const RemoveLiquidityEntry = (props: {
         break;
       }
       case "tokenA": {
+        console.log('tokenAtokenAtokenAtokenAtokenAtokenAtokenA')
         setInputsDescription({
           pool: withdrawType === "both" ? "Input" : "Output (Estimated)",
           poolAmount: formatPriceNumber.format(
@@ -199,6 +201,7 @@ export const RemoveLiquidityEntry = (props: {
         break;
       }
       case "tokenB": {
+        console.log('tokenBtokenBtokenBtokenBtokenBtokenBtokenB')
         setInputsDescription({
           pool: withdrawType === "both" ? "Input" : "Output (Estimated)",
           poolAmount: formatPriceNumber.format(
@@ -276,24 +279,27 @@ export const RemoveLiquidityEntry = (props: {
   const handleInputChange = (val: any, inputSource: string) => {
     switch (inputSource) {
       case "pool": {
+        console.log(val,'poolpoolpool')
         setInputInfo({
-          liquidityPercentage: (val.replace(/,/g, '') * 100) / (enriched.supply * ratio),
+          liquidityPercentage: toNdecimalString((val.replace(/,/g, '') * 100) / (enriched.supply * ratio),2),
           amount: val,
           lastTyped: "pool",
         });
         break;
       }
       case "tokenA": {
+        console.log(val,'tokenAtokenA')
         setInputInfo({
-          liquidityPercentage: (val.replace(/,/g, '') * 100) / (enriched.liquidityA * ratio),
+          liquidityPercentage: toNdecimalString((val.replace(/,/g, '') * 100) / (enriched.liquidityA * ratio),2),
           amount: val,
           lastTyped: "tokenA",
         });
         break;
       }
       case "tokenB": {
+        console.log(val,'tokenBtokenBtokenB')
         setInputInfo({
-          liquidityPercentage: (val.replace(/,/g, '') * 100) / (enriched.liquidityB * ratio),
+          liquidityPercentage: toNdecimalString(((val.replace(/,/g, '') * 100) / (enriched.liquidityB * ratio)),2),
           amount: val,
           lastTyped: "tokenB",
         });
