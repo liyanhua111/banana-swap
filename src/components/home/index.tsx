@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import { useHistory } from "react-router-dom";
+import { Popover } from 'antd';
 import './home.less'
 
 
@@ -255,8 +256,10 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               <div className="contact">
               <a href="https://twitter.com/BananaSwap_net" target="_blank" ><img src={require("../../assets/img/relative/1.png")} alt="" /></a>
               <a href="https://discord.gg/AWmXjCECgm" target="_blank"><img src={require("../../assets/img/relative/2.png")} alt=""/></a>
-              <a href="https://github.com/bananadefilabs-001/banana" target="_blank"><img src={require("../../assets/img/relative/3.png")} alt=""/></a>
-              <a href="contact@bananaswap.net" target="_blank"><img src={require("../../assets/img/relative/4.png")} alt=""/></a>
+              <a href="https://github.com/bananadefilabs-001/banana" target="_blank"><img src={require("../../assets/img/relative/3.png")} alt="" /></a>
+              <Popover content={"contact@bananaswap.net"} title="邮箱地址">
+                <a><img src={require("../../assets/img/relative/4.png")} alt=""/></a>
+              </Popover>
               <a href="https://www.facebook.com/BananaSwap" target="_blank"><img src={require("../../assets/img/relative/5.png")} alt=""/></a>
               <a href="https://t.me/banana_swap" target="_blank"><img src={require("../../assets/img/relative/6.png")} alt=""/></a>
               <a href="https://bananaswap-net.medium.com/" target="_blank"><img src={require("../../assets/img/relative/7.png")} alt=""/></a>
