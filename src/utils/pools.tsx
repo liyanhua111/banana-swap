@@ -1362,7 +1362,7 @@ async function _addLiquidityNewPool(
   signers = [];
   instructions = [];
   cleanupInstructions = [];
-
+  console.log(programIds().swapLayout.span, "  programIds().swapLayout.span")
   instructions.push(
     SystemProgram.createAccount({
       fromPubkey: wallet.publicKey,
