@@ -13,7 +13,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
     changeActiveIndex(activeIndex===1?2:1)
   }
   const HomePage = (
-    <div className="homePage">
+    <div className={`homePage ${i18n.language=='en'?'homePageEn':''}`}>
       <div className="homeContent">
         <div className="maxWidth">
           <div className="homeHeader">
@@ -99,115 +99,119 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
             </div>
           </div>
           <div className="section4">
-            <p className="title">{t("homeTitle5")}</p>
-            <div className="equity">
-              <div className="equityL">
-                <div className="equityLItem">
-                  <p><i>BANA</i></p>
-                  <img src={require('../../assets/img/homeIcon.png')} className="placeholder" alt=""/>
-                </div>
-                <div className="equityLItem">
-                  <p><i>SRM</i></p>
-                  <img src={require('../../assets/img/homeIcon.png')} className="placeholder" alt=""/>
-                </div>
-                <div className="equityLItem">
-                  <p><i>OXY</i></p>
-                  <img src={require('../../assets/img/homeIcon.png')} className="placeholder" alt=""/>
-                </div>
-                <div className="equityLItem">
-                  <div className="dian"><span></span><span></span><span></span></div>
-                  <p className="placeholder"></p>
-                </div>
-                <div className="equityLItem">
-                  <p><i>UNI</i></p>
-                  <img src={require('../../assets/img/homeIcon.png')} className="placeholder" alt=""/>
-                </div>
-                <div className="position position1"><i>DeFi权益币资产池<br />（白名单扩展）</i></div>
-                <div className="position position2"><i>将DeFi平台权益币抵<br />押进一个资产池</i></div>
-                <div className="position position3"><i>资格评定<br />（白名单）</i></div>
-              </div>
-              <div className="equityC">
-                <p className="font1"><i>BANA CARD <br /> BANANA CLUB</i></p>
-                <p className="font2"><i>全品牌会员生态联盟</i></p>
-                <p className="font3"><i>按照不同资产成分铸造合成BANA CARD，根据BANA CARD类型享受生态联盟中的所有平台权益委员会</i></p>
-              </div>
-              <div className="equityR">
-                <div className="equityRItem">
-                  <p className="placeholder"></p>
-                  <div className="equityRSubItem">
-                    <p className="classify"><i>青香蕉</i></p>
-                    <p className="classifyInfo"><i>获得生态联盟的手续<br/>费分红</i></p>
+            <div>
+              <p className="title">{t("homeTitle5")}</p>
+              <div className="equity">
+                <div className="equityL">
+                  <div className="equityLItem">
+                    <p><i>BANA</i></p>
+                    <img src={require('../../assets/img/homeIcon.png')} className="placeholder" alt=""/>
                   </div>
-                </div>
-                <div className="equityRItem">
-                  <img src={require('../../assets/img/homeIcon.png')} alt="" className="placeholder" />
-                  <div className="equityRSubItem">
-                    <p className="classify"><i>银香蕉</i></p>
-                    <p className="classifyInfo"><i>享受生态联盟的手续<br/>费折扣</i></p>
+                  <div className="equityLItem">
+                    <p><i>SRM</i></p>
+                    <img src={require('../../assets/img/homeIcon.png')} className="placeholder" alt=""/>
                   </div>
-                </div>
-                <div className="equityRItem">
-                  <p className="placeholder"></p>
-                  <div className="equityRSubItem">
-                    <p className="classify"><i>金香蕉</i></p>
-                    <p className="classifyInfo"><i>享受生态联盟的IDO<br/>认购份额</i></p>
+                  <div className="equityLItem">
+                    <p><i>OXY</i></p>
+                    <img src={require('../../assets/img/homeIcon.png')} className="placeholder" alt=""/>
                   </div>
+                  <div className="equityLItem">
+                    <div className="dian"><span></span><span></span><span></span></div>
+                    <p className="placeholder"></p>
+                  </div>
+                  <div className="equityLItem">
+                    <p><i>UNI</i></p>
+                    <img src={require('../../assets/img/homeIcon.png')} className="placeholder" alt=""/>
+                  </div>
+                  <div className="position position1"><i>{t("homeInfor53")}</i></div>
+                  <div className="position position2"><i>{t("homeInfor54")}</i></div>
+                  <div className="position position3"><i>{t("homeInfor55")}</i></div>
                 </div>
-                <div className="position position1"><i>兼具NFT功能，收藏、<br />转移、拍卖 …</i></div>
+                <div className="equityC">
+                  <p className="font1"><i>BANA CARD <br /> BANANA CLUB</i></p>
+                  <p className="font2"><i>{t("homeInfor51")}</i></p>
+                  <p className="font3"><i>{t("homeInfor52")}</i></p>
+                </div>
+                <div className="equityR">
+                  <div className="equityRItem">
+                    <p className="placeholder"></p>
+                    <div className="equityRSubItem">
+                      <p className="classify"><i>{t("homeInfor57")}</i></p>
+                      <p className="classifyInfo"><i>{t('homeInfor510')}</i></p>
+                    </div>
+                  </div>
+                  <div className="equityRItem">
+                    <img src={require('../../assets/img/homeIcon.png')} alt="" className="placeholder" />
+                    <div className="equityRSubItem">
+                      <p className="classify"><i>{t("homeInfor58")}</i></p>
+                      <p className="classifyInfo"><i>{t("homeInfor510")}</i></p>
+                    </div>
+                  </div>
+                  <div className="equityRItem">
+                    <p className="placeholder"></p>
+                    <div className="equityRSubItem">
+                      <p className="classify"><i>{t("homeInfor59")}</i></p>
+                      <p className="classifyInfo"><i>{t("homeInfor510")}</i></p>
+                    </div>
+                  </div>
+                  <div className="position position1"><i>{t("homeInfor56")}</i></div>
+                </div>
               </div>
             </div>
           </div>
           <div className="section5">
-            <div className="title">BANANA MAN</div>
-            <div className="teamBox">
-              <a href="https://twitter.com/0xbana" target="_blank" >
-                <div className="teamItem">
-                  <div>
-                    <img src={require('../../assets/img/team1.png')} alt="" />
-                    <p className="teamName">0xbana</p>
+            <div>
+              <div className="title">BANANA MAN</div>
+              <div className="teamBox">
+                <a href="https://twitter.com/0xbana" target="_blank" >
+                  <div className="teamItem">
+                    <div>
+                      <img src={require('../../assets/img/team1.png')} alt="" />
+                      <p className="teamName">0xbana</p>
+                    </div>
                   </div>
-                </div>
-              </a>
-              <a href="https://twitter.com/0xSakuya" target="_blank" >
-                <div className="teamItem">
-                  <div>
-                    <img src={require('../../assets/img/team2.png')} alt="" />
-                    <p className="teamName">0xsakuya</p>
+                </a>
+                <a href="https://twitter.com/0xSakuya" target="_blank" >
+                  <div className="teamItem">
+                    <div>
+                      <img src={require('../../assets/img/team2.png')} alt="" />
+                      <p className="teamName">0xsakuya</p>
+                    </div>
                   </div>
-                </div>
-              </a>
-              <a href="https://twitter.com/0xPeter101" target="_blank" >
-                <div className="teamItem">
-                  <div>
-                    <img src={require('../../assets/img/team3.png')} alt="" />
-                    <p className="teamName">0xpeter</p>
+                </a>
+                <a href="https://twitter.com/0xPeter101" target="_blank" >
+                  <div className="teamItem">
+                    <div>
+                      <img src={require('../../assets/img/team3.png')} alt="" />
+                      <p className="teamName">0xpeter</p>
+                    </div>
                   </div>
-                </div>
-              </a>
-              <a href="https://twitter.com/0xBruce" target="_blank" >
-                <div className="teamItem">
-                  <div>
-                    <img src={require('../../assets/img/team4.png')} alt="" />
-                    <p className="teamName">0xbruce</p>
+                </a>
+                <a href="https://twitter.com/0xBruce" target="_blank" >
+                  <div className="teamItem">
+                    <div>
+                      <img src={require('../../assets/img/team4.png')} alt="" />
+                      <p className="teamName">0xbruce</p>
+                    </div>
                   </div>
-                </div>
-              </a>
-              <a href="https://twitter.com/0xSelena" target="_blank" >
-                <div className="teamItem">
-                  <div>
-                    <img src={require('../../assets/img/team5.png')} alt="" />
-                    <p className="teamName">0xselena</p>
+                </a>
+                <a href="https://twitter.com/0xSelena" target="_blank" >
+                  <div className="teamItem">
+                    <div>
+                      <img src={require('../../assets/img/team5.png')} alt="" />
+                      <p className="teamName">0xselena</p>
+                    </div>
                   </div>
-                </div>
-              </a>
-              <a href="https://twitter.com/0xPlantain" target="_blank" >
-                <div className="teamItem">
-                  <div>
-                    <img src={require('../../assets/img/team6.png')} alt="" />
-                    <p className="teamName">0xplantain</p>
+                </a>
+                <a href="https://twitter.com/0xPlantain" target="_blank" >
+                  <div className="teamItem">
+                    <div>
+                      <img src={require('../../assets/img/team6.png')} alt="" />
+                      <p className="teamName">0xplantain</p>
+                    </div>
                   </div>
-                </div>
-              </a>
+                </a>
+              </div>
             </div>
           </div>
           <div className="section6">

@@ -3,8 +3,32 @@
   background: #FFE38D;
   margin: 0 auto;
   color: #000;
+  overflow-x: auto;
+  &.homePageEn{
+    .banner{
+      width: 12rem !important;
+      .font1{
+        font-size: 0.68rem !important;
+      }
+    }
+    .section4{
+      .title{
+        margin-bottom: 1rem !important;
+      }
+      .equityC{
+        padding: 0.56rem!important;
+      }
+      .classify{
+        font-size: 0.3rem!important;
+      }
+      .classifyInfo{
+        font-size: 0.24rem!important;
+      }
+    }
+  }
   .homeContent{
     position: relative;
+    min-width: 900px;
     background: url(../../assets/img/homeBg.jpg) no-repeat center top;
     background-size: cover;
     .footBg{
@@ -35,10 +59,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 13rem;
     .banner{
       width: 10rem;
       text-align: left;
-      margin-top: 0.7rem;
       &>div{
         margin-bottom: 0.25rem;
       }
@@ -82,7 +106,8 @@
     }
   }
   .section1{
-    margin-top: 3.3rem;
+    margin-top: 2.3rem;
+    height: 10rem;
     .font1{
       font-size: 0.56rem;
       color: #000;
@@ -129,7 +154,7 @@
     }
   }
   .section2{
-    margin-top: 2.1rem;
+    height: 16.2rem;
     .barBox{
       position: relative;
       width: 100%;
@@ -163,7 +188,7 @@
         align-items: center;
         justify-content: space-between;
         .tabLeft{
-          width: 6.2rem;
+          width: 6.4rem;
           text-align: left;
           .font1{
             font-size: 0.56rem;
@@ -214,10 +239,14 @@
     }
   }
   .section3{
-    margin-top:2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 11.2rem;
     .contentBox{
       display: flex;
       justify-content: space-between;
+      width: 100%;
       img{
         width: 7.84rem;
         height: auto;
@@ -244,7 +273,14 @@
   }
   .section4{
     min-height: 13rem;
-    margin-top: 2.8rem;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    &>div{
+      width: 100%;
+      height: 100%;
+    }
     .title{
       font-size: 0.56rem;
       color: #1D1930;
@@ -334,6 +370,7 @@
           font-size: 0.3rem;
           color: #2D2D2D;
           font-weight: 200;
+          margin-bottom: 0;
         }
       }
       .equityR{
@@ -372,6 +409,7 @@
             .classifyInfo{
               flex: 1;
               margin-bottom: 0;
+              white-space: pre-wrap;
             }
           }
         }
@@ -384,14 +422,24 @@
         position: absolute;
         font-weight: 600;
         font-size: 0.3rem;
+        white-space: pre-wrap;
       }
     }
   }
   .section5{
+    width: 100%;
+    height: 13rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &>div{
+      width: 100%;
+    }
     .title{
       font-size: 0.56rem;
       color: #1D1930;
       margin-bottom: 0.7rem;
+      margin-top: 0.8rem;
       letter-spacing: 6px;
     }
     .teamBox{
@@ -445,7 +493,7 @@
   }
   .section6{
     text-align: left;
-    padding-top: 1rem;
+    padding-top: 2rem;
     .hen{
       width: 0.54rem;
       height: 0.18rem;
