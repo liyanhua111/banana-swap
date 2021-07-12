@@ -17,9 +17,18 @@
   .homeHeader{
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 0.4rem 0;
     .homeLogo{
       width: 2.62rem;
+    }
+    .lang {
+      width: 60px;
+      cursor: pointer;
+      text-align: left;
+      img{
+        width: 28px;
+      }
     }
   }
   .bannerBox{
@@ -488,8 +497,8 @@
             content: "";
             position: absolute;
             left: 0;
-            top: 50%;
-            margin-top: -0.025rem;
+            top: 0;
+            margin-top: 0.25rem;
             width: 0.05rem;
             height: 0.05rem;
             background: #FFC000;
