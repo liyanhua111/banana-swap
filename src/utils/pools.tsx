@@ -303,7 +303,7 @@ const swapInfo = async (
   SLIPPAGE: number,
   pool?: PoolInfo
 ) => {
-  if (!pool || !components[0].account) {
+  if (!pool) {
     notify({
       type: "error",
       message: `Pool doesn't exsist.`,
@@ -322,10 +322,14 @@ const swapInfo = async (
       components[0].account.info.mint.toBase58()     // @ts-ignore
       ? pool.pubkeys.holdingAccounts[0]     // @ts-ignore
       : pool.pubkeys.holdingAccounts[1];
+  console.log(pool.pubkeys.holdingMints[0]?.toBase58() ===     // @ts-ignore
+    components[0].account.info.mint.toBase58(), "01")
   const holdingB =     // @ts-ignore
     holdingA === pool.pubkeys.holdingAccounts[0]     // @ts-ignore
       ? pool.pubkeys.holdingAccounts[1]     // @ts-ignore
       : pool.pubkeys.holdingAccounts[0];
+  console.log(pool.pubkeys.holdingMints[0]?.toBase58() ===     // @ts-ignore
+    components[0].account.info.mint.toBase58(), "10")
   // @ts-ignore
   const poolMint = await cache.queryMint(connection, pool.pubkeys.mint);     // @ts-ignore
   if (!poolMint.mintAuthority || !pool.pubkeys.feeAccount) {
@@ -417,17 +421,24 @@ export const swap = async (
   pool?: PoolInfo,
   swapList?: any,
 ) => {
-  let swapData = [];
+  let swapData: any[] = [];
   if (swapList) { // @ts-ignore
-    swapList.forEach(async (item) => {
-      swapData.push(await swapInfo(
-        connection,
-        wallet,
-        item.components,
-        SLIPPAGE,
-        item.pool
-      ))
-    })
+    const data = await swapInfo(
+      connection,
+      wallet,
+      swapList[0].components,
+      SLIPPAGE,
+      swapList[0].pool
+    )
+    swapData.push(data)
+    const data1 = await swapInfo(
+      connection,
+      wallet,
+      swapList[1].components,
+      SLIPPAGE,
+      swapList[1].pool
+    )
+    swapData.push(data1)
   } else {
     swapData.push(await swapInfo(
       connection,

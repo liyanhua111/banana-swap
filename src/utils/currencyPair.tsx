@@ -106,7 +106,7 @@ export function CurrencyPairProvider({ children = null as any }) {
     curveType: CurveType.ConstantProduct,
     fees: {
       tradeFeeNumerator: 30,
-      tradeFeeDenominator: 10_000 ,
+      tradeFeeDenominator: 10_000,
       ownerTradeFeeNumerator: 0,
       ownerTradeFeeDenominator: 0,
       ownerWithdrawFeeNumerator: 0,
@@ -138,7 +138,6 @@ export function CurrencyPairProvider({ children = null as any }) {
   const setAmountB = quote.setAmount;
 
   const pool = usePoolForBasket([base.mintAddress, quote.mintAddress]);
-
   useEffect(() => {
     const base =
       tokens.find((t) => t.address === mintAddressA)?.symbol || mintAddressA;
@@ -187,13 +186,13 @@ export function CurrencyPairProvider({ children = null as any }) {
 
     setMintAddressA(
       tokens.find((t) => t.symbol === defaultBase)?.address ||
-        (isValidAddress(defaultBase) ? defaultBase : "") ||
-        ""
+      (isValidAddress(defaultBase) ? defaultBase : "") ||
+      ""
     );
     setMintAddressB(
       tokens.find((t) => t.symbol === defaultQuote)?.address ||
-        (isValidAddress(defaultQuote) ? defaultQuote : "") ||
-        ""
+      (isValidAddress(defaultQuote) ? defaultQuote : "") ||
+      ""
     );
     // mintAddressA and mintAddressB are not included here to prevent infinite loop
     // eslint-disable-next-line
@@ -221,7 +220,7 @@ export function CurrencyPairProvider({ children = null as any }) {
         pool,
         poolOperation
       );
-      console.log(independent,amount,"independent========");
+      console.log(independent, amount, "independent========");
       if (typeof result === "string") {
         setDependent(result);
       } else if (result !== undefined && Number.isFinite(result)) {

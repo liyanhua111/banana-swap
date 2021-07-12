@@ -21,7 +21,8 @@ import {
   PoolOperation,
   calculateDependentAmount,
   LIQUIDITY_PROVIDER_FEE,
-} from "../../utils/pools";
+} from "../../utils/pools"; // @ts-ignore
+import { useAccountByMint } from "../../utils/accounts";
 import { notify } from "../../utils/notifications";
 import {
   useCurrencyPairState,
@@ -36,6 +37,7 @@ import { useEnrichedPools } from "../../context/market";
 import { AppBar } from "../appBar";
 import { Settings } from "../settings";
 import { MigrationModal } from "../migration";
+import { PublicKey } from "@solana/web3.js";
 
 const { Text } = Typography;
 
@@ -47,18 +49,20 @@ export const TradeEntry = () => {
   const connection = useConnection();
   const [pendingTx, setPendingTx] = useState(false);
   const [toInfo, setToInfo] = useState({});
+  const [fromInfo, setFromInfo] = useState({});
   const {
     A,
     B,
     setLastTypedAccount,
     setPoolOperation,
   } = useCurrencyPairState();
+
   const pool = usePoolForBasket([A?.mintAddress, B?.mintAddress]);
   const routeAddress = "So11111111111111111111111111111111111111112";
+  const routeAccount = useAccountByMint(routeAddress);
   const poolA = usePoolForBasket([A?.mintAddress, routeAddress]);
   const poolB = usePoolForBasket([routeAddress, B?.mintAddress]);
   let swapList: any[] = [];
-
   const { slippage } = useSlippageConfig();
   const { tokenMap } = useConnectionConfig();
   const swapAccounts = () => {
@@ -85,7 +89,6 @@ export const TradeEntry = () => {
     if (A.account && B.mintAddress) {
       try {
         setPendingTx(true);
-
         const components = [
           {
             account: A.account,
@@ -97,12 +100,13 @@ export const TradeEntry = () => {
             amount: B.convertAmount(),
           },
         ];
+        // sessionStorage.setItem("solAccount", JSON.stringify(A.account));
+        console.log(components, "components-----");
         if (!pool) {
           // @ts-ignore
           await swap(connection, wallet, components, slippage, pool, swapList);
           return;
         }
-        console.log(components, "-------");
         await swap(connection, wallet, components, slippage, pool);
       } catch {
         notify({
@@ -139,16 +143,55 @@ export const TradeEntry = () => {
       pool,
       poolOperation
     );
-    console.log(result, "result==========");
+    const componentsRoutA = {
+      components: [
+        {
+          account: A.account,
+          mintAddress: A.mintAddress,
+          amount: A.convertAmount(),
+        },
+        {
+          mintAddress: routeAddress,
+          amount: result,
+        },
+      ],
+      pool,
+    };
+
+    swapList.push(componentsRoutA);
+    const result1 = await calculateDependentAmount(
+      connection,
+      routeAddress, // @ts-ignore
+      result,
+      poolB,
+      poolOperation
+    ); // @ts-ignore
+    toInfo.setAmount(result1);
+    // setLastTypedAccount(fromInfo.mintAddress);
+     // @ts-ignore
+    // const routeAccount = JSON.parse(sessionStorage.getItem("solAccount"))
+    const componentsRoutB = {
+      components: [
+        {
+          account: routeAccount,
+          mintAddress: routeAddress,
+          amount: result,
+        },
+        {
+          mintAddress: B.mintAddress,
+          amount: result1,
+        },
+      ],
+      pool: poolB,
+    };
+    swapList.push(componentsRoutB);
   };
   useEffect(() => {
     if (!pool) {
-      // setNextInfo();
-      // setPoolOperation(PoolOperation.SwapGivenInput);
-      // setLastTypedAccount(A.mintAddress);
-      // A.setAmount(val);
+      getToInfoResult();
     }
-    getToInfoResult();
+    // @ts-ignore
+    setFromInfo(A);
     // @ts-ignore
     setToInfo(B);
   });
@@ -185,16 +228,17 @@ export const TradeEntry = () => {
         <CurrencyInput
           title="Input"
           onInputChange={async (val: any) => {
-            setPoolOperation(PoolOperation.SwapGivenInput);
-            if (A.amount !== val) {
-              setLastTypedAccount(A.mintAddress);
-            }
-            A.setAmount(val);
-          }}
-          amount={A.amount}
-          mint={A.mintAddress}
+            setPoolOperation(PoolOperation.SwapGivenInput); // @ts-ignore
+            if (fromInfo.amount !== val) { // @ts-ignore
+              setLastTypedAccount(fromInfo.mintAddress);
+            } // @ts-ignore
+            fromInfo.setAmount(val);
+          }} // @ts-ignore
+          amount={fromInfo.amount} // @ts-ignore
+          mint={fromInfo.mintAddress}
           onMintChange={(item) => {
-            A.setMint(item);
+            // @ts-ignore
+            fromInfo.setMint(item);
           }}
         />
         <Button type="primary" className="swap-button" onClick={swapAccounts}>
@@ -238,9 +282,9 @@ export const TradeEntry = () => {
         {generateActionLabel(
           !pool
             ? POOL_NOT_AVAILABLE(
-                getTokenName(tokenMap, A.mintAddress),
-                getTokenName(tokenMap, B.mintAddress)
-              )
+              getTokenName(tokenMap, A.mintAddress),
+              getTokenName(tokenMap, B.mintAddress)
+            )
             : SWAP_LABEL,
           connected,
           tokenMap,
@@ -275,6 +319,7 @@ export const TradeInfo = (props: { pool?: PoolInfo }) => {
     }
     if (B.amount) {
       const minAmountOut = parseFloat(B?.amount) * (1 - slippage);
+
       setAmountOut(minAmountOut);
     }
     const liqA = enriched[0].liquidityA;
@@ -287,7 +332,7 @@ export const TradeInfo = (props: { pool?: PoolInfo }) => {
       parseFloat(enrichedA.amount) / parseFloat(enrichedB.amount);
     // % difference between pool ratio and  calculated ratio
     setPriceImpact(Math.abs(100 - (calculatedRatio * 100) / supplyRatio));
-
+    console.log(amountOut, "minAmountOut===");
     // 6 decimals without trailing zeros
     const lpFeeStr = (parseFloat(A.amount) * LIQUIDITY_PROVIDER_FEE).toFixed(6);
     setLpFee(parseFloat(lpFeeStr));
