@@ -301,7 +301,8 @@ const swapInfo = async (
   wallet: any,
   components: LiquidityComponent[],
   SLIPPAGE: number,
-  pool?: PoolInfo
+  pool?: PoolInfo,
+  prevAccount?: any
 ) => {
   if (!pool) {
     notify({
@@ -322,14 +323,10 @@ const swapInfo = async (
       components[0].account.info.mint.toBase58()     // @ts-ignore
       ? pool.pubkeys.holdingAccounts[0]     // @ts-ignore
       : pool.pubkeys.holdingAccounts[1];
-  console.log(pool.pubkeys.holdingMints[0]?.toBase58() ===     // @ts-ignore
-    components[0].account.info.mint.toBase58(), "01")
   const holdingB =     // @ts-ignore
     holdingA === pool.pubkeys.holdingAccounts[0]     // @ts-ignore
       ? pool.pubkeys.holdingAccounts[1]     // @ts-ignore
       : pool.pubkeys.holdingAccounts[0];
-  console.log(pool.pubkeys.holdingMints[0]?.toBase58() ===     // @ts-ignore
-    components[0].account.info.mint.toBase58(), "10")
   // @ts-ignore
   const poolMint = await cache.queryMint(connection, pool.pubkeys.mint);     // @ts-ignore
   if (!poolMint.mintAuthority || !pool.pubkeys.feeAccount) {
@@ -345,7 +342,7 @@ const swapInfo = async (
     AccountLayout.span
   );
 
-  const fromAccount = getWrappedAccount(
+  const fromAccount = prevAccount || getWrappedAccount(
     instructions,
     cleanupInstructions,
     // @ts-ignore
@@ -354,7 +351,7 @@ const swapInfo = async (
     amountIn + accountRentExempt,
     signers
   );
-
+  console.log(fromAccount, prevAccount, "=====");
   let toAccount = findOrCreateAccountByMint(
     wallet.publicKey,
     wallet.publicKey,
@@ -411,7 +408,7 @@ const swapInfo = async (
     )
   );
   var instructionsData = instructions.concat(cleanupInstructions);
-  return { instructionsData, signers };
+  return { instructionsData, signers, toAccount };
 };
 export const swap = async (
   connection: Connection,
@@ -436,7 +433,8 @@ export const swap = async (
       wallet,
       swapList[1].components,
       SLIPPAGE,
-      swapList[1].pool
+      swapList[1].pool, // @ts-ignore
+      data.toAccount
     )
     swapData.push(data1)
   } else {
