@@ -167,8 +167,9 @@ export const TradeEntry = () => {
       poolOperation
     ); // @ts-ignore
     toInfo.setAmount(result1);
+    console.log(result1,"======");
     // setLastTypedAccount(fromInfo.mintAddress);
-     // @ts-ignore
+    // @ts-ignore
     // const routeAccount = JSON.parse(sessionStorage.getItem("solAccount"))
     const componentsRoutB = {
       components: [
@@ -312,9 +313,13 @@ export const TradeInfo = (props: { pool?: PoolInfo }) => {
   const [lpFee, setLpFee] = useState(0);
   const [exchangeRate, setExchangeRate] = useState(0);
   const [priceAccount, setPriceAccount] = useState("");
-
+  const [toInfo, setToInfo] = useState({});
+  const [fromInfo, setFromInfo] = useState({});
+  const routeAddress = "So11111111111111111111111111111111111111112";
+  const poolA = usePoolForBasket([A?.mintAddress, routeAddress]);
+  const poolB = usePoolForBasket([routeAddress, B?.mintAddress]);
   useEffect(() => {
-    if (!pool || enriched.length === 0) {
+    if (!pool && !poolA && !poolB || enriched.length === 0) {
       return;
     }
     if (B.amount) {
@@ -342,6 +347,10 @@ export const TradeInfo = (props: { pool?: PoolInfo }) => {
     } else {
       setExchangeRate(parseFloat(A.amount) / parseFloat(B.amount));
     }
+    // @ts-ignore
+    setFromInfo(A);
+    // @ts-ignore
+    setToInfo(B);
   }, [A, B, slippage, pool, enriched, priceAccount]);
 
   const handleSwapPriceInfo = () => {
@@ -350,8 +359,8 @@ export const TradeInfo = (props: { pool?: PoolInfo }) => {
     } else {
       setPriceAccount(A.mintAddress);
     }
-  };
-  return !!parseFloat(B.amount) ? (
+  }; // @ts-ignore
+  return !!parseFloat(toInfo.amount) ? (
     <div className="pool-card" style={{ width: "initial" }}>
       <div className="pool-card-row">
         <Text className="pool-card-cell">{t("Price")}</Text>
