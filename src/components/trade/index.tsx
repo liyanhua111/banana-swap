@@ -151,23 +151,25 @@ export const TradeEntry = () => {
           amount: A.convertAmount(),
         },
         {
-          mintAddress: routeAddress,
-          amount: result,
+          mintAddress: routeAddress, // @ts-ignore
+          amount: result * 1e9,
         },
       ],
       pool,
     };
 
     swapList.push(componentsRoutA);
-    const result1 = await calculateDependentAmount(
-      connection,
-      routeAddress, // @ts-ignore
-      result,
-      poolB,
-      poolOperation
-    ); // @ts-ignore
-    toInfo.setAmount(result1);
-    console.log(result1,"======");
+    let result1;
+    if (poolB) {
+      result1 = await calculateDependentAmount(
+        connection,
+        routeAddress, // @ts-ignore
+        result,
+        poolB,
+        poolOperation
+      ); // @ts-ignore
+      toInfo.setAmount(result1);
+    }
     // setLastTypedAccount(fromInfo.mintAddress);
     // @ts-ignore
     // const routeAccount = JSON.parse(sessionStorage.getItem("solAccount"))
@@ -175,12 +177,12 @@ export const TradeEntry = () => {
       components: [
         {
           account: routeAccount,
-          mintAddress: routeAddress,
-          amount: result,
+          mintAddress: routeAddress, // @ts-ignore
+          amount: result * 1e9,
         },
         {
-          mintAddress: B.mintAddress,
-          amount: result1,
+          mintAddress: B.mintAddress, // @ts-ignore
+          amount: result1 * 1e9,
         },
       ],
       pool: poolB,
@@ -230,7 +232,8 @@ export const TradeEntry = () => {
           title="Input"
           onInputChange={async (val: any) => {
             setPoolOperation(PoolOperation.SwapGivenInput); // @ts-ignore
-            if (fromInfo.amount !== val) { // @ts-ignore
+            if (fromInfo.amount !== val) {
+              // @ts-ignore
               setLastTypedAccount(fromInfo.mintAddress);
             } // @ts-ignore
             fromInfo.setAmount(val);
@@ -283,9 +286,9 @@ export const TradeEntry = () => {
         {generateActionLabel(
           !pool
             ? POOL_NOT_AVAILABLE(
-              getTokenName(tokenMap, A.mintAddress),
-              getTokenName(tokenMap, B.mintAddress)
-            )
+                getTokenName(tokenMap, A.mintAddress),
+                getTokenName(tokenMap, B.mintAddress)
+              )
             : SWAP_LABEL,
           connected,
           tokenMap,
@@ -319,7 +322,7 @@ export const TradeInfo = (props: { pool?: PoolInfo }) => {
   const poolA = usePoolForBasket([A?.mintAddress, routeAddress]);
   const poolB = usePoolForBasket([routeAddress, B?.mintAddress]);
   useEffect(() => {
-    if (!pool && !poolA && !poolB || enriched.length === 0) {
+    if ((!pool && !poolA && !poolB) || enriched.length === 0) {
       return;
     }
     if (B.amount) {
