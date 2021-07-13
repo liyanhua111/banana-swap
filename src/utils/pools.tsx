@@ -317,17 +317,17 @@ const swapInfo = async (
   // const amountIn = 1000000000; // these two should include slippage
   // const minAmountOut = 0;
 
-  const holdingA =     // @ts-ignore
-    pool.pubkeys.holdingMints[0]?.toBase58() ===     // @ts-ignore
-      components[0].account.info.mint.toBase58()     // @ts-ignore
-      ? pool.pubkeys.holdingAccounts[0]     // @ts-ignore
+  const holdingA = // @ts-ignore
+    pool.pubkeys.holdingMints[0]?.toBase58() === // @ts-ignore
+    components[0].account.info.mint.toBase58() // @ts-ignore
+      ? pool.pubkeys.holdingAccounts[0] // @ts-ignore
       : pool.pubkeys.holdingAccounts[1];
-  const holdingB =     // @ts-ignore
-    holdingA === pool.pubkeys.holdingAccounts[0]     // @ts-ignore
-      ? pool.pubkeys.holdingAccounts[1]     // @ts-ignore
+  const holdingB = // @ts-ignore
+    holdingA === pool.pubkeys.holdingAccounts[0] // @ts-ignore
+      ? pool.pubkeys.holdingAccounts[1] // @ts-ignore
       : pool.pubkeys.holdingAccounts[0];
   // @ts-ignore
-  const poolMint = await cache.queryMint(connection, pool.pubkeys.mint);     // @ts-ignore
+  const poolMint = await cache.queryMint(connection, pool.pubkeys.mint); // @ts-ignore
   if (!poolMint.mintAuthority || !pool.pubkeys.feeAccount) {
     throw new Error("Mint doesnt have authority");
   }
@@ -377,17 +377,18 @@ const swapInfo = async (
 
   let hostFeeAccount = SWAP_HOST_FEE_ADDRESS
     ? findOrCreateAccountByMint(
-      wallet.publicKey,
-      SWAP_HOST_FEE_ADDRESS,
-      instructions,
-      cleanupInstructions,
-      accountRentExempt,     // @ts-ignore
-      pool.pubkeys.mint,
-      signers
-    )
+        wallet.publicKey,
+        SWAP_HOST_FEE_ADDRESS,
+        instructions,
+        cleanupInstructions,
+        accountRentExempt, // @ts-ignore
+        pool.pubkeys.mint,
+        signers
+      )
     : undefined;
   instructions.push(
-    swapInstruction(     // @ts-ignore
+    swapInstruction(
+      // @ts-ignore
       pool.pubkeys.account,
       authority,
       transferAuthority.publicKey,
@@ -395,9 +396,9 @@ const swapInfo = async (
       // @ts-ignore
       holdingA,
       holdingB,
-      toAccount,     // @ts-ignore
-      pool.pubkeys.mint,     // @ts-ignore
-      pool.pubkeys.feeAccount,     // @ts-ignore
+      toAccount, // @ts-ignore
+      pool.pubkeys.mint, // @ts-ignore
+      pool.pubkeys.feeAccount, // @ts-ignore
       pool.pubkeys.program,
       programIds().token,
       amountIn,
@@ -415,38 +416,34 @@ export const swap = async (
   components: LiquidityComponent[],
   SLIPPAGE: number,
   pool?: PoolInfo,
-  swapList?: any,
+  swapList?: any
 ) => {
   let swapData = [];
-  if (swapList) { // @ts-ignore
+  if (swapList) {
+    // @ts-ignore
     swapList.forEach(async (item) => {
-      swapData.push(await swapInfo(
-        connection,
-        wallet,
-        item.components,
-        SLIPPAGE,
-        item.pool
-      ))
-    })
+      swapData.push(
+        await swapInfo(connection, wallet, item.components, SLIPPAGE, item.pool)
+      );
+    });
   } else {
-    swapData.push(await swapInfo(
-      connection,
-      wallet,
-      components,
-      SLIPPAGE,
-      pool
-    ))
+    swapData.push(
+      await swapInfo(connection, wallet, components, SLIPPAGE, pool)
+    );
   }
   let instructionsData: TransactionInstruction[] = [];
-  let signers: Account[] = []
-  swapData.forEach(item => {   // @ts-ignore
-    instructionsData.push(...item.instructionsData);// @ts-ignore
+  let signers: Account[] = [];
+  swapData.forEach((item) => {
+    // @ts-ignore
+    instructionsData.push(...item.instructionsData); // @ts-ignore
     signers.push(...item.signers);
-  })
+  });
+  console.log(instructionsData, "======instructionsData");
+  console.log(signers, "======signers");
   let tx = await sendTransaction(
     connection,
-    wallet,// @ts-ignore
-    instructionsData,// @ts-ignore
+    wallet, // @ts-ignore
+    instructionsData, // @ts-ignore
     signers
   );
   notify({
@@ -528,15 +525,15 @@ export const usePools = () => {
             data: undefined as any,
             account: item.account,
             pubkey: item.pubkey,
-            init: async () => { },
+            init: async () => {},
           };
 
           const layout =
             item.account.data.length === TokenSwapLayout.span
               ? TokenSwapLayout
               : item.account.data.length === TokenSwapLayoutV1.span
-                ? TokenSwapLayoutV1
-                : TokenSwapLayoutV0;
+              ? TokenSwapLayoutV1
+              : TokenSwapLayoutV0;
 
           // handling of legacy layout can be removed soon...
           if (layout === TokenSwapLayoutV0) {
@@ -1367,7 +1364,7 @@ async function _addLiquidityNewPool(
   signers = [];
   instructions = [];
   cleanupInstructions = [];
-
+  console.log(programIds().swapLayout.span, "  programIds().swapLayout.span");
   instructions.push(
     SystemProgram.createAccount({
       fromPubkey: wallet.publicKey,

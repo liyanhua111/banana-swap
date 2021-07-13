@@ -106,13 +106,13 @@ export function CurrencyPairProvider({ children = null as any }) {
     curveType: CurveType.ConstantProduct,
     fees: {
       tradeFeeNumerator: 30,
-      tradeFeeDenominator: 10_000 ,
+      tradeFeeDenominator: 10_000,
       ownerTradeFeeNumerator: 0,
-      ownerTradeFeeDenominator: 0,
+      ownerTradeFeeDenominator: 10_000,
       ownerWithdrawFeeNumerator: 0,
       ownerWithdrawFeeDenominator: 0,
-      hostFeeNumerator: 0,
-      hostFeeDenominator: 0,
+      hostFeeNumerator: 20,
+      hostFeeDenominator: 100,
     },
   });
   // fees: {
@@ -187,13 +187,13 @@ export function CurrencyPairProvider({ children = null as any }) {
 
     setMintAddressA(
       tokens.find((t) => t.symbol === defaultBase)?.address ||
-        (isValidAddress(defaultBase) ? defaultBase : "") ||
-        ""
+      (isValidAddress(defaultBase) ? defaultBase : "") ||
+      ""
     );
     setMintAddressB(
       tokens.find((t) => t.symbol === defaultQuote)?.address ||
-        (isValidAddress(defaultQuote) ? defaultQuote : "") ||
-        ""
+      (isValidAddress(defaultQuote) ? defaultQuote : "") ||
+      ""
     );
     // mintAddressA and mintAddressB are not included here to prevent infinite loop
     // eslint-disable-next-line

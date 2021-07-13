@@ -104,6 +104,7 @@ export const TradeEntry = () => {
         }
         console.log(components, "-------");
         await swap(connection, wallet, components, slippage, pool);
+
       } catch {
         notify({
           description:
@@ -238,9 +239,9 @@ export const TradeEntry = () => {
         {generateActionLabel(
           !pool
             ? POOL_NOT_AVAILABLE(
-                getTokenName(tokenMap, A.mintAddress),
-                getTokenName(tokenMap, B.mintAddress)
-              )
+              getTokenName(tokenMap, A.mintAddress),
+              getTokenName(tokenMap, B.mintAddress)
+            )
             : SWAP_LABEL,
           connected,
           tokenMap,

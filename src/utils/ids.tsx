@@ -13,7 +13,7 @@ let SWAP_PROGRAM_LEGACY_IDS: PublicKey[];
 let SWAP_PROGRAM_LAYOUT: any;
 
 export const SWAP_PROGRAM_OWNER_FEE_ADDRESS = new PublicKey(
-  "HfoTxFR1Tm6kGmWgYWD6J7YHVy1UwqSULUGVLXkJqaKN"
+  "3XES7oj741wdwPcV6iZLNNFHE8dWwbt9ELEGYcbAZXq3"
 );
 
 export const SWAP_HOST_FEE_ADDRESS = process.env.REACT_APP_SWAP_HOST_FEE_ADDRESS
@@ -51,7 +51,7 @@ export const PROGRAM_IDS = [
     name: "devnet",
     swap: () => ({
       current: {
-        pubkey: new PublicKey("CnzpQA6jWV1iwJFGejegFxHE3WxwS9JHcayUer6P8m3V"),
+        pubkey: new PublicKey("EBa9aLTCTr4soEXbSb97V69UcUc3TynkSy5ktvQGCtqT"),
         layout: TokenSwapLayout,
       },
       legacy: [],
