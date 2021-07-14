@@ -50,6 +50,7 @@ export const TradeEntry = () => {
   const [pendingTx, setPendingTx] = useState(false);
   const [toInfo, setToInfo] = useState({});
   const [fromInfo, setFromInfo] = useState({});
+  const [routeAmount, setRouteAmount] = useState({});
   const {
     A,
     B,
@@ -100,8 +101,6 @@ export const TradeEntry = () => {
             amount: B.convertAmount(),
           },
         ];
-        // sessionStorage.setItem("solAccount", JSON.stringify(A.account));
-        console.log(components, "components-----");
         if (!pool) {
           // @ts-ignore
           await swap(connection, wallet, components, slippage, pool, swapList);
@@ -157,7 +156,9 @@ export const TradeEntry = () => {
       ],
       pool,
     };
-
+    // @ts-ignore
+    setRouteAmount(result); // @ts-ignore
+    console.log(result * 1e9, "routefee--effect");
     swapList.push(componentsRoutA);
     let result1;
     if (poolB) {
@@ -170,9 +171,6 @@ export const TradeEntry = () => {
       ); // @ts-ignore
       toInfo.setAmount(result1);
     }
-    // setLastTypedAccount(fromInfo.mintAddress);
-    // @ts-ignore
-    // const routeAccount = JSON.parse(sessionStorage.getItem("solAccount"))
     const componentsRoutB = {
       components: [
         {
@@ -257,6 +255,14 @@ export const TradeEntry = () => {
               setLastTypedAccount(toInfo.mintAddress); // @ts-ignore
             } // @ts-ignore
             toInfo.setAmount(val);
+            // if (!pool && poolA && poolB) {
+            //   // @ts-ignore
+            //   const per = toInfo.amount / fromInfo.amount;
+            //   // @ts-ignore
+            //   console.log(toInfo.amount, per, "----per");
+            //   // @ts-ignore
+            //   fromInfo.setAmount(val * per);
+            // }
           }} // @ts-ignore
           amount={toInfo.amount} // @ts-ignore
           mint={toInfo.mintAddress} // @ts-ignore
@@ -279,12 +285,12 @@ export const TradeEntry = () => {
               !B.mintAddress ||
               A.account === B.account ||
               !A.sufficientBalance())) ||
-          (!poolA && !poolA)
+          (!poolA && !poolB)
         }
       >
         {generateActionLabel(
           !pool
-            ? !poolA && !poolA
+            ? !poolA && !poolB
               ? POOL_NOT_AVAILABLE(
                   getTokenName(tokenMap, A.mintAddress),
                   getTokenName(tokenMap, B.mintAddress)
@@ -299,7 +305,14 @@ export const TradeEntry = () => {
         )}
         {pendingTx && <Spin indicator={antIcon} className="add-spinner" />}
       </Button>
-      <TradeInfo pool={pool} poolA={poolA} poolB={poolB} />
+      <TradeInfo
+        pool={pool}
+        poolA={poolA}
+        poolB={poolB} // @ts-ignore
+        fromInfo={fromInfo} // @ts-ignore
+        toInfo={toInfo} // @ts-ignore
+        routeAmount={routeAmount}
+      />
     </>
   );
 };
@@ -308,67 +321,106 @@ export const TradeInfo = (props: {
   pool?: PoolInfo;
   poolA?: PoolInfo;
   poolB?: PoolInfo;
+  fromInfo?: any;
+  toInfo?: any;
+  routeAmount?: any;
 }) => {
   const { t } = useTranslation();
   const { A, B } = useCurrencyPairState();
-  const { pool } = props;
+  const { pool, fromInfo, toInfo, poolA, poolB } = props;
   const { slippage } = useSlippageConfig();
   const pools = useMemo(() => (pool ? [pool] : []), [pool]);
   const enriched = useEnrichedPools(pools);
-
+  const poolsA = useMemo(() => (poolA ? [poolA] : []), [poolA]);
+  const enrichedRouteA = useEnrichedPools(poolsA);
+  const poolsB = useMemo(() => (poolB ? [poolB] : []), [poolB]);
+  const enrichedRouteB = useEnrichedPools(poolsB);
   const [amountOut, setAmountOut] = useState(0);
   const [priceImpact, setPriceImpact] = useState(0);
   const [lpFee, setLpFee] = useState(0);
+  const [routeFee, setRouteFee] = useState(0);
   const [exchangeRate, setExchangeRate] = useState(0);
   const [priceAccount, setPriceAccount] = useState("");
-  const [toInfo, setToInfo] = useState({});
-  const [fromInfo, setFromInfo] = useState({});
-  const routeAddress = "So11111111111111111111111111111111111111112";
-  const poolA = usePoolForBasket([A?.mintAddress, routeAddress]);
-  const poolB = usePoolForBasket([routeAddress, B?.mintAddress]);
+  const countPriceImpact = (enrichedInfo: any) => {
+    let supplyRatio = 0;
+    const liqA = enrichedInfo[0].liquidityA;
+    const liqB = enrichedInfo[0].liquidityB;
+    supplyRatio = liqA / liqB;
+    // We need to make sure the order matched the pool's accounts order
+    const enrichedA = A.mintAddress === enrichedInfo[0].mints[0] ? A : B;
+    const enrichedB = enrichedA.mintAddress === A.mintAddress ? B : A;
+    const calculatedRatio =
+      parseFloat(enrichedA.amount) / parseFloat(enrichedB.amount);
+    return Math.abs(100 - (calculatedRatio * 100) / supplyRatio);
+  };
   useEffect(() => {
-    if ((!pool && !poolA && !poolB) || enriched.length === 0) {
+    if (pool) {
+      if (enriched.length === 0) {
+        return;
+      }
+    } else if (poolA && poolB) {
+      if (enrichedRouteA.length === 0 && enrichedRouteB.length === 0) {
+        return;
+      }
+    } else {
       return;
     }
     if (B.amount) {
       const minAmountOut = parseFloat(B?.amount) * (1 - slippage);
-
       setAmountOut(minAmountOut);
     }
-    const liqA = enriched[0].liquidityA;
-    const liqB = enriched[0].liquidityB;
-    const supplyRatio = liqA / liqB;
-    // We need to make sure the order matched the pool's accounts order
-    const enrichedA = A.mintAddress === enriched[0].mints[0] ? A : B;
-    const enrichedB = enrichedA.mintAddress === A.mintAddress ? B : A;
-    const calculatedRatio =
-      parseFloat(enrichedA.amount) / parseFloat(enrichedB.amount);
-    // % difference between pool ratio and  calculated ratio
-    setPriceImpact(Math.abs(100 - (calculatedRatio * 100) / supplyRatio));
-    console.log(amountOut, "minAmountOut===");
+    if (!pool && poolA && poolB) {
+      const routeFee = (
+        parseFloat(props.routeAmount) * LIQUIDITY_PROVIDER_FEE
+      ).toFixed(6);
+      setRouteFee(parseFloat(routeFee));
+      const priceImpactA = countPriceImpact(enrichedRouteA);
+      const priceImpactB = countPriceImpact(enrichedRouteB);
+      console.log(priceImpactA, priceImpactB);
+      setPriceImpact((priceImpactA + priceImpactB) / 2 / 1e5);
+    } else {
+      const priceImpact = countPriceImpact(enriched);
+      // % difference between pool ratio and  calculated ratio
+      setPriceImpact(priceImpact);
+    }
     // 6 decimals without trailing zeros
     const lpFeeStr = (parseFloat(A.amount) * LIQUIDITY_PROVIDER_FEE).toFixed(6);
     setLpFee(parseFloat(lpFeeStr));
-
     if (priceAccount === B.mintAddress) {
+      if (!pool && poolA && poolB) {
+        setExchangeRate(
+          parseFloat(toInfo.amount) / parseFloat(fromInfo.amount)
+        );
+        return;
+      }
       setExchangeRate(parseFloat(B.amount) / parseFloat(A.amount));
     } else {
+      if (!pool && poolA && poolB) {
+        setExchangeRate(
+          parseFloat(fromInfo.amount) / parseFloat(toInfo.amount)
+        );
+        return;
+      }
       setExchangeRate(parseFloat(A.amount) / parseFloat(B.amount));
     }
-    // @ts-ignore
-    setFromInfo(A);
-    // @ts-ignore
-    setToInfo(B);
   }, [A, B, slippage, pool, enriched, priceAccount]);
 
   const handleSwapPriceInfo = () => {
     if (priceAccount !== B.mintAddress) {
+      if (!pool && poolA && poolB) {
+        setPriceAccount(toInfo.mintAddress);
+        return;
+      }
       setPriceAccount(B.mintAddress);
     } else {
+      if (!pool && poolA && poolB) {
+        setPriceAccount(fromInfo.mintAddress);
+        return;
+      }
       setPriceAccount(A.mintAddress);
     }
   }; // @ts-ignore
-  return !!parseFloat(toInfo.amount) ? (
+  return !!parseFloat(B.amount) || (poolA && poolB) ? (
     <div className="pool-card" style={{ width: "initial" }}>
       <div className="pool-card-row">
         <Text className="pool-card-cell">{t("Price")}</Text>
@@ -431,6 +483,7 @@ export const TradeInfo = (props: {
           </Popover>
         </Text>
         <div className="pool-card-cell " title={lpFee.toString()}>
+          {routeFee ? routeFee + "SOL+" : ""}
           {lpFee} {A.name}
         </div>
       </div>
