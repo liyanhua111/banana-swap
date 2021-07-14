@@ -438,6 +438,14 @@ export const TradeInfo = (props: {
           </Button>
         </div>
       </div>
+      {poolA && poolB && (
+        <div className="pool-card-row">
+          <Text className="pool-card-cell">{t("Route")}</Text>
+          <div className="pool-card-cell " title={exchangeRate.toString()}>
+            {A.name}-SOL-{B.name}
+          </div>
+        </div>
+      )}
       <div className="pool-card-row">
         <Text className="pool-card-cell">
           <Popover
@@ -483,8 +491,8 @@ export const TradeInfo = (props: {
           </Popover>
         </Text>
         <div className="pool-card-cell " title={lpFee.toString()}>
-          {routeFee ? routeFee + "SOL+" : ""}
           {lpFee} {A.name}
+          {routeFee ? "+" + routeFee + "SOL" : ""}
         </div>
       </div>
     </div>

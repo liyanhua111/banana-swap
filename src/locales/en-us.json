@@ -22,6 +22,7 @@
   "Slippage":"Slippage:",
   "Network":"Network:",
   "Price":"Price",
+  "Route":"路径",
   "MinimumReceived ":"Minimum Received",
   "PriceImpact":"Price Impact",
   "LiquidityProviderFee":"Liquidity Provider Fee",
