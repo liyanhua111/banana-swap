@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^5.7.0",
+    "@hurryfire/spl-token-registry": "0.2.1",
     "@ledgerhq/hw-transport": "^5.45.0",
     "@ledgerhq/hw-transport-webusb": "^5.45.0",
     "@project-serum/serum": "^0.13.33",

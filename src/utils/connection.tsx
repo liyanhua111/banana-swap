@@ -15,7 +15,7 @@ import {
   TokenListProvider,
   ENV as ChainID,
   TokenInfo,
-} from "@solana/spl-token-registry";
+} from "@hurryfire/spl-token-registry";
 import { cache, getMultipleAccounts } from "./accounts";
 
 export type ENV = "mainnet-beta" | "testnet" | "devnet" | "localnet";
