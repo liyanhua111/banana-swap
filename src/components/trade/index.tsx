@@ -492,7 +492,7 @@ export const TradeInfo = (props: {
         </Text>
         <div className="pool-card-cell " title={lpFee.toString()}>
           {lpFee} {A.name}
-          {routeFee ? "+" + routeFee + "SOL" : ""}
+          {!pool && poolA && poolB && routeFee ? "+" + routeFee + "SOL" : ""}
         </div>
       </div>
     </div>
