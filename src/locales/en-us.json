@@ -1,6 +1,7 @@
 {
   "home":"Home",
   "Trade":"Trade",
+  "Pool":"Pool",
   "Exchange":"Exchange",
   "Liquidity":"Liquidity",
   "AddLiquidity":"Add Liquidity",
@@ -105,5 +106,7 @@
   "homeInfor651":"Initiate a multi-chain deployment plan",
   "homeInfor652":"Hybrid cross-chain bridge",
   "homeInfor653":"Cross-chain asset exchange",
-  "homeInfor654":"Aggregate transaction dashboards"
+  "homeInfor654":"Aggregate transaction dashboards",
+  "Estimate":"Estimate",
+  "Balance":"Balance"
 }

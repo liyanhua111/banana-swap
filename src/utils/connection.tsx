@@ -98,6 +98,7 @@ export function ConnectionProvider({ children = undefined as any }) {
   useEffect(() => {
     (async () => {
       const res = await new TokenListProvider().resolve();
+      console.log(res,'==============================================')
       const list = res
         .filterByChainId(chain.chainID)
         .excludeByTag("nft")

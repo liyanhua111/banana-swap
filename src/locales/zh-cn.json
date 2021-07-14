@@ -1,6 +1,7 @@
 {
   "home":"首页",
   "Trade":"交易",
+  "Pool":"资金池",
   "Exchange":"兑换",
   "Liquidity":"流动性",
   "AddLiquidity":"增加流动性",
@@ -50,7 +51,7 @@
   "ConnectTip":"连接钱包， \n查看您的流动性。",
   "home1":"从这里打开你的DeFi乐园",
   "home2":"高易用性链上基础设施",
-  "home3":"高易用性链BananaSwap 是一个运行在 Solana 上、采用聚合流动性设计的AMM资产交易平台。其新特性支持区间做市、限价单、NFT LP等功能，此外，BananaSwap还提供一套聚合型Dashboard交易数据看板，提供真正的一站式交易体验。上基础设施",
+  "home3":"高易用性链BananaSwap 是一个运行在 Solana 上、采用聚合流动性设计的AMM资产交易平台。其新特性支持区间做市、限价单、NFT LP等功能，此外，BananaSwap还提供一套聚合型Dashboard交易数据看板，提供真正的一站式交易体验。",
   "homeTitle1":"前所未有的交易体验",
   "homesubTitle11":"灵活做市",
   "homesubTitle12":"资产发行",
@@ -105,5 +106,7 @@
   "homeInfor651":"启动多链部署计划",
   "homeInfor652":"混合型跨链桥",
   "homeInfor653":"跨链资产兑换",
-  "homeInfor654":"聚合交易仪表盘"
+  "homeInfor654":"聚合交易仪表盘",
+  "Estimate":"预估",
+  "Balance":"余额"
 }
