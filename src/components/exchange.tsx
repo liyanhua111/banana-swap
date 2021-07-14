@@ -6,20 +6,22 @@ import { Settings } from "./settings";
 import { SettingOutlined } from "@ant-design/icons";
 import { AppBar } from "./appBar";
 import { useHistory, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export const ExchangeView = (props: {}) => {
+  const { t } = useTranslation();
   const tabStyle: React.CSSProperties = { width: 120 };
   const tabList = [
     {
       key: "trade",
-      tab: <div style={tabStyle}>Trade</div>,
+      tab: <div style={tabStyle}>{ t("Trade")}</div>,
       render: () => {
         return <TradeEntry />;
       },
     },
     {
       key: "pool",
-      tab: <div style={tabStyle}>Pool</div>,
+      tab: <div style={tabStyle}>{ t("Pool")}</div>,
       render: () => {
         return <AddToLiquidity />;
       },

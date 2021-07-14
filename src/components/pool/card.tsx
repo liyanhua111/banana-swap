@@ -108,7 +108,7 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
             className="left-icon"
           />
           {enriched?.name}
-          {/* <Popover
+          <Popover
             placement="topRight"
             trigger="hover"
             className="right-icon"
@@ -125,21 +125,22 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
                 onClick={() => setDisplayMode("card")}
               />
             ) : (
-              <Button
-                shape="circle"
-                size="middle"
-                type="text"
-                icon={
-                  displayMode === "card" ? (
-                    <LineChartOutlined />
-                  ) : (
-                    <AlignLeftOutlined />
-                  )
-                }
-                onClick={handleSwitchChartMode}
-              />
+              <></>
+              // <Button
+              //   shape="circle"
+              //   size="middle"
+              //   type="text"
+              //   icon={
+              //     displayMode === "card" ? (
+              //       <LineChartOutlined />
+              //     ) : (
+              //       <AlignLeftOutlined />
+              //     )
+              //   }
+              //   onClick={handleSwitchChartMode}
+              // />
             )}
-          </Popover> */}
+          </Popover>
         </>
       }
     >
@@ -177,7 +178,7 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
               {formatNumber.format(enriched.supply)}
             </div>
           </div>
-          <div className="pool-card-row">
+          {/* <div className="pool-card-row">
             <Text type="secondary" className="pool-card-cell ">
               Value per token:
             </Text>
@@ -211,7 +212,7 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
             <div className="pool-card-cell ">
               {formatPct.format(enriched.apy24h)}
             </div>
-          </div>
+          </div> */}
           <div className="pool-card-row">
             <Text type="secondary" className="pool-card-cell ">
               Address:

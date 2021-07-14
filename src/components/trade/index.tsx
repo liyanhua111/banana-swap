@@ -202,7 +202,7 @@ export const TradeEntry = () => {
           ⇅
         </Button>
         <CurrencyInput
-          title="To (Estimate)"
+          title={`To (${t("Estimate")})`}
           onInputChange={(val: any) => {
             setPoolOperation(PoolOperation.SwapGivenProceeds); // @ts-ignore
             if (toInfo.amount !== val) {
@@ -227,7 +227,7 @@ export const TradeEntry = () => {
         style={{ width: "100%" }}
         disabled={
           connected &&
-          (pendingTx ||
+          ( pendingTx ||
             !A.account ||
             !B.mintAddress ||
             A.account === B.account ||
@@ -239,10 +239,10 @@ export const TradeEntry = () => {
         {generateActionLabel(
           !pool
             ? POOL_NOT_AVAILABLE(
-              getTokenName(tokenMap, A.mintAddress),
-              getTokenName(tokenMap, B.mintAddress)
-            )
-            : SWAP_LABEL,
+                getTokenName(tokenMap, A.mintAddress),
+                getTokenName(tokenMap, B.mintAddress)
+              )
+            : SWAP_LABEL(),
           connected,
           tokenMap,
           A,
