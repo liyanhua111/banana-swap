@@ -279,18 +279,21 @@ export const TradeEntry = () => {
         onClick={connected ? handleSwap : connect}
         style={{ width: "100%" }}
         disabled={
-          (connected &&
-            (pendingTx ||
-              !A.account ||
-              !B.mintAddress ||
-              A.account === B.account ||
-              !A.sufficientBalance())) ||
-          (!poolA && !poolB)
+          connected &&
+          (pendingTx ||
+            !A.account ||
+            !B.mintAddress ||
+            A.account === B.account ||
+            !A.sufficientBalance() ||
+            (!pool && !poolA && !poolB) ||
+            (!pool && !poolA) ||
+            (!pool && !poolB))
         }
       >
+        {console.log(pool, poolA, poolB, "-========")}
         {generateActionLabel(
           !pool
-            ? !poolA && !poolB
+            ? !poolA || !poolB
               ? POOL_NOT_AVAILABLE(
                   getTokenName(tokenMap, A.mintAddress),
                   getTokenName(tokenMap, B.mintAddress)
@@ -420,7 +423,7 @@ export const TradeInfo = (props: {
       setPriceAccount(A.mintAddress);
     }
   }; // @ts-ignore
-  return !!parseFloat(B.amount) || (poolA && poolB) ? (
+  return pool || (poolA && poolB) ? (
     <div className="pool-card" style={{ width: "initial" }}>
       <div className="pool-card-row">
         <Text className="pool-card-cell">{t("Price")}</Text>
