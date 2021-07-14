@@ -273,22 +273,23 @@ export const TradeEntry = () => {
         onClick={connected ? handleSwap : connect}
         style={{ width: "100%" }}
         disabled={
-          connected &&
-          (pendingTx ||
-            !A.account ||
-            !B.mintAddress ||
-            A.account === B.account ||
-            !A.sufficientBalance())
-          // ||
-          // !pool && !poolA && !poolA
+          (connected &&
+            (pendingTx ||
+              !A.account ||
+              !B.mintAddress ||
+              A.account === B.account ||
+              !A.sufficientBalance())) ||
+          (!poolA && !poolA)
         }
       >
         {generateActionLabel(
           !pool
-            ? POOL_NOT_AVAILABLE(
-                getTokenName(tokenMap, A.mintAddress),
-                getTokenName(tokenMap, B.mintAddress)
-              )
+            ? !poolA && !poolA
+              ? POOL_NOT_AVAILABLE(
+                  getTokenName(tokenMap, A.mintAddress),
+                  getTokenName(tokenMap, B.mintAddress)
+                )
+              : SWAP_LABEL
             : SWAP_LABEL,
           connected,
           tokenMap,
@@ -298,12 +299,16 @@ export const TradeEntry = () => {
         )}
         {pendingTx && <Spin indicator={antIcon} className="add-spinner" />}
       </Button>
-      <TradeInfo pool={pool} />
+      <TradeInfo pool={pool} poolA={poolA} poolB={poolB} />
     </>
   );
 };
 
-export const TradeInfo = (props: { pool?: PoolInfo }) => {
+export const TradeInfo = (props: {
+  pool?: PoolInfo;
+  poolA?: PoolInfo;
+  poolB?: PoolInfo;
+}) => {
   const { t } = useTranslation();
   const { A, B } = useCurrencyPairState();
   const { pool } = props;

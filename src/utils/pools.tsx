@@ -247,6 +247,10 @@ export const removeExactOneLiquidity = async (
   );
 
   const isLatestSwap = isLatest(pool.raw.account);
+  console.log(
+    account.info.amount.toNumber(),
+    "account.info.amount.toNumber()======="
+  );
   const transferAuthority = approveAmount(
     instructions,
     cleanupInstructions,
@@ -302,6 +306,7 @@ const swapInfo = async (
   components: LiquidityComponent[],
   SLIPPAGE: number,
   pool?: PoolInfo,
+  isRoute?: Boolean,
   prevAccount?: any
 ) => {
   if (!pool) {
@@ -317,10 +322,10 @@ const swapInfo = async (
   const minAmountOut = components[1].amount * (1 - SLIPPAGE);
   // const amountIn = 1000000000; // these two should include slippage
   // const minAmountOut = 0;
-  console.log(amountIn, minAmountOut, "amountIn=========minAmountOut")
+  console.log(amountIn, minAmountOut, "amountIn=========minAmountOut");
   const holdingA = // @ts-ignore
     pool.pubkeys.holdingMints[0]?.toBase58() === // @ts-ignore
-      components[0].account.info.mint.toBase58() // @ts-ignore
+    components[0].account.info.mint.toBase58() // @ts-ignore
       ? pool.pubkeys.holdingAccounts[0] // @ts-ignore
       : pool.pubkeys.holdingAccounts[1];
   const holdingB = // @ts-ignore
@@ -353,12 +358,6 @@ const swapInfo = async (
       amountIn + accountRentExempt,
       signers
     );
-  console.log(
-    amountIn + accountRentExempt,
-    "accountRentExempt-----",
-    accountRentExempt,
-    "=====111"
-  );
   let toAccount = findOrCreateAccountByMint(
     wallet.publicKey,
     wallet.publicKey,
@@ -366,7 +365,10 @@ const swapInfo = async (
     cleanupInstructions,
     accountRentExempt,
     new PublicKey(components[1].mintAddress),
-    signers
+    signers,
+    undefined,
+    // @ts-ignore
+    isRoute
   );
   // @ts-ignore
   const isLatestSwap = isLatest(pool.raw.account);
@@ -379,6 +381,7 @@ const swapInfo = async (
     amountIn,
     isLatestSwap ? undefined : authority
   );
+  console.log(amountIn, "approveAmount-----", accountRentExempt, "=====111");
   if (isLatestSwap) {
     signers.push(transferAuthority);
   }
@@ -386,14 +389,14 @@ const swapInfo = async (
   let hostFeeAccount =
     SWAP_HOST_FEE_ADDRESS && !prevAccount
       ? findOrCreateAccountByMint(
-        wallet.publicKey,
-        SWAP_HOST_FEE_ADDRESS,
-        instructions,
-        cleanupInstructions,
-        accountRentExempt, // @ts-ignore
-        pool.pubkeys.mint,
-        signers
-      )
+          wallet.publicKey,
+          SWAP_HOST_FEE_ADDRESS,
+          instructions,
+          cleanupInstructions,
+          accountRentExempt, // @ts-ignore
+          pool.pubkeys.mint,
+          signers
+        )
       : undefined;
   instructions.push(
     swapInstruction(
@@ -435,7 +438,8 @@ export const swap = async (
       wallet,
       swapList[0].components,
       SLIPPAGE,
-      swapList[0].pool
+      swapList[0].pool,
+      true
     );
     swapData.push(data);
     const data1 = await swapInfo(
@@ -443,7 +447,8 @@ export const swap = async (
       wallet,
       swapList[1].components,
       SLIPPAGE,
-      swapList[1].pool, // @ts-ignore
+      swapList[1].pool,
+      true, // @ts-ignore
       data.toAccount
     );
     swapData.push(data1);
@@ -546,15 +551,15 @@ export const usePools = () => {
             data: undefined as any,
             account: item.account,
             pubkey: item.pubkey,
-            init: async () => { },
+            init: async () => {},
           };
 
           const layout =
             item.account.data.length === TokenSwapLayout.span
               ? TokenSwapLayout
               : item.account.data.length === TokenSwapLayoutV1.span
-                ? TokenSwapLayoutV1
-                : TokenSwapLayoutV0;
+              ? TokenSwapLayoutV1
+              : TokenSwapLayoutV0;
 
           // handling of legacy layout can be removed soon...
           if (layout === TokenSwapLayoutV0) {
@@ -1066,7 +1071,8 @@ function findOrCreateAccountByMint(
   accountRentExempt: number,
   mint: PublicKey, // use to identify same type
   signers: Account[],
-  excluded?: Set<string>
+  excluded?: Set<string>, // @ts-ignore
+  route?: Boolean
 ): PublicKey {
   const accountToFind = mint.toBase58();
   const account = getCachedAccount(
@@ -1093,8 +1099,7 @@ function findOrCreateAccountByMint(
 
     toAccount = newToAccount.publicKey;
     signers.push(newToAccount);
-
-    if (isWrappedSol) {
+    if (isWrappedSol && !route) {
       cleanupInstructions.push(
         Token.createCloseAccountInstruction(
           programIds().token,
