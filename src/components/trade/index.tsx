@@ -44,7 +44,7 @@ const { Text } = Typography;
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 export const TradeEntry = () => {
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
   const { wallet, connect, connected } = useWallet();
   const connection = useConnection();
   const [pendingTx, setPendingTx] = useState(false);
@@ -292,6 +292,7 @@ export const TradeEntry = () => {
       >
         {console.log(pool, poolA, poolB, "-========")}
         {generateActionLabel(
+          i18n.language,
           !pool
             ? !poolA || !poolB
               ? POOL_NOT_AVAILABLE(

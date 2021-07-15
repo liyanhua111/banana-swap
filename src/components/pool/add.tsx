@@ -39,7 +39,7 @@ import { programIds } from "../../utils/ids";
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 export const AddToLiquidity = () => {
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
   const { wallet, connect, connected } = useWallet();
   const connection = useConnection();
   const [pendingTx, setPendingTx] = useState(false);
@@ -190,7 +190,7 @@ export const AddToLiquidity = () => {
           !hasSufficientBalance)
       }
     >
-      {generateActionLabel(CREATE_POOL_LABEL, connected, tokenMap, A, B)}
+      {generateActionLabel(i18n.language,CREATE_POOL_LABEL, connected, tokenMap, A, B)}
       {pendingTx && <Spin indicator={antIcon} className="add-spinner" />}
     </Button>
   );
@@ -216,13 +216,14 @@ export const AddToLiquidity = () => {
     >
         {depositType === "both"
         ? generateActionLabel(
+          i18n.language,
           pool ? ADD_LIQUIDITY_LABEL : CREATE_POOL_LABEL,
           connected,
           tokenMap,
           A,
           B
         )
-        : generateExactOneLabel(connected, tokenMap, getDepositToken())}
+        : generateExactOneLabel(connected, tokenMap, i18n.language, getDepositToken())}
        {pendingTx && <Spin indicator={antIcon} className="add-spinner" />}
     </Button>
     // <Dropdown.Button
