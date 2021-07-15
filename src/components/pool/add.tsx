@@ -190,7 +190,7 @@ export const AddToLiquidity = () => {
           !hasSufficientBalance)
       }
     >
-      {generateActionLabel(i18n.language,CREATE_POOL_LABEL, connected, tokenMap, A, B)}
+      {generateActionLabel(i18n.language, CREATE_POOL_LABEL(i18n.language), connected, tokenMap, A, B)}
       {pendingTx && <Spin indicator={antIcon} className="add-spinner" />}
     </Button>
   );
@@ -217,13 +217,13 @@ export const AddToLiquidity = () => {
         {depositType === "both"
         ? generateActionLabel(
           i18n.language,
-          pool ? ADD_LIQUIDITY_LABEL : CREATE_POOL_LABEL,
+          pool ? ADD_LIQUIDITY_LABEL(i18n.language) : CREATE_POOL_LABEL(i18n.language),
           connected,
           tokenMap,
           A,
           B
         )
-        : generateExactOneLabel(connected, tokenMap, i18n.language, getDepositToken())}
+        : generateExactOneLabel(i18n.language, connected, tokenMap, getDepositToken())}
        {pendingTx && <Spin indicator={antIcon} className="add-spinner" />}
     </Button>
     // <Dropdown.Button

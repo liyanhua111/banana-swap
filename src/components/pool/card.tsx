@@ -84,7 +84,7 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
         </Text>
         <div className="pool-card-cell ">{ratio * enriched.supply}</div>
       </div>
-      <div className="pool-card-row">
+      {/* <div className="pool-card-row">
         <Text type="secondary" className="pool-card-cell ">
           Your fees (24h):
         </Text>
@@ -92,7 +92,7 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
           {enriched.fees24h * ratio < 0.005 ? "< " : ""}
           {formatUSD.format(enriched.fees24h * ratio)}
         </div>
-      </div>
+      </div> */}
 
       <hr />
     </>
@@ -177,7 +177,7 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
               {formatNumber.format(enriched.supply)}
             </div>
           </div>
-          <div className="pool-card-row">
+          {/* <div className="pool-card-row">
             <Text type="secondary" className="pool-card-cell ">
               Value per token:
             </Text>
@@ -211,7 +211,7 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
             <div className="pool-card-cell ">
               {formatPct.format(enriched.apy24h)}
             </div>
-          </div>
+          </div> */}
           <div className="pool-card-row">
             <Text type="secondary" className="pool-card-cell ">
               Address:

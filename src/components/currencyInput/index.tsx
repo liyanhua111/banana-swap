@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Select } from "antd";
+import { useTranslation } from "react-i18next";
 import { NumericInput } from "../numericInput";
 import { convert, getPoolName, getTokenName, isKnownMint } from "../../utils/utils";
 import {
@@ -79,6 +80,7 @@ export const CurrencyInput = (props: {
   onInputChange?: (val: number) => void;
   onMintChange?: (account: string) => void;
 }) => {
+  const { t } = useTranslation();
   const { userAccounts } = useUserAccounts();
   const { pools } = useCachedPool();
   const mint = cache.getMint(props.mint);
@@ -192,7 +194,7 @@ export const CurrencyInput = (props: {
             props.onInputChange && props.onInputChange(userUiBalance())
           }
         >
-          Balance: {userUiBalance().toFixed(6)}
+          {t("Balance")}: {userUiBalance().toFixed(6)}
         </div>
       </div>
       <div className="ccy-input-header" style={{ padding: "0px 10px 5px 7px" }}>

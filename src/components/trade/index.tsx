@@ -247,7 +247,7 @@ export const TradeEntry = () => {
           ⇅
         </Button>
         <CurrencyInput
-          title="To (Estimate)"
+          title={`To (${t('Estimate')})`}
           onInputChange={(val: any) => {
             setPoolOperation(PoolOperation.SwapGivenProceeds); // @ts-ignore
             if (toInfo.amount !== val) {
@@ -296,11 +296,12 @@ export const TradeEntry = () => {
           !pool
             ? !poolA || !poolB
               ? POOL_NOT_AVAILABLE(
+                  i18n.language,
                   getTokenName(tokenMap, A.mintAddress),
                   getTokenName(tokenMap, B.mintAddress)
                 )
-              : SWAP_LABEL
-            : SWAP_LABEL,
+              : SWAP_LABEL(i18n.language,)
+            : SWAP_LABEL(i18n.language,),
           connected,
           tokenMap,
           A,
