@@ -322,11 +322,7 @@ const swapInfo = async (
   const minAmountOut = components[1].amount * (1 - SLIPPAGE);
   // const amountIn = 1000000000; // these two should include slippage
   // const minAmountOut = 0;
-<<<<<<< HEAD
-
-=======
   console.log(amountIn, minAmountOut, "amountIn=========minAmountOut");
->>>>>>> route-swap
   const holdingA = // @ts-ignore
     pool.pubkeys.holdingMints[0]?.toBase58() === // @ts-ignore
     components[0].account.info.mint.toBase58() // @ts-ignore
@@ -390,19 +386,6 @@ const swapInfo = async (
     signers.push(transferAuthority);
   }
 
-<<<<<<< HEAD
-  let hostFeeAccount = SWAP_HOST_FEE_ADDRESS
-    ? findOrCreateAccountByMint(
-        wallet.publicKey,
-        SWAP_HOST_FEE_ADDRESS,
-        instructions,
-        cleanupInstructions,
-        accountRentExempt, // @ts-ignore
-        pool.pubkeys.mint,
-        signers
-      )
-    : undefined;
-=======
   let hostFeeAccount =
     SWAP_HOST_FEE_ADDRESS && !prevAccount
       ? findOrCreateAccountByMint(
@@ -415,7 +398,6 @@ const swapInfo = async (
           signers
         )
       : undefined;
->>>>>>> route-swap
   instructions.push(
     swapInstruction(
       // @ts-ignore
@@ -448,17 +430,6 @@ export const swap = async (
   pool?: PoolInfo,
   swapList?: any
 ) => {
-<<<<<<< HEAD
-  let swapData = [];
-  if (swapList) {
-    // @ts-ignore
-    swapList.forEach(async (item) => {
-      swapData.push(
-        await swapInfo(connection, wallet, item.components, SLIPPAGE, item.pool)
-      );
-    });
-  } else {
-=======
   let swapData: any[] = [];
   if (swapList) {
     // @ts-ignore
@@ -484,7 +455,6 @@ export const swap = async (
     console.log(swapList, "swapList======");
   } else {
     console.log(swapList, "swapList======");
->>>>>>> route-swap
     swapData.push(
       await swapInfo(connection, wallet, components, SLIPPAGE, pool)
     );
@@ -496,11 +466,6 @@ export const swap = async (
     instructionsData.push(...item.instructionsData); // @ts-ignore
     signers.push(...item.signers);
   });
-<<<<<<< HEAD
-  console.log(instructionsData, "======instructionsData");
-  console.log(signers, "======signers");
-=======
->>>>>>> route-swap
   let tx = await sendTransaction(
     connection,
     wallet, // @ts-ignore

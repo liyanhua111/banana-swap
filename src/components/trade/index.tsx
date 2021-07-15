@@ -294,21 +294,13 @@ export const TradeEntry = () => {
         {console.log(pool, poolA, poolB, "-========")}
         {generateActionLabel(
           !pool
-<<<<<<< HEAD
-            ? POOL_NOT_AVAILABLE(
-                getTokenName(tokenMap, A.mintAddress),
-                getTokenName(tokenMap, B.mintAddress)
-              )
-            : SWAP_LABEL(),
-=======
             ? !poolA || !poolB
               ? POOL_NOT_AVAILABLE(
                   getTokenName(tokenMap, A.mintAddress),
                   getTokenName(tokenMap, B.mintAddress)
                 )
-              : SWAP_LABEL
-            : SWAP_LABEL,
->>>>>>> route-swap
+              : SWAP_LABEL()
+            : SWAP_LABEL(),
           connected,
           tokenMap,
           A,
