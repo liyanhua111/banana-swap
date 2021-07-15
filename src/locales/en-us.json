@@ -23,6 +23,7 @@
   "Slippage":"Slippage:",
   "Network":"Network:",
   "Price":"Price",
+  "Route":"路径",
   "MinimumReceived ":"Minimum Received",
   "PriceImpact":"Price Impact",
   "LiquidityProviderFee":"Liquidity Provider Fee",
@@ -106,7 +107,11 @@
   "homeInfor651":"Initiate a multi-chain deployment plan",
   "homeInfor652":"Hybrid cross-chain bridge",
   "homeInfor653":"Cross-chain asset exchange",
+<<<<<<< HEAD
   "homeInfor654":"Aggregate transaction dashboards",
   "Estimate":"Estimate",
   "Balance":"Balance"
+=======
+  "homeInfor654":"Aggregate transaction dashboards"
+>>>>>>> route-swap
 }
