@@ -108,7 +108,8 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
             className="left-icon"
           />
           {enriched?.name}
-          {/* <Popover
+          
+          <Popover
             placement="topRight"
             trigger="hover"
             className="right-icon"
@@ -125,21 +126,22 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
                 onClick={() => setDisplayMode("card")}
               />
             ) : (
-              <Button
-                shape="circle"
-                size="middle"
-                type="text"
-                icon={
-                  displayMode === "card" ? (
-                    <LineChartOutlined />
-                  ) : (
-                    <AlignLeftOutlined />
-                  )
-                }
-                onClick={handleSwitchChartMode}
-              />
+              <></>
+              // <Button
+              //   shape="circle"
+              //   size="middle"
+              //   type="text"
+              //   icon={
+              //     displayMode === "card" ? (
+              //       <LineChartOutlined />
+              //     ) : (
+              //       <AlignLeftOutlined />
+              //     )
+              //   }
+              //   onClick={handleSwitchChartMode}
+              // />
             )}
-          </Popover> */}
+          </Popover>
         </>
       }
     >
