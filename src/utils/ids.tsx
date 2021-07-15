@@ -61,7 +61,7 @@ export const PROGRAM_IDS = [
     name: "localnet",
     swap: () => ({
       current: {
-        pubkey: new PublicKey("FMcef6hG9TjPADSHD3Y945UESqisPzXNVVPhQER4cuw7"),
+        pubkey: new PublicKey("sD2YJ8PAmFyjHgJMrny79bzdBNPYpZeMe1PQ9KRAoX3"),
         layout: TokenSwapLayout,
       },
       legacy: [],
