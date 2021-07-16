@@ -32,8 +32,8 @@ export const AppBar = (props: { left?: JSX.Element; right?: JSX.Element }) => {
         </WalletConnect>
         {connected && (
           <Button
-            className={location.pathname==='/swap/pool'?'poolActive':''}
-            type="text"
+            className={`mypoolBtn ${location.pathname === '/swap/pool' ? 'poolActive' : ''}`}
+            shape="round"
             size="large"
             onClick={() => history.push({ pathname: "/swap/pool" })}
           >

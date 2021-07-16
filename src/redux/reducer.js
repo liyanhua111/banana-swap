@@ -7,9 +7,11 @@ const init = {
 };
 
 const hamburger = (state = init.hamburger, action) => {
+  const { data } = action;
+  console.log(data);
   switch (action.type) {
     case "changeHamburger":
-      return !state;
+      return data;
     default:
       return state;
   }

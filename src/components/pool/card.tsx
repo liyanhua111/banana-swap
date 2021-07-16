@@ -152,7 +152,7 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
           {userInfo}
           <div className="pool-card-row">
             <Text type="secondary" className="pool-card-cell ">
-            {t("Yourquantity")}:
+            {t("PoolLiquidity")}:
             </Text>
             <div className="pool-card-cell ">
               <div className="left">

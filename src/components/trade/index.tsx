@@ -14,6 +14,7 @@ import {
   SwapOutlined,
   QuestionCircleOutlined,
   SettingOutlined,
+  SwapRightOutlined
 } from "@ant-design/icons";
 import {
   swap,
@@ -437,7 +438,7 @@ export const TradeInfo = (props: {
             icon={<SwapOutlined />}
             onClick={handleSwapPriceInfo}
           >
-            {exchangeRate.toFixed(6)}&nbsp;
+            {isNaN(exchangeRate)?" ":exchangeRate.toFixed(6)}&nbsp;
             {priceAccount === B.mintAddress ? B.name : A.name} per&nbsp;
             {priceAccount === B.mintAddress ? A.name : B.name}&nbsp;
           </Button>
@@ -447,7 +448,9 @@ export const TradeInfo = (props: {
         <div className="pool-card-row">
           <Text className="pool-card-cell">{t("Route")}</Text>
           <div className="pool-card-cell " title={exchangeRate.toString()}>
-            {A.name}-SOL-{B.name}
+            <div>
+            {A.name}<SwapRightOutlined />SOL<SwapRightOutlined />{B.name}
+            </div>
           </div>
         </div>
       )}
@@ -478,7 +481,7 @@ export const TradeInfo = (props: {
           title={priceImpact.toString()}
           style={{ color: colorWarning(priceImpact) }}
         >
-          {priceImpact < 0.01 ? "< 0.01%" : priceImpact.toFixed(3) + "%"}
+          {priceImpact < 0.01 ? "< 0.01%" : (isNaN(priceImpact)?' ':(priceImpact.toFixed(3))) + "%"}
         </div>
       </div>
       <div className="pool-card-row">
@@ -496,7 +499,7 @@ export const TradeInfo = (props: {
           </Popover>
         </Text>
         <div className="pool-card-cell " title={lpFee.toString()}>
-          {lpFee} {A.name}
+          {isNaN(lpFee)?" ":lpFee} {A.name}
           {!pool && poolA && poolB && routeFee ? "+" + routeFee + "SOL" : ""}
         </div>
       </div>

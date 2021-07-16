@@ -1,10 +1,11 @@
-import React,{useState} from "react";
+import React,{useEffect} from "react";
 import { Menu } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import { useTranslation, Trans, Translation } from 'react-i18next'
 import { Link, useHistory, useLocation } from "react-router-dom";
 import {changeHamburgerFunc,toggleCollapsedFunc} from '../../redux/action'
-import {useSelector,useDispatch,RootStateOrAny} from 'react-redux'
+import { useSelector, useDispatch, RootStateOrAny } from 'react-redux'
+
 import './styles.less'
 
 const { SubMenu } = Menu;
@@ -13,8 +14,12 @@ const { SubMenu } = Menu;
 export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
   const collapsed = useSelector((state: RootStateOrAny) => state.collapsed);
   const { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
   const location = useLocation();
   const current = location.pathname;
+  useEffect(()=>{
+    dispatch(changeHamburgerFunc(true))
+	},[location])
   const LeftMenu = (
     <div className="App-Menu">
       <div className="App-Menu-left">
@@ -68,12 +73,12 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
             </p>
           </div>
           <div className="relationBox">
-            <a href="https://github.com/bananadefilabs-001/banana">
+            <a href="https://github.com/bananadefilabs-001">
               <img src={require('../../assets/img/nav/b1.png')} alt=""/>
             </a>
-            <a href="">
+            {/* <a href="">
               <img src={require('../../assets/img/nav/b2.png')} alt=""/>
-            </a>
+            </a> */}
             <a href="https://twitter.com/BananaSwap_net">
               <img src={require('../../assets/img/nav/b3.png')} alt=""/>
             </a>
