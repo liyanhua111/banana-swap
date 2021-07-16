@@ -98,10 +98,11 @@ export function ConnectionProvider({ children = undefined as any }) {
   useEffect(() => {
     (async () => {
       const res = await new TokenListProvider().resolve();
-      console.log(res,'==============================================')
+      console.log(res, '==============================================')
       const list = res
         .filterByChainId(chain.chainID)
         .excludeByTag("nft")
+        .excludeByTag("lp-token")
         .getList();
       const knownMints = list.reduce((map, item) => {
         map.set(item.address, item);

@@ -1271,10 +1271,10 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@hurryfire/spl-token-registry@0.2.1":
-  version "0.2.1"
-  resolved "https://registry.nlark.com/@hurryfire/spl-token-registry/download/@hurryfire/spl-token-registry-0.2.1.tgz?cache=0&sync_timestamp=1626256740025&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40hurryfire%2Fspl-token-registry%2Fdownload%2F%40hurryfire%2Fspl-token-registry-0.2.1.tgz#42acf0d0dfe48fcc8061f2b2770f008ea020e512"
-  integrity sha1-Qqzw0N/kj8yAYfKydw8AjqAg5RI=
+"@hurryfire/spl-token-registry@0.2.2":
+  version "0.2.2"
+  resolved "https://registry.nlark.com/@hurryfire/spl-token-registry/download/@hurryfire/spl-token-registry-0.2.2.tgz#f6dd38bb877a3e48f82d4e5cbb40ed8c2742cd2b"
+  integrity sha1-9t04u4d6Pkj4LU5cu0DtjCdCzSs=
   dependencies:
     cross-fetch "3.0.6"
 
