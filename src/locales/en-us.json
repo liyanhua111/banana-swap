@@ -23,7 +23,7 @@
   "Slippage":"Slippage:",
   "Network":"Network:",
   "Price":"Price",
-  "Route":"路径",
+  "Route":"Route",
   "MinimumReceived ":"Minimum Received",
   "PriceImpact":"Price Impact",
   "LiquidityProviderFee":"Liquidity Provider Fee",
@@ -109,5 +109,17 @@
   "homeInfor653":"Cross-chain asset exchange",
   "homeInfor654":"Aggregate transaction dashboards",
   "Estimate":"Estimate",
-  "Balance":"Balance"
+  "Balance":"Balance",
+  "Yourliquidity":"Your Liquidity",
+  "Yourquantity":"Your Quantity",
+  "LPSupply":"LP Supply",
+  "Address":"Address",
+  "Remove":"Remove",
+  "RemoveLiquidity":"Remove Liquidity",
+  "Amount":"Amount",
+  "Detailed":"Detailed",
+  "AmountEstimated":"Amount Estimated",
+  "Simple":"Simple",
+  "estimated":"estimated",
+  "MyPools":"My Pools"
 }

@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Button, Card, Popover, Typography } from "antd";
+import { useTranslation } from 'react-i18next'
 import { RemoveLiquidityEntry } from "./remove";
 import { useMint, useUserAccounts } from "../../utils/accounts";
 import { PoolIcon } from "../tokenIcon";
@@ -15,6 +16,7 @@ import { LineChartOutlined, AlignLeftOutlined } from "@ant-design/icons";
 const { Text } = Typography;
 
 export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
+  const { t } = useTranslation();
   const pools = useMemo(() => [props.pool].filter((p) => p) as PoolInfo[], [
     props.pool,
   ]);
@@ -58,7 +60,7 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
     <>
       <div className="pool-card-row">
         <Text type="secondary" className="pool-card-cell ">
-          Your liquidity:
+          {t("Yourliquidity")}:
         </Text>
         <div className="pool-card-cell ">
           <div className="left">
@@ -80,7 +82,7 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
       </div>
       <div className="pool-card-row">
         <Text type="secondary" className="pool-card-cell ">
-          Your quantity:
+          {t("Yourquantity")}:
         </Text>
         <div className="pool-card-cell ">{ratio * enriched.supply}</div>
       </div>
@@ -150,7 +152,7 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
           {userInfo}
           <div className="pool-card-row">
             <Text type="secondary" className="pool-card-cell ">
-              Pool Liquidity:
+            {t("PoolLiquidity")}:
             </Text>
             <div className="pool-card-cell ">
               <div className="left">
@@ -172,7 +174,7 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
           </div>
           <div className="pool-card-row">
             <Text type="secondary" className="pool-card-cell ">
-              LP Supply:
+              {t("LPSupply")}:
             </Text>
             <div className="pool-card-cell " title={enriched.supply}>
               <span>{enriched.supply}</span>
@@ -216,7 +218,7 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
           </div> */}
           <div className="pool-card-row">
             <Text type="secondary" className="pool-card-cell ">
-              Address:
+              {t("Address")}:
             </Text>
             <div className="pool-card-cell ">
               <div className="left">
@@ -259,7 +261,7 @@ export const PoolCard = (props: { pool: PoolInfo; account?: TokenAccount }) => {
           <div className="pool-card-row">
             {/* {item && <Button type="default" onClick={setPair}>Add</Button>} */}
             {props.account && (
-              <Button onClick={handleSwitchViewMode}>Remove</Button>
+              <Button onClick={handleSwitchViewMode}>{ t("Remove")}</Button>
             )}
           </div>
         </>

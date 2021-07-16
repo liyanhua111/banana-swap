@@ -1136,9 +1136,9 @@ function estimateInputFromProceeds(
   proceedsQuantityInPool: number,
   proceedsAmount: number
 ): number | string {
-  if (proceedsAmount >= proceedsQuantityInPool) {
-    return "Not possible";
-  }
+  // if (proceedsAmount >= proceedsQuantityInPool) {
+  //   return "Not possible";
+  // }
   // console.log('===================================================================')
 
   // console.log(`(inputQuantityInPool * proceedsAmount) / (proceedsQuantityInPool - proceedsAmount)`)
