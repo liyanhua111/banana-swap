@@ -19,6 +19,7 @@ import { PoolCurrencyInput } from "../currencyInput";
 import { LoadingOutlined } from "@ant-design/icons";
 import { generateRemoveLabel } from "../labels";
 import { programIds } from "../../utils/ids";
+import i18n from "../../locales/i18n";
 
 export const RemoveLiquidity = (props: {
   instance: { account: TokenAccount; pool: PoolInfo };
@@ -89,6 +90,7 @@ export const RemoveLiquidity = (props: {
       }
     >
       {generateRemoveLabel(
+        i18n.language,
         connected,
         liquidityAmount,
         pool,

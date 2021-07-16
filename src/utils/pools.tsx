@@ -247,6 +247,10 @@ export const removeExactOneLiquidity = async (
   );
 
   const isLatestSwap = isLatest(pool.raw.account);
+  console.log(
+    account.info.amount.toNumber(),
+    "account.info.amount.toNumber()======="
+  );
   const transferAuthority = approveAmount(
     instructions,
     cleanupInstructions,
@@ -301,9 +305,11 @@ const swapInfo = async (
   wallet: any,
   components: LiquidityComponent[],
   SLIPPAGE: number,
-  pool?: PoolInfo
+  pool?: PoolInfo,
+  isRoute?: Boolean,
+  prevAccount?: any
 ) => {
-  if (!pool || !components[0].account) {
+  if (!pool) {
     notify({
       type: "error",
       message: `Pool doesn't exsist.`,
@@ -316,7 +322,7 @@ const swapInfo = async (
   const minAmountOut = components[1].amount * (1 - SLIPPAGE);
   // const amountIn = 1000000000; // these two should include slippage
   // const minAmountOut = 0;
-
+  console.log(amountIn, minAmountOut, "amountIn=========minAmountOut");
   const holdingA = // @ts-ignore
     pool.pubkeys.holdingMints[0]?.toBase58() === // @ts-ignore
     components[0].account.info.mint.toBase58() // @ts-ignore
@@ -341,16 +347,17 @@ const swapInfo = async (
     AccountLayout.span
   );
 
-  const fromAccount = getWrappedAccount(
-    instructions,
-    cleanupInstructions,
-    // @ts-ignore
-    components[0].account,
-    wallet.publicKey,
-    amountIn + accountRentExempt,
-    signers
-  );
-
+  const fromAccount =
+    prevAccount ||
+    getWrappedAccount(
+      instructions,
+      cleanupInstructions,
+      // @ts-ignore
+      components[0].account,
+      wallet.publicKey,
+      amountIn + accountRentExempt,
+      signers
+    );
   let toAccount = findOrCreateAccountByMint(
     wallet.publicKey,
     wallet.publicKey,
@@ -358,7 +365,10 @@ const swapInfo = async (
     cleanupInstructions,
     accountRentExempt,
     new PublicKey(components[1].mintAddress),
-    signers
+    signers,
+    undefined,
+    // @ts-ignore
+    isRoute
   );
   // @ts-ignore
   const isLatestSwap = isLatest(pool.raw.account);
@@ -371,21 +381,23 @@ const swapInfo = async (
     amountIn,
     isLatestSwap ? undefined : authority
   );
+  console.log(amountIn, "approveAmount-----", accountRentExempt, "=====111");
   if (isLatestSwap) {
     signers.push(transferAuthority);
   }
 
-  let hostFeeAccount = SWAP_HOST_FEE_ADDRESS
-    ? findOrCreateAccountByMint(
-        wallet.publicKey,
-        SWAP_HOST_FEE_ADDRESS,
-        instructions,
-        cleanupInstructions,
-        accountRentExempt, // @ts-ignore
-        pool.pubkeys.mint,
-        signers
-      )
-    : undefined;
+  let hostFeeAccount =
+    SWAP_HOST_FEE_ADDRESS && !prevAccount
+      ? findOrCreateAccountByMint(
+          wallet.publicKey,
+          SWAP_HOST_FEE_ADDRESS,
+          instructions,
+          cleanupInstructions,
+          accountRentExempt, // @ts-ignore
+          pool.pubkeys.mint,
+          signers
+        )
+      : undefined;
   instructions.push(
     swapInstruction(
       // @ts-ignore
@@ -408,7 +420,7 @@ const swapInfo = async (
     )
   );
   var instructionsData = instructions.concat(cleanupInstructions);
-  return { instructionsData, signers };
+  return { instructionsData, signers, toAccount };
 };
 export const swap = async (
   connection: Connection,
@@ -418,15 +430,31 @@ export const swap = async (
   pool?: PoolInfo,
   swapList?: any
 ) => {
-  let swapData = [];
+  let swapData: any[] = [];
   if (swapList) {
     // @ts-ignore
-    swapList.forEach(async (item) => {
-      swapData.push(
-        await swapInfo(connection, wallet, item.components, SLIPPAGE, item.pool)
-      );
-    });
+    const data = await swapInfo(
+      connection,
+      wallet,
+      swapList[0].components,
+      SLIPPAGE,
+      swapList[0].pool,
+      true
+    );
+    swapData.push(data);
+    const data1 = await swapInfo(
+      connection,
+      wallet,
+      swapList[1].components,
+      SLIPPAGE,
+      swapList[1].pool,
+      true, // @ts-ignore
+      data.toAccount
+    );
+    swapData.push(data1);
+    console.log(swapList, "swapList======");
   } else {
+    console.log(swapList, "swapList======");
     swapData.push(
       await swapInfo(connection, wallet, components, SLIPPAGE, pool)
     );
@@ -438,8 +466,6 @@ export const swap = async (
     instructionsData.push(...item.instructionsData); // @ts-ignore
     signers.push(...item.signers);
   });
-  console.log(instructionsData, "======instructionsData");
-  console.log(signers, "======signers");
   let tx = await sendTransaction(
     connection,
     wallet, // @ts-ignore
@@ -1045,7 +1071,8 @@ function findOrCreateAccountByMint(
   accountRentExempt: number,
   mint: PublicKey, // use to identify same type
   signers: Account[],
-  excluded?: Set<string>
+  excluded?: Set<string>, // @ts-ignore
+  route?: Boolean
 ): PublicKey {
   const accountToFind = mint.toBase58();
   const account = getCachedAccount(
@@ -1072,8 +1099,7 @@ function findOrCreateAccountByMint(
 
     toAccount = newToAccount.publicKey;
     signers.push(newToAccount);
-
-    if (isWrappedSol) {
+    if (isWrappedSol && !route) {
       cleanupInstructions.push(
         Token.createCloseAccountInstruction(
           programIds().token,

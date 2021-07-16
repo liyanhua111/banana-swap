@@ -138,7 +138,6 @@ export function CurrencyPairProvider({ children = null as any }) {
   const setAmountB = quote.setAmount;
 
   const pool = usePoolForBasket([base.mintAddress, quote.mintAddress]);
-
   useEffect(() => {
     const base =
       tokens.find((t) => t.address === mintAddressA)?.symbol || mintAddressA;
@@ -221,7 +220,7 @@ export function CurrencyPairProvider({ children = null as any }) {
         pool,
         poolOperation
       );
-      console.log(independent,amount,"independent========");
+      console.log(independent, amount, "independent========");
       if (typeof result === "string") {
         setDependent(result);
       } else if (result !== undefined && Number.isFinite(result)) {

@@ -23,6 +23,7 @@
   "Slippage":"滑点公差:",
   "Network":"网络:",
   "Price":"价格",
+  "Route":"路径",
   "MinimumReceived":"最少收到",
   "PriceImpact":"价格波动",
   "LiquidityProviderFee":"支付给流动性提供者",
