@@ -108,5 +108,17 @@
   "homeInfor653":"跨链资产兑换",
   "homeInfor654":"聚合交易仪表盘",
   "Estimate":"预估",
-  "Balance":"余额"
+  "Balance":"余额",
+  "Yourliquidity":"你的流动性",
+  "Yourquantity":"你的数量",
+  "LPSupply":"LP供应",
+  "Address":"地址",
+  "Remove":"移除",
+  "RemoveLiquidity":"移除流动性",
+  "Amount":"数量",
+  "Detailed":"详细",
+  "AmountEstimated":"预估数量",
+  "Simple":"简洁",
+  "estimated":"预估",
+  "MyPools":"我的流动池"
 }

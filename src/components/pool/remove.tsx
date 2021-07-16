@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Radio, Row, Slider, Spin, Typography } from "antd";
-
+import { useTranslation } from 'react-i18next'
 import { removeLiquidity, removeExactOneLiquidity } from "../../utils/pools";
 import { useWallet } from "../../context/wallet";
 import { useConnection, useConnectionConfig } from "../../utils/connection";
@@ -111,6 +111,7 @@ export const RemoveLiquidityEntry = (props: {
   instance: { account?: TokenAccount; pool: PoolInfo };
   enriched: any;
 }) => {
+  const { t } = useTranslation();
   const { account, pool } = props.instance;
   const { enriched } = props;
   const [inputType, setInputType] = useState("slider");
@@ -140,13 +141,13 @@ export const RemoveLiquidityEntry = (props: {
     poolAmount: formatPriceNumber.format(
       ratio * (enriched?.supply || 0) * (inputInfo.liquidityPercentage / 100)
     ),
-    tokenA: "Output (estimated)",
+    tokenA: `Output (${t('estimated')})`,
     tokenAAmount: formatPriceNumber.format(
       ratio *
         (enriched?.liquidityA || 0) *
         (inputInfo.liquidityPercentage / 100)
     ),
-    tokenB: "Output (estimated)",
+    tokenB: `Output (${t('estimated')})`,
     tokenBAmount: formatPriceNumber.format(
       ratio *
         (enriched?.liquidityB || 0) *
@@ -158,7 +159,7 @@ export const RemoveLiquidityEntry = (props: {
     switch (inputInfo.lastTyped) {
       case "pool": {
         setInputsDescription({
-          pool: withdrawType === "both" ? "Input" : "Output (Estimated)",
+          pool: withdrawType === "both" ? "Input" : `Output (${t('estimated')})`,
           poolAmount:
             inputInfo.amount !== "initial"
               ? inputInfo.amount
@@ -167,13 +168,13 @@ export const RemoveLiquidityEntry = (props: {
                     (enriched?.supply || 0) *
                     (inputInfo.liquidityPercentage / 100)
                 ),
-          tokenA: withdrawType === "one" ? "Input" : "Output (Estimated)",
+          tokenA: withdrawType === "one" ? "Input" : `Output (${t('estimated')})`,
           tokenAAmount: formatPriceNumber.format(
             ratio *
               (enriched?.liquidityA || 0) *
               (inputInfo.liquidityPercentage / 100)
           ),
-          tokenB: withdrawType === "one" ? "Input" : "Output (Estimated)",
+          tokenB: withdrawType === "one" ? "Input" : `Output (${t('estimated')})`,
           tokenBAmount: formatPriceNumber.format(
             ratio *
               (enriched?.liquidityB || 0) *
@@ -185,15 +186,15 @@ export const RemoveLiquidityEntry = (props: {
       case "tokenA": {
         console.log('tokenAtokenAtokenAtokenAtokenAtokenAtokenA')
         setInputsDescription({
-          pool: withdrawType === "both" ? "Input" : "Output (Estimated)",
+          pool: withdrawType === "both" ? "Input" : `Output (${t('estimated')})`,
           poolAmount: formatPriceNumber.format(
             ratio *
               (enriched?.supply || 0) *
               (inputInfo.liquidityPercentage / 100)
           ),
-          tokenA: withdrawType === "one" ? "Input" : "Output (Estimated)",
+          tokenA: withdrawType === "one" ? "Input" : `Output (${t('estimated')})`,
           tokenAAmount: inputInfo.amount,
-          tokenB: withdrawType === "one" ? "Input" : "Output (Estimated)",
+          tokenB: withdrawType === "one" ? "Input" : `Output (${t('estimated')})`,
           tokenBAmount: formatPriceNumber.format(
             ratio *
               (enriched?.liquidityB || 0) *
@@ -205,38 +206,38 @@ export const RemoveLiquidityEntry = (props: {
       case "tokenB": {
         console.log('tokenBtokenBtokenBtokenBtokenBtokenBtokenB')
         setInputsDescription({
-          pool: withdrawType === "both" ? "Input" : "Output (Estimated)",
+          pool: withdrawType === "both" ? "Input" : `Output (${t('estimated')})`,
           poolAmount: formatPriceNumber.format(
             ratio *
               (enriched?.supply || 0) *
               (inputInfo.liquidityPercentage / 100)
           ),
-          tokenA: withdrawType === "one" ? "Input" : "Output (Estimated)",
+          tokenA: withdrawType === "one" ? "Input" : `Output (${t('estimated')})`,
           tokenAAmount: formatPriceNumber.format(
             ratio *
               (enriched?.liquidityA || 0) *
               (inputInfo.liquidityPercentage / 100)
           ),
-          tokenB: withdrawType === "one" ? "Input" : "Output (Estimated)",
+          tokenB: withdrawType === "one" ? "Input" : `Output (${t('estimated')})`,
           tokenBAmount: inputInfo.amount,
         });
         break;
       }
       case "slider": {
         setInputsDescription({
-          pool: withdrawType === "both" ? "Input" : "Output (Estimated)",
+          pool: withdrawType === "both" ? "Input" : `Output (${t('estimated')})`,
           poolAmount: formatPriceNumber.format(
             ratio *
               (enriched?.supply || 0) *
               (inputInfo.liquidityPercentage / 100)
           ),
-          tokenA: withdrawType === "one" ? "Input" : "Output (Estimated)",
+          tokenA: withdrawType === "one" ? "Input" : `Output (${t('estimated')})`,
           tokenAAmount: formatPriceNumber.format(
             ratio *
               (enriched?.liquidityA || 0) *
               (inputInfo.liquidityPercentage / 100)
           ),
-          tokenB: withdrawType === "one" ? "Input" : "Output (Estimated)",
+          tokenB: withdrawType === "one" ? "Input" : `Output (${t('estimated')})`,
           tokenBAmount: formatPriceNumber.format(
             ratio *
               (enriched?.liquidityB || 0) *
@@ -362,7 +363,7 @@ export const RemoveLiquidityEntry = (props: {
     <>
       {inputType === "slider" && (
         <div className="input-card">
-          Remove Liquidity
+          {t("RemoveLiquidity")}
           <Card
             className="ccy-input"
             style={{ borderRadius: 20, width: "100%" }}
@@ -370,10 +371,10 @@ export const RemoveLiquidityEntry = (props: {
           >
             <div className="pool-card" style={{ width: "initial" }}>
               <div className="pool-card-row">
-                <div className="pool-card-cell">Amount</div>
+                <div className="pool-card-cell">{t("Amount")}</div>
                 <div className="pool-card-cell">
                   <Button onClick={() => setInputType("input")}>
-                    Detailed
+                    {t("Detailed")}
                   </Button>
                 </div>
               </div>
@@ -499,7 +500,7 @@ export const RemoveLiquidityEntry = (props: {
       )}
       {inputType === "input" && (
         <div className="input-card">
-          Remove Liquidity
+          {t("RemoveLiquidity")}
           {/* {isLatestLayout && pool && (
             <div className="flex-row-center">
               <Radio.Group
@@ -522,9 +523,9 @@ export const RemoveLiquidityEntry = (props: {
           >
             <div className="pool-card" style={{ width: "initial" }}>
               <div className="pool-card-row">
-                <div className="pool-card-cell">Amount Estimated</div>
+                <div className="pool-card-cell">{t("AmountEstimated")}</div>
                 <div className="pool-card-cell">
-                  <Button onClick={() => setInputType("slider")}>Simple</Button>
+                  <Button onClick={() => setInputType("slider")}>{ t("Simple")}</Button>
                 </div>
               </div>
               <div className="pool-card-row">

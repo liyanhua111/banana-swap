@@ -108,5 +108,18 @@
   "homeInfor653":"Cross-chain asset exchange",
   "homeInfor654":"Aggregate transaction dashboards",
   "Estimate":"Estimate",
-  "Balance":"Balance"
+  "Balance":"Balance",
+  "Yourliquidity":"Your liquidity",
+  "Yourquantity:":"Your quantity",
+  "PoolLiquidity:":"Pool Liquidity",
+  "LPSupply":"LP Supply",
+  "Address":"Address",
+  "Remove":"Remove",
+  "RemoveLiquidity":"Remove Liquidity",
+  "Amount":"Amount",
+  "Detailed":"Detailed",
+  "AmountEstimated":"Amount Estimated",
+  "Simple":"Simple",
+  "estimated":"estimated",
+  "MyPools":"My Pools"
 }
