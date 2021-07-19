@@ -29,8 +29,8 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               <div className="font1">{t("home1")}</div>
               <div className="font2">AMM<span className="font4"> | </span>IBO<span className="font4"> | </span>Social<span className="font4"> | {t("home2")}</span></div>
               <div className="font3">{t("home3")}</div>
-              {/* <div className="handBtn" onClick={() => history.push({ pathname: "/swap/index" })}>LAUNCH APP</div> */}
-              <div className="handBtn">LAUNCH APP</div>
+              <div className="handBtn" onClick={() => history.push({ pathname: "/swap/index" })}>LAUNCH APP</div>
+              {/* <div className="handBtn">LAUNCH APP</div> */}
             </div>
             <img src={require('../../assets/img/homeSubBg1.png')} alt=""/>
           </div>
