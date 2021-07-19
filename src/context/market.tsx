@@ -72,7 +72,7 @@ export function MarketProvider({ children = null as any }) {
 
       const marketAddress = MINT_TO_MARKET[mintAddress];
       const marketName = `${SERUM_TOKEN?.name}/USDC`;
-      const marketInfo = MARKETS.filter(m => !m.deprecated).find(
+      const marketInfo = MARKETS.filter((m) => !m.deprecated).find(
         (m) => m.name === marketName || m.address.toBase58() === marketAddress
       );
 
@@ -107,7 +107,7 @@ export function MarketProvider({ children = null as any }) {
           acc.set(item.pool_identifier, item);
           return acc;
         }, new Map<string, RecentPoolData>());
-
+        console.log(map, "map=======");
         setDailyVolume(map);
       } catch {
         // ignore
@@ -138,12 +138,12 @@ export function MarketProvider({ children = null as any }) {
         allMarkets.filter((a) => cache.get(a) === undefined),
         "single"
       ).then(({ keys, array }) => {
-        allMarkets.forEach(() => {});
+        allMarkets.forEach(() => { });
 
         return array.map((item, index) => {
           const marketAddress = keys[index];
           const mintAddress = reverseSerumMarketCache.get(marketAddress);
-          if (mintAddress  && item) {
+          if (mintAddress && item) {
             const market = marketByMint.get(mintAddress);
 
             if (market) {
@@ -229,7 +229,7 @@ export function MarketProvider({ children = null as any }) {
       const info = marketByMint.get(mintAddress);
       const market = cache.get(info?.marketInfo.address.toBase58() || "");
       if (!market) {
-        return () => {};
+        return () => { };
       }
 
       // TODO: get recent volume
@@ -368,14 +368,13 @@ function createEnrichedPools(
   const result = pools
     .filter((p) => p.pubkeys.holdingMints && p.pubkeys.holdingMints.length > 1)
     .map((p, index) => {
-      const mints = (p.pubkeys.holdingMints || [])
-        .map((a) => a.toBase58());
+      const mints = (p.pubkeys.holdingMints || []).map((a) => a.toBase58());
       const mintA = cache.getMint(mints[0]);
       const mintB = cache.getMint(mints[1]);
 
       const account0 = cache.getAccount(p.pubkeys.holdingAccounts[0]);
       const account1 = cache.getAccount(p.pubkeys.holdingAccounts[1]);
-      
+
       const accountA =
         account0?.info.mint.toBase58() === mints[0] ? account0 : account1;
       const accountB =
@@ -394,6 +393,16 @@ function createEnrichedPools(
       const quoteReserveUSD = quote * convert(accountB, mintB);
 
       const poolMint = cache.getMint(p.pubkeys.mint);
+      console.log(
+        "baseMid=====",
+        baseMid,
+        "quote=====",
+        quote,
+        "baseReserveUSD=====",
+        baseReserveUSD,
+        "quoteReserveUSD=====",
+        quoteReserveUSD
+      );
       if (poolMint?.supply.eqn(0)) {
         return undefined;
       }
@@ -409,7 +418,7 @@ function createEnrichedPools(
       let volume24h =
         baseMid * (poolData?.get(p.pubkeys.mint.toBase58())?.volume24hA || 0);
       let fees24h = volume24h * (LIQUIDITY_PROVIDER_FEE - SERUM_FEE);
-      let fees = 0;
+      let fees = 1;
       let apy = airdropYield;
       let apy24h = airdropYield;
       if (p.pubkeys.feeAccount) {
@@ -437,7 +446,7 @@ function createEnrichedPools(
             // Aproximation not true for all pools we need to fine a better way
             const daysSinceInception = Math.floor(
               (TODAY.getTime() - INITAL_LIQUIDITY_DATE.getTime()) /
-                (24 * 3600 * 1000)
+              (24 * 3600 * 1000)
             );
             const apy0 =
               parseFloat(
@@ -514,6 +523,7 @@ function calculateAirdropYield(
   let poolWithAirdrop = POOLS_WITH_AIRDROP.find((drop) =>
     drop.pool.equals(p.pubkeys.mint)
   );
+  console.log(poolWithAirdrop);
   if (poolWithAirdrop) {
     airdropYield = poolWithAirdrop.airdrops.reduce((acc, item) => {
       const market = marketByMint.get(item.mint.toBase58())?.marketInfo.address;
@@ -524,7 +534,7 @@ function calculateAirdropYield(
           acc +
           // airdrop yield
           ((item.amount * midPrice) / (baseReserveUSD + quoteReserveUSD)) *
-            (365 / 30);
+          (365 / 30);
       }
 
       return acc;
@@ -548,54 +558,67 @@ const OrderBookParser = (id: PublicKey, acc: AccountInfo<Buffer>) => {
 };
 
 const getMidPrice = (marketAddress?: string, mintAddress?: string) => {
-  const SERUM_TOKEN = TOKEN_MINTS.find(
-    (a) => a.address.toBase58() === mintAddress
-  );
-
-  if (STABLE_COINS.has(SERUM_TOKEN?.name || "")) {
-    return 1.0;
+  // const SERUM_TOKEN = TOKEN_MINTS.find(
+  //   (a) => a.address.toBase58() === mintAddress
+  // );
+  const priceList = {
+    "So11111111111111111111111111111111111111112": 30,
+    "5WyDJwxFmYQX4wiTZGf9bnKxVVkubduVR2zfxo5dhmmf": 1,
+    "8U77rNzyKq57C1hdD9qtn2CjHMntpsV3d2E6bqC3bo16": 1,
+    "AArEHuyejhdC1BMNQN7NFK3A1M8mvCagTfZw12KwkGGi": 1,
+    "4k9s5D7b3LWQ3ByyGiFhRqRi47NjsrjEYrT8XWGyuiDW": 12,
+    "6nUL5U1EAgv8C3BdMrESCyTB3DgL7WVjbdUuD22BjqmA": 2000,
+    "BTfGdC4Pj1htw5yDQH929a9ZdSkBTSjvDrVegdDTp388": 30,
+    "6uRJmzcMWxTYd6g8KZNzh5uKHTj1VmUxpikwo1n1a45t": 10,
   }
+    // @ts-ignore
+  return priceList[mintAddress] || priceList[marketAddress] || 0;
+  // if (STABLE_COINS.has(SERUM_TOKEN?.name || "")) {
+  //   return 1.0;
+  // }
 
-  if (!marketAddress) {
-    return 0.0;
-  }
+  // if (!marketAddress) {
+  //   return 0.0;
+  // }
 
-  const marketInfo = cache.get(marketAddress);
-  if (!marketInfo) {
-    return 0.0;
-  }
+  // const marketInfo = cache.get(marketAddress);
+  // if (!marketInfo) {
+  //   return 0.0;
+  // }
 
-  const decodedMarket = marketInfo.info;
+  // const decodedMarket = marketInfo.info;
 
-  const baseMintDecimals =
-    cache.get(decodedMarket.baseMint)?.info.decimals || 0;
-  const quoteMintDecimals =
-    cache.get(decodedMarket.quoteMint)?.info.decimals || 0;
+  // const baseMintDecimals =
+  //   cache.get(decodedMarket.baseMint)?.info.decimals || 0;
+  // const quoteMintDecimals =
+  //   cache.get(decodedMarket.quoteMint)?.info.decimals || 0;
 
-  const market = new Market(
-    decodedMarket,
-    baseMintDecimals,
-    quoteMintDecimals,
-    undefined,
-    decodedMarket.programId
-  );
+  // const market = new Market(
+  //   decodedMarket,
+  //   baseMintDecimals,
+  //   quoteMintDecimals,
+  //   undefined,
+  //   decodedMarket.programId
+  // );
 
-  const bids = cache.get(decodedMarket.bids)?.info;
-  const asks = cache.get(decodedMarket.asks)?.info;
+  // const bids = cache.get(decodedMarket.bids)?.info;
+  // const asks = cache.get(decodedMarket.asks)?.info;
 
-  if (bids && asks) {
-    const bidsBook = new Orderbook(market, bids.accountFlags, bids.slab);
-    const asksBook = new Orderbook(market, asks.accountFlags, asks.slab);
+  // if (bids && asks) {
+  //   const bidsBook = new Orderbook(market, bids.accountFlags, bids.slab);
 
-    const bestBid = bidsBook.getL2(1);
-    const bestAsk = asksBook.getL2(1);
+  //   const asksBook = new Orderbook(market, asks.accountFlags, asks.slab);
+  //   console.log(bidsBook);
+  //   console.log(asksBook);
+  //   const bestBid = bidsBook.getL2(1);
+  //   const bestAsk = asksBook.getL2(1);
 
-    if (bestBid.length > 0 && bestAsk.length > 0) {
-      return (bestBid[0][0] + bestAsk[0][0]) / 2.0;
-    }
-  }
+  //   if (bestBid.length > 0 && bestAsk.length > 0) {
+  //     return (bestBid[0][0] + bestAsk[0][0]) / 2.0;
+  //   }
+  // }
 
-  return 0;
+  // return 0;
 };
 
 const refreshAccounts = async (connection: Connection, keys: string[]) => {
@@ -605,14 +628,16 @@ const refreshAccounts = async (connection: Connection, keys: string[]) => {
 
   return getMultipleAccounts(connection, keys, "single").then(
     ({ keys, array }) => {
-      return array.map((item, index) => {
-        if (!item) {
-          return undefined;
-        }
+      return array
+        .map((item, index) => {
+          if (!item) {
+            return undefined;
+          }
 
-        const address = keys[index];
-        return cache.add(new PublicKey(address), item);
-      }).filter(a => !!a);
+          const address = keys[index];
+          return cache.add(new PublicKey(address), item);
+        })
+        .filter((a) => !!a);
     }
   );
 };
