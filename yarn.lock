@@ -1274,10 +1274,10 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@hurryfire/spl-token-registry@0.2.2":
-  version "0.2.2"
-  resolved "https://registry.nlark.com/@hurryfire/spl-token-registry/download/@hurryfire/spl-token-registry-0.2.2.tgz#f6dd38bb877a3e48f82d4e5cbb40ed8c2742cd2b"
-  integrity sha1-9t04u4d6Pkj4LU5cu0DtjCdCzSs=
+"@hurryfire/spl-token-registry@0.2.5":
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/@hurryfire/spl-token-registry/-/spl-token-registry-0.2.5.tgz#87880c062440152f63c1a82ac9271e7d40ee8a6d"
+  integrity sha512-mFqsXW62lSDBy3ItZYiBCuLbcM2yRwrl4cjhdQoHRCNMrua/ZT6CPx1hxMmz0j7UalpJrpCmhbbLHhmzv7VDmg==
   dependencies:
     cross-fetch "3.0.6"
 
@@ -4026,11 +4026,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.4, create-hmac@^1.1.7:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-<<<<<<< HEAD
-cross-fetch@3.0.6, cross-fetch@^3.0.6:
-=======
 cross-fetch@3.0.6:
->>>>>>> route-swap
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.0.6.tgz#3a4040bc8941e653e0e9cf17f29ebcd177d3365c"
   integrity sha512-KBPUbqgFjzWlVcURG+Svp9TlhA5uliYtiNx/0r8nv0pdypeQCRJ9IaSIc3q/x3q8t3F75cHuwxVql1HFGHCNJQ==
