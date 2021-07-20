@@ -135,7 +135,7 @@ export const TradeEntry = () => {
             pool: poolB,
           };
           swapList.push(componentsRoutA, componentsRoutB);
-          console.log(swapList,"swapList=========");
+          console.log(swapList, "swapList=========");
           // @ts-ignore
           await swap(connection, wallet, components, slippage, pool, swapList);
           return;
@@ -197,7 +197,7 @@ export const TradeEntry = () => {
     }
     let independent = A.mintAddress;
     const poolOperation = 1; // @ts-ignore
-    const amount: number = val * 1;
+    const amount: number = val;
     // @ts-ignore
     fromInfo.setAmount(amount);
     const result = await calculateDependentAmount(
