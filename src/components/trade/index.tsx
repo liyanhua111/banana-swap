@@ -434,7 +434,7 @@ export const TradeInfo = (props: {
     } else {
       if (!pool && poolA && poolB) {
         setExchangeRate(
-          parseFloat(fromInfo.amount) / parseFloat(toInfo.amount)
+          parseFloat(fromInfo.amount) / parseFloat(B.amount)
         );
         return;
       }
