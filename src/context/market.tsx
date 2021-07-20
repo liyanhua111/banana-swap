@@ -107,7 +107,6 @@ export function MarketProvider({ children = null as any }) {
           acc.set(item.pool_identifier, item);
           return acc;
         }, new Map<string, RecentPoolData>());
-        console.log(map, "map=======");
         setDailyVolume(map);
       } catch {
         // ignore
@@ -393,16 +392,6 @@ function createEnrichedPools(
       const quoteReserveUSD = quote * convert(accountB, mintB);
 
       const poolMint = cache.getMint(p.pubkeys.mint);
-      console.log(
-        "baseMid=====",
-        baseMid,
-        "quote=====",
-        quote,
-        "baseReserveUSD=====",
-        baseReserveUSD,
-        "quoteReserveUSD=====",
-        quoteReserveUSD
-      );
       if (poolMint?.supply.eqn(0)) {
         return undefined;
       }
@@ -523,7 +512,6 @@ function calculateAirdropYield(
   let poolWithAirdrop = POOLS_WITH_AIRDROP.find((drop) =>
     drop.pool.equals(p.pubkeys.mint)
   );
-  console.log(poolWithAirdrop);
   if (poolWithAirdrop) {
     airdropYield = poolWithAirdrop.airdrops.reduce((acc, item) => {
       const market = marketByMint.get(item.mint.toBase58())?.marketInfo.address;

@@ -14,7 +14,7 @@ import {
   SwapOutlined,
   QuestionCircleOutlined,
   SettingOutlined,
-  SwapRightOutlined
+  SwapRightOutlined,
 } from "@ant-design/icons";
 import {
   swap,
@@ -45,12 +45,14 @@ const { Text } = Typography;
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 export const TradeEntry = () => {
-  const { t,i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { wallet, connect, connected } = useWallet();
   const connection = useConnection();
   const [pendingTx, setPendingTx] = useState(false);
   const [toInfo, setToInfo] = useState({});
   const [fromInfo, setFromInfo] = useState({});
+  const [swapListInfoA, setSwapListInfoA] = useState({});
+  const [swapListInfoB, setSwapListInfoB] = useState({});
   const [routeAmount, setRouteAmount] = useState({});
   const {
     A,
@@ -103,12 +105,42 @@ export const TradeEntry = () => {
           },
         ];
         if (!pool) {
+          const componentsRoutA = {
+            components: [
+              {
+                account: A.account,
+                mintAddress: A.mintAddress, // @ts-ignore
+                amount: fromInfo.amount * 1e9,
+              },
+              {
+                mintAddress: routeAddress, // @ts-ignore
+                amount: routeAmount * 1e9,
+              },
+            ],
+            pool: poolA,
+          };
+          const componentsRoutB = {
+            components: [
+              {
+                // @ts-ignore
+                account: routeAccount,
+                mintAddress: routeAddress, // @ts-ignore
+                amount: routeAmount * 1e9,
+              },
+              {
+                mintAddress: B.mintAddress, // @ts-ignore
+                amount: toInfo.amount * 1e9,
+              },
+            ],
+            pool: poolB,
+          };
+          swapList.push(componentsRoutA, componentsRoutB);
+          console.log(swapList,"swapList=========");
           // @ts-ignore
           await swap(connection, wallet, components, slippage, pool, swapList);
           return;
         }
         await swap(connection, wallet, components, slippage, pool);
-
       } catch {
         notify({
           description:
@@ -128,15 +160,15 @@ export const TradeEntry = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-  const getToInfoResult = async () => {
+  const countA = async (val: any) => {
     // @ts-ignore
-    const pool: PoolInfo = poolA;
+    let pool: PoolInfo = poolB;
     if (!pool) {
       return;
     }
-    const independent = A.mintAddress; // @ts-ignore  froma ddress
+    let independent = B.mintAddress;
     const poolOperation = 1; // @ts-ignore
-    const amount: number = A.amount;
+    const amount: number = val * 1;
     const result = await calculateDependentAmount(
       connection,
       independent,
@@ -144,24 +176,39 @@ export const TradeEntry = () => {
       pool,
       poolOperation
     );
-    const componentsRoutA = {
-      components: [
-        {
-          account: A.account,
-          mintAddress: A.mintAddress,
-          amount: A.convertAmount(),
-        },
-        {
-          mintAddress: routeAddress, // @ts-ignore
-          amount: result * 1e9,
-        },
-      ],
+    // @ts-ignore
+    let result1 = await calculateDependentAmount(
+      connection,
+      routeAddress, // @ts-ignore
+      result,
+      poolA,
+      poolOperation
+    );
+    // @ts-ignore
+    fromInfo.setAmount(result1);
+    // @ts-ignore
+    toInfo.setAmount(val);
+  };
+  const getToInfoResult = async (val: any) => {
+    // @ts-ignore
+    let pool: PoolInfo = poolA;
+    if (!pool) {
+      return;
+    }
+    let independent = A.mintAddress;
+    const poolOperation = 1; // @ts-ignore
+    const amount: number = val * 1;
+    // @ts-ignore
+    fromInfo.setAmount(amount);
+    const result = await calculateDependentAmount(
+      connection,
+      independent,
+      amount,
       pool,
-    };
+      poolOperation
+    );
     // @ts-ignore
     setRouteAmount(result); // @ts-ignore
-    console.log(result * 1e9, "routefee--effect");
-    swapList.push(componentsRoutA);
     let result1;
     if (poolB) {
       result1 = await calculateDependentAmount(
@@ -170,29 +217,12 @@ export const TradeEntry = () => {
         result,
         poolB,
         poolOperation
-      ); // @ts-ignore
+      );
+      // @ts-ignore
       toInfo.setAmount(result1);
     }
-    const componentsRoutB = {
-      components: [
-        {
-          account: routeAccount,
-          mintAddress: routeAddress, // @ts-ignore
-          amount: result * 1e9,
-        },
-        {
-          mintAddress: B.mintAddress, // @ts-ignore
-          amount: result1 * 1e9,
-        },
-      ],
-      pool: poolB,
-    };
-    swapList.push(componentsRoutB);
   };
   useEffect(() => {
-    if (!pool) {
-      getToInfoResult();
-    }
     // @ts-ignore
     setFromInfo(A);
     // @ts-ignore
@@ -235,8 +265,13 @@ export const TradeEntry = () => {
             if (fromInfo.amount !== val) {
               // @ts-ignore
               setLastTypedAccount(fromInfo.mintAddress);
-            } // @ts-ignore
-            fromInfo.setAmount(val);
+            }
+            if (pool) {
+              // @ts-ignore
+              fromInfo.setAmount(val);
+            } else {
+              getToInfoResult(val);
+            }
           }} // @ts-ignore
           amount={fromInfo.amount} // @ts-ignore
           mint={fromInfo.mintAddress}
@@ -249,22 +284,19 @@ export const TradeEntry = () => {
           ⇅
         </Button>
         <CurrencyInput
-          title={`To (${t('Estimate')})`}
+          title={`To (${t("Estimate")})`}
           onInputChange={(val: any) => {
             setPoolOperation(PoolOperation.SwapGivenProceeds); // @ts-ignore
             if (toInfo.amount !== val) {
               // @ts-ignore
               setLastTypedAccount(toInfo.mintAddress); // @ts-ignore
-            } // @ts-ignore
-            toInfo.setAmount(val);
-            // if (!pool && poolA && poolB) {
-            //   // @ts-ignore
-            //   const per = toInfo.amount / fromInfo.amount;
-            //   // @ts-ignore
-            //   console.log(toInfo.amount, per, "----per");
-            //   // @ts-ignore
-            //   fromInfo.setAmount(val * per);
-            // }
+            }
+            if (pool) {
+              // @ts-ignore
+              toInfo.setAmount(val);
+            } else {
+              countA(val);
+            }
           }} // @ts-ignore
           amount={toInfo.amount} // @ts-ignore
           mint={toInfo.mintAddress} // @ts-ignore
@@ -282,7 +314,7 @@ export const TradeEntry = () => {
         style={{ width: "100%" }}
         disabled={
           connected &&
-          ( pendingTx ||
+          (pendingTx ||
             !A.account ||
             !B.mintAddress ||
             A.account === B.account ||
@@ -292,7 +324,6 @@ export const TradeEntry = () => {
             (!pool && !poolB))
         }
       >
-        {console.log(pool, poolA, poolB, "-========")}
         {generateActionLabel(
           i18n.language,
           !pool
@@ -302,8 +333,8 @@ export const TradeEntry = () => {
                   getTokenName(tokenMap, A.mintAddress),
                   getTokenName(tokenMap, B.mintAddress)
                 )
-              : SWAP_LABEL(i18n.language,)
-            : SWAP_LABEL(i18n.language,),
+              : SWAP_LABEL(i18n.language)
+            : SWAP_LABEL(i18n.language),
           connected,
           tokenMap,
           A,
@@ -383,7 +414,6 @@ export const TradeInfo = (props: {
       setRouteFee(parseFloat(routeFee));
       const priceImpactA = countPriceImpact(enrichedRouteA);
       const priceImpactB = countPriceImpact(enrichedRouteB);
-      console.log(priceImpactA, priceImpactB);
       setPriceImpact((priceImpactA + priceImpactB) / 2 / 1e5);
     } else {
       const priceImpact = countPriceImpact(enriched);
@@ -439,7 +469,7 @@ export const TradeInfo = (props: {
             icon={<SwapOutlined />}
             onClick={handleSwapPriceInfo}
           >
-            {isNaN(exchangeRate)?" ":exchangeRate.toFixed(6)}&nbsp;
+            {isNaN(exchangeRate) ? " " : exchangeRate.toFixed(6)}&nbsp;
             {priceAccount === B.mintAddress ? B.name : A.name} per&nbsp;
             {priceAccount === B.mintAddress ? A.name : B.name}&nbsp;
           </Button>
@@ -450,7 +480,11 @@ export const TradeInfo = (props: {
           <Text className="pool-card-cell">{t("Route")}</Text>
           <div className="pool-card-cell " title={exchangeRate.toString()}>
             <div>
-            {A.name}<SwapRightOutlined />SOL<SwapRightOutlined />{B.name}
+              {A.name}
+              <SwapRightOutlined />
+              SOL
+              <SwapRightOutlined />
+              {B.name}
             </div>
           </div>
         </div>
@@ -482,7 +516,9 @@ export const TradeInfo = (props: {
           title={priceImpact.toString()}
           style={{ color: colorWarning(priceImpact) }}
         >
-          {priceImpact < 0.01 ? "< 0.01%" : (isNaN(priceImpact)?' ':(priceImpact.toFixed(3))) + "%"}
+          {priceImpact < 0.01
+            ? "< 0.01%"
+            : (isNaN(priceImpact) ? " " : priceImpact.toFixed(3)) + "%"}
         </div>
       </div>
       <div className="pool-card-row">
@@ -500,7 +536,7 @@ export const TradeInfo = (props: {
           </Popover>
         </Text>
         <div className="pool-card-cell " title={lpFee.toString()}>
-          {isNaN(lpFee)?" ":lpFee} {A.name}
+          {isNaN(lpFee) ? " " : lpFee} {A.name}
           {!pool && poolA && poolB && routeFee ? "+" + routeFee + "SOL" : ""}
         </div>
       </div>
