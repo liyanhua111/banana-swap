@@ -17,6 +17,7 @@ i18n.use(LanguageDetector)
       translation: zhCnTrans,
     },
   },
+  lng : localStorage.getItem("i18nextLng")||'en',
   fallbackLng: "en",
   debug: false,
   interpolation: {
