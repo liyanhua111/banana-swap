@@ -104,13 +104,15 @@ export const TradeEntry = () => {
             amount: B.convertAmount(),
           },
         ];
+
         if (!pool) {
+          console.log(fromInfo);
           const componentsRoutA = {
             components: [
               {
                 account: A.account,
                 mintAddress: A.mintAddress, // @ts-ignore
-                amount: fromInfo.amount * 1e9,
+                amount: fromInfo.amount * `1e${fromInfo.mint.decimals}`,
               },
               {
                 mintAddress: routeAddress, // @ts-ignore
@@ -129,7 +131,7 @@ export const TradeEntry = () => {
               },
               {
                 mintAddress: B.mintAddress, // @ts-ignore
-                amount: toInfo.amount * 1e9,
+                amount: toInfo.amount * `1e${toInfo.mint.decimals}`,
               },
             ],
             pool: poolB,
@@ -433,9 +435,7 @@ export const TradeInfo = (props: {
       setExchangeRate(parseFloat(B.amount) / parseFloat(A.amount));
     } else {
       if (!pool && poolA && poolB) {
-        setExchangeRate(
-          parseFloat(fromInfo.amount) / parseFloat(B.amount)
-        );
+        setExchangeRate(parseFloat(fromInfo.amount) / parseFloat(B.amount));
         return;
       }
       setExchangeRate(parseFloat(A.amount) / parseFloat(B.amount));
