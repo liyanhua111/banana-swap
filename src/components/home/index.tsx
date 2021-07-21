@@ -8,15 +8,33 @@ import './home.less'
 export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
   const history = useHistory();
   const { t, i18n } = useTranslation();
-  const [activeIndex,changeActiveIndex]=useState(1)
+  const [activeIndex, changeActiveIndex] = useState(1)
+  const [page, setPage] = useState(2)
+  const pageTotal = 8
   const changeActive = () => {
     changeActiveIndex(activeIndex===1?2:1)
   }
+  const Submit = () => {
+    if (page >= pageTotal) {
+      setPage(1)
+    } else {
+      setPage(page + 1)
+    }
+    var homePage = document.querySelector('#homePage')
+    var PageId = document.querySelector('#page' + page)
+    // @ts-ignore
+    homePage.scrollTo({
+       // @ts-ignore
+      'top': PageId.offsetTop,
+      'behavior': 'smooth'
+    })
+  }
   const HomePage = (
-    <div className={`homePage ${i18n.language=='en'?'homePageEn':''}`}>
+    <div id="homePage" className={`homePage ${i18n.language == 'en' ? 'homePageEn' : ''}`}>
+      <div className="arrowBtn" onClick={Submit}>«</div>
       <div className="homeContent">
         <div className="maxWidth">
-          <div className="homeHeader">
+          <div className="homeHeader" id="page1">
             <img src={require('../../assets/img/logo.png')} alt="" className="homeLogo" />
             <p className="lang" onClick={()=>i18n.changeLanguage(i18n.language=='en'?'zh':'en')}>
               <img src={require('../../assets/img/nav/lang.png')} alt="" />
@@ -34,7 +52,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
             </div>
             <img src={require('../../assets/img/homeSubBg1.png')} alt=""/>
           </div>
-          <div className="section1">
+          <div className="section1" id="page2">
             <div className="font1">{t("homeTitle1")}<span className="subfont">IN SOLANA</span></div>
             <div className="cardBox">
               <div className="cardItem">
@@ -54,7 +72,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               </div>
             </div>
           </div>
-          <div className="section2">
+          <div className="section2" id="page3">
             <div className="barBox">
               {t("homeTitle2")}
               <div className="addImg">
@@ -88,7 +106,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               </div>
             </div>
           </div>
-          <div className="section3">
+          <div className="section3" id="page4">
             <div className="contentBox">
               <img src={require('../../assets/img/homeImg4.png')} alt="" className="tabImg" />
               <div className="content">
@@ -98,7 +116,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               </div>
             </div>
           </div>
-          <div className="section4">
+          <div className="section4" id="page5">
             <div>
               <p className="title">{t("homeTitle5")}</p>
               <div className="equity">
@@ -159,7 +177,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               </div>
             </div>
           </div>
-          <div className="section5">
+          <div className="section5" id="page6">
             <div>
               <div className="title">BANANA MAN</div>
               <div className="teamBox">
@@ -214,7 +232,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               </div>
             </div>
           </div>
-          <div className="section6">
+          <div className="section6" id="page7">
             <p className="hen"></p>
             <p className="font1">{t("homeTitle6")}</p>
             <div className="headerBox">
@@ -260,7 +278,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               </ul>
             </div>
           </div>
-          <div className="section7">
+          <div className="section7" id="page8">
             <p className="line"></p>
             <div className="contactBox">
               <p className="title">CONTACT US</p>
