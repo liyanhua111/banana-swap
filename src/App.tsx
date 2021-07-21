@@ -8,10 +8,10 @@ function App() {
   return (
     <div className="App">
       <Switch>
-        <Route path="/home" component={Home} />
+        <Route exact path="/" component={Home} />
         <Route path="/swap" component={Main} />
-        <Route path="/ComingSoon" component={ComingSoon} />
-        <Redirect to="/ComingSoon"/>
+        {/* <Route path="/ComingSoon" component={ComingSoon} /> */}
+        <Redirect to="/"/>
       </Switch>
     </div>
   );
