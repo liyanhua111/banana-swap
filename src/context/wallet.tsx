@@ -48,12 +48,12 @@ export const WALLET_PROVIDERS = [
     icon: require("../assets/img/wallet/MathWallet.png"),
     adapter: MathWalletAdapter,
   },
-  // {
-  //   name: "Phantom",
-  //   url: "https://www.phantom.app",
-  //   icon: require("../assets/img/wallet/Phantom.png"),
-  //   adapter: PhantomWalletAdapter,
-  // },
+  {
+    name: "Phantom",
+    url: "https://www.phantom.app",
+    icon: require("../assets/img/wallet/Phantom.png"),
+    adapter: PhantomWalletAdapter,
+  },
 ];
 
 const WalletContext = React.createContext<any>(null);
@@ -130,6 +130,7 @@ export function WalletProvider({ children = null as any }) {
   }, [wallet]);
 
   useEffect(() => {
+    console.log('11111111111111111111111111111111111')
     if (wallet && autoConnect) {
       wallet.connect();
       setAutoConnect(false);
