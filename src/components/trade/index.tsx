@@ -54,12 +54,8 @@ export const TradeEntry = () => {
   const [swapListInfoA, setSwapListInfoA] = useState({});
   const [swapListInfoB, setSwapListInfoB] = useState({});
   const [routeAmount, setRouteAmount] = useState({});
-  const {
-    A,
-    B,
-    setLastTypedAccount,
-    setPoolOperation,
-  } = useCurrencyPairState();
+  const { A, B, setLastTypedAccount, setPoolOperation } =
+    useCurrencyPairState();
 
   const pool = usePoolForBasket([A?.mintAddress, B?.mintAddress]);
   const routeAddress = "So11111111111111111111111111111111111111112";
@@ -162,10 +158,12 @@ export const TradeEntry = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-  const countA = async (val: any) => {
+  const setFromInfoResult = async (val: any) => {
     // @ts-ignore
     let pool: PoolInfo = poolB;
     if (!pool) {
+      // @ts-ignore
+      toInfo.setAmount(val);
       return;
     }
     let independent = B.mintAddress;
@@ -188,13 +186,13 @@ export const TradeEntry = () => {
     );
     // @ts-ignore
     fromInfo.setAmount(result1);
-    // @ts-ignore
-    toInfo.setAmount(val);
   };
-  const getToInfoResult = async (val: any) => {
+  const setToInfoResult = async (val: any) => {
     // @ts-ignore
     let pool: PoolInfo = poolA;
     if (!pool) {
+      // @ts-ignore
+      fromInfo.setAmount(val);
       return;
     }
     let independent = A.mintAddress;
@@ -272,7 +270,7 @@ export const TradeEntry = () => {
               // @ts-ignore
               fromInfo.setAmount(val);
             } else {
-              getToInfoResult(val);
+              setToInfoResult(val);
             }
           }} // @ts-ignore
           amount={fromInfo.amount} // @ts-ignore
@@ -297,7 +295,7 @@ export const TradeEntry = () => {
               // @ts-ignore
               toInfo.setAmount(val);
             } else {
-              countA(val);
+              setFromInfoResult(val);
             }
           }} // @ts-ignore
           amount={toInfo.amount} // @ts-ignore
