@@ -130,7 +130,6 @@ export function WalletProvider({ children = null as any }) {
   }, [wallet]);
 
   useEffect(() => {
-    console.log('11111111111111111111111111111111111')
     if (wallet && autoConnect) {
       wallet.connect();
       setAutoConnect(false);

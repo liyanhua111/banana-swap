@@ -247,10 +247,6 @@ export const removeExactOneLiquidity = async (
   );
 
   const isLatestSwap = isLatest(pool.raw.account);
-  console.log(
-    account.info.amount.toNumber(),
-    "account.info.amount.toNumber()======="
-  );
   const transferAuthority = approveAmount(
     instructions,
     cleanupInstructions,
@@ -322,7 +318,6 @@ const swapInfo = async (
   const minAmountOut = components[1].amount * (1 - SLIPPAGE);
   // const amountIn = 1000000000; // these two should include slippage
   // const minAmountOut = 0;
-  console.log(amountIn, minAmountOut, "amountIn=========minAmountOut");
   const holdingA = // @ts-ignore
     pool.pubkeys.holdingMints[0]?.toBase58() === // @ts-ignore
     components[0].account.info.mint.toBase58() // @ts-ignore
@@ -381,7 +376,6 @@ const swapInfo = async (
     amountIn,
     isLatestSwap ? undefined : authority
   );
-  console.log(amountIn, "approveAmount-----", accountRentExempt, "=====111");
   if (isLatestSwap) {
     signers.push(transferAuthority);
   }
@@ -1120,11 +1114,6 @@ function estimateProceedsFromInput(
   proceedsQuantityInPool: number,
   inputAmount: number
 ): number {
-  // console.log('===================================================================')
-  // console.log(`(proceedsQuantityInPool * 997 * inputAmount) / (inputQuantityInPool * 1000 + inputAmount * 997)`)
-  // console.log(`(${proceedsQuantityInPool} * 997 * ${inputAmount}) / (${inputQuantityInPool} * 1000 + ${inputAmount} * 997)= `, (proceedsQuantityInPool * 997 * inputAmount) / (inputQuantityInPool * 1000 + inputAmount * 997))
-  // console.log('===================================================================')
-
   return (
     (proceedsQuantityInPool * 997 * inputAmount) /
     (inputQuantityInPool * 1000 + inputAmount * 997)
@@ -1139,11 +1128,6 @@ function estimateInputFromProceeds(
   // if (proceedsAmount >= proceedsQuantityInPool) {
   //   return "Not possible";
   // }
-  // console.log('===================================================================')
-
-  // console.log(`(inputQuantityInPool * proceedsAmount) / (proceedsQuantityInPool - proceedsAmount)`)
-  // console.log(`(${inputQuantityInPool} * ${proceedsAmount}) / (${proceedsQuantityInPool} - ${proceedsAmount})= `, (inputQuantityInPool * proceedsAmount) / (proceedsQuantityInPool - proceedsAmount))
-  // console.log('===================================================================')
   // return (
   //   (inputQuantityInPool * 997 * proceedsAmount) /
   //   (proceedsQuantityInPool * 1000 - proceedsAmount * 997)
@@ -1238,7 +1222,6 @@ export async function calculateDependentAmount(
           indBasketQuantity,
           indAdjustedAmount
         );
-        // console.log(depAdjustedAmount, 'SwapGivenProceeds1')
         break;
       case PoolOperation.SwapGivenInput:
         depAdjustedAmount = estimateProceedsFromInput(
@@ -1246,7 +1229,6 @@ export async function calculateDependentAmount(
           depBasketQuantity,
           indAdjustedAmount
         );
-        // console.log(depAdjustedAmount, 'SwapGivenInput2')
         break;
     }
   }

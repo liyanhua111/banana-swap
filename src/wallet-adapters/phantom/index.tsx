@@ -50,7 +50,6 @@ export class PhantomWalletAdapter
   }
 
   get publicKey() {
-    console.log('5555555555555555555555555555555555')
     return this._provider?.publicKey || DEFAULT_PUBLIC_KEY;
   }
 
