@@ -96,6 +96,7 @@ export class PhantomWalletAdapter
       this._provider.disconnect();
       this._provider = undefined;
       this.emit("disconnect");
+      window.location.reload();
     }
   }
 }
