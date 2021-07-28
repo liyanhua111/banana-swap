@@ -108,7 +108,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
           </div>
           <div className="section3" id="page4">
             <div className="contentBox">
-              <img src={require('../../assets/img/homeImg4.png')} alt="" className="tabImg" />
+              <img src={i18n.language == 'en'?require('../../assets/img/homeImg5.png'):require('../../assets/img/homeImg4.png')} alt="" className="tabImg" />
               <div className="content">
                 <p className="font1 title">BANA CLUB</p>
                 <p className="font2">{t("homeInfor41")}</p>
