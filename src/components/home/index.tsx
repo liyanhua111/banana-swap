@@ -192,6 +192,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                 <a href="https://twitter.com/0xSakuya" target="_blank" >
                   <div className="teamItem">
                     <div>
+                      
                       <img src={require('../../assets/img/team2.png')} alt="" />
                       <p className="teamName">0xsakuya</p>
                     </div>
