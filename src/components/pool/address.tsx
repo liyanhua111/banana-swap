@@ -14,8 +14,8 @@ const Address = (props: {
 }) => {
   return (
     <Row style={{ width: "100%", ...props.style }}>
-      {props.label && <Col span={4}>{props.label}:</Col>}
-      <Col span={17}>
+      {props.label && <Col span={8}>{props.label}:</Col>}
+      <Col span={13}>
         <ExplorerLink address={props.address} code={true} type="address" />
       </Col>
       <Col span={3} style={{ display: "flex" }}>
