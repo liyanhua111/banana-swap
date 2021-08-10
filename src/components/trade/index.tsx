@@ -255,7 +255,7 @@ export const TradeEntry = () => {
               alt=""
             />
             {/* <img src={require('../../assets/img/icon2.png')} alt="" /> */}
-            <AdressesPopover pool={pool} />
+            <AdressesPopover pool={pool} poolA={poolA} poolB={poolB} />
           </div>
         </div>
         <CurrencyInput
@@ -329,10 +329,10 @@ export const TradeEntry = () => {
           !pool
             ? !poolA || !poolB
               ? POOL_NOT_AVAILABLE(
-                  i18n.language,
-                  getTokenName(tokenMap, A.mintAddress),
-                  getTokenName(tokenMap, B.mintAddress)
-                )
+                i18n.language,
+                getTokenName(tokenMap, A.mintAddress),
+                getTokenName(tokenMap, B.mintAddress)
+              )
               : SWAP_LABEL(i18n.language)
             : SWAP_LABEL(i18n.language),
           connected,

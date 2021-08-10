@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Col, Popover, Row } from "antd";
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from "react-i18next";
 import { PoolInfo } from "../../models";
 import { CopyOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import { ExplorerLink } from "./../explorerLink";
@@ -39,6 +39,16 @@ export const PoolAddress = (props: {
 }) => {
   const { pool } = props;
   const label = props.label || "Address";
+  const { tokenMap } = useConnectionConfig();
+  const mint1 = pool?.pubkeys.holdingMints[0];
+  const mint2 = pool?.pubkeys.holdingMints[1];
+  let aName, bName;
+  if (mint1) {
+    aName = getTokenName(tokenMap, mint1.toBase58());
+  }
+  if (mint2) {
+    bName = getTokenName(tokenMap, mint2.toBase58());
+  }
 
   if (!pool?.pubkeys.account) {
     return null;
@@ -48,7 +58,7 @@ export const PoolAddress = (props: {
     <Address
       address={pool.pubkeys.account.toBase58()}
       style={props.style}
-      label={label}
+      label={"Pool-" + aName + "-" + bName+" "}
     />
   );
 };
@@ -96,14 +106,17 @@ export const AccountsAddress = (props: {
   );
 };
 
-export const AdressesPopover = (props: { pool?: PoolInfo }) => {
+export const AdressesPopover = (props: {
+  pool?: PoolInfo;
+  poolA?: PoolInfo;
+  poolB?: PoolInfo;
+}) => {
   const { t } = useTranslation();
-  const { pool } = props;
+  const { pool, poolA, poolB } = props;
 
-  if (!pool) {
+  if (!pool && !poolA && !poolB) {
     return null;
   }
-
   return (
     <Popover
       placement="topRight"
@@ -111,13 +124,21 @@ export const AdressesPopover = (props: { pool?: PoolInfo }) => {
       trigger="hover"
       content={
         <>
-          <PoolAddress pool={pool} showLabel={true} label={"Pool"} />
+          {poolA && (
+            <PoolAddress pool={poolA} showLabel={true} label={"Pool"} />
+          )}
+          {poolB && (
+            <PoolAddress pool={poolB} showLabel={true} label={"Pool"} />
+          )}
+          {pool && !poolA && !poolB && (
+            <PoolAddress pool={pool} showLabel={true} label={"Pool"} />
+          )}
           <AccountsAddress pool={pool} />
         </>
       }
     >
       <Button
-        style={{color:'#FFC000',marginTop:"3px"}}
+        style={{ color: "#FFC000", marginTop: "3px" }}
         shape="circle"
         size="large"
         type="text"
