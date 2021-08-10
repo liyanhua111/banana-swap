@@ -24,11 +24,23 @@ export const Settings = () => {
           value={endpoint}
           style={{ marginRight: 8 }}
         >
-          {ENDPOINTS.map(({ name, endpoint }) => (
-            <Select.Option value={endpoint} key={endpoint}>
-              {name}
-            </Select.Option>
-          ))}
+          {ENDPOINTS.map(({ name, endpoint }) => {
+            if (document.domain.includes('banana')) {
+              if (name != 'localnet') {
+                return (
+                  <Select.Option value={endpoint} key={endpoint}>
+                    {name}
+                  </Select.Option>
+                )
+              }
+            } else {
+              return (
+                <Select.Option value={endpoint} key={endpoint}>
+                  {name}
+                </Select.Option>
+              )
+            }
+          })}
         </Select>
       </div>
     </>
