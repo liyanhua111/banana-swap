@@ -14,11 +14,11 @@ const Address = (props: {
 }) => {
   return (
     <Row style={{ width: "100%", ...props.style }}>
-      {props.label && <Col span={8}>{props.label}:</Col>}
-      <Col span={13}>
+      {props.label && <Col span={6}>{props.label}:</Col>}
+      <Col span={16}>
         <ExplorerLink address={props.address} code={true} type="address" />
       </Col>
-      <Col span={3} style={{ display: "flex" }}>
+      <Col span={2} style={{ display: "flex" }}>
         <Button
           shape="round"
           icon={<CopyOutlined />}
@@ -58,32 +58,44 @@ export const PoolAddress = (props: {
     <Address
       address={pool.pubkeys.account.toBase58()}
       style={props.style}
-      label={"Pool-" + aName + "-" + bName+" "}
+      label={aName + "-" + bName}
     />
   );
 };
 
 export const AccountsAddress = (props: {
   pool?: PoolInfo;
+  poolA?: PoolInfo;
+  poolB?: PoolInfo;
   style?: React.CSSProperties;
 }) => {
   const { tokenMap } = useConnectionConfig();
-  const { pool } = props;
+  const { pool, poolA, poolB } = props;
 
-  if (!pool) {
+  if (!pool && !poolA && !poolB) {
     return null;
   }
 
-  const account1 = pool?.pubkeys.holdingAccounts[0];
-  const account2 = pool?.pubkeys.holdingAccounts[1];
-  const mint1 = pool?.pubkeys.holdingMints[0];
-  const mint2 = pool?.pubkeys.holdingMints[1];
+  let account1 = pool?.pubkeys.holdingAccounts[0];
+  let account2 = pool?.pubkeys.holdingAccounts[1];
+  let mint1 = pool?.pubkeys.holdingMints[0];
+  if (poolA) {
+    mint1 = poolA?.pubkeys.holdingMints[1];
+    account1 = poolA?.pubkeys.holdingAccounts[1];
+  }
+  let mint2 = pool?.pubkeys.holdingMints[1];
+  if (poolB) {
+    mint2 = poolB?.pubkeys.holdingMints[1];
+    account2 =poolB?.pubkeys.holdingAccounts[1];
+  }
   let aName, bName;
   if (mint1) {
     aName = getTokenName(tokenMap, mint1.toBase58());
+    console.log(aName,"====")
   }
   if (mint2) {
     bName = getTokenName(tokenMap, mint2.toBase58());
+    console.log(bName,"====")
   }
 
   return (
@@ -133,7 +145,7 @@ export const AdressesPopover = (props: {
           {pool && !poolA && !poolB && (
             <PoolAddress pool={pool} showLabel={true} label={"Pool"} />
           )}
-          <AccountsAddress pool={pool} />
+          <AccountsAddress pool={pool} poolA={poolA} poolB={poolB} />
         </>
       }
     >
