@@ -41,16 +41,16 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               {i18n.language=='en'?'EN':'中文'}
             </p>
           </div>
+          <div className="bananaImg">
+            <img src={require('../../assets/img/home/1.png')} alt=""/>
+          </div>
           <div className="bannerBox">
             <div className="banner">
-              {/* <div className="font1">从这里打开你的<span style={{color:"#222"}}>DeFi</span>乐园</div> */}
               <div className="font1">{t("home1")}</div>
               <div className="font2">AMM<span className="font4"> | </span>IBO<span className="font4"> | </span>Social<span className="font4"> | {t("home2")}</span></div>
               <div className="font3">{t("home3")}</div>
               <div className="handBtn" onClick={() => history.push({ pathname: "/swap/index" })}>LAUNCH APP</div>
-              {/* <div className="handBtn">LAUNCH APP</div> */}
             </div>
-            <img src={require('../../assets/img/homeSubBg1.png')} alt=""/>
           </div>
           <div className="section1" id="page2">
             <div className="font1">{t("homeTitle1")}<span className="subfont">IN SOLANA</span></div>

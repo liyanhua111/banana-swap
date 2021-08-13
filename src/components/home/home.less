@@ -17,9 +17,9 @@
   overflow-x: auto;
   &.homePageEn{
     .banner{
-      width: 12rem !important;
       .font1{
-        font-size: 0.68rem !important;
+        font-size: 1.34rem !important;
+        white-space: pre-wrap;
       }
     }
     .section4{
@@ -70,11 +70,12 @@
   }
   .homeContent{
     position: relative;
+    height: 1420vh;
     min-width: 900px;
     max-width: 2800px;
     margin: 0 auto;
     background: url(../../assets/img/homeBg.jpg) no-repeat center top;
-    background-size: cover;
+    background-size: contain;
     .footBg{
       position: absolute;
       bottom: 0;
@@ -99,14 +100,19 @@
       }
     }
   }
+  .bananaImg{
+    display: flex;
+    justify-content: center;
+    margin-top: 1.65rem;
+    img{
+      width: 6.5rem;
+    }
+  }
   .bannerBox{
     display: flex;
-    align-items: center;
     justify-content: space-between;
     height: 13rem;
     .banner{
-      width: 10rem;
-      text-align: left;
       &>div{
         margin-bottom: 0.25rem;
       }
@@ -640,7 +646,7 @@
   }
 }
 .maxWidth{
-  max-width: 19.6rem;
+  max-width: 17.1rem;
   margin: 0 auto;
 }
 
