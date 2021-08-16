@@ -44,7 +44,12 @@ export const IDO = (props: { left?: JSX.Element; right?: JSX.Element }) => {
       dataIndex: 'address',
     },
   ];
-  const data= [];
+  interface IData {
+    id?: string; 
+    name: string;
+    age: number;
+  }
+  const data: Array<IData>= [];
   const IDOPage = (
     <>
       <AppBar/>
