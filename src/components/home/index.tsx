@@ -53,7 +53,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
             </div>
           </div>
           <div className="section1" id="page2">
-            {/* <img src={require('../../assets/img/home/2.png')} alt="" className="logoImg" /> */}
+            <img src={require('../../assets/img/home/2.png')} alt="" className="logoImg" />
             <div className="font1">{t("homeTitle1")}<span className="subfont">IN SOLANA</span></div>
             <div className="cardBox">
               <div className="cardItem">
@@ -277,7 +277,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                 <li>{t("homeInfor642")}</li>
                 <li>{t("homeInfor643")}</li>
                 <li>{t("homeInfor644")}</li>
-                <li className="teamImg"><img src={require('../../assets/img/team4.png')} alt=""/></li>
+                <li className="teamImg"><img src={require('../../assets/img/team5.png')} alt=""/></li>
               </ul>
               <ul>
                 <li className="headerBox">
@@ -287,7 +287,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                 <li>{t("homeInfor652")}</li>
                 <li>{t("homeInfor653")}</li>
                 <li>{t("homeInfor654")}</li>
-                <li className="teamImg"><img src={require('../../assets/img/team5.png')} alt=""/></li>
+                <li className="teamImg"><img src={require('../../assets/img/team4.png')} alt=""/></li>
               </ul>
             </div>
           </div>
@@ -311,6 +311,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
             </div>
           </div>
         </div>
+        <div className="end"></div>
       </div>
     </div>
   );

@@ -57,7 +57,7 @@
       font();
       window.addEventListener('resize', () => font());
       function font(){
-        var deviceMax = document.documentElement.clientWidth >2400?2400:document.documentElement.clientWidth <900?900: document.documentElement.clientWidth
+        var deviceMax = document.documentElement.clientWidth >2400?2400:document.documentElement.clientWidth <1100?1100: document.documentElement.clientWidth
         document.documentElement.style.fontSize = deviceMax / 24 + 'px'
       }
     </script>
