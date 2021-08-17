@@ -47,38 +47,39 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
           <div className="bannerBox">
             <div className="banner">
               <div className="font1">{t("home1")}</div>
-              <div className="font2">AMM<span className="font4"> | </span>IBO<span className="font4"> | </span>Social<span className="font4"> | {t("home2")}</span></div>
+              <div className="font4">AMM | IBO | Social <span className="font2">{t("home2")}</span></div>
               <div className="font3">{t("home3")}</div>
               <div className="handBtn" onClick={() => history.push({ pathname: "/swap/index" })}>LAUNCH APP</div>
             </div>
           </div>
           <div className="section1" id="page2">
+            <img src={require('../../assets/img/home/2.png')} alt="" className="logoImg" />
             <div className="font1">{t("homeTitle1")}<span className="subfont">IN SOLANA</span></div>
             <div className="cardBox">
               <div className="cardItem">
-                <img src={require('../../assets/img/homeImg1.png')} alt="" className="cardImg" />
+                <img src={require('../../assets/img/home/3.png')} alt="" className="cardImg" />
                 <p className="cardFont1">{t("homesubTitle11")}</p>
                 <p className="cardFont2">{t("homeInfor11")}</p>
               </div>
               <div className="cardItem">
-                <img src={require('../../assets/img/homeImg2.png')} alt="" className="cardImg" />
+                <img src={require('../../assets/img/home/4.png')} alt="" className="cardImg" />
                 <p className="cardFont1">{t("homesubTitle12")}</p>
                 <p className="cardFont2">{t("homeInfor12")}</p>
               </div>
               <div className="cardItem">
-                <img src={require('../../assets/img/homeImg3.png')} alt="" className="cardImg" />
+                <img src={require('../../assets/img/home/5.png')} alt="" className="cardImg" />
                 <p className="cardFont1">{t("homesubTitle13")}</p>
                 <p className="cardFont2">{t("homeInfor13")}</p>
               </div>
             </div>
           </div>
           <div className="section2" id="page3">
-            <div className="barBox">
+            {/* <div className="barBox">
               {t("homeTitle2")}
               <div className="addImg">
                 <img src={require('../../assets/img/homeIcon2.png')} alt="" className="cardImg" />
               </div>
-            </div>
+            </div> */}
             <div className="moduleBox">
               <div className="tabTitle">
                 <p>{t("homeInfor21")}</p>
@@ -108,7 +109,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
           </div>
           <div className="section3" id="page4">
             <div className="contentBox">
-              <img src={i18n.language == 'en'?require('../../assets/img/homeImg5.png'):require('../../assets/img/homeImg4.png')} alt="" className="tabImg" />
+              <img src={i18n.language == 'en'?require('../../assets/img/home/9.png'):require('../../assets/img/home/9.png')} alt="" className="tabImg" />
               <div className="content">
                 <p className="font1 title">BANA CLUB</p>
                 <p className="font2">{t("homeInfor41")}</p>
@@ -179,7 +180,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
           </div>
           <div className="section5" id="page6">
             <div>
-              <div className="title">BANANA MAN</div>
+              <div className="title"><span> BANANA </span>MAN</div>
               <div className="teamBox">
                 <a href="https://twitter.com/0xbana" target="_blank" >
                   <div className="teamItem">
@@ -233,74 +234,84 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
             </div>
           </div>
           <div className="section6" id="page7">
-            <p className="hen"></p>
-            <p className="font1">{t("homeTitle6")}</p>
-            <div className="headerBox">
-              <p>2021 Q2</p>
-              <p className="active">2021 Q3</p>
-              <p>2021 Q4</p>
-              <p>2022 Q1</p>
-              <p>2022 Q2</p>
-            </div>
+            <p className="font1"><img src={require('../../assets/img/home/7.png')} alt=""/> {t("homeTitle6")}</p>
             <div className="contentBox">
               <ul>
+                <li className="headerBox">
+                  <p>2021 Q2</p>
+                </li>
                 <li>{t("homeInfor611")}</li>
                 <li>{t("homeInfor612")}</li>
                 <li>{t("homeInfor613")}</li>
                 <li>{t("homeInfor614")}</li>
                 <li>{t("homeInfor615")}</li>
+                <li className="teamImg"><img src={require('../../assets/img/team1.png')} alt=""/></li>
               </ul>
               <ul>
+                <li className="headerBox active">
+                  <p>2021 Q3</p>
+                </li>
                 <li>{t("homeInfor621")}</li>
                 <li>{t("homeInfor622")}</li>
                 <li>{t("homeInfor623")}</li>
                 <li>{t("homeInfor624")}</li>
                 <li>{t("homeInfor625")}</li>
+                <li className="teamImg"><img src={require('../../assets/img/team2.png')} alt=""/></li>
               </ul>
               <ul>
+                <li className="headerBox">
+                  <p>2021 Q4</p>
+                </li>
                 <li>{t("homeInfor631")}</li>
                 <li>{t("homeInfor632")}</li>
                 <li>{t("homeInfor633")}</li>
                 <li>{t("homeInfor634")}</li>
                 <li>{t("homeInfor635")}</li>
+                <li className="teamImg"><img src={require('../../assets/img/team3.png')} alt=""/></li>
               </ul>
               <ul>
+                <li className="headerBox">
+                  <p>2022 Q1</p>
+                </li>
                 <li>{t("homeInfor641")}</li>
                 <li>{t("homeInfor642")}</li>
                 <li>{t("homeInfor643")}</li>
                 <li>{t("homeInfor644")}</li>
+                <li className="teamImg"><img src={require('../../assets/img/team5.png')} alt=""/></li>
               </ul>
               <ul>
+                <li className="headerBox">
+                  <p>2022 Q2</p>
+                </li>
                 <li>{t("homeInfor651")}</li>
                 <li>{t("homeInfor652")}</li>
                 <li>{t("homeInfor653")}</li>
                 <li>{t("homeInfor654")}</li>
+                <li className="teamImg"><img src={require('../../assets/img/team4.png')} alt=""/></li>
               </ul>
             </div>
           </div>
           <div className="section7" id="page8">
-            <p className="line"></p>
             <div className="contactBox">
               <p className="title">CONTACT US</p>
-              <div className="contact">
-              <a href="https://twitter.com/BananaSwap_net" target="_blank" ><img src={require("../../assets/img/relative/1.png")} alt="" /></a>
-              <a href="https://discord.gg/AWmXjCECgm" target="_blank"><img src={require("../../assets/img/relative/2.png")} alt=""/></a>
-              <a href="https://github.com/bananadefilabs-001" target="_blank"><img src={require("../../assets/img/relative/3.png")} alt="" /></a>
-              <Popover content={"contact@bananaswap.net"} title="邮箱地址">
-                <a><img src={require("../../assets/img/relative/4.png")} alt=""/></a>
-              </Popover>
-              <a href="https://www.facebook.com/BananaSwap" target="_blank"><img src={require("../../assets/img/relative/5.png")} alt=""/></a>
-              <a href="https://t.me/banana_swap" target="_blank"><img src={require("../../assets/img/relative/6.png")} alt=""/></a>
-              <a href="https://bananaswap-net.medium.com/" target="_blank"><img src={require("../../assets/img/relative/7.png")} alt=""/></a>
+              <div className="contactContent">
+                <div className="contact">
+                <a href="https://twitter.com/BananaSwap_net" target="_blank" ><img src={require("../../assets/img/relative/1.png")} alt="" /></a>
+                <a href="https://discord.gg/AWmXjCECgm" target="_blank"><img src={require("../../assets/img/relative/2.png")} alt=""/></a>
+                <a href="https://github.com/bananadefilabs-001" target="_blank"><img src={require("../../assets/img/relative/3.png")} alt="" /></a>
+                <Popover content={"contact@bananaswap.net"} title="邮箱地址">
+                  <a><img src={require("../../assets/img/relative/4.png")} alt=""/></a>
+                </Popover>
+                <a href="https://www.facebook.com/BananaSwap" target="_blank"><img src={require("../../assets/img/relative/5.png")} alt=""/></a>
+                <a href="https://t.me/banana_swap" target="_blank"><img src={require("../../assets/img/relative/6.png")} alt=""/></a>
+                <a href="https://bananaswap-net.medium.com/" target="_blank"><img src={require("../../assets/img/relative/7.png")} alt=""/></a>
+                </div>
+                <img src={require('../../assets/img/home/13.png')} alt=""/>
               </div>
-            </div>
-            <div className="logoBox">
-              <img src={require('../../assets/img/logo.png')} alt="" />
-              {/* <p>EMAIL：CONTACT@BANANASWAP.NET</p> */}
             </div>
           </div>
         </div>
-        <img src={require('../../assets/img/homeSubBg2.png')} alt="" className="footBg"/>
+        <div className="end"></div>
       </div>
     </div>
   );

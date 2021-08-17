@@ -10,6 +10,7 @@ import { MarketProvider } from "./context/market";
 import { PoolOverview } from "./components/pool/view";
 import { ExchangeView } from "./components/exchange";
 import { IndexPage } from "./components/index";
+import { IDO } from "./components/IDO/IDO";
 
 export function Routes() {
   return (
@@ -24,6 +25,7 @@ export function Routes() {
                   <Route exact path="/swap/" component={ExchangeView} />
                   <Route exact path="/swap/add" component={ExchangeView} />
                   <Route exact path="/swap/info" component={() => <ChartsView />} />
+                  <Route exact path="/swap/IDO" component={() => <IDO />} />
                   <Route
                     exact
                     path="/swap/pool"

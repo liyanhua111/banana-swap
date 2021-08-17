@@ -17,8 +17,9 @@ export const Settings = () => {
           <Slippage />
         </div>
       </div>
-      <div style={{ display: "grid" }}>
-       {t("Network")}
+
+      {!document.domain.includes('.net')?<div style={{ display: "grid" }}>
+        {t("Network")}
         <Select
           onSelect={setEndpoint}
           value={endpoint}
@@ -42,7 +43,7 @@ export const Settings = () => {
             }
           })}
         </Select>
-      </div>
+      </div>:''}
     </>
   );
 };
