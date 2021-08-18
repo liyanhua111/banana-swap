@@ -1,6 +1,7 @@
 import { HashRouter, Route, Redirect } from "react-router-dom";
 import React from "react";
 import { ChartsView } from "./components/charts";
+import { InfoView } from "./components/Info";
 
 import { WalletProvider } from "./context/wallet";
 import { ConnectionProvider } from "./utils/connection";
@@ -24,7 +25,8 @@ export function Routes() {
                   <Route exact path="/swap/index" component={IndexPage} />
                   <Route exact path="/swap/" component={ExchangeView} />
                   <Route exact path="/swap/add" component={ExchangeView} />
-                  <Route exact path="/swap/info" component={() => <ChartsView />} />
+                  {/* <Route exact path="/swap/info" component={() => <ChartsView />} /> */}
+                  <Route exact path="/swap/Info" component={() => <InfoView />} />
                   <Route exact path="/swap/IDO" component={() => <IDO />} />
                   <Route
                     exact

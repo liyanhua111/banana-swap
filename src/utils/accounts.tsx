@@ -432,7 +432,7 @@ export function AccountsProvider({ children = null as any }) {
             try {
               cache.addMint(new PublicKey(key), response.array[index]);
             } catch {
-              debugger;
+              // debugger;
             }
           }
         });

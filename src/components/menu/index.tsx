@@ -87,8 +87,14 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                   IDO
             </Link>
           </Menu.Item>
-          <Menu.Item key="/swap/developing6" icon={<img src={require('../../assets/img/nav/nav8.png')} className="navIcon" />}>
-            <span>{t('Info')}</span>
+          <Menu.Item key="/swap/Info" icon={<img src={require('../../assets/img/nav/nav8.png')} className="navIcon" />}>
+            <Link
+                  to={{
+                    pathname: "/swap/Info",
+                  }}
+            >
+                  {t('Info')}
+            </Link>
           </Menu.Item>
         </Menu>
         <div className="bottomBox">
