@@ -79,6 +79,7 @@ export const PoolsView = React.memo(() => {
             <div style={{ display: "flex", alignItems: "center" }}>
               <PoolIcon mintA={record.mints[0]} mintB={record.mints[1]} />
               <a href={record.link} target="_blank" rel="noopener noreferrer" className="font1">{text}</a>
+              <span className="font4">0.03%</span>
             </div>
           ),
         };
@@ -112,30 +113,13 @@ export const PoolsView = React.memo(() => {
             style: { textAlign: "right" },
           },
           children:(
-            <FlashText text={text} val={record.liquidity} />
-          ),
-        };
-      },
-      // sorter: (a: any, b: any) => a.supply - b.supply,
-    },
-    {
-      title: "Volume24H",
-      dataIndex: "volume",
-      key: "volume",
-      align: 'right' as 'right',
-      render(text: string, record: any) {
-        return {
-          props: {
-            style: { textAlign: "right" },
-          },
-          children: (
             <div>
               <div>{formatUSD.format(record.volume24h)}</div>
             </div>
           ),
         };
       },
-      // sorter: (a: any, b: any) => a.volume24h - b.volume24h,
+      // sorter: (a: any, b: any) => a.supply - b.supply,
     },
     {
       title: "Volume7D",
@@ -172,7 +156,7 @@ export const PoolsView = React.memo(() => {
                 (row) => true
               )}
               columns={columns}
-              pagination={{ pageSize: 4,position:['bottomCenter'] }}
+              pagination={{ pageSize: 4,position:['bottomCenter'],showLessItems:true }}
           />
         </div>
       </div>

@@ -175,7 +175,7 @@ export const TokensView = React.memo(() => {
                 (row) => true
               )}
               columns={columns}
-              pagination={{ pageSize: 4,position:['bottomCenter'] }}
+              pagination={{ pageSize: 4,position:['bottomCenter'],showLessItems:true }}
           />
         </div>
       </div>
