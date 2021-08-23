@@ -67,16 +67,40 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               </Menu.Item>
           </SubMenu>
           <Menu.Item key="/swap/developing1" icon={<img src={require('../../assets/img/nav/nav2.png')} className="navIcon" />}>
-            <span>Trading</span>
+            <Link
+              to={{
+                pathname: "/swap/Trading",
+              }}
+            >
+              Trading
+            </Link>
           </Menu.Item>
           <Menu.Item key="/swap/developing2" icon={<img src={require('../../assets/img/nav/nav4.png')} className="navIcon" />}>
-              <span>{t("farm")}</span>
+            <Link
+              to={{
+                pathname: "/swap/farm",
+              }}
+            >
+              {t("farm")}
+            </Link>
           </Menu.Item>
           <Menu.Item key="/swap/developing3" icon={<img src={require('../../assets/img/nav/nav5.png')} className="navIcon" />}>
-              <span>{t("pool")}</span>
+            <Link
+              to={{
+                pathname: "/swap/pool",
+              }}
+            >
+              {t("pool")}
+            </Link>
           </Menu.Item>
           <Menu.Item key="/swap/developing4" icon={<img src={require('../../assets/img/nav/nav6.png')} className="navIcon" />}>
-              <span>Jungles</span>
+            <Link
+              to={{
+                pathname: "/swap/Jungles",
+              }}
+            >
+              Jungles
+            </Link>
           </Menu.Item>
           <Menu.Item key="/swap/IDO" icon={<img src={require('../../assets/img/nav/nav7.png')} className="navIcon" />}>
             <Link
@@ -87,7 +111,7 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                   IDO
             </Link>
           </Menu.Item>
-          <Menu.Item key="/swap/Info" icon={<img src={require('../../assets/img/nav/nav8.png')} className="navIcon" />}>
+          <Menu.Item key="/swap/developing6" icon={<img src={require('../../assets/img/nav/nav8.png')} className="navIcon" />}>
             <Link
                   to={{
                     pathname: "/swap/Info",

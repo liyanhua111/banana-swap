@@ -61,19 +61,19 @@ export const IndexPage = (props: { left?: JSX.Element; right?: JSX.Element }) =>
       />
       <div className="indexPageBox">
         <div className="indexTitle">
-          <img src={require('../../assets/img/bananaTxt.png')} className="img1" alt="" />
+          <img src={require('../../assets/img/home/2.png')} className="img1" alt="" /><br/> 
           <p>{t("IndexTip1")}</p>
         </div>
         <div className="indexPageT">
           <div className="card indexPageL">
             <p className="title">{t("MiningandDeposit")}</p>
-            <img src={require("../../assets/img/nav/logo.png")} className="logo" alt="" />
+            {/* <img src={require("../../assets/img/nav/logo.png")} className="logo" alt="" /> */}
             <p className="font1">{t("Fortheharvest")} Banana:</p>
-            <p className="font2">{ t("locked")}</p>
+            <p className="font2 locked">{ t("locked")}</p>
             <p className="font3">~$ 0</p>
             <p className="font1">{t("InWallet")} Banana:</p>
-            <p className="font2">{ t("locked")}</p>
-            <p className="font3">~$ 0</p>
+            <p className="font2 locked">{ t("locked")}</p>
+            <p className="font3" style={{marginBottom:'15px'}}>~$ 0</p>
             {!connected&&<Button
               className="connect-button"
               type="primary"
@@ -83,9 +83,27 @@ export const IndexPage = (props: { left?: JSX.Element; right?: JSX.Element }) =>
             >
               {connected?t("connected"):t("ConnectWallet")}
             </Button>}
-            <img src={require("../../assets/img/logo2.png")} className="bgImg" alt=""/>
+            <img src={require("../../assets/img/homeSubBg1.png")} className="bgImg" alt=""/>
           </div>
-          <div className="card indexPageR">
+          <div className="indexPageB">
+            <div className="card indexPageL">
+              <p className="font1">{t("TVL")}</p>
+              <p className="font2">{formatUSD.format(totals.liquidity)}</p>
+              <p className="font3">Across all Farms and Pools</p>
+            </div>
+            <div className="card indexPageR">
+              <p className="font1">{t("DEX")}</p>
+              <div className="dataItem" style={{marginTop:"22px",fontWeight: 600}}>
+                <p className="font4">{t("TotalLiquidity")}</p>
+                <p className="font4">{formatUSD.format(totals.liquidity)}</p>
+              </div>
+              {/* <div className="dataItem">
+                <p>24小时交易量</p>
+                <p className="font4">{formatUSD.format(totals.volume)}</p>
+              </div> */}
+            </div>
+          </div>
+          {/* <div className="card indexPageR">
             <p className="title">{t("announcement")}</p>
             <p className="line"></p>
             <div className="noticeBox">
@@ -99,25 +117,7 @@ export const IndexPage = (props: { left?: JSX.Element; right?: JSX.Element }) =>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div className="indexPageB">
-          <div className="card indexPageL">
-            <p className="font1">{t("TVL")}</p>
-            <p className="font2">{formatUSD.format(totals.liquidity)}</p>
-            <p className="font3">Across all Farms and Pools</p>
-          </div>
-          <div className="card indexPageR">
-            <p className="font1">{t("DEX")}</p>
-            <div className="dataItem" style={{marginTop:"22px",fontWeight: 600}}>
-              <p>{t("TotalLiquidity")}</p>
-              <p className="font4">{formatUSD.format(totals.liquidity)}</p>
-            </div>
-            {/* <div className="dataItem">
-              <p>24小时交易量</p>
-              <p className="font4">{formatUSD.format(totals.volume)}</p>
-            </div> */}
-          </div>
+          </div> */}
         </div>
       </div>
     </>

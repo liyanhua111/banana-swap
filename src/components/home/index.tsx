@@ -33,53 +33,59 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
     <div id="homePage" className={`homePage ${i18n.language == 'en' ? 'homePageEn' : ''}`}>
       <div className="arrowBtn" onClick={Submit}>«</div>
       <div className="homeContent">
-        <div className="maxWidth">
-          <div className="homeHeader" id="page1">
-            <img src={require('../../assets/img/logo.png')} alt="" className="homeLogo" />
-            <p className="lang" onClick={()=>i18n.changeLanguage(i18n.language=='en'?'zh':'en')}>
-              <img src={require('../../assets/img/nav/lang.png')} alt="" />
-              {i18n.language=='en'?'EN':'中文'}
-            </p>
-          </div>
-          <div className="bananaImg">
-            <img src={require('../../assets/img/home/1.png')} alt=""/>
-          </div>
-          <div className="bannerBox">
-            <div className="banner">
-              <div className="font1">{t("home1")}</div>
-              <div className="font4">AMM | IBO | Social <span className="font2">{t("home2")}</span></div>
-              <div className="font3">{t("home3")}</div>
-              <div className="handBtn" onClick={() => history.push({ pathname: "/swap/index" })}>LAUNCH APP</div>
+        <div className="module1">
+          <div className="maxWidth">
+            <div className="homeHeader" id="page1">
+              <img src={require('../../assets/img/logo.png')} alt="" className="homeLogo" />
+              <p className="lang" onClick={()=>i18n.changeLanguage(i18n.language=='en'?'zh':'en')}>
+                <img src={require('../../assets/img/nav/lang.png')} alt="" />
+                {i18n.language=='en'?'EN':'中文'}
+              </p>
             </div>
-          </div>
-          <div className="section1" id="page2">
-            <img src={require('../../assets/img/home/2.png')} alt="" className="logoImg" />
-            <div className="font1">{t("homeTitle1")}<span className="subfont">IN SOLANA</span></div>
-            <div className="cardBox">
-              <div className="cardItem">
-                <img src={require('../../assets/img/home/3.png')} alt="" className="cardImg" />
-                <p className="cardFont1">{t("homesubTitle11")}</p>
-                <p className="cardFont2">{t("homeInfor11")}</p>
-              </div>
-              <div className="cardItem">
-                <img src={require('../../assets/img/home/4.png')} alt="" className="cardImg" />
-                <p className="cardFont1">{t("homesubTitle12")}</p>
-                <p className="cardFont2">{t("homeInfor12")}</p>
-              </div>
-              <div className="cardItem">
-                <img src={require('../../assets/img/home/5.png')} alt="" className="cardImg" />
-                <p className="cardFont1">{t("homesubTitle13")}</p>
-                <p className="cardFont2">{t("homeInfor13")}</p>
+            <div className="bannerBox">
+              <img src={require('../../assets/img/home/1.png')} alt=""/>
+              <div className="banner">
+                <img src={require('../../assets/img/home/bs.png')} alt=""/>
+                {/* <div className="font1">{t("home1")}</div> */}
+                <div className="font4">AMM | IBO | NFT | Social  
+                {/* <span className="font2">{t("home2")}</span> */}
+                </div>
+                <div className="font3">{t("home3")}</div>
+                <div className="handBtn" onClick={() => history.push({ pathname: "/swap/index" })}>LAUNCH APP</div>
               </div>
             </div>
           </div>
-          <div className="section2" id="page3">
-            {/* <div className="barBox">
-              {t("homeTitle2")}
-              <div className="addImg">
-                <img src={require('../../assets/img/homeIcon2.png')} alt="" className="cardImg" />
+        </div>
+        <div className="section1" id="page2">
+          <div className="maxWidth">
+            {/* <img src={require('../../assets/img/home/2.png')} alt="" className="logoImg" /> */}
+              <div className="font1">{t("homeTitle1")}<span className="subfont">ON SOLANA</span></div>
+              <div className="cardBox">
+                <div className="cardItem">
+                  <img src={require('../../assets/img/home/3.png')} alt="" className="cardImg" />
+                  <p className="cardFont1">{t("homesubTitle11")}</p>
+                  <p className="cardFont2">{t("homeInfor11")}</p>
+                </div>
+                <div className="cardItem">
+                  <img src={require('../../assets/img/home/4.png')} alt="" className="cardImg" />
+                  <p className="cardFont1">{t("homesubTitle12")}</p>
+                  <p className="cardFont2">{t("homeInfor12")}</p>
+                </div>
+                <div className="cardItem">
+                  <img src={require('../../assets/img/home/5.png')} alt="" className="cardImg" />
+                  <p className="cardFont1">{t("homesubTitle13")}</p>
+                  <p className="cardFont2">{t("homeInfor13")}</p>
+                </div>
+                <div className="cardItem">
+                  <img src={require('../../assets/img/home/5b.png')} alt="" className="cardImg" />
+                  <p className="cardFont1">{t("homesubTitle14")}</p>
+                  <p className="cardFont2">{t("homeInfor14")}</p>
+                </div>
               </div>
-            </div> */}
+          </div>
+        </div>
+        <div className="section2" id="page3">
+          <div className="maxWidth">
             <div className="moduleBox">
               <div className="tabTitle">
                 <p>{t("homeInfor21")}</p>
@@ -96,8 +102,9 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                 </div>
                 <div className="switchBox">
                   <div className="switch">
-                    <img src={require('../../assets/img/dome1.png')} alt="" className={`tabImg ${activeIndex===1 ?'active':''}`}  onClick={changeActive} />
-                    <img src={require('../../assets/img/dome2.png')} alt="" className={`tabImg ${activeIndex===2 ?'active':''}`}  onClick={changeActive} />
+                    {/* <img src={require('../../assets/img/dome1.png')} alt="" className={`tabImg ${activeIndex===1 ?'active':''}`}  onClick={changeActive} />
+                    <img src={require('../../assets/img/dome1.png')} alt="" className={`tabImg ${activeIndex===1 ?'active':''}`}  onClick={changeActive} /> */}
+                    <img src={require('../../assets/img/home/web.png')} alt="" className={`tabImg ${activeIndex===1 ?'active':''}`} />
                   </div>
                   <div className="slickBox">
                     <span className="slickDots active"></span>
@@ -107,9 +114,11 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               </div>
             </div>
           </div>
-          <div className="section3" id="page4">
+        </div>
+        <div className="section3" id="page4">
+          <div className="maxWidth">
             <div className="contentBox">
-              <img src={i18n.language == 'en'?require('../../assets/img/home/9.png'):require('../../assets/img/home/9.png')} alt="" className="tabImg" />
+              <img src={i18n.language == 'en'?require('../../assets/img/home/9b.png'):require('../../assets/img/home/9.png')} alt="" className="tabImg" />
               <div className="content">
                 <p className="font1 title">BANA CLUB</p>
                 <p className="font2">{t("homeInfor41")}</p>
@@ -117,68 +126,72 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               </div>
             </div>
           </div>
-          <div className="section4" id="page5">
+        </div>
+        <div className="section4" id="page5">
+          <div className="maxWidth">
             <div>
               <p className="title">{t("homeTitle5")}</p>
               <div className="equity">
                 <div className="equityL">
                   <div className="equityLItem">
-                    <p><i>BANA</i></p>
+                    <p>BANA</p>
                     <img src={require('../../assets/img/homeIcon.png')} className="placeholder" alt=""/>
                   </div>
                   <div className="equityLItem">
-                    <p><i>SRM</i></p>
+                    <p>SRM</p>
                     <img src={require('../../assets/img/homeIcon.png')} className="placeholder" alt=""/>
                   </div>
                   <div className="equityLItem">
-                    <p><i>OXY</i></p>
+                    <p>OXY</p>
                     <img src={require('../../assets/img/homeIcon.png')} className="placeholder" alt=""/>
                   </div>
                   <div className="equityLItem">
-                    <div className="dian"><span></span><span></span><span></span></div>
+                    <p className="dian">...</p>
                     <p className="placeholder"></p>
                   </div>
                   <div className="equityLItem">
-                    <p><i>UNI</i></p>
+                    <p>UNI</p>
                     <img src={require('../../assets/img/homeIcon.png')} className="placeholder" alt=""/>
                   </div>
-                  <div className="position position1"><i>{t("homeInfor53")}</i></div>
-                  <div className="position position2"><i>{t("homeInfor54")}</i></div>
-                  <div className="position position3"><i>{t("homeInfor55")}</i></div>
+                  <div className="position position1">{t("homeInfor53")}</div>
+                  <div className="position position2">{t("homeInfor54")}</div>
+                  <div className="position position3">{t("homeInfor55")}</div>
                 </div>
                 <div className="equityC">
-                  <p className="font1"><i>BANA CARD <br /> BANANA CLUB</i></p>
-                  <p className="font2"><i>{t("homeInfor51")}</i></p>
-                  <p className="font3"><i>{t("homeInfor52")}</i></p>
+                  <p className="font1">BANA CARD <br /> BANANA CLUB</p>
+                  <p className="font2">{t("homeInfor51")}</p>
+                  <p className="font3">{t("homeInfor52")}</p>
                 </div>
                 <div className="equityR">
                   <div className="equityRItem">
                     <p className="placeholder"></p>
                     <div className="equityRSubItem">
-                      <p className="classify"><i>{t("homeInfor57")}</i></p>
-                      <p className="classifyInfo"><i>{t('homeInfor510')}</i></p>
+                      <p className="classify">{t("homeInfor57")}</p>
+                      <p className="classifyInfo">{t('homeInfor510')}</p>
                     </div>
                   </div>
                   <div className="equityRItem">
                     <img src={require('../../assets/img/homeIcon.png')} alt="" className="placeholder" />
                     <div className="equityRSubItem">
-                      <p className="classify"><i>{t("homeInfor58")}</i></p>
-                      <p className="classifyInfo"><i>{t("homeInfor510")}</i></p>
+                      <p className="classify">{t("homeInfor58")}</p>
+                      <p className="classifyInfo">{t("homeInfor510")}</p>
                     </div>
                   </div>
                   <div className="equityRItem">
                     <p className="placeholder"></p>
                     <div className="equityRSubItem">
-                      <p className="classify"><i>{t("homeInfor59")}</i></p>
-                      <p className="classifyInfo"><i>{t("homeInfor510")}</i></p>
+                      <p className="classify">{t("homeInfor59")}</p>
+                      <p className="classifyInfo">{t("homeInfor510")}</p>
                     </div>
                   </div>
-                  <div className="position position1"><i>{t("homeInfor56")}</i></div>
+                  <div className="position position1">{t("homeInfor56")}</div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="section5" id="page6">
+        </div>
+        <div className="section5" id="page6">
+          <div className="maxWidth">
             <div>
               <div className="title"><span> BANANA </span>MAN</div>
               <div className="teamBox">
@@ -233,7 +246,9 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               </div>
             </div>
           </div>
-          <div className="section6" id="page7">
+        </div>
+        <div className="section6" id="page7">
+          <div className="maxWidth">
             <p className="font1"><img src={require('../../assets/img/home/7.png')} alt=""/> {t("homeTitle6")}</p>
             <div className="contentBox">
               <ul>
@@ -244,7 +259,6 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                 <li>{t("homeInfor612")}</li>
                 <li>{t("homeInfor613")}</li>
                 <li>{t("homeInfor614")}</li>
-                <li>{t("homeInfor615")}</li>
                 <li className="teamImg"><img src={require('../../assets/img/team1.png')} alt=""/></li>
               </ul>
               <ul>
@@ -291,27 +305,29 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               </ul>
             </div>
           </div>
-          <div className="section7" id="page8">
+          <div className="bottomBg"></div>
+        </div>
+        <div className="section7" id="page8">
+          <div className="maxWidth">
             <div className="contactBox">
-              <p className="title">CONTACT US</p>
               <div className="contactContent">
+                <p className="title">CONTACT US</p>
                 <div className="contact">
-                <a href="https://twitter.com/BananaSwap_net" target="_blank" ><img src={require("../../assets/img/relative/1.png")} alt="" /></a>
-                <a href="https://discord.gg/AWmXjCECgm" target="_blank"><img src={require("../../assets/img/relative/2.png")} alt=""/></a>
-                <a href="https://github.com/bananadefilabs-001" target="_blank"><img src={require("../../assets/img/relative/3.png")} alt="" /></a>
-                <Popover content={"contact@bananaswap.net"} title="邮箱地址">
-                  <a><img src={require("../../assets/img/relative/4.png")} alt=""/></a>
-                </Popover>
-                <a href="https://www.facebook.com/BananaSwap" target="_blank"><img src={require("../../assets/img/relative/5.png")} alt=""/></a>
-                <a href="https://t.me/banana_swap" target="_blank"><img src={require("../../assets/img/relative/6.png")} alt=""/></a>
-                <a href="https://bananaswap-net.medium.com/" target="_blank"><img src={require("../../assets/img/relative/7.png")} alt=""/></a>
+                  <a href="https://twitter.com/BananaSwap_net" target="_blank" ><img src={require("../../assets/img/relative/1.png")} alt="" /></a>
+                  <a href="https://discord.gg/AWmXjCECgm" target="_blank"><img src={require("../../assets/img/relative/2.png")} alt=""/></a>
+                  <a href="https://github.com/bananadefilabs-001" target="_blank"><img src={require("../../assets/img/relative/3.png")} alt="" /></a>
+                  <Popover content={"contact@bananaswap.net"} title="邮箱地址">
+                    <a><img src={require("../../assets/img/relative/4.png")} alt=""/></a>
+                  </Popover>
+                  <a href="https://www.facebook.com/BananaSwap" target="_blank"><img src={require("../../assets/img/relative/5.png")} alt=""/></a>
+                  <a href="https://t.me/banana_swap" target="_blank"><img src={require("../../assets/img/relative/6.png")} alt=""/></a>
+                  <a href="https://bananaswap-net.medium.com/" target="_blank"><img src={require("../../assets/img/relative/7.png")} alt=""/></a>
                 </div>
-                <img src={require('../../assets/img/home/13.png')} alt=""/>
               </div>
+              <img src={require('../../assets/img/home/1.png')} alt=""/>
             </div>
           </div>
         </div>
-        <div className="end"></div>
       </div>
     </div>
   );

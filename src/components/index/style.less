@@ -13,9 +13,18 @@
       margin-bottom: 30px;
     }
     p{
-      font-size: 16px;
+      display: inline-block;
+      font-size: 20px;
       font-weight: 600;
+      color: #fff;
+      padding: 6px 40px;
+      background-color: #ffc000;
+      border-radius: 14px;
     }
+  }
+  .locked{
+    color: #919191 !important;
+    margin-bottom: 10px;
   }
   .card{
     margin-right: 32px;
@@ -31,44 +40,64 @@
   }
   .indexPageT{
     display: flex;
+    justify-content: space-between;
     margin-bottom: 36px;
+    &>.indexPageL{
+      width: 55%;
+      .font3{
+        color: #ffc000;
+      }
+    }
     .card{
       position: relative;
-      height: 444px;
+      overflow: hidden;
       .bgImg{
         position: absolute;
-        right: 0;
+        right: -110px;
         top: -30px;
         width: 54%;
+        opacity: 0.15;
       }
     }
     .title{
       position: relative;
       font-size: 40px;
       font-weight: 600;
-      margin-bottom: 15px;
+      margin-bottom: 28px;
       z-index: 10;
+      &::before{
+        display: inline-block;
+        content: "";
+        position: relative;
+        left: 0;
+        overflow: hidden;
+        height: 28px;
+        width: 6px;
+        background: #ffc000;
+        margin-right: 10px;
+      }
     }
     .logo{
       width: 55px;
       margin-bottom: 15px;
     }
     .font1{
-      font-size: 14px;
+      font-size: 16px;
       margin-bottom: 10px;
     }
     .font2{
-      font-size: 14px;
-      color: #E7E7E5;
-      margin-bottom: 5px;
+      font-size: 16px;
+      color: #FFC000;
     }
     .font3{
-      color: #FFC000;
+      font-size: 16px;
       margin-bottom: 10px;
     }
     .connect-button{
+      position: relative;
       height: 48px;
       margin-top: 10px;
+      z-index: 1;
     }
     .line{
       width: 100%;
@@ -92,8 +121,8 @@
         line-height: 14px;
       }
       .font5{
-        font-size: 18px;
-        margin-bottom: 14px;
+        font-size:24px;
+        margin-top: 30px;
       }
       .noticeImg{
         width: 100%;
@@ -101,14 +130,29 @@
     }
   }
   .indexPageB{
-    display: flex;
+    width: 45%;
     .card{
-      height: 154px;
+      height: 193px;
       padding:20px 25px;
+      margin-right: 0;
+      &:first-child{
+        margin-bottom: 25px;
+      }
       .font1{
-        font-size: 24px;
+        font-size: 32px;
         font-weight: 600;
-        margin-bottom:8px;
+        margin-bottom:15px;
+        &::before{
+          display: inline-block;
+          content: "";
+          position: relative;
+          left: 0;
+          overflow: hidden;
+          height: 22px;
+          width: 6px;
+          background: #ffc000;
+          margin-right: 10px;
+        }
       }
       .font2{
         font-size: 32px;
@@ -117,21 +161,35 @@
       .font3{
         font-size: 16px;
         font-weight: 600;
-        color: #FFC000;
       }
       .font4{
+        font-size: 20px;
         font-weight: 600;
+        margin-top: 22px;
       }
       .dataItem{
         display: flex;
         justify-content: space-between;
+        align-items: center;
         font-size: 16px;
         margin-bottom: 10px;
       }
     }
   }
 }
-
+@media only screen and (max-width: 1060px) {
+  .indexPageT{
+    flex-wrap: wrap;
+  }
+  .card{
+    width: 100% !important;
+    margin-right: 0 !important;
+    margin-bottom: 25px;
+  }
+  .indexPageB{
+    width: 100% !important;
+  }
+}
 @media only screen and (max-width: 600px) {
   #root{
     .indexPageBox{
