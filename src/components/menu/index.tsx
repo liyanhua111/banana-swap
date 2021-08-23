@@ -17,11 +17,11 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const current = location.pathname;
-  // const handleClick = function (data: any) {
+  const handleClick = function (data: any) {
     // if (data.key.indexOf('developing')>-1) {
     //   message.info(t('developing'))
     // }
-  // }
+  }
   useEffect(()=>{
     dispatch(changeHamburgerFunc(true))
 	},[location])
@@ -29,6 +29,7 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
     <div className="App-Menu">
       <div className="App-Menu-left">
         <Menu
+          onClick={handleClick}
           inlineCollapsed={collapsed}
           style={{ width: 240 }}
           defaultSelectedKeys={['/']}
