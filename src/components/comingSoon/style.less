@@ -1,11 +1,44 @@
 .ComingSoonPage{
   position: fixed;
   top: 0;
-  width: 100%;
+  right: 0;
+  left: 240px;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6);
   .ComingSoon{
-    margin-top: 300px;
-    font-size: 50px;
+    position: relative;
+    width: 720px;
+    margin: 0 auto;
+    top: 35vh;
+    img{
+      width: 720px;
+    }
+    .font1{
+      position: absolute;
+      right: 100px;
+      top: 78px;
+      font-size: 45px;
+      color: #fff;
+    }
   }
+}
+@media only screen and (max-width: 600px) {
+  .ComingSoonPage{
+    left: 0;
+    .ComingSoon{
+      width: 100%;
+      padding: 0 20px;
+      img{
+        width: 100%;
+      }
+      .font1{
+        position: absolute;
+        right: 25vw;
+        top: 11vw;
+        font-size: 18px;
+        color: #fff;
+      }
+    }
+  }
+  
 }
