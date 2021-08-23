@@ -14,7 +14,8 @@ export const Pool = (props: { left?: JSX.Element; right?: JSX.Element }) => {
   const farmPage = (
     <>
       <AppBar/>
-      <div className="IDOPage">
+      <div className="IDOPage soonPage">
+        <img src={require('../../assets/img/page/2.jpg')} alt="" className="cardImg" />
         <ComingSoon/>
       </div>
     </>

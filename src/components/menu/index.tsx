@@ -18,9 +18,9 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
   const location = useLocation();
   const current = location.pathname;
   const handleClick = function (data: any) {
-    if (data.key.indexOf('developing')>-1) {
-      message.info(t('developing'))
-    }
+    // if (data.key.indexOf('developing')>-1) {
+    //   message.info(t('developing'))
+    // }
   }
   useEffect(()=>{
     dispatch(changeHamburgerFunc(true))
