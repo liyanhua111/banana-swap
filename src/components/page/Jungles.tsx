@@ -15,7 +15,7 @@ export const Jungles = (props: { left?: JSX.Element; right?: JSX.Element }) => {
     <>
       <AppBar/>
       <div className="IDOPage soonPage">
-        <img src={require('../../assets/img/page/5.jpg')} alt="" className="cardImg" />
+        <img src={i18n.language == 'en'?require('../../assets/img/page/5.jpg'):require('../../assets/img/page/5.jpg')} alt="" className="cardImg" />
         <ComingSoon/>
       </div>
     </>

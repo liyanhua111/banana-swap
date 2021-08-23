@@ -15,7 +15,7 @@ export const Info = (props: { left?: JSX.Element; right?: JSX.Element }) => {
     <>
       <AppBar/>
       <div className="InfoPage soonPage">
-      <img src={require('../../assets/img/page/4.jpg')} alt="" className="cardImg" />
+      <img src={i18n.language == 'en'?require('../../assets/img/page/4.jpg'):require('../../assets/img/page/4.jpg')} alt="" className="cardImg" />
         <ComingSoon/>
       </div>
     </>

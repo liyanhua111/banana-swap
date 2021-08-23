@@ -62,7 +62,7 @@ export const IndexPage = (props: { left?: JSX.Element; right?: JSX.Element }) =>
       <div className="indexPageBox">
         <div className="indexTitle">
           <img src={require('../../assets/img/home/2.png')} className="img1" alt="" /><br/> 
-          <p>{t("IndexTip1")}</p>
+          {/* <p>{t("IndexTip1")}</p> */}
         </div>
         <div className="indexPageT">
           <div className="card indexPageL">
