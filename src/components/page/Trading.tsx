@@ -15,7 +15,7 @@ export const Trading = (props: { left?: JSX.Element; right?: JSX.Element }) => {
     <>
       <AppBar/>
       <div className="IDOPage soonPage">
-        <img src={i18n.language == 'en'?require('../../assets/img/page/1.jpg'):require('../../assets/img/page/1.jpg')} alt="" className="cardImg" />
+        <img src={i18n.language == 'en'?require('../../assets/img/page/1b.jpg'):require('../../assets/img/page/1.jpg')} alt="" className="cardImg" />
         <ComingSoon/>
       </div>
     </>

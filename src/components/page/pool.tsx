@@ -15,7 +15,7 @@ export const Pool = (props: { left?: JSX.Element; right?: JSX.Element }) => {
     <>
       <AppBar/>
       <div className="IDOPage soonPage">
-        <img src={i18n.language == 'en'?require('../../assets/img/page/2.jpg'):require('../../assets/img/page/2.jpg')} alt="" className="cardImg" />
+        <img src={i18n.language == 'en'?require('../../assets/img/page/2b.jpg'):require('../../assets/img/page/2.jpg')} alt="" className="cardImg" />
         <ComingSoon/>
       </div>
     </>

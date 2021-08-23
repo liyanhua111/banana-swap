@@ -15,7 +15,7 @@ export const Farm = (props: { left?: JSX.Element; right?: JSX.Element }) => {
     <>
       <AppBar/>
       <div className="soonPage farmPage">
-        <img src={i18n.language == 'en'?require('../../assets/img/page/3.jpg'):require('../../assets/img/page/3.jpg')} alt="" className="cardImg" />
+        <img src={i18n.language == 'en'?require('../../assets/img/page/3b.jpg'):require('../../assets/img/page/3.jpg')} alt="" className="cardImg" />
         <ComingSoon/>
       </div>
     </>
