@@ -1,0 +1,147 @@
+.ant-card{
+  &.pool-card {
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px 0px;
+  }
+  .ant-typography.ant-typography-secondary{
+    color: rgba(0, 0, 0, 0.8);
+  }
+}
+.pool-grid {
+  max-width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.pool-card {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  position: relative;
+  margin: 5px;
+  border-radius: 10px;
+  .left-icon {
+    position: absolute;
+    top: 15px;
+    left: 30px;
+    transform: scale(1.5, 1.5);
+  }
+
+  .right-icon {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    transform: scale(1.5, 1.5);
+  }
+
+  h3 {
+    display: flex;
+  }
+
+  hr {
+    border-color: #ddd;
+  }
+
+  .pool-card-row {
+    box-sizing: border-box;
+    margin: 5px 0px;
+    min-width: 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    color: #222;
+    .pool-card-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      box-sizing: border-box;
+      text-align: left;
+      margin: 0px;
+      min-width: 0px;
+      font-size: 14px;
+    }
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .small {
+      font-size: 11px;
+    }
+  }
+}
+
+.noDataBox{
+  position: relative;
+  width: 436px;
+  height: 512px;
+  padding: 24px 16px;
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px 0px;
+  border-radius: 10px;
+  margin-top: 4%;
+  .img1{
+    position: absolute;
+    left: -35px;
+    top: -26px;
+    width: 313px;
+  }
+  .img2{
+    position: absolute;
+    right: 0px;
+    top: 156px;
+    width: 130px;
+  }
+  .noDataInfor{
+    margin-top: 350px;
+  }
+  .font1{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 18px;
+    margin-bottom: 25px;
+    white-space: pre-wrap;
+  }
+  .font2{
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 24px;
+    margin-bottom: 15px;
+  }
+  .font3{
+    font-size: 14px;
+    color: #999999;
+  }
+}
+@media only screen and (max-width: 600px) {
+  #root{
+    .pool-grid{
+      max-width: 100%;
+      .pool-card{
+        width: 100%;
+        margin: 10px;
+      }
+      .noDataBox{
+        width: 100%;
+        margin: 10px;
+        .img1{
+          width: 70%;
+          left: 0;
+        }
+        .img2{
+          width: 30%;
+        }
+      }
+    }
+    
+  }
+}
