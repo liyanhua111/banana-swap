@@ -11,7 +11,6 @@ export const ComingSoon = (props: { left?: JSX.Element; right?: JSX.Element }) =
   const ComingSoon = (
     <div className="ComingSoonPage">
       <div className="ComingSoon">
-        <img src={require('../../assets/img/page/btn.png')} alt="" className="homeLogo" />
         <p className="font1">{ t('COMINGSOON')}</p>
       </div>
     </div>

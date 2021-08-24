@@ -118,11 +118,12 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
         <div className="section3" id="page4">
           <div className="maxWidth">
             <div className="contentBox">
+              <p className="font1 title cellfont1">BANA CLUB</p>
               <img src={i18n.language == 'en'?require('../../assets/img/home/9b.png'):require('../../assets/img/home/9.png')} alt="" className="tabImg" />
               <div className="content">
-                <p className="font1 title">BANA CLUB</p>
-                <p className="font2">{t("homeInfor41")}</p>
-                <p className="font2">{t("homeInfor42")}</p>
+                <p className="font1 title pcfont1">BANA CLUB</p>
+                <p className="font2"><span className="font3">BANA CLUB </span>{t("homeInfor41")}</p>
+                <p className="font2"><span className="font3">BANA CARD </span>{t("homeInfor42")}</p>
               </div>
             </div>
           </div>
@@ -133,6 +134,9 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               <p className="title">{t("homeTitle5")}</p>
               <div className="equity">
                 <div className="equityL">
+                  <div className="position position1">{t("homeInfor53")}</div>
+                  <div className="position position2">{t("homeInfor54")}</div>
+                  <div className="position position3">{t("homeInfor55")}</div>
                   <div className="equityLItem">
                     <p>BANA</p>
                     <img src={require('../../assets/img/homeIcon.png')} className="placeholder" alt=""/>
@@ -145,7 +149,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                     <p>OXY</p>
                     <img src={require('../../assets/img/homeIcon.png')} className="placeholder" alt=""/>
                   </div>
-                  <div className="equityLItem">
+                  <div className="equityLItem dianBox">
                     <p className="dian">...</p>
                     <p className="placeholder"></p>
                   </div>
@@ -153,9 +157,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                     <p>UNI</p>
                     <img src={require('../../assets/img/homeIcon.png')} className="placeholder" alt=""/>
                   </div>
-                  <div className="position position1">{t("homeInfor53")}</div>
-                  <div className="position position2">{t("homeInfor54")}</div>
-                  <div className="position position3">{t("homeInfor55")}</div>
+
                 </div>
                 <div className="equityC">
                   <p className="font1">BANA CARD <br /> BANANA CLUB</p>
@@ -163,28 +165,28 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                   <p className="font3">{t("homeInfor52")}</p>
                 </div>
                 <div className="equityR">
+                  <div className="position position1">{t("homeInfor56")}</div>
                   <div className="equityRItem">
                     <p className="placeholder"></p>
                     <div className="equityRSubItem">
-                      <p className="classify">{t("homeInfor57")}</p>
+                      <p className="classify classify1">{t("homeInfor57")}</p>
                       <p className="classifyInfo">{t('homeInfor510')}</p>
                     </div>
                   </div>
                   <div className="equityRItem">
                     <img src={require('../../assets/img/homeIcon.png')} alt="" className="placeholder" />
                     <div className="equityRSubItem">
-                      <p className="classify">{t("homeInfor58")}</p>
+                      <p className="classify classify2">{t("homeInfor58")}</p>
                       <p className="classifyInfo">{t("homeInfor510")}</p>
                     </div>
                   </div>
                   <div className="equityRItem">
                     <p className="placeholder"></p>
                     <div className="equityRSubItem">
-                      <p className="classify">{t("homeInfor59")}</p>
+                      <p className="classify classify3">{t("homeInfor59")}</p>
                       <p className="classifyInfo">{t("homeInfor510")}</p>
                     </div>
                   </div>
-                  <div className="position position1">{t("homeInfor56")}</div>
                 </div>
               </div>
             </div>

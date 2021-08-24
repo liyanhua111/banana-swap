@@ -101,13 +101,13 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               Jungles
             </Link>
           </Menu.Item>
-          <Menu.Item key="/swap/IDO" icon={<img src={require('../../assets/img/nav/nav7.png')} className="navIcon" />}>
+          <Menu.Item key="/swap/IBO" icon={<img src={require('../../assets/img/nav/nav7.png')} className="navIcon" />}>
             <Link
                   to={{
-                    pathname: "/swap/IDO",
+                    pathname: "/swap/IBO",
                   }}
             >
-                  IDO
+                  IBO
             </Link>
           </Menu.Item>
           <Menu.Item key="/swap/Info" icon={<img src={require('../../assets/img/nav/nav8.png')} className="navIcon" />}>

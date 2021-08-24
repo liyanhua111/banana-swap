@@ -11,7 +11,7 @@ import { MarketProvider } from "./context/market";
 import { PoolOverview } from "./components/pool/view";
 import { ExchangeView } from "./components/exchange";
 import { IndexPage } from "./components/index";
-import { IDO } from "./components/IDO/IDO";
+import { IBO } from "./components/IBO/IBO";
 import { Farm } from "./components/page/farm";
 import { Info } from "./components/page/Info";
 import { Pool } from "./components/page/pool";
@@ -32,7 +32,7 @@ export function Routes() {
                   <Route exact path="/swap/add" component={ExchangeView} />
                   {/* <Route exact path="/swap/info" component={() => <ChartsView />} /> */}
                   {/* <Route exact path="/swap/Info" component={() => <InfoView />} /> */}
-                  <Route exact path="/swap/IDO" component={() => <IDO />} />
+                  <Route exact path="/swap/IBO" component={() => <IBO />} />
                   <Route exact path="/swap/farm" component={() => <Farm />} />
                   <Route exact path="/swap/Info" component={() => <Info />} />
                   <Route exact path="/swap/pool" component={() => <Pool />} />
