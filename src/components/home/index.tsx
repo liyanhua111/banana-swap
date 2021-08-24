@@ -47,7 +47,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               <div className="banner">
                 <img src={require('../../assets/img/home/bs.png')} alt=""/>
                 {/* <div className="font1">{t("home1")}</div> */}
-                <div className="font4">AMM | IBO | NFT | Social  
+                <div className="font4">AMM <span className="su">|</span> IBO <span className="su">|</span> NFT <span className="su">|</span> Social  
                 {/* <span className="font2">{t("home2")}</span> */}
                 </div>
                 <div className="font3">{t("home3")}</div>

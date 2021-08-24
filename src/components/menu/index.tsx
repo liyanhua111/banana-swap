@@ -65,7 +65,7 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                 </Link>
               </Menu.Item>
           </SubMenu>
-          <Menu.Item key="/swap/developing1" icon={<img src={require('../../assets/img/nav/nav2.png')} className="navIcon" />}>
+          <Menu.Item key="/swap/Trading" icon={<img src={require('../../assets/img/nav/nav2.png')} className="navIcon" />}>
             <Link
               to={{
                 pathname: "/swap/Trading",
@@ -74,7 +74,7 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               Trading
             </Link>
           </Menu.Item>
-          <Menu.Item key="/swap/developing2" icon={<img src={require('../../assets/img/nav/nav4.png')} className="navIcon" />}>
+          <Menu.Item key="/swap/farm" icon={<img src={require('../../assets/img/nav/nav4.png')} className="navIcon" />}>
             <Link
               to={{
                 pathname: "/swap/farm",
@@ -83,7 +83,7 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               {t("farm")}
             </Link>
           </Menu.Item>
-          <Menu.Item key="/swap/developing3" icon={<img src={require('../../assets/img/nav/nav5.png')} className="navIcon" />}>
+          <Menu.Item key="/swap/pool" icon={<img src={require('../../assets/img/nav/nav5.png')} className="navIcon" />}>
             <Link
               to={{
                 pathname: "/swap/pool",
@@ -92,7 +92,7 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               {t("pool")}
             </Link>
           </Menu.Item>
-          <Menu.Item key="/swap/developing4" icon={<img src={require('../../assets/img/nav/nav6.png')} className="navIcon" />}>
+          <Menu.Item key="/swap/Jungles" icon={<img src={require('../../assets/img/nav/nav6.png')} className="navIcon" />}>
             <Link
               to={{
                 pathname: "/swap/Jungles",
@@ -110,7 +110,7 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                   IDO
             </Link>
           </Menu.Item>
-          <Menu.Item key="/swap/developing6" icon={<img src={require('../../assets/img/nav/nav8.png')} className="navIcon" />}>
+          <Menu.Item key="/swap/Info" icon={<img src={require('../../assets/img/nav/nav8.png')} className="navIcon" />}>
             <Link
                   to={{
                     pathname: "/swap/Info",
