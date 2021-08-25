@@ -40,7 +40,7 @@ export function Routes() {
                   <Route exact path="/swap/Trading" component={() => <Trading />} />
                   <Route
                     exact
-                    path="/swap/pool"
+                    path="/swap/myPool"
                     component={() => <PoolOverview />}
                   />
                 </CurrencyPairProvider>

@@ -32,10 +32,10 @@ export const AppBar = (props: { left?: JSX.Element; right?: JSX.Element }) => {
         </WalletConnect>
         {connected && (
           <Button
-            className={`mypoolBtn ${location.pathname === '/swap/pool' ? 'poolActive' : ''}`}
+            className={`mypoolBtn ${location.pathname === '/swap/myPool' ? 'poolActive' : ''}`}
             shape="round"
             size="large"
-            onClick={() => history.push({ pathname: "/swap/pool" })}
+            onClick={() => history.push({ pathname: "/swap/myPool" })}
           >
             {t("MyPools")}
           </Button>
