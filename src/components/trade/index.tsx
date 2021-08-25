@@ -31,7 +31,7 @@ import {
 } from "../../utils/currencyPair";
 import { generateActionLabel, POOL_NOT_AVAILABLE, SWAP_LABEL } from "../labels";
 import "./trade.less";
-import { colorWarning, getTokenName } from "../../utils/utils";
+import { colorWarning, getTokenName,KnownTokenMap } from "../../utils/utils";
 import { AdressesPopover } from "../pool/address";
 import { PoolInfo } from "../../models";
 import { useEnrichedPools } from "../../context/market";
@@ -39,6 +39,7 @@ import { AppBar } from "../appBar";
 import { Settings } from "../settings";
 import { MigrationModal } from "../migration";
 import { PublicKey } from "@solana/web3.js";
+
 
 const { Text } = Typography;
 
@@ -85,7 +86,7 @@ export const TradeEntry = () => {
     });
   };
 
-  const handleSwap = async () => {
+  const handleSwap = async (tokenMap:KnownTokenMap) => {
     if (A.account && B.mintAddress) {
       try {
         setPendingTx(true);
@@ -134,11 +135,18 @@ export const TradeEntry = () => {
           };
           swapList.push(componentsRoutA, componentsRoutB);
           console.log(swapList, "swapList=========");
+          console.log(wallet, "wallet=========");
+          console.log(components, "components=========");
+          console.log(slippage, "slippage=========");
+          console.log(pool, "pool=========");
+          
+          console.log(componentsRoutA, "componentsRoutA=========");
+          console.log(componentsRoutB, "componentsRoutB=========");
           // @ts-ignore
-          await swap(connection, wallet, components, slippage, pool, swapList);
+          await swap(tokenMap, connection, wallet, components, slippage, pool, swapList);
           return;
         }
-        await swap(connection, wallet, components, slippage, pool);
+        await swap(tokenMap, connection, wallet, components, slippage, pool);
       } catch {
         notify({
           description:
@@ -310,7 +318,7 @@ export const TradeEntry = () => {
         className="trade-button"
         type="primary"
         size="large"
-        onClick={connected ? handleSwap : connect}
+        onClick={connected ? ()=>{handleSwap(tokenMap)} : connect}
         style={{ width: "100%" }}
         disabled={
           connected &&

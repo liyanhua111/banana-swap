@@ -91,11 +91,9 @@ export const AccountsAddress = (props: {
   let aName, bName;
   if (mint1) {
     aName = getTokenName(tokenMap, mint1.toBase58());
-    console.log(aName,"====")
   }
   if (mint2) {
     bName = getTokenName(tokenMap, mint2.toBase58());
-    console.log(bName,"====")
   }
 
   return (

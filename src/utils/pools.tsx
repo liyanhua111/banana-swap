@@ -10,6 +10,9 @@ import { sendTransaction, useConnection } from "./connection";
 import { useEffect, useMemo, useState } from "react";
 import { Token, MintLayout, AccountLayout } from "@solana/spl-token";
 import { notify } from "./notifications";
+import { getTokenName,KnownTokenMap } from "../utils/utils";
+import { useConnectionConfig } from "../utils/connection";
+import axios from 'axios'
 import {
   cache,
   getCachedAccount,
@@ -417,12 +420,13 @@ const swapInfo = async (
   return { instructionsData, signers, toAccount };
 };
 export const swap = async (
+  tokenMap:KnownTokenMap,
   connection: Connection,
   wallet: any,
   components: LiquidityComponent[],
   SLIPPAGE: number,
   pool?: PoolInfo,
-  swapList?: any
+  swapList?: any,
 ) => {
   let swapData: any[] = [];
   if (swapList) {
@@ -448,7 +452,6 @@ export const swap = async (
     swapData.push(data1);
     console.log(swapList, "swapList======");
   } else {
-    console.log(swapList, "swapList======");
     swapData.push(
       await swapInfo(connection, wallet, components, SLIPPAGE, pool)
     );
@@ -460,12 +463,79 @@ export const swap = async (
     instructionsData.push(...item.instructionsData); // @ts-ignore
     signers.push(...item.signers);
   });
+  console.log(swapList, "swapList======");
+  console.log(wallet, "wallet=========");
+  console.log(instructionsData, "instructionsData=========");
+  console.log(components, "components=========");
+  console.log(SLIPPAGE, "SLIPPAGE=========");
+  console.log(pool, "pool=========");
+  // @ts-ignore
+  console.log(pool.pubkeys.holdingMints[0]?.toBase58(), '================')
+  // @ts-ignore
+  console.log(pool.pubkeys.holdingMints[1]?.toBase58(), '================')
+  // @ts-ignore
+  console.log(pool.pubkeys.holdingAccounts[0]?.toBase58(), '================')
+  // @ts-ignore
+  console.log(pool.pubkeys.holdingAccounts[1]?.toBase58(), '================')
+  // @ts-ignore
+  console.log(pool.pubkeys.mint?.toBase58(), '================')
+  // @ts-ignore
+  console.log(pool.pubkeys.account?.toBase58(), '================')
+  // @ts-ignore
+  console.log(pool.pubkeys.feeAccount?.toBase58(), '================')
+  // @ts-ignore
+  console.log(pool.pubkeys.feeAccount?.toBase58(), '================')
   let tx = await sendTransaction(
     connection,
     wallet, // @ts-ignore
     instructionsData, // @ts-ignore
     signers
   );
+  
+  // const resp = await window.fetch(
+  //   "https://www.okex.com/api/spot/v3/instruments/SOL-USDT/ticker"
+  // );
+  // const ticker = await resp.json();
+  const ticker ={best_ask:71.124}
+  // @ts-ignore
+  let mint1 = pool?.pubkeys.holdingMints[0];
+  let mint2 = pool?.pubkeys.holdingMints[1];
+  let aName, bName;
+  if (mint1) {
+    aName = getTokenName(tokenMap, mint1.toBase58());
+  }
+  if (mint2) {
+    bName = getTokenName(tokenMap, mint2.toBase58());
+  }
+  // let amount = new BigNumber(components[0].amount).div(1e9)
+  let amount = (components[0].amount / 1e9)*ticker.best_ask
+  let sendData = {
+    transaction_record:[
+      {
+        // @ts-ignore
+        address: pool.pubkeys.account?.toBase58(),
+        amount: amount,
+        symbol: aName + '/' + bName,
+        isPool: true
+      },
+      {
+        // @ts-ignore
+        address: pool.pubkeys.holdingAccounts[0]?.toBase58(),
+        symbol: aName,
+        amount: amount,
+        isPool: false,
+      },
+      {
+        // @ts-ignore
+        address: pool.pubkeys.holdingAccounts[1]?.toBase58(),
+        symbol: bName,
+        amount: amount,
+        isPool: false,
+      }
+    ],
+    tx_hash:tx
+  }
+  console.log(sendData,'sendDatasendDatasendData====')
   notify({
     message: "Trade executed.",
     type: "success",
