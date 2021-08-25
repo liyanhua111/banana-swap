@@ -558,6 +558,17 @@ const getMidPrice = (marketAddress?: string, mintAddress?: string) => {
     "6nUL5U1EAgv8C3BdMrESCyTB3DgL7WVjbdUuD22BjqmA": 2000,
     "BTfGdC4Pj1htw5yDQH929a9ZdSkBTSjvDrVegdDTp388": 30,
     "6uRJmzcMWxTYd6g8KZNzh5uKHTj1VmUxpikwo1n1a45t": 10,
+    "EpfpiUxuzq1J9Z4wjc6MSNdmw7u9Wn1WAwNjTsMW4L9e":368,
+    "ESuY1ancmW4N4E1qPX4kb5gmiLuKPX8jP5BgfuB4wHCj":0.03,
+    "A2eTiujiRzirJPvaCtNccMkiTSKoD5SgiVD6n2DQTmsR":1,
+    "48mFWmYVsQsuxe7qw26iUFKmD916NFWL1jiVC9Ed9qJU":47537,
+    "CDbaZZQNQt23Wq7F9maeG6bXhcCwraEwZQqu5eRkJNzu":2,
+    "Fx55gn1M3uNkwnoXa3MA5vus9QdYrP1KifQoDnTmxJjn":0.63,
+    "9peXMdFvH6wfEJuNw24h6aFG7VTWpRPtkf6Vhb1um9s3":3118,
+    "EqSqXXUxyBwAv3Srvixrzp7aVKgEoLgpdrXgk6AaBHyq":29,
+    "Da8A9pM6Sfz2Cxce2V6szHoXE6K3DNR7natCHW7P6XWU":25.7,
+    "884XYVwEX51J7g9gXcrn2NK75pwXSUnLK2HFd6aaxA8R":0.14,
+    "E9tCeMVUPUGFDhUj9EcofNpkNCHbZLaSyS68kuXRN2vZ":1,
   }
     // @ts-ignore
   return priceList[mintAddress] || priceList[marketAddress] || 0;
