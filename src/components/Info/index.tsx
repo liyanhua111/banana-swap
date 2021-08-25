@@ -22,7 +22,7 @@ import {
 import { PoolIcon } from "../tokenIcon";
 import "./styles.less";
 import echarts from "echarts";
-import { useEnrichedPools } from "../../context/market";
+import { useEnrichedPools, getTokenData } from "../../context/market";
 import { usePools } from "../../utils/pools";
 import {
   formatNumber,
@@ -43,6 +43,7 @@ interface Totals {
   fees: number;
 }
 export const InfoView = React.memo(() => {
+  // const tokenData = getTokenData()
   const [totals, setTotals] = useState<Totals>(() => ({
     liquidity: 0,
     volume: 0,
@@ -62,7 +63,7 @@ export const InfoView = React.memo(() => {
         { liquidity: 0, volume: 0, fees: 0 } as Totals
       )
     );
-  }, [enriched]);
+  })
   return (
     <div className="infoPage">
       <div className="chartsBox">

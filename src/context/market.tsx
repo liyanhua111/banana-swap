@@ -1,4 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
+import axios from "axios"
 import { POOLS_WITH_AIRDROP } from "./../models/airdrops";
 import { MINT_TO_MARKET } from "./../models/marketOverrides";
 import {
@@ -22,6 +23,7 @@ import { useMemo } from "react";
 import { PoolInfo } from "../models";
 import { EventEmitter } from "./../utils/eventEmitter";
 import { LIQUIDITY_PROVIDER_FEE, SERUM_FEE } from "../utils/pools";
+import {setPool} from "../service/fetch"
 
 interface RecentPoolData {
   pool_identifier: string;
@@ -654,3 +656,31 @@ interface SerumMarket {
 
   midPrice?: (mint?: PublicKey) => number;
 }
+
+export const getTokenData = async () => {
+  // let obj =  {
+  //   transaction_record: [
+  //     {
+  //       address: "9XEVp3xJxNdspGjTGteEsbDsDEJtPt8hvKWSYWYkFJJb",// poolAddress
+  //       amount: 100,//交易兑换后的usdt价值
+  //       symbol: "SOL/ABC",
+  //       isPool: true,//标记是否是资金池
+  //     },
+  //     {
+  //       address: "EqueH8NoYUQVGoh6SDnAxzRg9oThAHax5xpQ9h1GwWPS",
+  //       symbol: "SOL",
+  //       amount: 100,
+  //       isPool: false,
+  //     },
+  //     {
+  //       address: "F1FRJXU6Nnt87rnhhFPnWJt5SAp2cq7QKA2rkQVW6sAw",
+  //       symbol: "ABC",
+  //       amount: 100,
+  //       isPool: false,
+  //     },
+  //   ],
+  //   tx_hash: "3cpzmbf7wrXQm6zWrfuH2DCHDrHdgJCe33rMh9ECE54UimyCCRxJ6EzW5rLrf9VZ7p54YKpr4jrt6t1GCd5G1upi",
+  // }
+  // const data = await setPool(obj)
+  // console.log(data)
+};

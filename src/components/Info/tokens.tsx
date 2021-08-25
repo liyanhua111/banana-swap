@@ -13,7 +13,7 @@ import {
 } from "@ant-design/icons";
 import { TokenIcon } from "../tokenIcon";
 import "./styles.less";
-import { useEnrichedPools } from "../../context/market";
+import { useEnrichedPools, getTokenData } from "../../context/market";
 import { usePools } from "../../utils/pools";
 import {
   formatNumber,
@@ -47,9 +47,9 @@ export const TokensView = React.memo(() => {
     volume: 0,
     fees: 0,
   }));
+  // const tokenData = getTokenData()
   const { pools } = usePools();
   const enriched = useEnrichedPools(pools);
-  console.log(enriched,'enriched')
   // Updates total values
   useEffect(() => {
     setTotals(

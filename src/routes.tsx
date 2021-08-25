@@ -31,10 +31,10 @@ export function Routes() {
                   <Route exact path="/swap/" component={ExchangeView} />
                   <Route exact path="/swap/add" component={ExchangeView} />
                   {/* <Route exact path="/swap/info" component={() => <ChartsView />} /> */}
-                  {/* <Route exact path="/swap/Info" component={() => <InfoView />} /> */}
+                  <Route exact path="/swap/Info" component={() => <InfoView />} />
                   <Route exact path="/swap/IBO" component={() => <IBO />} />
                   <Route exact path="/swap/farm" component={() => <Farm />} />
-                  <Route exact path="/swap/Info" component={() => <Info />} />
+                  {/* <Route exact path="/swap/Info" component={() => <Info />} /> */}
                   <Route exact path="/swap/pool" component={() => <Pool />} />
                   <Route exact path="/swap/Jungles" component={() => <Jungles />} />
                   <Route exact path="/swap/Trading" component={() => <Trading />} />
