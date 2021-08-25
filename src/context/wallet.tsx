@@ -25,11 +25,11 @@ export const WALLET_PROVIDERS = [
     url: "https://www.sollet.io",
     icon: require("../assets/img/wallet/Sollet.png"),
   },
-  // {
-  //   name: "Solflare",
-  //   url: "https://solflare.com/access-wallet",
-  //   icon: require("../assets/img/wallet/Solflare.png")
-  // },
+  {
+    name: "Solflare",
+    url: "https://solflare.com/access-wallet",
+    icon: require("../assets/img/wallet/Solflare.png")
+  },
   // {
   //   name: "Ledger",
   //   url: "https://www.ledger.com",
