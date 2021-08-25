@@ -132,6 +132,7 @@ export const AdressesPopover = (props: {
       placement="topRight"
       title={t("Addresses")}
       trigger="hover"
+      style={{width:'100%'}}
       content={
         <>
           {poolA && (

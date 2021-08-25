@@ -135,15 +135,8 @@ export const TradeEntry = () => {
           };
           swapList.push(componentsRoutA, componentsRoutB);
           console.log(swapList, "swapList=========");
-          console.log(wallet, "wallet=========");
-          console.log(components, "components=========");
-          console.log(slippage, "slippage=========");
-          console.log(pool, "pool=========");
-          
-          console.log(componentsRoutA, "componentsRoutA=========");
-          console.log(componentsRoutB, "componentsRoutB=========");
           // @ts-ignore
-          await swap(tokenMap, connection, wallet, components, slippage, pool, swapList);
+          await swap(tokenMap, connection, wallet, components, slippage, pool, swapList,routeAmount);
           return;
         }
         await swap(tokenMap, connection, wallet, components, slippage, pool);

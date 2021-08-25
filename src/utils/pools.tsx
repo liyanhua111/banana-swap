@@ -13,6 +13,7 @@ import { notify } from "./notifications";
 import { getTokenName,KnownTokenMap } from "../utils/utils";
 import { useConnectionConfig } from "../utils/connection";
 import axios from 'axios'
+import {setPool} from "../service/fetch"
 import {
   cache,
   getCachedAccount,
@@ -427,6 +428,7 @@ export const swap = async (
   SLIPPAGE: number,
   pool?: PoolInfo,
   swapList?: any,
+  routeAmount?:any
 ) => {
   let swapData: any[] = [];
   if (swapList) {
@@ -463,58 +465,87 @@ export const swap = async (
     instructionsData.push(...item.instructionsData); // @ts-ignore
     signers.push(...item.signers);
   });
-  console.log(swapList, "swapList======");
-  console.log(wallet, "wallet=========");
-  console.log(instructionsData, "instructionsData=========");
-  console.log(components, "components=========");
-  console.log(SLIPPAGE, "SLIPPAGE=========");
-  console.log(pool, "pool=========");
-  // @ts-ignore
-  console.log(pool.pubkeys.holdingMints[0]?.toBase58(), '================')
-  // @ts-ignore
-  console.log(pool.pubkeys.holdingMints[1]?.toBase58(), '================')
-  // @ts-ignore
-  console.log(pool.pubkeys.holdingAccounts[0]?.toBase58(), '================')
-  // @ts-ignore
-  console.log(pool.pubkeys.holdingAccounts[1]?.toBase58(), '================')
-  // @ts-ignore
-  console.log(pool.pubkeys.mint?.toBase58(), '================')
-  // @ts-ignore
-  console.log(pool.pubkeys.account?.toBase58(), '================')
-  // @ts-ignore
-  console.log(pool.pubkeys.feeAccount?.toBase58(), '================')
-  // @ts-ignore
-  console.log(pool.pubkeys.feeAccount?.toBase58(), '================')
   let tx = await sendTransaction(
     connection,
     wallet, // @ts-ignore
     instructionsData, // @ts-ignore
     signers
   );
-  
+
+  let transaction_record = []
   // const resp = await window.fetch(
   //   "https://www.okex.com/api/spot/v3/instruments/SOL-USDT/ticker"
   // );
   // const ticker = await resp.json();
   const ticker ={best_ask:71.124}
-  // @ts-ignore
-  let mint1 = pool?.pubkeys.holdingMints[0];
-  let mint2 = pool?.pubkeys.holdingMints[1];
-  let aName, bName;
-  if (mint1) {
-    aName = getTokenName(tokenMap, mint1.toBase58());
-  }
-  if (mint2) {
-    bName = getTokenName(tokenMap, mint2.toBase58());
-  }
-  // let amount = new BigNumber(components[0].amount).div(1e9)
-  let amount = (components[0].amount / 1e9)*ticker.best_ask
-  let sendData = {
-    transaction_record:[
+  if (!pool) {
+    let amount1 = (components[0].amount / 1e9)
+    let amount2 = (components[1].amount / 1e9)
+    let mint1 = swapList[0].pool.pubkeys.holdingMints[1];
+    let mint2 = swapList[1].pool.pubkeys.holdingMints[1];
+    let aName, bName;
+    if (mint1) {
+      aName = getTokenName(tokenMap, mint1.toBase58());
+    }
+    if (mint2) {
+      bName = getTokenName(tokenMap, mint2.toBase58());
+    }
+    transaction_record = [
+        {
+          // @ts-ignore
+          address: swapList[0].pool.pubkeys.account?.toBase58(),
+          amount: amount1,
+          symbol: 'SOL' + '/' + aName,
+          isPool: true
+        },
+        {
+          // @ts-ignore
+          address: swapList[1].pool.pubkeys.account?.toBase58(),
+          amount: routeAmount,
+          symbol: 'SOL' + '/' + bName,
+          isPool: true
+        },
+        {
+          // @ts-ignore
+          address:swapList[0].pool.pubkeys.holdingAccounts[1]?.toBase58(),
+          symbol: aName,
+          amount: amount1,
+          isPool: false,
+        },
+        {
+          // @ts-ignore
+          address: swapList[1].pool.pubkeys.holdingAccounts[1]?.toBase58(),
+          symbol: bName,
+          amount: amount2,
+          isPool: false,
+      },
+      {
+         // @ts-ignore
+         address: swapList[1].pool.pubkeys.holdingAccounts[0]?.toBase58(),
+         symbol: 'SOL',
+         amount: routeAmount,
+         isPool: false,
+        }
+    ]
+  } else {
+      // @ts-ignore
+    let mint1 = pool?.pubkeys.holdingMints[0];
+    let mint2 = pool?.pubkeys.holdingMints[1];
+    let aName, bName;
+    if (mint1) {
+      aName = getTokenName(tokenMap, mint1.toBase58());
+    }
+    if (mint2) {
+      bName = getTokenName(tokenMap, mint2.toBase58());
+    }
+    // let amount = new BigNumber(components[0].amount).div(1e9)
+    let amount1 = (components[0].amount / 1e9)
+    let amount2 = (components[1].amount / 1e9)
+    transaction_record = [
       {
         // @ts-ignore
         address: pool.pubkeys.account?.toBase58(),
-        amount: amount,
+        amount: amount1,
         symbol: aName + '/' + bName,
         isPool: true
       },
@@ -522,20 +553,21 @@ export const swap = async (
         // @ts-ignore
         address: pool.pubkeys.holdingAccounts[0]?.toBase58(),
         symbol: aName,
-        amount: amount,
+        amount: amount1,
         isPool: false,
       },
       {
         // @ts-ignore
         address: pool.pubkeys.holdingAccounts[1]?.toBase58(),
         symbol: bName,
-        amount: amount,
+        amount: amount2,
         isPool: false,
       }
-    ],
-    tx_hash:tx
+    ]
   }
-  console.log(sendData,'sendDatasendDatasendData====')
+  let sendData = { transaction_record, tx_hash: tx }
+  console.log(sendData, 'sendDatasendDatasendData====')
+  await setPool({ ...sendData })
   notify({
     message: "Trade executed.",
     type: "success",
