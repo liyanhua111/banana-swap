@@ -197,7 +197,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
             <div>
               <div className="title"><span> BANANA </span>MAN</div>
               <div className="teamBox">
-                <a href="https://twitter.com/0xbana" target="_blank" >
+                <a href="https://twitter.com/0xbana_" target="_blank" >
                   <div className="teamItem">
                     <div>
                       <img src={require('../../assets/img/team1.png')} alt="" />
@@ -237,7 +237,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                     </div>
                   </div>
                 </a>
-                <a href="https://twitter.com/0xPlantain" target="_blank" >
+                <a href="https://twitter.com/oxplantain" target="_blank" >
                   <div className="teamItem">
                     <div>
                       <img src={require('../../assets/img/team6.png')} alt="" />
