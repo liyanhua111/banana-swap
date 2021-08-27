@@ -13,7 +13,7 @@ import { notify } from "./notifications";
 import { getTokenName,KnownTokenMap } from "../utils/utils";
 import { useConnectionConfig } from "../utils/connection";
 import axios from 'axios'
-import {setPool} from "../service/fetch"
+import {setPoolHttp,getTickerHttp} from "../service/fetch"
 import {
   cache,
   getCachedAccount,
@@ -473,14 +473,13 @@ export const swap = async (
   );
 
   let transaction_record = []
-  // const resp = await window.fetch(
-  //   "https://www.okex.com/api/spot/v3/instruments/SOL-USDT/ticker"
-  // );
-  // const ticker = await resp.json();
-  const ticker ={best_ask:71.124}
+  let pairUSDT = await getTickerHttp({ trading_pair: "SOL-USDT" })
+  // @ts-ignore
+  const ticker = pairUSDT?.data.best_ask
   if (!pool) {
-    let amount1 = (components[0].amount / 1e9)
-    let amount2 = (components[1].amount / 1e9)
+    // let amount1 = (components[0].amount / 1e9)
+    // let amount2 = (components[1].amount / 1e9)
+    let amount = routeAmount*ticker
     let mint1 = swapList[0].pool.pubkeys.holdingMints[1];
     let mint2 = swapList[1].pool.pubkeys.holdingMints[1];
     let aName, bName;
@@ -494,14 +493,14 @@ export const swap = async (
         {
           // @ts-ignore
           address: swapList[0].pool.pubkeys.account?.toBase58(),
-          amount: amount1,
+          amount: amount,
           symbol: 'SOL' + '/' + aName,
           isPool: true
         },
         {
           // @ts-ignore
           address: swapList[1].pool.pubkeys.account?.toBase58(),
-          amount: routeAmount,
+          amount: amount,
           symbol: 'SOL' + '/' + bName,
           isPool: true
         },
@@ -509,21 +508,21 @@ export const swap = async (
           // @ts-ignore
           address:swapList[0].pool.pubkeys.holdingAccounts[1]?.toBase58(),
           symbol: aName,
-          amount: amount1,
+          amount: amount,
           isPool: false,
         },
         {
           // @ts-ignore
           address: swapList[1].pool.pubkeys.holdingAccounts[1]?.toBase58(),
           symbol: bName,
-          amount: amount2,
+          amount: amount,
           isPool: false,
       },
       {
          // @ts-ignore
          address: swapList[1].pool.pubkeys.holdingAccounts[0]?.toBase58(),
          symbol: 'SOL',
-         amount: routeAmount,
+         amount: amount,
          isPool: false,
         }
     ]
@@ -538,14 +537,15 @@ export const swap = async (
     if (mint2) {
       bName = getTokenName(tokenMap, mint2.toBase58());
     }
+    // let amount1 = (components[0].amount / 1e9)
+    // let amount2 = (components[1].amount / 1e9)
     // let amount = new BigNumber(components[0].amount).div(1e9)
-    let amount1 = (components[0].amount / 1e9)
-    let amount2 = (components[1].amount / 1e9)
+    let amount = components[0].amount/1e9*ticker
     transaction_record = [
       {
         // @ts-ignore
         address: pool.pubkeys.account?.toBase58(),
-        amount: amount1,
+        amount: amount,
         symbol: aName + '/' + bName,
         isPool: true
       },
@@ -553,21 +553,21 @@ export const swap = async (
         // @ts-ignore
         address: pool.pubkeys.holdingAccounts[0]?.toBase58(),
         symbol: aName,
-        amount: amount1,
+        amount: amount,
         isPool: false,
       },
       {
         // @ts-ignore
         address: pool.pubkeys.holdingAccounts[1]?.toBase58(),
         symbol: bName,
-        amount: amount2,
+        amount: amount,
         isPool: false,
       }
     ]
   }
   let sendData = { transaction_record, tx_hash: tx }
   console.log(sendData, 'sendDatasendDatasendData====')
-  await setPool({ ...sendData })
+  await setPoolHttp({ ...sendData })
   notify({
     message: "Trade executed.",
     type: "success",

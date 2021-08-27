@@ -40,37 +40,7 @@ interface Totals {
   fees: number;
 }
 
-const columnsTab = React.memo(() => {
-  return (
-    <>
-      
-    </>
-  )
-})
-
 export const TransactionsView = React.memo(() => {
-  const [totals, setTotals] = useState<Totals>(() => ({
-    liquidity: 0,
-    volume: 0,
-    fees: 0,
-  }));
-  const { pools } = usePools();
-  const enriched = useEnrichedPools(pools);
-  console.log(enriched,'enriched')
-  // Updates total values
-  useEffect(() => {
-    setTotals(
-      enriched.reduce(
-        (acc, item) => {
-          acc.liquidity = acc.liquidity + item.liquidity;
-          acc.volume = acc.volume + item.volume24h;
-          acc.fees = acc.fees + item.fees;
-          return acc;
-        },
-        { liquidity: 0, volume: 0, fees: 0 } as Totals
-      )
-    );
-  }, [enriched]);
   const tab = ['All','Swaps','Adds','Removes']
   const [tabIndex, setTabIndex] = useState(0)
   const changeTab = function (index:number) {
@@ -201,13 +171,13 @@ export const TransactionsView = React.memo(() => {
           <p className="titleL">Transactions</p>
         </div>
         <div className="tableBox">
-          <Table
+          {/* <Table
               dataSource={enriched.filter(
                 (row) => true
               )}
               columns={columns}
               pagination={{ pageSize: 4,position:['bottomCenter'],showLessItems:true }}
-          />
+          /> */}
         </div>
       </div>
     </>

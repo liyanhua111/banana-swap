@@ -13,7 +13,7 @@ import {
 } from "@ant-design/icons";
 import { TokenIcon } from "../tokenIcon";
 import "./styles.less";
-import { useEnrichedPools, getTokenData } from "../../context/market";
+import { useEnrichedPools } from "../../context/market";
 import { usePools } from "../../utils/pools";
 import {
   formatNumber,
@@ -40,36 +40,16 @@ interface Totals {
   volume: number;
   fees: number;
 }
-
-export const TokensView = React.memo(() => {
-  const [totals, setTotals] = useState<Totals>(() => ({
-    liquidity: 0,
-    volume: 0,
-    fees: 0,
-  }));
-  // const tokenData = getTokenData()
-  const { pools } = usePools();
-  const enriched = useEnrichedPools(pools);
-  // Updates total values
+export const TokensView = React.memo((props:{data:any[]}) => {
   useEffect(() => {
-    setTotals(
-      enriched.reduce(
-        (acc, item) => {
-          acc.liquidity = acc.liquidity + item.liquidity;
-          acc.volume = acc.volume + item.volume24h;
-          acc.fees = acc.fees + item.fees;
-          return acc;
-        },
-        { liquidity: 0, volume: 0, fees: 0 } as Totals
-      )
-    );
-  }, [enriched]);
+    
+  }, [props.data]);
 
   const columns = [
     {
       title: "Name",
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "symbol",
+      key: "symbol",
       render(text: string, record: any) {
         return {
           props: {
@@ -77,7 +57,7 @@ export const TokensView = React.memo(() => {
           },
           children: (
             <div style={{ display: "flex" , alignItems: "center"}}>
-              <TokenIcon mintAddress={record.mints[0]} />
+              <TokenIcon mintAddress={record.address} />
               <a href={record.link} target="_blank" rel="noopener noreferrer" className="font1">
                 {text}
                 <span className="font2"> ({'USDT'})</span>
@@ -123,8 +103,8 @@ export const TokensView = React.memo(() => {
     },
     {
       title: "Volume (24h)",
-      dataIndex: "volume",
-      key: "volume",
+      dataIndex: "vol24",
+      key: "vol24",
       align: 'right' as 'right',
       render(text: string, record: any) {
         return {
@@ -133,7 +113,7 @@ export const TokensView = React.memo(() => {
           },
           children: (
             <div>
-              <div>{formatUSD.format(record.volume24h)}</div>
+              <div>{formatUSD.format(record.vol24)}</div>
             </div>
           ),
         };
@@ -142,8 +122,8 @@ export const TokensView = React.memo(() => {
     },
     {
       title: "TVL",
-      dataIndex: "fees24h",
-      key: "fees24h",
+      dataIndex: "tvl",
+      key: "tvl",
       align: 'right' as 'right',
       render(text: string, record: any) {
         return {
@@ -152,7 +132,7 @@ export const TokensView = React.memo(() => {
           },
           children: (
             <div>
-              <div>{formatUSD.format(record.fees24h)}</div>
+              <div>{formatUSD.format(record.tvl)}</div>
             </div>
           ),
         };
@@ -171,7 +151,7 @@ export const TokensView = React.memo(() => {
         </div>
         <div className="tableBox">
           <Table
-              dataSource={enriched.filter(
+              dataSource={props.data.filter(
                 (row) => true
               )}
               columns={columns}

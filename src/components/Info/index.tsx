@@ -22,7 +22,7 @@ import {
 import { PoolIcon } from "../tokenIcon";
 import "./styles.less";
 import echarts from "echarts";
-import { useEnrichedPools, getTokenData } from "../../context/market";
+import { useEnrichedPools } from "../../context/market";
 import { usePools } from "../../utils/pools";
 import {
   formatNumber,
@@ -30,40 +30,50 @@ import {
   formatUSD,
   useLocalStorageState,
 } from "../../utils/utils";
-import { PoolAddress } from "../pool/address";
-import { PoolCard } from "./../pool/card";
 import { TVLChart, VolumeChart } from "./historical";
 import {TokensView} from "./tokens"
 import {PoolsView} from "./pools"
 import { TransactionsView } from "./transactions"
+import {getMarketInfoHttp} from "../../service/fetch"
 
-interface Totals {
-  liquidity: number;
-  volume: number;
-  fees: number;
+interface OverviewInfo {
+  date: string;
+  tvl: string;
+  vol: string;
+}
+interface PoolsInfo {
+  address: string;
+  symbol: string;
+  tvl: string;
+  vol7d: Number;
+  vol24: Number;
 }
 export const InfoView = React.memo(() => {
-  // const tokenData = getTokenData()
-  const [totals, setTotals] = useState<Totals>(() => ({
-    liquidity: 0,
-    volume: 0,
-    fees: 0,
-  }));
-  const { pools } = usePools();
-  const enriched = useEnrichedPools(pools);
+  const [TVLTime, setTVLTime] = useState<string[]>([])
+  const [TVLData, setTVLData] = useState<Number[]>([])
+  const [VolData, setVolData] = useState<Number[]>([])
+  const [Loading, setLoading] = useState(true)
+  const [PoolsData, setPoolsData] = useState<any[]>([])
+  const [TokensData, setTokensData] = useState<any[]>([])
   useEffect(() => {
-    setTotals(
-      enriched.reduce(
-        (acc, item) => {
-          acc.liquidity = acc.liquidity + item.liquidity;
-          acc.volume = acc.volume + item.volume24h;
-          acc.fees = acc.fees + item.fees;
-          return acc;
-        },
-        { liquidity: 0, volume: 0, fees: 0 } as Totals
-      )
-    );
-  })
+    (async function myFunction() {
+      let res = await getMarketInfoHttp();
+       // @ts-ignore
+      if (res && res.data.length > 0) {
+        // @ts-ignore
+        const { Overview, Pools, Tokens } = res.data[0]
+        const TVLTime = Overview.map((x:any)=>x.date)
+        const TVLData = Overview.map((x:any) =>Number(x.tvl))
+        const VolData = Overview.map((x:any) =>Number(x.vol))
+        setTVLTime(TVLTime)
+        setTVLData(TVLData)
+        setVolData(VolData)
+        setLoading(false)
+        setPoolsData(Pools)
+        setTokensData(Tokens)
+      }
+    })();
+  },[]);
   return (
     <div className="infoPage">
       <div className="chartsBox">
@@ -72,15 +82,15 @@ export const InfoView = React.memo(() => {
         </div>
         <div className="chartsContent">
           <div>
-            <TVLChart current={formatUSD.format(totals.liquidity)} />
+            <TVLChart time={TVLTime} data={TVLData} loading={Loading}  />
           </div>
           <div>
-            <VolumeChart current={formatUSD.format(totals.liquidity)} />
+            <VolumeChart time={TVLTime} data={VolData} loading={Loading} />
           </div>
         </div>
       </div>
-      <TokensView />
-      <PoolsView />
+      <TokensView data={TokensData} />
+      <PoolsView data={PoolsData} />
       <TransactionsView />
     </div>
   )

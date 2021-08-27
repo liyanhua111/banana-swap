@@ -41,35 +41,15 @@ interface Totals {
   fees: number;
 }
 
-export const PoolsView = React.memo(() => {
-  const [totals, setTotals] = useState<Totals>(() => ({
-    liquidity: 0,
-    volume: 0,
-    fees: 0,
-  }));
-  const { pools } = usePools();
-  const enriched = useEnrichedPools(pools);
-  console.log(enriched,'enriched')
-  // Updates total values
+export const PoolsView = React.memo((props:{data:any[]}) => {
   useEffect(() => {
-    setTotals(
-      enriched.reduce(
-        (acc, item) => {
-          acc.liquidity = acc.liquidity + item.liquidity;
-          acc.volume = acc.volume + item.volume24h;
-          acc.fees = acc.fees + item.fees;
-          return acc;
-        },
-        { liquidity: 0, volume: 0, fees: 0 } as Totals
-      )
-    );
-  }, [enriched]);
-
+    
+  }, [props.data]);
   const columns = [
     {
       title: "Pools",
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "symbol",
+      key: "symbol",
       render(text: string, record: any) {
         return {
           props: {
@@ -77,7 +57,7 @@ export const PoolsView = React.memo(() => {
           },
           children: (
             <div style={{ display: "flex", alignItems: "center" }}>
-              <PoolIcon mintA={record.mints[0]} mintB={record.mints[1]} />
+              <PoolIcon mintA={record.address} mintB={record.address} />
               <a href={record.link} target="_blank" rel="noopener noreferrer" className="font1">{text}</a>
               <span className="font4">0.03%</span>
             </div>
@@ -87,14 +67,14 @@ export const PoolsView = React.memo(() => {
     },
     {
       title: "TVL",
-      dataIndex: "Price",
-      key: "Price",
+      dataIndex: "tvl",
+      key: "tvl",
       align: 'right' as 'right',
       render(text: string, record: any) {
         return {
           children: (
             <div>
-              <div>{formatUSD.format(record.liquidity)}</div>
+              <div>{formatUSD.format(record.tvl)}</div>
             </div>
           ),
         };
@@ -104,8 +84,8 @@ export const PoolsView = React.memo(() => {
     },
     {
       title: "Volume 24H",
-      dataIndex: "liquidity",
-      key: "PriceChange",
+      dataIndex: "vol24",
+      key: "vol24",
       align: 'right' as 'right',
       render(text: string, record: any) {
         return {
@@ -114,7 +94,7 @@ export const PoolsView = React.memo(() => {
           },
           children:(
             <div>
-              <div>{formatUSD.format(record.volume24h)}</div>
+              <div>{formatUSD.format(record.vol24)}</div>
             </div>
           ),
         };
@@ -123,8 +103,8 @@ export const PoolsView = React.memo(() => {
     },
     {
       title: "Volume7D",
-      dataIndex: "fees24h",
-      key: "fees24h",
+      dataIndex: "vol7d",
+      key: "vol7d",
       align: 'right' as 'right',
       render(text: string, record: any) {
         return {
@@ -133,7 +113,7 @@ export const PoolsView = React.memo(() => {
           },
           children: (
             <div>
-              <div>{formatUSD.format(record.fees24h)}</div>
+              <div>{formatUSD.format(record.vol7d)}</div>
             </div>
           ),
         };
@@ -152,7 +132,7 @@ export const PoolsView = React.memo(() => {
         </div>
         <div className="tableBox">
           <Table
-              dataSource={enriched.filter(
+              dataSource={props.data.filter(
                 (row) => true
               )}
               columns={columns}

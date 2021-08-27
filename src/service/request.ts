@@ -11,7 +11,7 @@ var instance = axios.create({
 });
 
 var service = {
-  async post(api:string, sendData:Object) {
+  async post(api:string, sendData?:Object) {
     sendData = sendData || {};
     let promise = new Promise(function(resolve, reject) {
       instance
@@ -35,7 +35,7 @@ var service = {
     });
     return promise;
   },
-  async get(api:string, sendData:Object) {
+  async get(api:string, sendData?:Object) {
     sendData = sendData || {};
     let promise = new Promise(function(resolve, reject) {
       instance
