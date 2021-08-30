@@ -15,6 +15,7 @@
   "Connect":"Connect",
   "Disconnect":"Disconnect",
   "connected":"connected",
+  "CopyAddress":"Copy address",
   "ChangeWallet":"Change Wallet",
   "SelectWallet":"Select Wallet",
   "Cancel":"Cancel",
@@ -142,5 +143,8 @@
   "IBO13":"Single-Token Market Making",
   "IBO14":"Creating a Crowdpooling campaign can help you create a highly liquid trading venue for your project tokens, with an equal opportunity community token distribution mechanic that ensures no frontrunning and bot interference.",
   "IBO15":"You only need to supply the tokens you want to distribute and nothing more. No more liquidity provision in pairs! Crowdpooling will help you create the liquidity market for your token with the community's help. ",
-  "COMINGSOON":"COMING SOON..."
+  "COMINGSOON":"COMING SOON...",
+  "SlipeTip1":"Enter a valid slippage percentage",
+  "SlipeTip2":"Your transaction may fail",
+  "SlipeTip3":"Enter a valid number less than "
 }

@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link,useLocation } from "react-router-dom";
 import {
   addLiquidity,
   usePoolForBasket,
@@ -533,6 +534,7 @@ export const PoolNum = (props: { pool?: PoolInfo }) => {
 };
 export const YourPosition = (props: { pool?: PoolInfo }) => {
   const { t } = useTranslation();
+  const history = useLocation();
   const { pool } = props;
   const pools = useMemo(
     () => [props.pool].filter((p) => p) as PoolInfo[],
@@ -547,7 +549,6 @@ export const YourPosition = (props: { pool?: PoolInfo }) => {
   }
   const baseMintAddress = pool.pubkeys.holdingMints[0].toBase58();
   const quoteMintAddress = pool.pubkeys.holdingMints[1].toBase58();
-
   const ratio =
     userAccounts
       .filter((f) => pool.pubkeys.mint.equals(f.info.mint))
@@ -560,6 +561,16 @@ export const YourPosition = (props: { pool?: PoolInfo }) => {
       bodyStyle={{ padding: "7px" }}
       size="small"
       title={t("YourLiquidity")}
+      extra={history.pathname=='/swap/add'&&ratio>0?(<p className="removeBtn">
+        <Link
+        to={{
+          pathname: `/swap/myPool`,
+          state: {MintAddressA: baseMintAddress, MintAddressB:quoteMintAddress}
+        }}
+      >
+        {t("Remove")}
+      </Link>
+      </p>):''}
     >
       <div className="pool-card" style={{ width: "initial" }}>
         <div className="pool-card-row" style={{ margin: 0 }}>

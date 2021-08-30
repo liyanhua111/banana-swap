@@ -18,8 +18,13 @@ export const WalletConnect: FunctionComponent = ({ children }) => {
           style={{ padding: 12 }}
         />
       )}
+      {connected &&(
+        <Menu.Item key="4" onClick={() => navigator.clipboard.writeText(publicKey)}>
+          {t("CopyAddress")}
+        </Menu.Item>
+      )}
       <Menu.Item key="3" onClick={select}>
-        {t("ChangeWallet")}
+        <span>{t("ChangeWallet")}</span>
       </Menu.Item>
       {connected && (
         <Menu.Item

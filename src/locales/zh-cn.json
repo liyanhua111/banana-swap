@@ -15,6 +15,7 @@
   "Connect":"连接",
   "Disconnect":"断开",
   "connected":"已连接",
+  "CopyAddress":"复制地址",
   "ChangeWallet":"选择钱包",
   "SelectWallet":"选择钱包",
   "Cancel":"取消",
@@ -142,5 +143,8 @@
   "IBO13":"无需双边做市",
   "IBO14":"通过众筹建池，项目方可以和社区合作建立初始流动性，为代币提供交易场所。",
   "IBO15":"你只需要提供你想发行的代币，就可以跟社区一起合作建立流动性。",
-  "COMINGSOON":"正在开发中..."
+  "COMINGSOON":"正在开发中...",
+  "SlipeTip1":"输入一个大于0的有效值",
+  "SlipeTip2":"设置太小，交易可能会失败",
+  "SlipeTip3":"输入的有效值不得大于 "
 }

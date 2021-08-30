@@ -42,18 +42,18 @@ export const WALLET_PROVIDERS = [
   //   icon: require("../assets/img/wallet/Solong.png"),
   //   adapter: SolongWalletAdapter,
   // },
-  {
-    name: "MathWallet",
-    url: "https://www.mathwallet.org",
-    icon: require("../assets/img/wallet/MathWallet.png"),
-    adapter: MathWalletAdapter,
-  },
-  {
-    name: "Phantom",
-    url: "https://www.phantom.app",
-    icon: require("../assets/img/wallet/Phantom.png"),
-    adapter: PhantomWalletAdapter,
-  },
+  // {
+  //   name: "MathWallet",
+  //   url: "https://www.mathwallet.org",
+  //   icon: require("../assets/img/wallet/MathWallet.png"),
+  //   adapter: MathWalletAdapter,
+  // },
+  // {
+  //   name: "Phantom",
+  //   url: "https://www.phantom.app",
+  //   icon: require("../assets/img/wallet/Phantom.png"),
+  //   adapter: PhantomWalletAdapter,
+  // },
 ];
 
 const WalletContext = React.createContext<any>(null);
@@ -73,6 +73,7 @@ export function WalletProvider({ children = null as any }) {
   const wallet = useMemo(
     function () {
       if (provider) {
+        // @ts-ignore
         return new (provider.adapter || Wallet)(
           providerUrl,
           endpoint

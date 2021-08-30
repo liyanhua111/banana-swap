@@ -18,7 +18,10 @@ export const AppBar = (props: { left?: JSX.Element; right?: JSX.Element }) => {
   const { connected } = useWallet();
   const location = useLocation();
   const history = useHistory();
-
+  const goMyPool =function () {
+    history.push({ pathname: "/swap/myPool" })
+    localStorage.removeItem('MintAddress')
+  }
   const TopBar = (
     <div className="App-Bar">
       <div className="App-Bar-left">
@@ -35,7 +38,7 @@ export const AppBar = (props: { left?: JSX.Element; right?: JSX.Element }) => {
             className={`mypoolBtn ${location.pathname === '/swap/myPool' ? 'poolActive' : ''}`}
             shape="round"
             size="large"
-            onClick={() => history.push({ pathname: "/swap/myPool" })}
+            onClick={goMyPool}
           >
             {t("MyPools")}
           </Button>
