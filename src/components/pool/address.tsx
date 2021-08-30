@@ -13,7 +13,7 @@ const Address = (props: {
   label?: string;
 }) => {
   return (
-    <Row style={{ width: "100%", ...props.style }}>
+    <Row style={{ width: "300px", ...props.style }}>
       {props.label && <Col span={8} style={{textAlign:'right'}}>{props.label}:</Col>}
       <Col span={14}>
         <ExplorerLink address={props.address} code={true} type="address" />

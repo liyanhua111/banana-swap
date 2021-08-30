@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
-import { Dropdown, Menu,ConfigProvider } from "antd";
+import { Dropdown, Menu, ConfigProvider,message } from "antd";
+import Clipboard from 'clipboard';
 import { useTranslation } from 'react-i18next';
 import { useWallet } from "../context/wallet";
 import { ExplorerLink } from "./explorerLink";
@@ -8,7 +9,13 @@ export const WalletConnect: FunctionComponent = ({ children }) => {
   const { t } = useTranslation();
   const { connected, wallet, select, connect, disconnect } = useWallet();
   const publicKey = (connected && wallet?.publicKey?.toBase58()) || "";
-
+  const copy = new Clipboard('.copy-btn');
+  copy.on('success', e => {
+   });
+  copy.on('error', function (e) {
+      console.error('Action:', e.action);
+      console.error('Trigger:', e.trigger);
+  });
   const menu = (
     <Menu style={{ textAlign: "right" }}>
       {connected && (
@@ -19,8 +26,8 @@ export const WalletConnect: FunctionComponent = ({ children }) => {
         />
       )}
       {connected &&(
-        <Menu.Item key="4" onClick={() => navigator.clipboard.writeText(publicKey)}>
-          {t("CopyAddress")}
+        <Menu.Item key="4" data-clipboard-text={publicKey} className="copy-btn">
+          <span>{t("CopyAddress")}</span>
         </Menu.Item>
       )}
       <Menu.Item key="3" onClick={select}>

@@ -169,9 +169,6 @@ export function WalletProvider({ children = null as any }) {
       >
         {WALLET_PROVIDERS.map((provider) => {
           const onClick = function () {
-            if (provider.name !== "Solflare") {
-              return;
-            }
             setProviderUrl(provider.url);
             setAutoConnect(true);
             close();
@@ -183,7 +180,7 @@ export function WalletProvider({ children = null as any }) {
               type={providerUrl === provider.url ? "primary" : "ghost"}
               onClick={onClick}
               className="walletBtn"
-              disabled={provider.name !== "Solflare" ? true : false}
+              // disabled={provider.name !== "Solflare" ? true : false}
               icon={
                 <img
                   alt={`${provider.name}`}
