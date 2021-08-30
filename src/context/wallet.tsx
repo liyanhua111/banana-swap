@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import Wallet from "@project-serum/sol-wallet-adapter";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import { Button, Modal } from "antd";
 import {
   WalletAdapter,
@@ -20,15 +20,15 @@ import { useLocalStorageState } from "../utils/utils";
 import { notify } from "../utils/notifications";
 
 export const WALLET_PROVIDERS = [
-  // {
-  //   name: "sollet.io",
-  //   url: "https://www.sollet.io",
-  //   icon: require("../assets/img/wallet/Sollet.png"),
-  // },
+  {
+    name: "sollet.io",
+    url: "https://www.sollet.io",
+    icon: require("../assets/img/wallet/Sollet.png"),
+  },
   {
     name: "Solflare",
     url: "https://solflare.com/access-wallet",
-    icon: require("../assets/img/wallet/Solflare.png")
+    icon: require("../assets/img/wallet/Solflare.png"),
   },
   // {
   //   name: "Ledger",
@@ -168,6 +168,9 @@ export function WalletProvider({ children = null as any }) {
       >
         {WALLET_PROVIDERS.map((provider) => {
           const onClick = function () {
+            if (provider.name !== "Solflare") {
+              return;
+            }
             setProviderUrl(provider.url);
             setAutoConnect(true);
             close();
@@ -179,6 +182,7 @@ export function WalletProvider({ children = null as any }) {
               type={providerUrl === provider.url ? "primary" : "ghost"}
               onClick={onClick}
               className="walletBtn"
+              disabled={provider.name !== "Solflare" ? true : false}
               icon={
                 <img
                   alt={`${provider.name}`}
