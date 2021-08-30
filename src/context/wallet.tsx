@@ -20,11 +20,11 @@ import { useLocalStorageState } from "../utils/utils";
 import { notify } from "../utils/notifications";
 
 export const WALLET_PROVIDERS = [
-  {
-    name: "sollet.io",
-    url: "https://www.sollet.io",
-    icon: require("../assets/img/wallet/Sollet.png"),
-  },
+  // {
+  //   name: "sollet.io",
+  //   url: "https://www.sollet.io",
+  //   icon: require("../assets/img/wallet/Sollet.png"),
+  // },
   {
     name: "Solflare",
     url: "https://solflare.com/access-wallet",
@@ -42,12 +42,12 @@ export const WALLET_PROVIDERS = [
   //   icon: require("../assets/img/wallet/Solong.png"),
   //   adapter: SolongWalletAdapter,
   // },
-  {
-    name: "MathWallet",
-    url: "https://www.mathwallet.org",
-    icon: require("../assets/img/wallet/MathWallet.png"),
-    adapter: MathWalletAdapter,
-  },
+  // {
+  //   name: "MathWallet",
+  //   url: "https://www.mathwallet.org",
+  //   icon: require("../assets/img/wallet/MathWallet.png"),
+  //   adapter: MathWalletAdapter,
+  // },
   {
     name: "Phantom",
     url: "https://www.phantom.app",

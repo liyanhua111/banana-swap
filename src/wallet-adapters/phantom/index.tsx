@@ -61,7 +61,7 @@ export class PhantomWalletAdapter
     return this._provider.signTransaction(transaction);
   }
 
-  connect = async () => {
+  async connect() {
     if (this._provider) {
       return;
     }
