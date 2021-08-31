@@ -1,3 +1,136 @@
+.launchPage{
+  max-width: 1350px;
+  margin: 0 auto;
+  height: 700px;
+  margin-top: -30px;
+  .tite{
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .titleBox{
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 30px;
+    .font1{
+      color: #fff;
+    }
+  }
+  .launchContent{
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    .launchL{
+      width: 890px;
+      margin-right: 24px;
+    }
+    .launchR{
+      flex: 1;
+      background: #fff;
+      box-shadow: 0px 0px 27px 0px rgba(33, 30, 30, 0.2);
+      border-radius: 10px;
+      .tabBox{
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #F7F7F7;
+        padding: 6px;
+        color:#FFC000;
+        margin-bottom: 15px;
+        .tabTitle{
+          width: 50%;
+          height: 100%;
+          line-height: 38px;
+          text-align: center;
+          margin-bottom: 0;
+          cursor: pointer;
+          &.tabActive{
+            color: #fff;
+            background: #FFC000;
+            border-radius: 6px;
+          }
+        }
+      }
+    }
+  }
+}
+.launch{
+  text-align: left;
+  padding: 30px;
+  .subTitle{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #999999;
+    p{
+      margin-bottom: 0;
+    }
+    .font3{
+      padding: 0px 4px;
+      color:#FFC000;
+      background: #FFF6DC;
+      border-radius: 4px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+  }
+}
+.stepView{
+  position: relative;
+  height: 100%;
+  background: #fff;
+  box-shadow: 0px 0px 27px 0px rgba(33, 30, 30, 0.2);
+  border-radius: 10px;
+  padding: 30px;
+  text-align: left;
+  overflow: hidden;
+  .bgImg{
+    position: absolute;
+    right: -170px;
+    top: -40px;
+    width: 58%;
+    opacity: 0.12;
+  }
+  .font1{
+    font-size: 14px;
+    color: #999999;
+    text-align: center;
+    margin-top: 10vh;
+    margin-bottom: 6vh;
+  }
+  .stepContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .stepItem{
+      width: 199px;
+      height: 270px;
+      background: #FFF6DC;
+      border-radius: 10px;
+      padding: 16px;
+      .index{
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        text-align: center;
+        background: #FFC000;
+        color: #fff;
+        border-radius: 50%;
+      }
+      .font2{
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .font3{
+        color: #999999;
+      }
+    }
+    .ArrowRight{
+      padding: 15px;
+      font-size: 12px;
+    }
+  }
+}
 .IBOPage{
   .ant-table{
     margin: 0;

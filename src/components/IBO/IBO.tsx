@@ -44,6 +44,9 @@ export const IBO = (props: { left?: JSX.Element; right?: JSX.Element }) => {
       dataIndex: 'address',
     },
   ];
+  const goLaunch =function () {
+    history.push({ pathname: "/swap/IBO/launch" })
+  }
   interface IData {
     id?: string; 
     name: string;
@@ -58,8 +61,9 @@ export const IBO = (props: { left?: JSX.Element; right?: JSX.Element }) => {
           <div className="tableH">
             <p className="title">{t("IBO1")}</p>
             <Button
-            className="myButton"
-            type="primary"
+              onClick={goLaunch}
+              className="myButton"
+              type="primary"
               size="large">
               {t("IBO2")}
             </Button>
@@ -81,9 +85,10 @@ export const IBO = (props: { left?: JSX.Element; right?: JSX.Element }) => {
             </div>
           </div>
           <div className="buttonBox">
-           <Button
-            className="myButton"
-            type="primary"
+            <Button
+              onClick={goLaunch}
+              className="myButton"
+              type="primary"
               size="large">
               {t("IBO2")}
             </Button>
