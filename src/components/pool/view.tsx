@@ -14,10 +14,10 @@ import { MigrationModal } from "../migration";
 
 export const PoolOverview = () => {
   const { t } = useTranslation();
-  const [ownedArr,setOwnedArr] = useState<any[]>([])
   const myPoolsLoading = useSelector((state: RootStateOrAny) => state.myPoolsLoading);
   const history = useHistory();
   const owned = useOwnedPools();
+  const [ownedArr,setOwnedArr] = useState<any[]>(owned)
   const location = useLocation();
   useEffect(() => {
     if (location.state) {
