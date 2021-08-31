@@ -24,7 +24,8 @@ interface PhantomProvider {
 
 export class PhantomWalletAdapter
   extends EventEmitter
-  implements WalletAdapter {
+  implements WalletAdapter
+{
   _provider: PhantomProvider | undefined;
   constructor() {
     super();
@@ -61,7 +62,7 @@ export class PhantomWalletAdapter
     return this._provider.signTransaction(transaction);
   }
 
-  connect = async () => {
+  async connect() {
     if (this._provider) {
       return;
     }
@@ -78,10 +79,10 @@ export class PhantomWalletAdapter
       return;
     }
 
-    provider.on('connect', () => {
+    provider.on("connect", () => {
       this._provider = provider;
       this.emit("connect");
-    })
+    });
 
     if (!provider.isConnected) {
       await provider.connect();

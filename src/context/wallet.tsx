@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import Wallet from "@project-serum/sol-wallet-adapter";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import { Button, Modal } from "antd";
 import {
   WalletAdapter,
@@ -28,7 +28,7 @@ export const WALLET_PROVIDERS = [
   {
     name: "Solflare",
     url: "https://solflare.com/access-wallet",
-    icon: require("../assets/img/wallet/Solflare.png")
+    icon: require("../assets/img/wallet/Solflare.png"),
   },
   // {
   //   name: "Ledger",
@@ -42,18 +42,18 @@ export const WALLET_PROVIDERS = [
   //   icon: require("../assets/img/wallet/Solong.png"),
   //   adapter: SolongWalletAdapter,
   // },
-  {
-    name: "MathWallet",
-    url: "https://www.mathwallet.org",
-    icon: require("../assets/img/wallet/MathWallet.png"),
-    adapter: MathWalletAdapter,
-  },
-  {
-    name: "Phantom",
-    url: "https://www.phantom.app",
-    icon: require("../assets/img/wallet/Phantom.png"),
-    adapter: PhantomWalletAdapter,
-  },
+  // {
+  //   name: "MathWallet",
+  //   url: "https://www.mathwallet.org",
+  //   icon: require("../assets/img/wallet/MathWallet.png"),
+  //   adapter: MathWalletAdapter,
+  // },
+  // {
+  //   name: "Phantom",
+  //   url: "https://www.phantom.app",
+  //   icon: require("../assets/img/wallet/Phantom.png"),
+  //   adapter: PhantomWalletAdapter,
+  // },
 ];
 
 const WalletContext = React.createContext<any>(null);
@@ -73,6 +73,7 @@ export function WalletProvider({ children = null as any }) {
   const wallet = useMemo(
     function () {
       if (provider) {
+        // @ts-ignore
         return new (provider.adapter || Wallet)(
           providerUrl,
           endpoint
@@ -179,6 +180,7 @@ export function WalletProvider({ children = null as any }) {
               type={providerUrl === provider.url ? "primary" : "ghost"}
               onClick={onClick}
               className="walletBtn"
+              // disabled={provider.name !== "Solflare" ? true : false}
               icon={
                 <img
                   alt={`${provider.name}`}
