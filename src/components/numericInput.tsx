@@ -32,7 +32,7 @@ export class NumericInput extends React.Component<any, any> {
         {...this.props}
         onChange={this.onChange}
         onBlur={this.onBlur}
-        maxLength={5}
+        maxLength={this.props.maxLength||25}
       />
     );
   }

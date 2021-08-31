@@ -51,6 +51,7 @@ export const Slippage = () => {
             size="small"
             placeholder={value}
             value={value}
+            maxLength={5}
             style={{
               width: 50,
               fontSize: 14,
