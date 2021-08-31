@@ -6,6 +6,7 @@ import {
   SystemProgram,
   TransactionInstruction,
 } from "@solana/web3.js";
+import BigNumber from "bignumber.js";
 import { sendTransaction, useConnection } from "./connection";
 import { useEffect, useMemo, useState } from "react";
 import { Token, MintLayout, AccountLayout } from "@solana/spl-token";
@@ -13,7 +14,7 @@ import { notify } from "./notifications";
 import { getTokenName,KnownTokenMap } from "../utils/utils";
 import { useConnectionConfig } from "../utils/connection";
 import axios from 'axios'
-import {setPoolHttp,getTickerHttp} from "../service/fetch"
+import {setPoolHttp,getTickerHttp,setTransactions} from "../service/fetch"
 import {
   cache,
   getCachedAccount,
@@ -476,18 +477,19 @@ export const swap = async (
   let pairUSDT = await getTickerHttp({ trading_pair: "SOL-USDT" })
   // @ts-ignore
   const ticker = pairUSDT?.data.best_ask
+  let mint_a_address, mint_b_address
+  let aName, bName;
+  // let amount1 = new BigNumber(components[0].amount).div(1e9).toNumber()
+  // let amount2 = new BigNumber(components[1].amount).div(1e9).toNumber()
   if (!pool) {
-    // let amount1 = (components[0].amount / 1e9)
-    // let amount2 = (components[1].amount / 1e9)
-    let amount = routeAmount*ticker
-    let mint1 = swapList[0].pool.pubkeys.holdingMints[1];
-    let mint2 = swapList[1].pool.pubkeys.holdingMints[1];
-    let aName, bName;
-    if (mint1) {
-      aName = getTokenName(tokenMap, mint1.toBase58());
+    let amount = new BigNumber(routeAmount).times(ticker).toNumber()
+    mint_a_address = swapList[0].pool.pubkeys.holdingMints[1].toBase58();
+    mint_b_address = swapList[1].pool.pubkeys.holdingMints[1].toBase58();
+    if (mint_a_address) {
+      aName = getTokenName(tokenMap, mint_a_address);
     }
-    if (mint2) {
-      bName = getTokenName(tokenMap, mint2.toBase58());
+    if (mint_b_address) {
+      bName = getTokenName(tokenMap, mint_b_address);
     }
     transaction_record = [
         {
@@ -528,19 +530,15 @@ export const swap = async (
     ]
   } else {
       // @ts-ignore
-    let mint1 = pool?.pubkeys.holdingMints[0];
-    let mint2 = pool?.pubkeys.holdingMints[1];
-    let aName, bName;
-    if (mint1) {
-      aName = getTokenName(tokenMap, mint1.toBase58());
+    mint_a_address = pool?.pubkeys.holdingMints[0].toBase58();
+    mint_b_address = pool?.pubkeys.holdingMints[1].toBase58();
+    if (mint_a_address) {
+      aName = getTokenName(tokenMap, mint_a_address);
     }
-    if (mint2) {
-      bName = getTokenName(tokenMap, mint2.toBase58());
+    if (mint_b_address) {
+      bName = getTokenName(tokenMap, mint_b_address);
     }
-    // let amount1 = (components[0].amount / 1e9)
-    // let amount2 = (components[1].amount / 1e9)
-    // let amount = new BigNumber(components[0].amount).div(1e9)
-    let amount = components[0].amount/1e9*ticker
+    let amount = new BigNumber(components[0].amount).div(1e9).times(ticker).toNumber()
     transaction_record = [
       {
         // @ts-ignore
@@ -565,9 +563,21 @@ export const swap = async (
       }
     ]
   }
-  let sendData = { transaction_record, tx_hash: tx }
-  console.log(sendData, 'sendDatasendDatasendData====')
+  let sendData = { transaction_record, tx_hash: tx ,mint_a_address, mint_b_address}
+  console.log(sendData, 'sendDatasendDatasendData11111====')
   await setPoolHttp({ ...sendData })
+  // const publicKey = (wallet?.publicKey?.toBase58()) || "";
+  // let sendData2 = {  
+  //   transactions_type: "0",
+  //   token_in_symbol: aName,
+  //   token_out_symbol: bName,
+  //   total_value: new BigNumber(amount1).plus(amount2).toNumber(),
+  //   token_in_amount: amount1,
+  //   token_out_amount: amount2,
+  //   account: publicKey
+  // }
+  // console.log(sendData2, 'sendDatasendDatasendData222222222====')
+  // await setTransactions({ ...sendData2 })
   notify({
     message: "Trade executed.",
     type: "success",

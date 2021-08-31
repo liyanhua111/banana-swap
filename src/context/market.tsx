@@ -23,7 +23,6 @@ import { useMemo } from "react";
 import { PoolInfo } from "../models";
 import { EventEmitter } from "./../utils/eventEmitter";
 import { LIQUIDITY_PROVIDER_FEE, SERUM_FEE } from "../utils/pools";
-import {setPoolHttp} from "../service/fetch"
 
 interface RecentPoolData {
   pool_identifier: string;
