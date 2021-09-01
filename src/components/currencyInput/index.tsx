@@ -35,7 +35,6 @@ export const TokenDisplay = (props: {
       hasBalance = balance > 0;
     }
   }
-
   return (
     <>
       <div
@@ -239,13 +238,184 @@ export const CurrencyInput = (props: {
                 key={props.mint}
                 name={getTokenName(tokenMap, props.mint)}
                 mintAddress={props.mint}
-                showBalance={true}
               />
             )
           )}
         </div>
       </div>
     </Card>
+  );
+};
+
+export const CurrencySelect = (props: {
+  mint?: string;
+  amount?: string;
+  title?: string;
+  hideSelect?: boolean;
+  onBalanceChange?: (val: number) => void;
+  onMintChange?: (account: string) => void;
+}) => {
+  const { userAccounts } = useUserAccounts();
+  // const { pools } = useCachedPool();
+  const mint = cache.getMint(props.mint);
+
+  const { tokens, tokenMap } = useConnectionConfig();
+  const renderPopularTokens = tokens.map((item) => {
+    return (
+      <Option
+        key={item.address}
+        value={item.address}
+        name={item.symbol}
+        title={item.address}
+      >
+        <TokenDisplay
+          key={item.address}
+          name={item.symbol}
+          mintAddress={item.address}
+          showBalance={true}
+        />
+      </Option>
+    );
+  });
+
+  // TODO: expand nested pool names ...?
+
+  // group accounts by mint and use one with biggest balance
+  // const grouppedUserAccounts = userAccounts
+  //   .sort((a, b) => {
+  //     return b.info.amount.gt(a.info.amount) ? 1 : -1;
+  //   })
+  //   .reduce((map, acc) => {
+  //     const mint = acc.info.mint.toBase58();
+  //     if (isKnownMint(tokenMap, mint)) {
+  //       return map;
+  //     }
+
+  //     const pool = pools.find((p) => p && p.pubkeys.mint.toBase58() === mint);
+
+  //     map.set(mint, (map.get(mint) || []).concat([{ account: acc, pool }]));
+
+  //     return map;
+  //   }, new Map<string, { account: TokenAccount; pool: PoolInfo | undefined }[]>());
+
+  // const additionalAccounts = [...grouppedUserAccounts.keys()];
+  // if (
+  //   tokens.findIndex((t) => t.address === props.mint) < 0 &&
+  //   props.mint &&
+  //   !grouppedUserAccounts.has(props?.mint)
+  // ) {
+  //   additionalAccounts.push(props.mint);
+  // }
+  
+  // const renderAdditionalTokens = additionalAccounts.map((mint) => {
+  //   let pool: PoolInfo | undefined;
+  //   const list = grouppedUserAccounts.get(mint);
+  //   if (list && list.length > 0) {
+  //     // TODO: group multple accounts of same time and select one with max amount
+  //     const account = list[0];
+  //     pool = account.pool;
+  //   }
+
+  //   let name: string;
+  //   let icon: JSX.Element;
+  //   if (pool) {
+  //     name = getPoolName(tokenMap, pool);
+  //     const sorted = pool.pubkeys.holdingMints
+  //       .map((a: PublicKey) => a.toBase58())
+  //       .sort();
+  //     icon = <PoolIcon mintA={sorted[0]} mintB={sorted[1]} />;
+  //   } else {
+  //     name = getTokenName(tokenMap, mint, true, 9);
+  //     icon = <TokenIcon mintAddress={mint} />;
+  //   }
+  //   if (name.indexOf('/')>-1)return
+  //   return (
+  //     <Option key={mint} value={mint} name={name}>
+  //       <TokenDisplay
+  //         key={mint}
+  //         mintAddress={mint}
+  //         name={name}
+  //         icon={icon}
+  //         showBalance={!pool}
+  //       />
+  //     </Option>
+  //   );
+  // });
+ 
+
+  // const tokenMint = cache.getMint(mintAddress);
+  // const tokenAccount = useAccountByMint(mintAddress);
+
+  // let balance: number = 0;
+  // let hasBalance: boolean = false;
+  // if (showBalance) {
+  //   if (tokenAccount && tokenMint) {
+  //     balance = convert(tokenAccount, tokenMint);
+  //     hasBalance = balance > 0;
+  //   }
+  // }
+
+  // const tokenMint = cache.getMint(mintAddress);
+  // const tokenAccount = useAccountByMint(mintAddress);
+
+  // let balance: number = 0;
+  // let hasBalance: boolean = false;
+  // if (showBalance) {
+  //   if (tokenAccount && tokenMint) {
+  //     balance = convert(tokenAccount, tokenMint);
+  //     hasBalance = balance > 0;
+  //   }
+  // }
+  const userUiBalance = (mint:any) => {
+    const currentAccount = userAccounts?.find(
+      (a) => {
+        return a.info.mint.toBase58() === mint
+      }
+    );
+    if (currentAccount && mint) {
+      const tokenMint = cache.getMint(mint);
+      return convert(currentAccount, tokenMint);
+    }
+    return 0;
+  };
+  return (
+    <div>
+      {!props.hideSelect ? (
+        <Select
+          className="CurrencySelect"
+          size="large"
+          showSearch
+          style={{ minWidth: 130 }}
+          placeholder="CCY"
+          value={props.mint}
+          onChange={(item) => {
+            console.log(item)
+            if (props.onMintChange) {
+              props.onMintChange(item);
+            }
+            if (props.onBalanceChange) {
+              let balance = userUiBalance(item).toFixed(6)
+              props.onBalanceChange(Number(balance))
+            }
+          }}
+          filterOption={(input, option) =>
+            option?.name?.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
+        >
+          {/* {[...renderPopularTokens, ...renderAdditionalTokens]} */}
+          {[...renderPopularTokens]}
+        </Select>
+      ) : (
+        props.mint && (
+          <TokenDisplay
+            key={props.mint}
+            name={getTokenName(tokenMap, props.mint)}
+            mintAddress={props.mint}
+            showBalance={false}
+          />
+        )
+      )}
+    </div>
   );
 };
 
