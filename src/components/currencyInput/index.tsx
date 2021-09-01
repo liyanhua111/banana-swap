@@ -253,7 +253,7 @@ export const CurrencySelect = (props: {
   title?: string;
   hideSelect?: boolean;
   onBalanceChange?: (val: number) => void;
-  onMintChange?: (account: string) => void;
+  onMintChange?: (obj: object) => void;
 }) => {
   const { userAccounts } = useUserAccounts();
   // const { pools } = useCachedPool();
@@ -390,8 +390,10 @@ export const CurrencySelect = (props: {
           value={props.mint}
           onChange={(item) => {
             console.log(item)
-            if (props.onMintChange) {
-              props.onMintChange(item);
+            if (props.onMintChange&&props.mint) {
+              let name = getTokenName(tokenMap, props.mint)
+              props.onMintChange({address:item,symbal:name});
+              
             }
             if (props.onBalanceChange) {
               let balance = userUiBalance(item).toFixed(6)
