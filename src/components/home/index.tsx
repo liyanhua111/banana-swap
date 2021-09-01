@@ -136,7 +136,6 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                 <div className="equityL">
                   <div className="position position1">{t("homeInfor53")}</div>
                   <div className="position position2">{t("homeInfor54")}</div>
-                  <div className="position position3">{t("homeInfor55")}</div>
                   <div className="equityLItem">
                     <p>BANA</p>
                     <img src={require('../../assets/img/homeIcon.png')} className="placeholder" alt=""/>
@@ -160,7 +159,7 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
 
                 </div>
                 <div className="equityC">
-                  <p className="font1">BANA CARD <br /> BANANA CLUB</p>
+                  <p className="font1">{t("homeInfor51a")}</p>
                   <p className="font2">{t("homeInfor51")}</p>
                   <p className="font3">{t("homeInfor52")}</p>
                 </div>
@@ -177,14 +176,14 @@ export const Home = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                     <img src={require('../../assets/img/homeIcon.png')} alt="" className="placeholder" />
                     <div className="equityRSubItem">
                       <p className="classify classify2">{t("homeInfor58")}</p>
-                      <p className="classifyInfo">{t("homeInfor510")}</p>
+                      <p className="classifyInfo">{t("homeInfor511")}</p>
                     </div>
                   </div>
                   <div className="equityRItem">
                     <p className="placeholder"></p>
                     <div className="equityRSubItem">
                       <p className="classify classify3">{t("homeInfor59")}</p>
-                      <p className="classifyInfo">{t("homeInfor510")}</p>
+                      <p className="classifyInfo">{t("homeInfor512")}</p>
                     </div>
                   </div>
                 </div>
