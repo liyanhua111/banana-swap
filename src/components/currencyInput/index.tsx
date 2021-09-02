@@ -1,8 +1,9 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Card, Select } from "antd";
 import { useTranslation } from "react-i18next";
 import { NumericInput } from "../numericInput";
 import { convert, getPoolName, getTokenName, isKnownMint } from "../../utils/utils";
+import { useWallet } from "../../context/wallet";
 import {
   useUserAccounts,
   useCachedPool,
@@ -252,12 +253,13 @@ export const CurrencySelect = (props: {
   amount?: string;
   title?: string;
   hideSelect?: boolean;
-  onBalanceChange?: (val: number) => void;
   onMintChange?: (obj: object) => void;
 }) => {
+  const { connected } = useWallet();
   const { userAccounts } = useUserAccounts();
   // const { pools } = useCachedPool();
   const mint = cache.getMint(props.mint);
+  
 
   const { tokens, tokenMap } = useConnectionConfig();
   const renderPopularTokens = tokens.map((item) => {
@@ -374,9 +376,11 @@ export const CurrencySelect = (props: {
     );
     if (currentAccount && mint) {
       const tokenMint = cache.getMint(mint);
-      return convert(currentAccount, tokenMint);
+      const balance=convert(currentAccount, tokenMint)
+      
+      return {tokenMint,balance};
     }
-    return 0;
+    return {tokenMint:null,balance:0};
   };
   return (
     <div>
@@ -389,15 +393,10 @@ export const CurrencySelect = (props: {
           placeholder="CCY"
           value={props.mint}
           onChange={(item) => {
-            console.log(item)
-            if (props.onMintChange&&props.mint) {
-              let name = getTokenName(tokenMap, props.mint)
-              props.onMintChange({address:item,symbal:name});
-              
-            }
-            if (props.onBalanceChange) {
-              let balance = userUiBalance(item).toFixed(6)
-              props.onBalanceChange(Number(balance))
+            if (props.onMintChange) {
+              let name = getTokenName(tokenMap, item)
+              let balance = userUiBalance(item)
+              props.onMintChange({address:item,symbol:name,...balance});
             }
           }}
           filterOption={(input, option) =>
