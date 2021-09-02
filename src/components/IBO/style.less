@@ -1,7 +1,8 @@
 .launchPage{
   max-width: 1350px;
+  padding: 0 20px;
   margin: 0 auto;
-  margin-top: -15px;
+  margin-top: -40px;
   .tite{
     font-size: 24px;
     font-weight: 600;
@@ -24,6 +25,7 @@
     }
     .launchR{
       width: 436px;
+      min-width: 320px;
       background: #fff;
       box-shadow: 0px 0px 27px 0px rgba(33, 30, 30, 0.2);
       border-radius: 10px;
@@ -181,7 +183,7 @@
     position: absolute;
     right: -170px;
     top: -20px;
-    width: 58%;
+    height: 120%;
     opacity: 0.12;
   }
   .font1{
@@ -192,11 +194,13 @@
     margin-bottom: 6vh;
   }
   .stepContent{
+    position: relative;
     display: flex;
     justify-content: center;
-    align-items: center;
+    z-index: 1;
     .stepItem{
       max-width: 199px;
+      flex: 1;
       min-height: 270px;
       background: #FFF6DC;
       border-radius: 10px;
@@ -219,6 +223,8 @@
       }
     }
     .ArrowRight{
+      display: flex;
+      align-items: center;
       padding: 15px;
       font-size: 12px;
     }
@@ -303,32 +309,96 @@
     margin-top: 40px;
   }
 }
-@media only screen and (max-width: 870px) {
-  #root .IBOPage{
-    .myButton{
-      min-width: 120px;
-      height: 36px;
-      line-height: 20px;
-      font-size: 14px;
+@media only screen and (max-width: 1200px) {
+  #root {
+    .stepView .font1 {
+      margin-top: 30px;
+      margin-bottom: 20px;
     }
-    .tableH{
+    .stepContent{
       flex-wrap: wrap;
-      .title{
-        text-align: left;
+      .stepItem{
         width: 100%;
-        font-size: 18px;
-        margin-bottom: 20px;
+        max-width: 90%;
+        min-height: auto;
+        margin: 0 auto;
+      }
+      .ArrowRight{
+        width: 100%;
+        justify-content: center;
+        transform: rotate(90deg);
+      }
+    }
+    .launchR{
+      flex: 1;
+    }
+  }
+}
+@media only screen and (max-width: 900px) {
+  #root {
+    .IBOPage{
+      .myButton{
+        min-width: 120px;
+        height: 36px;
+        line-height: 20px;
+        font-size: 14px;
+      }
+      .tableH{
+        flex-wrap: wrap;
+        .title{
+          text-align: left;
+          width: 100%;
+          font-size: 18px;
+          margin-bottom: 20px;
+        }
+      }
+    }
+    .launchPage{
+      padding:0 10px;
+      .stepItem{
+        .font2{
+          font-size: 16px;
+        }
+      }
+      .launchContent{
+        flex-wrap: wrap;
+        .tite{
+          font-size: 16px;
+        }
+        .launchL{
+          width: 100%;
+          flex: auto;
+          margin-bottom: 20px;
+          margin-right: 0;
+        }
+        .launchR{
+          width: 100%;
+          min-width: 300px;
+          margin-bottom: 20px;
+          .ant-select{
+            min-width: auto !important;
+          }
+        }
       }
     }
   }
 }
 @media only screen and (max-width: 600px) {
-  #root .typeBox{
-    flex-wrap: wrap;
-    .typeItem{
-      width: 100%;
-      flex: auto;
-      margin-bottom: 15px;
+  #root {
+    .typeBox{
+      flex-wrap: wrap;
+      .typeItem{
+        width: 100%;
+        flex: auto;
+        margin-bottom: 15px;
+      }
+    }
+    .launchPage{
+      font-size: 12px;
+      margin-top: -20px;
+      .label{
+        font-size: 14px;
+      }
     }
   }
 }
