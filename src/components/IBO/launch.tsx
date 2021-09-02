@@ -112,8 +112,6 @@ export const Transaction = (props: {}) => {
     } else if (!startTime) {
       setErrTip('请选择众筹开始时间')
     } else if (!endTime) {
-      console.log(startTime,'555555')
-      console.log(endTime,'333333')
       setErrTip('请选择众筹结束时间')
     } else if (startTime && endTime) {
       // @ts-ignore
