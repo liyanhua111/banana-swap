@@ -97,11 +97,6 @@ export const Transaction = (props: {}) => {
     };
   }
   const errTipFunc = function () {
-    console.log(Number(currencyBalance))
-    console.log(Number(tokenAmount))
-    console.log(Number(currencyBalance) < Number(tokenAmount))
-    console.log(startTime,'555555')
-      console.log(endTime,'333333')
     if (!currency) {
       setErrTip('请选择众筹代币')
     } else if (!tokenAmount) {
