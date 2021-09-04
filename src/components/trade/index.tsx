@@ -545,23 +545,7 @@ export const TradeInfo = (props: {
 export const TradeView = () => {
   return (
     <>
-      <AppBar
-        right={
-          <Popover
-            placement="topRight"
-            title="Settings"
-            content={<Settings />}
-            trigger="click"
-          >
-            <Button
-              shape="circle"
-              size="large"
-              type="text"
-              icon={<SettingOutlined />}
-            />
-          </Popover>
-        }
-      />
+      <AppBar/>
       <Card
         className="exchange-card"
         headStyle={{ padding: 0 }}

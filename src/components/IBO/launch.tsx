@@ -285,7 +285,7 @@ export const launchView = React.memo(() => {
     <>
       <AppBar/>
       <div className="launchPage">
-        <p className="titleBox">发起 <span className="font1">/ 发起众筹建池</span></p>
+        <div className="titleBox"><p>发起 <span className="font1">/ 发起众筹建池</span></p></div>
         <div className="launchContent">
           <div className="launchL">
             <StepView/>

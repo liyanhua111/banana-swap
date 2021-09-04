@@ -615,23 +615,7 @@ export const YourPosition = (props: { pool?: PoolInfo }) => {
 export const AddToLiquidityView = () => {
   return (
     <>
-      <AppBar
-        right={
-          <Popover
-            placement="topRight"
-            title="Settings"
-            content={<Settings />}
-            trigger="click"
-          >
-            <Button
-              shape="circle"
-              size="large"
-              type="text"
-              icon={<SettingOutlined />}
-            />
-          </Popover>
-        }
-      />
+      <AppBar/>
       <Card
         className="exchange-card"
         headStyle={{ padding: 0 }}

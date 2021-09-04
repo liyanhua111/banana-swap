@@ -7,14 +7,6 @@
     font-size: 24px;
     font-weight: 600;
   }
-  .titleBox{
-    font-size: 16px;
-    text-align: left;
-    margin-bottom: 15px;
-    .font1{
-      color: #fff;
-    }
-  }
   .launchContent{
     height: 100%;
     display: flex;
@@ -307,6 +299,682 @@
   .buttonBox{
     margin: 0 auto;
     margin-top: 40px;
+  }
+}
+.joinPage{
+  width: 1200px;
+  min-height: 600px;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0px 0px 27px 0px rgba(33, 30, 30, 0.2);
+  padding: 45px 10px;
+  font-size: 14px;
+  .title{
+    font-size: 24px;
+    color: #FFC000;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .subTitle{
+    display: flex;
+    justify-content: center;
+    p{
+      padding-bottom: 5px;
+      border-bottom: 5px solid #ED4B9E;
+      margin-right: 5px;
+    }
+    span{
+      color: #999;
+    }
+  }
+  .searchBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+    margin-top: 50px;
+    .ant-input-affix-wrapper{
+      border:none;
+      box-shadow: none;
+    }
+    .searchInput{
+      line-height: 48px;
+      max-width: 456px;
+      background: #F7F7F7;
+      border-radius: 10px;
+      input{
+        background: transparent;
+        padding-left: 10px;
+        border: none;
+        outline: none;
+      }
+      .anticon-search{
+        color: #DBDBDB;
+        font-size: 26px;
+      }
+    }
+    .searchBtn{
+      width: 160px;
+      height: 54px;
+      line-height: 54px;
+      background: #FFC000;
+      text-align: center;
+      color: #fff;
+      margin-bottom: 0;
+      border-radius: 10px;
+      margin-left: 16px;
+      cursor: pointer;
+    }
+  }
+  .joinContent{
+    margin-top: 70px;
+    p{
+      margin-bottom: 8px;
+    }
+    .PoolIconBox{
+      img{
+        width: 45px;
+        height: 45px;
+      }
+    }
+    .joinTip{
+      color: #999999;
+      margin-bottom: 20px;
+    }
+    .projectBox{
+      display: flex;
+      justify-content: center;
+      text-align: left;
+      .itemP{
+        width: 400px;
+        background: #F8F8F8;
+        padding: 25px;
+        border: 1px solid #EEEEEE;
+        border-radius: 8px;
+        .itemT{
+          display: flex;
+          align-items: center;
+          .itemTR{
+            display: flex;
+            justify-content: space-between;
+            flex: 1;
+            position: relative;
+            margin-left: 10px;
+            p{
+              margin-bottom: 0;
+            }
+            .type{
+              flex: 1;
+              height: 24px;
+              line-height: 24px;
+              padding-left: 15px;
+              margin-right: -25px;
+              background: #0BFFDB;
+              border-radius:12px 0 0 12px;
+              margin-left: 16px;
+            }
+          }
+        }
+        .itemM{
+          margin-top: 15px;
+        }
+        .timeBox{
+          display: flex;
+          align-items: center;
+          margin-top: 10px;
+          .waitingBtn{
+            padding: 0 20px;
+            height: 32px;
+            line-height: 32px;
+            color: #fff;
+            margin-right: 10px;
+            background: #FFC000;
+            border-radius: 16px;
+          }
+        }
+        .itemB{
+          .itemBItem{
+            display: flex;
+            justify-content: space-between;
+          }
+        }
+        .itemBB{
+          display: flex;
+          justify-content: flex-end;
+          margin-top: 30px;
+          p{
+            width: 160px;
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+            background: #0BFFDB;
+            cursor: pointer;
+            border-radius: 10px;
+          }
+        }
+        .ProgressBox{
+          width: 100%;
+          .ProgressInfo{
+            display: flex;
+            justify-content: space-between;
+          }
+        }
+      }
+      .font1{
+        color: #FFC000;
+        margin-bottom: 0;
+      }
+      .font2{
+        color: #999999;
+      }
+      .font3{
+        font-size: 40px;
+        margin-right: 8px;
+      }
+      .font4{
+        font-size: 24px;
+      }
+      .font5{
+        color: #00FCD5;
+      }
+    }
+  }
+}
+.disclaimerModel{
+  .ant-modal-footer{
+    border-top: none;
+  }
+  .issueBox{
+    height: 250px;
+    overflow-y: auto;
+    .issue{
+      margin-bottom: 15px;
+    }
+  }
+  .checkBox{
+    border-top: 1px solid #EFEFEF;
+    margin-top: 10px;
+    padding-top: 15px;
+  }
+  .errRadio{
+    .ant-radio-wrapper-checked{
+      .ant-radio-inner{
+        border-color: #FF4D4F;
+      }
+      .ant-radio-inner::after{
+        background-color: #FF4D4F;
+      }
+      span{
+        color: #FF4D4F;
+      }
+    }
+  }
+  .font1{
+    color: #999;
+    font-size: 12px;
+    padding: 16px;
+    background: #F7F7F7;
+    border: 1px solid #EFEFEF;
+    margin-bottom: 16px;
+  }
+  .font2{
+    color: #999;
+    font-size: 14px;
+  }
+}
+.joinDetailPage{
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+  margin-top: -40px;
+  p{
+    margin-bottom: 0;
+  }
+  .joinDetailContent{
+    display: flex;
+    justify-content: space-between;
+    &>div{
+      padding: 30px 23px;
+      background: #fff;
+      box-shadow: 0px 0px 27px 0px rgba(33, 30, 30, 0.2);
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .joinDetailL{
+      flex: 1;
+      margin-right: 23px;
+      .joinTL{
+        display: flex;
+        align-items: center;
+        color: #FFC000;
+        font-size: 16px;
+        div{
+          display: flex;
+          align-items: center;
+          height: 32px;
+          line-height: 32px;
+          background: #F7F7F7;
+          border-radius: 16px;
+          font-size: 24px;
+          padding-right: 8px;
+          color: #222;
+          margin-right: 8px;
+          a{
+            color: #222;
+          }
+          span{
+            display: inline-block;
+            color: #7F5B00;
+            font-size: 16px;
+            background: #FFC000;
+            padding: 0 20px;
+            margin-right: 10px;
+            border-radius: 16px;
+          }
+        }
+      }
+      .priceBox{
+        margin-top: 25px;
+        .font1{
+          font-size: 40px;
+        }
+        .font2{
+          font-size: 24px;
+        }
+      }
+      .ProgressBoxBox{
+        width: 50%;
+        font-size: 16px;
+        margin-top: 10px;
+      }
+      .font3{
+        color: #999;
+      }
+      .tipIcon{
+        margin-left: 8px;
+      }
+      .joinM{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+        &>div{
+          flex: 1;
+          padding: 9px;
+          border: 1px solid #F9F9F9;
+          border-radius: 6px;
+          font-size: 16px;
+          .titleTxt{
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            padding-left: 16px;
+            background: #FFF6DC;
+            padding-left: 16px;
+            border-radius: 6px;
+          }
+          .parameterItem{
+            display: flex;
+            height: 66px;
+            line-height: 66px;
+            justify-content: space-between;
+            border-bottom: 1px solid #F7F7F7;
+            &:last-child{
+              border-bottom: none;
+            }
+          }
+        }
+        .joinML{
+          margin-right: 23px;
+        }
+      }
+    }
+    .joinDetailR{
+      width: 432px;
+      background: #fff;
+      box-shadow: 0px 0px 27px 0px rgba(33, 30, 30, 0.2);
+      .joinDetailRT{
+        display: flex;
+        justify-content: flex-end;
+        .tool{
+          width: 48px;
+          height: 48px;
+          line-height: 48px;
+          text-align: center;
+          color: #999999;
+          font-size: 20px;
+          background: #F7F7F7;
+          border-radius: 10px;
+          cursor: pointer;
+        }
+      }
+      .infoContent{
+        margin-top: 16px;
+        padding: 30px 16px 10px 30px;
+        border: 1px solid #F7F7F7;
+        margin-bottom: 15px;
+      }
+      .infoItem{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+      }
+      .tipIcon{
+        margin-left: 6px;
+        font-size: 14px !important;
+      }
+      .marginB{
+        margin-bottom: 25px !important; 
+      }
+      .marginT{
+        margin-top: 16px !important; 
+      }
+      .font4{
+        color: #999;
+      }
+      .font5{
+        font-size: 16px;
+        color: #999;
+      }
+      .font6{
+        color: #FFC000;
+        font-weight: 600;
+      }
+      .font7{
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .font8{
+        font-size: 16px;
+        font-weight: 600;
+        color: #00FCD5;
+      }
+    }
+  }
+}
+.launchDetailPage{
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+  margin-top: -40px;
+  p{
+    margin-bottom: 0;
+  }
+  .joinDetailContent{
+    display: flex;
+    justify-content: space-between;
+    &>div{
+      padding: 30px 23px;
+      background: #fff;
+      box-shadow: 0px 0px 27px 0px rgba(33, 30, 30, 0.2);
+      border-radius: 10px;
+    }
+    .font1{
+      color: #999;
+    }
+    .font2{
+      color: #00FCD5;
+      font-size: 24px;
+      font-weight: 600;
+    }
+    .font3{
+      color: #FFC000;
+      font-size: 24px;
+      font-weight: 600;
+    }
+    .joinDetailL{
+      flex: 1;
+      margin-right: 23px;
+      .tabContent1{
+        .infoItem{
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 10px;
+        }
+      }
+      .ant-table{
+        margin: 0;
+      }
+    }
+    .joinDetailR{
+      width: 432px;
+      .joinDetailRT{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 24px;
+      }
+      .ProgressBox{
+        margin-top: 40px;
+      }
+      .infoContent{
+        margin-bottom: 80px;
+        margin-top: 30px;
+        .infoItem{
+          display: flex;
+          justify-content: space-between;
+          font-size: 16px;
+          margin-bottom:8px;
+        }
+      }
+      .crowdfunding{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 25px;
+        .subCrowdfunding{
+          display: flex;
+          align-items: center;
+          .imgBox{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 48px;
+            height: 48px;
+            background: #F7F7F7;
+            border-radius: 10px;
+            margin-right: 10px;
+            img{
+              width: 24px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.errTipBtn{
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  background: #F7F7F7;
+  border-radius: 6px;
+  color: #999999;
+}
+.waitingIcon{
+  min-width: 64px;
+  height: 20px;
+  padding: 0 10px;
+  background: #FFF6DC;
+  text-align: center;
+  font-size: 12px;
+  border-radius: 10px;
+}
+.addressModule{
+  a{
+    display: flex;
+    align-items: center;
+  }
+  img{
+    width: 20px;
+    margin:0 5px;
+  }
+  .anticon{
+    font-size: 18px;
+  }
+}
+.shareModel{
+  .ant-modal-content{
+    background: #2A2A2D;
+  }
+  .anticon{
+    color: #fff;
+  }
+  .ant-modal-header{
+    background: #2A2A2D;
+    text-align: center;
+    border-bottom:none;
+    padding: 20px 0;
+    .ant-modal-title{
+      color: #0BFFDB;
+    }
+  }
+  .ant-modal-body{
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .ant-modal-footer{
+    border-top: none;
+  }
+  .shareContent{
+    position: relative;
+    width: 100%;
+    height: 440px;
+    background: url("../../assets/img/shareBg.png") no-repeat center;
+    background-size: contain;
+    font-weight: 600;
+    .shareContentTop{
+      text-align: center;
+      .TokenIcon{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 25px;
+        margin-bottom: 20px;
+        img{
+          width: 24px;
+          height: 24px;
+        }
+      }
+      .font1{
+        font-size: 24px;
+      }
+      .font2{
+        display: inline-block;
+        min-width: 64px;
+        padding: 0 10px;
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        background: #0BFFDB;
+        border-radius: 16px;
+        font-size: 24px;
+        margin: 0 5px;
+      }
+    }
+    .shareContentB{
+      position: absolute;
+      bottom: 0;
+      left: 15px;
+      line-height: 40px;
+      font-size: 12px;
+    }
+    .QRCode{
+      position: absolute;
+      right: 20px;
+      bottom: 60px;
+      width: 90px;
+      height: 90px;
+      img{
+        width: 100%;
+      }
+    }
+  }
+  .shareFooter{
+    margin-top: 40px;
+    cursor: pointer;
+    .font3{
+      color: #fff;
+      font-size: 16px;
+      text-align: center;
+    }
+    .copyImg{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 48px;
+      height: 48px;
+      background: #343638;
+      border-radius: 50%;
+      margin-bottom: 7px;
+      margin: 0 auto;
+      img{
+        width: 32px;
+      }
+    }
+  }
+}
+.inputItemBox{
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  display: flex;
+  flex: 1;
+  background: #F7F7F7;
+  border-radius: 6px;
+  padding: 0 16px;
+  input{
+    border:none;
+    outline: none;
+    box-shadow: none;
+    background: transparent;
+    text-align: right;
+  }
+  .ant-input:focus, .ant-input-focused{
+    box-shadow: none;
+  }
+}
+.balanceBox{
+  display: flex;
+  justify-content: flex-end;
+  .currencyBalance{
+    margin-bottom: 4px;
+    color: #999;
+    .font3{
+      padding: 0px 4px;
+      color:#FFC000;
+      background: #FFF6DC;
+      border-radius: 4px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+  }
+}
+.titleBox{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  text-align: left;
+  margin-bottom: 15px;
+  .font1{
+    color: #fff;
+  }
+  .joinBtn{
+    color: #FFC002;
+    height: 32px;
+    line-height: 32px;
+    min-width: 120px;
+    padding: 0 10px;
+    text-align: center;
+    background: #FFFFFF;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+}
+.ProgressBox{
+  width: 100%;
+  .ProgressInfo{
+    display: flex;
+    justify-content: space-between;
   }
 }
 @media only screen and (max-width: 1200px) {

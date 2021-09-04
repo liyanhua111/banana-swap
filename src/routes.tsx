@@ -13,6 +13,9 @@ import { ExchangeView } from "./components/exchange";
 import { IndexPage } from "./components/index";
 import { IBO } from "./components/IBO/IBO";
 import { launchView } from "./components/IBO/launch";
+import { IBOJoinView } from "./components/IBO/join";
+import { JoinDetailView } from "./components/IBO/joinDetail";
+import { LaunchDetailView } from "./components/IBO/launchDetail";
 import { Farm } from "./components/page/farm";
 import { Info } from "./components/page/Info";
 import { Pool } from "./components/page/pool";
@@ -35,6 +38,9 @@ export function Routes() {
                   {/* <Route exact path="/swap/Info" component={() => <InfoView />} /> */}
                   <Route exact path="/swap/IBO" component={() => <IBO />} />
                   <Route exact path="/swap/IBO/launch" component={launchView} />
+                  <Route exact path="/swap/IBO/join" component={IBOJoinView} />
+                  <Route exact path="/swap/IBO/joinDetail" component={JoinDetailView} />
+                  <Route exact path="/swap/IBO/launchDetail" component={LaunchDetailView} />
                   <Route exact path="/swap/farm" component={() => <Farm />} />
                   <Route exact path="/swap/Info" component={() => <Info />} />
                   <Route exact path="/swap/pool" component={() => <Pool />} />

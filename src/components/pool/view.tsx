@@ -39,23 +39,7 @@ export const PoolOverview = () => {
   const { connect, connected } = useWallet();
   return (
     <>
-      <AppBar
-        right={
-          <Popover
-            placement="topRight"
-            title="Settings"
-            content={<Settings />}
-            trigger="click"
-          >
-            <Button
-              shape="circle"
-              size="large"
-              type="text"
-              icon={<SettingOutlined />}
-            />
-          </Popover>
-        }
-      />
+      <AppBar/>
       <div className="pool-grid">
         {ownedArr.map((o) => (
           <PoolCard

@@ -298,23 +298,7 @@ export const ChartsView = React.memo(() => {
 
   return (
     <>
-      <AppBar
-        right={
-          <Popover
-            placement="topRight"
-            title="Settings"
-            content={<Settings />}
-            trigger="click"
-          >
-            <Button
-              shape="circle"
-              size="large"
-              type="text"
-              icon={<SettingOutlined />}
-            />
-          </Popover>
-        }
-      />
+      <AppBar/>
       <div className="info-header">
         <Search
           className="search-input"

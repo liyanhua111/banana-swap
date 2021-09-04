@@ -47,6 +47,9 @@ export const IBO = (props: { left?: JSX.Element; right?: JSX.Element }) => {
   const goLaunch =function () {
     history.push({ pathname: "/swap/IBO/launch" })
   }
+  const goJoin =function () {
+    history.push({ pathname: "/swap/IBO/join" })
+  }
   interface IData {
     id?: string; 
     name: string;
@@ -60,13 +63,23 @@ export const IBO = (props: { left?: JSX.Element; right?: JSX.Element }) => {
         <div className="contentBox contentBox1">
           <div className="tableH">
             <p className="title">{t("IBO1")}</p>
-            <Button
-              onClick={goLaunch}
-              className="myButton"
-              type="primary"
-              size="large">
-              {t("IBO2")}
-            </Button>
+            <div>
+              <Button
+                onClick={goLaunch}
+                className="myButton"
+                type="primary"
+                size="large">
+                {t("IBO2")}
+              </Button>
+              <Button
+                style={{marginLeft:'20px'}}
+                onClick={goJoin}
+                className="myButton"
+                type="primary"
+                size="large">
+                参与众筹
+              </Button>
+            </div>
           </div>
           <Input className="searchBox" size="large" placeholder={t("IBO3")} prefix={<SearchOutlined className="color" />} />
           <Table columns={columns} dataSource={data} scroll={{ x: 680 }} />

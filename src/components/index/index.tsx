@@ -42,23 +42,7 @@ export const IndexPage = (props: { left?: JSX.Element; right?: JSX.Element }) =>
   }, [enriched]);
   const IndexPage = (
     <>
-      <AppBar
-        right={
-          <Popover
-            placement="topRight"
-            title="Settings"
-            content={<Settings />}
-            trigger="click"
-          >
-            <Button
-              shape="circle"
-              size="large"
-              type="text"
-              icon={<SettingOutlined />}
-            />
-          </Popover>
-        }
-      />
+      <AppBar/>
       <div className="indexPageBox">
         <div className="indexTitle">
           <img src={require('../../assets/img/home/2.png')} className="img1" alt="" /><br/> 
