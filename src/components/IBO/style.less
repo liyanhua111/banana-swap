@@ -302,13 +302,14 @@
   }
 }
 .joinPage{
-  width: 1200px;
+  max-width: 1200px;
   min-height: 600px;
   margin: 0 auto;
   background: #fff;
   box-shadow: 0px 0px 27px 0px rgba(33, 30, 30, 0.2);
-  padding: 45px 10px;
+  padding: 45px 12px;
   font-size: 14px;
+  border-radius: 10px;
   .title{
     font-size: 24px;
     color: #FFC000;
@@ -524,9 +525,12 @@
 }
 .joinDetailPage{
   max-width: 1200px;
+  min-width: 850px;
   margin: 0 auto;
   text-align: left;
   margin-top: -40px;
+  padding: 0 12px;
+  overflow-x: auto;
   p{
     margin-bottom: 0;
   }
@@ -696,6 +700,7 @@
   margin: 0 auto;
   text-align: left;
   margin-top: -40px;
+  padding: 0 12px;
   p{
     margin-bottom: 0;
   }
@@ -722,6 +727,7 @@
       font-weight: 600;
     }
     .joinDetailL{
+      max-width: 720px;
       flex: 1;
       margin-right: 23px;
       .tabContent1{
@@ -736,7 +742,7 @@
       }
     }
     .joinDetailR{
-      width: 432px;
+      min-width: 432px;
       .joinDetailRT{
         display: flex;
         justify-content: space-between;
@@ -841,6 +847,7 @@
     background: url("../../assets/img/shareBg.png") no-repeat center;
     background-size: contain;
     font-weight: 600;
+    border-radius: 8px;
     .shareContentTop{
       text-align: center;
       .TokenIcon{
@@ -880,7 +887,7 @@
     .QRCode{
       position: absolute;
       right: 20px;
-      bottom: 60px;
+      bottom: 45px;
       width: 90px;
       height: 90px;
       img{
@@ -889,12 +896,21 @@
     }
   }
   .shareFooter{
+    display: flex;
+    justify-content: center;
     margin-top: 40px;
     cursor: pointer;
+    .copy-btn{
+      margin-right: 40px;
+    }
     .font3{
       color: #fff;
       font-size: 16px;
       text-align: center;
+    }
+    .anticon{
+      font-size: 28px;
+      font-weight: bold;
     }
     .copyImg{
       display: flex;
@@ -908,6 +924,20 @@
       margin: 0 auto;
       img{
         width: 32px;
+      }
+    }
+  }
+}
+.affirmModel{
+  .affirmContent{
+    .infoItem{
+      display: flex;
+      justify-content: space-between;
+      .font1{
+        color: #999;
+      }
+      .flex{
+        display: flex;
       }
     }
   }
@@ -977,6 +1007,27 @@
     justify-content: space-between;
   }
 }
+@media only screen and (max-width: 1400px) {
+  #root {
+    .joinDetailPage{
+      .ProgressBoxBox{
+        width: 100%;
+      }
+      .joinDetailR{
+        width: 360px;
+      }
+      .joinDetailL{
+        .joinM{
+          flex-direction: column;
+          .joinML{
+            margin-bottom: 20px;
+          }
+        }
+      }
+    }
+  }
+  
+}
 @media only screen and (max-width: 1200px) {
   #root {
     .stepView .font1 {
@@ -1029,7 +1080,7 @@
         }
       }
       .launchContent{
-        flex-wrap: wrap;
+        flex-direction: column-reverse;
         .tite{
           font-size: 16px;
         }
@@ -1066,6 +1117,100 @@
       margin-top: -20px;
       .label{
         font-size: 14px;
+      }
+    }
+    .titleBox{
+      margin-top: 30px;
+      padding-left: 20px;
+    }
+    .joinPage{
+      margin: 0 12px;
+      margin-bottom: 20px;
+      .title{
+        font-size: 16px;
+      }
+      .subTitle{
+        flex-wrap: wrap;
+        p{
+          width: 100%;
+          border-bottom: 2px solid #ED4B9E;
+        }
+      }
+      .searchBox{
+        .searchBtn{
+          width: 100px;
+        }
+      }
+      .timeBox{
+        align-items: baseline;
+        flex-direction: column;
+        .waitingBtn{
+          width: 120px;
+          text-align: center;
+        }
+      }
+    }
+    .joinDetailPage{
+      width: 100%;
+      min-width: 100%;
+      margin-top: -20px;
+      .joinTL{
+        flex-direction: column;
+        align-items: baseline;
+        &>div{
+          margin-bottom: 10px;
+          margin-right: 0;
+          span{
+            font-size: 12px;
+          }
+        }
+      }
+      .joinDetailContent{
+        flex-direction: column-reverse;
+        .joinDetailL{
+          margin-right: 0;
+          padding: 20px 15px;
+        }
+        .joinDetailR{
+          width: 100%;
+          padding: 20px 15px;
+          .infoContent{
+            padding-left: 16px;
+          }
+        }
+      }
+    }
+    .launchDetailPage{
+      .joinDetailContent{
+        flex-direction: column-reverse;
+        .joinDetailL{
+          margin-right: 0;
+          padding: 20px 15px;
+        }
+        .joinDetailR{
+          margin-bottom: 20px;
+          min-width: 100%;
+          padding: 20px 15px;
+          .infoItem{
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+  .shareModel{
+    .shareContent{
+      background-size: cover;
+    }
+  }
+}
+@media only screen and (max-width: 360px) {
+  #root{
+    .launchDetailPage{
+      .joinDetailR{
+        .crowdfunding{
+          flex-direction: column;
+        }
       }
     }
   }

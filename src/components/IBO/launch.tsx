@@ -1,6 +1,7 @@
 import React, {
   useEffect,
   useState,
+  useRef
 } from "react";
 import {
   Button,
@@ -29,10 +30,12 @@ import { PoolCard } from "./../pool/card";
 import { StepView } from "./step"
 import { CurrencySelect } from "../currencyInput";
 import { NumericInput } from "./../numericInput";
+import { AffirmModel } from "./disclaimerModel";
 import BigNumber from "bignumber.js";
 import moment from 'moment';
 const { RangePicker } = DatePicker;
 export const Transaction = (props: {}) => {
+  const fromRef = useRef();
   const { connected } = useWallet();
   // 众筹类型
   const [IBOType, setIBOType] = useState('A');
@@ -49,7 +52,7 @@ export const Transaction = (props: {}) => {
   // 众筹销售价格
   const [sellPrice, setSellPrice] = useState();
   // 众筹比例
-  const [ratio, setRatio] = useState();
+  const [ratio, setRatio] = useState(50);
   // 众筹开始时间
   const [startTime, setStartTime] = useState();
   // 众筹结束时间
@@ -127,15 +130,20 @@ export const Transaction = (props: {}) => {
   const MaxFunc = function () {
     setTokenAmount(currencyBalance)
   }
-  const goLaunch =function() {
+  const goLaunch = function () {
+    if (fromRef.current !== null) {
+      // @ts-ignore
+      fromRef.current.showModal()
+    }
   }
   
   useEffect(() => {
     console.log({ IBOType, currency, symbol, currencyBalance, sellCurrency, tokenAmount, ratio, sellPrice, startTime, endTime, protectDays })
     errTipFunc()
-  }, [IBOType,currency,currencyBalance,sellCurrency,tokenAmount,ratio,sellPrice,startTime,endTime,protectDays]);
+  }, [IBOType,currency,symbol,currencyBalance,sellCurrency,sellSymbol,tokenAmount,ratio,sellPrice,startTime,endTime,protectDays]);
   return (
     <div className="launch">
+      <AffirmModel fromRef={fromRef} info={{IBOType,currency,currencyBalance,symbol,sellCurrency,sellSymbol,tokenAmount,ratio,sellPrice,startTime,endTime,protectDays}}/>
       <p className="tite">设置参数</p>
       <p className="subTitle">01 设置众筹类型</p>
      <div className="tabBox">
@@ -175,6 +183,7 @@ export const Transaction = (props: {}) => {
           </Tooltip>
         </p>
         <NumericInput
+            disabled={true}
             className="launch-input"
             size="small"
             placeholder={'0-50'}

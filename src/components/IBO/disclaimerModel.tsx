@@ -3,10 +3,16 @@ import React, {
   useState,
   useImperativeHandle
 } from "react";
-import { useHistory } from "react-router-dom";
 import {
-  Modal,Radio, Space ,Checkbox 
+  Modal,Radio, Space ,Checkbox ,Button,message
 } from "antd";
+import { SaveOutlined } from "@ant-design/icons";
+import { useHistory } from "react-router-dom";
+import BigNumber from "bignumber.js";
+import moment from 'moment';
+import Clipboard from 'clipboard';
+import QRCode from 'qrcode.react';
+import html2canvas from 'html2canvas';
 import { TokenIcon } from "../tokenIcon";
 
 export const DisclaimerModel = (props: any) => {
@@ -100,7 +106,8 @@ export const DisclaimerModel = (props: any) => {
 
 export const ShareModel = (props: any) => {
   const {address} = props
-  const [isShareModalVisible, setShareIsModalVisible] = useState(true);
+  
+  const [isShareModalVisible, setShareIsModalVisible] = useState(false);
   useImperativeHandle(props.fromRef, () => ({
     showModal
   }));
@@ -115,13 +122,35 @@ export const ShareModel = (props: any) => {
   const handleCancel = () => {
     setShareIsModalVisible(false);
   };
-
+  const savePng = function () {
+      html2canvas(document.getElementById('shareImg')!, {
+        allowTaint: false,
+        useCORS: true,
+    }).then(function (canvas) {
+        const dataImg = new Image()
+        dataImg.src = canvas.toDataURL('image/png')
+        const alink = document.createElement("a");
+        alink.href = dataImg.src;
+        alink.download = "join.jpg";
+        alink.click();
+    });
+  }
+  const shareTxt = function () {
+    let date = moment().format('YYYY-MM-DD HH:mm:ss');
+    let text = `${date}，USD Coin 在 DODO 开启众筹建池，总量 2 个，价格 0.00001 BUSD， 上车链接：${window.location.href}`
+    return text
+  }
+  const copy = new Clipboard('.copy-btn');
+  copy.on('success', e => {
+    console.log(22222)
+    // message.success('This is a success message');
+  });
   useEffect(() => {
 
   }, []);
   return (
     <Modal title="邀请社区" footer={[]} visible={isShareModalVisible} onOk={handleOk} onCancel={handleCancel}  cancelText="取消" okText="确认" width="400px" wrapClassName="shareModel">
-      <div className="shareContent">
+      <div className="shareContent" id="shareImg">
         <div className="shareContentTop">
           <div className="TokenIcon">
             <TokenIcon mintAddress={address} /><span className="font1">4 USDC</span>
@@ -133,13 +162,99 @@ export const ShareModel = (props: any) => {
           <p>扫码上车</p>
         </div>
         <div className="QRCode">
-        <img src={require("../../assets/img/launch2.png")} alt="" />
+          <QRCode
+              value={window.location.href}
+              size={90}
+              fgColor="#000000"
+          />
         </div>
         <div className="shareContentB">bananaSwap.com</div>
       </div>
+      {/* onClick={() => navigator.clipboard.writeText(props.address)} */}
       <div className="shareFooter">
-        <p className="copyImg"><img src={require("../../assets/img/launch3.png")} alt="" /></p>
-        <p className="font3">复制链接</p>
+        <div className="copy-btn" data-clipboard-text={shareTxt()}>
+          <p className="copyImg"><img src={require("../../assets/img/launch3.png")} alt="" /></p>
+          <p className="font3">复制链接</p>
+        </div>
+        <div onClick={savePng}>
+          <p className="copyImg"><SaveOutlined /></p>
+          <p className="font3">保存图片</p>
+        </div>
+      </div>
+    </Modal>
+  )
+}
+
+export const AffirmModel = (props: any) => {
+  const {IBOType,currency,symbol,currencyBalance,sellCurrency,sellSymbol,tokenAmount,ratio,sellPrice,startTime,endTime,protectDays} = props.info
+  
+  const [isAffirmVisible, setAffirmVisible] = useState(false);
+  useImperativeHandle(props.fromRef, () => ({
+    showModal
+  }));
+  
+  const showModal = () => {
+    setAffirmVisible(true);
+  }
+  const handleCancel = () => {
+    setAffirmVisible(false);
+  };
+  const submitFunc = function () {
+     
+  }
+  useEffect(() => {
+
+  }, []);
+  return (
+    <Modal title="确认发起流动性众筹" footer={[]} visible={isAffirmVisible} onCancel={handleCancel}  cancelText="取消" okText="确认" width="400px" wrapClassName="affirmModel">
+      <div className="affirmContent">
+        <div className="infoItem">
+          <p className="font1">总供应量</p>
+          <div className="flex">
+            <TokenIcon mintAddress={currency} /><span className="font1">4 {symbol}</span>
+          </div>
+        </div>
+        <div className="infoItem">
+          <p className="font1">众筹代币数</p>
+          <div className="flex">
+            <TokenIcon mintAddress={currency} /><span className="font1">{tokenAmount + symbol}</span>
+          </div>
+        </div>
+        <div className="infoItem">
+          <p className="font1">目标筹集资金</p>
+          <div className="flex">
+            <TokenIcon mintAddress={sellCurrency} />
+            <span>{new BigNumber(tokenAmount || 0).times(sellPrice || 0).times(ratio || 0).div(100).toNumber()}{sellSymbol }</span>
+          </div>
+        </div>
+        <div className="infoItem">
+          <p className="font1">众筹售卖的代币比例上限</p>
+          <p>{ ratio }%</p>
+        </div>
+        <div className="infoItem">
+          <p className="font1">价格</p>
+          <p>{1 +''+ symbol}={ new BigNumber(sellPrice || 0).div(tokenAmount)+''+sellSymbol}</p>
+        </div>
+        <div className="infoItem">
+          <p className="font1">众筹开始时间</p>
+          <p>{startTime}</p>
+        </div>
+        <div className="infoItem">
+          <p className="font1">众筹结束时间</p>
+          <p>{endTime}</p>
+        </div>
+        <div className="infoItem">
+          <p className="font1">流动性保护天数</p>
+          <p>{protectDays}天</p>
+        </div>
+      </div>
+      <div className="affirmFooter">
+        <Button
+          className="add-button goLaunch"
+          type="primary"
+          size="large"
+          onClick={() => submitFunc()}
+        >确认发起</Button>
       </div>
     </Modal>
   )

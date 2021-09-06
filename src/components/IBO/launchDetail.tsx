@@ -10,11 +10,13 @@ import { NumericInput } from "./../numericInput";
 import {Addressmodule} from "./tools"
 import { useWallet } from "../../context/wallet";
 import { TokenIcon } from "../tokenIcon";
+import { ShareModel } from "./disclaimerModel";
 import './style.less'
 
 const { TabPane } = Tabs;
 
 export const LaunchDetailView = React.memo(() => {
+  const fromRef = useRef();
   const { connected } = useWallet();
   const [mints, setIMints] = useState(['4k9s5D7b3LWQ3ByyGiFhRqRi47NjsrjEYrT8XWGyuiDW', '5WyDJwxFmYQX4wiTZGf9bnKxVVkubduVR2zfxo5dhmmf']);
   const [tabVal, setTabVal] = useState('1')
@@ -35,6 +37,13 @@ export const LaunchDetailView = React.memo(() => {
       // 退出
     }
   }
+  const shareFunc=function () {
+    if (fromRef.current !== null) {
+      // @ts-ignore
+      fromRef.current.showModal()
+      return
+    }
+  }
   useEffect(() => {
 
   }, [tokenAmount]);
@@ -42,27 +51,33 @@ export const LaunchDetailView = React.memo(() => {
     {
       title: 'Signature',
       dataIndex: 'address',
+      width: 130,
       render: (text:any) => <Tooltip placement="top" title={text}><div style={{width:100,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{text}</div></Tooltip>
     },
     {
       title: 'Block',
+      width: 130,
       dataIndex: 'age',
     },
     {
       title: 'Time',
+      width: 180,
       dataIndex: 'name',
     },
     {
       title: 'Instructions',
+      width: 130,
       dataIndex: 'age',
     },
     {
       title: 'By',
       dataIndex: 'address',
+      width: 150,
       render: (text:any) => <Tooltip placement="top" title={text}><div style={{width:100,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{text}</div></Tooltip>
     },
     {
       title: 'Fee (SOL)',
+      width: 130,
       dataIndex: 'age',
     }
   ];
@@ -79,19 +94,23 @@ export const LaunchDetailView = React.memo(() => {
     {
       title: '参与者',
       dataIndex: 'address',
+      width: 150,
       render: (text:any) => <Addressmodule address={text} goUrl={true} color="#222" />
     },
     {
       title: '总支付',
       dataIndex: 'age',
+      width: 120,
       render: (text:any) => <div>{text +'USDC'}</div>
     },
     {
       title: '价值（美元）',
+      width: 120,
       dataIndex: 'name',
     },
     {
       title: '份额',
+      width: 120,
       dataIndex: 'age',
     }
   ];
@@ -107,10 +126,11 @@ export const LaunchDetailView = React.memo(() => {
   return (
     <>
       <AppBar />
+      <ShareModel fromRef={fromRef} address={ mints[0]}/>
       <div className="launchDetailPage">
         <div className="titleBox">
           <p>发起 <span className="font1">/ <Addressmodule address={'4k9s5D7b3LWQ3ByyGiFhRqRi47NjsrjEYrT8XWGyuiDW'} /></span></p>
-          <p className="joinBtn"><ShareAltOutlined /> 邀请好友</p>
+          <p className="joinBtn" onClick={shareFunc}><ShareAltOutlined /> 邀请好友</p>
         </div>
         <div className="joinDetailContent">
           <div className="joinDetailL">
