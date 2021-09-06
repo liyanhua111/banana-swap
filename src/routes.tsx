@@ -39,8 +39,8 @@ export function Routes() {
                   <Route exact path="/swap/IBO" component={() => <IBO />} />
                   <Route exact path="/swap/IBO/launch" component={launchView} />
                   <Route exact path="/swap/IBO/join" component={IBOJoinView} />
-                  <Route exact path="/swap/IBO/joinDetail" component={JoinDetailView} />
-                  <Route exact path="/swap/IBO/launchDetail" component={LaunchDetailView} />
+                  <Route exact path="/swap/IBO/joinDetail/:id" component={JoinDetailView} />
+                  <Route exact path="/swap/IBO/launchDetail/:id" component={LaunchDetailView} />
                   <Route exact path="/swap/farm" component={() => <Farm />} />
                   <Route exact path="/swap/Info" component={() => <Info />} />
                   <Route exact path="/swap/pool" component={() => <Pool />} />

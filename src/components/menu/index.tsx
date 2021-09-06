@@ -19,7 +19,7 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
   let current = location.pathname;
   let pathSplit = location.pathname.split('/')
   if (pathSplit.length > 3) {
-    pathSplit.splice(pathSplit.length-1, 1)
+    pathSplit.splice(pathSplit.length - (pathSplit.length-3),pathSplit.length-3)
     current = pathSplit.join('/')
   }
   // const handleClick = function (data: any) {

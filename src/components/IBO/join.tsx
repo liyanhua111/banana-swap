@@ -23,7 +23,7 @@ export const IBOJoinView = React.memo((props) => {
         return
       }
     }
-    history.push({ pathname: "/swap/IBO/joinDetail" })
+    history.push({ pathname: `/swap/IBO/joinDetail/${mints[0]}` })
   }
   useEffect(() => {
     
@@ -31,7 +31,7 @@ export const IBOJoinView = React.memo((props) => {
   return (
     <>
       <AppBar />
-      <DisclaimerModel fromRef={fromRef}/>
+      <DisclaimerModel fromRef={fromRef} address={mints[0]}/>
       <DisclaimerModel/>
       <div className="joinPage">
         <p className="title">输入想要参与的合约地址，参与众筹建池，公平获得代币</p>

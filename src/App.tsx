@@ -10,7 +10,6 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/swap" component={Main} />
-        {/* <Route path="/ComingSoon" component={ComingSoon} /> */}
         <Redirect to="/"/>
       </Switch>
     </div>

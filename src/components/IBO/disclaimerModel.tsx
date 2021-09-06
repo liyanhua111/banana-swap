@@ -33,7 +33,7 @@ export const DisclaimerModel = (props: any) => {
   const handleOk = () => {
     setIsModalVisible(false);
     localStorage.setItem('disclaimerState', 'true')
-    history.push({ pathname: "/swap/IBO/joinDetail" })
+    history.push({ pathname: `/swap/IBO/joinDetail/${props.address}` })
   };
 
   const handleCancel = () => {
