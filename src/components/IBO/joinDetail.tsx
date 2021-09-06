@@ -24,6 +24,7 @@ export const JoinDetailView = React.memo(() => {
   const [tokenAmount, setTokenAmount] = useState();
   const [currency, setCurrency] = useState('');
   const [symbol, setSymbol] = useState('');
+  const [timeState,seTimeState] = useState(true);
   // 是否参与了
   const [joinState, setJoinState] = useState(true);
   // 错误提示
@@ -53,6 +54,9 @@ export const JoinDetailView = React.memo(() => {
     } else if (tabVal == '2') {
       // 退出
     }
+  }
+  const goUrlFunc = function (path:any) {
+    history.push({ pathname: path })
   }
   const goDetail = function (id:string) {
     history.push({ pathname: `/swap/IBO/launchDetail` })
@@ -155,83 +159,142 @@ export const JoinDetailView = React.memo(() => {
             <div className="joinDetailRT">
               <p className="tool" onClick={shareFunc}><ShareAltOutlined /></p>
             </div>
-            <Tabs defaultActiveKey="1" onChange={tabChange}>
-              <TabPane tab="参与" key="1">
-              </TabPane>
-              <TabPane tab="退出" key="2">
-              </TabPane>
-            </Tabs>
+            {
+              timeState ?
+                (
+                  <Tabs defaultActiveKey="1" onChange={tabChange}>
+                    <TabPane tab="参与" key="1">
+                    </TabPane>
+                    <TabPane tab="退出" key="2">
+                    </TabPane>
+                  </Tabs>
+                ) :
+                (
+                  <Tabs defaultActiveKey="3" onChange={tabChange}>
+                    <TabPane tab="众筹建池已结束" key="3">
+                    </TabPane>
+                  </Tabs>
+                )
+            }
             <div className="tabContent">
-              <div className="balanceBox">
-               {(connected) && <p className="currencyBalance">余额：{currencyBalance}<span className="font3" onClick={MaxFunc}>Max</span></p>}
-              </div>
-              <div className="inputItemBox">
-                <CurrencySelect
-                  mint={mints[0]}
-                  hideSelect={true}
-                  onMintChange={(item: any) => {
-                    console.log(item)
-                  }}
-                />
-                <NumericInput
-                  style={{marginLeft:'10px'}}
-                  className="launch-input"
-                  size="small"
-                  placeholder={0}
-                  value={tokenAmount}
-                  maxLength={15}
-                  onBlur={() => {
-                  }}
-                  onChange={(x: any) => {
-                    setTokenAmount(x);
-                  }}
-                />
-              </div>
+              {
+                timeState&&
+                <div>
+                  <div className="balanceBox">
+                  {(connected) && <p className="currencyBalance">余额：{currencyBalance}<span className="font3" onClick={MaxFunc}>Max</span></p>}
+                  </div>
+                  <div className="inputItemBox">
+                    <CurrencySelect
+                      mint={mints[0]}
+                      hideSelect={true}
+                      onMintChange={(item: any) => {
+                        console.log(item)
+                      }}
+                    />
+                    <NumericInput
+                      style={{marginLeft:'10px'}}
+                      className="launch-input"
+                      size="small"
+                      placeholder={0}
+                      value={tokenAmount}
+                      maxLength={15}
+                      onBlur={() => {
+                      }}
+                      onChange={(x: any) => {
+                        setTokenAmount(x);
+                      }}
+                    />
+                  </div>
+                </div>
+              }
               <div className="infoContent">
                 <div className="infoItem marginB">
                   <p>1 <span className="font4">USDC = </span>0.0001 <span className="font4">BUSD </span></p>
                   <p className="waitingIcon">等待中</p>
                 </div>
-                <div className="infoItem">
-                  <p className="font5">
-                    认购额度
-                    <Tooltip placement="top" title={'是您能最多能参与认购的资金数量'}>
-                      <QuestionCircleOutlined className="tipIcon" />
-                    </Tooltip>
-                  </p>
-                  <p className="font6">无限制</p>
-                </div>
+                {
+                  timeState&&
+                  <div className="infoItem">
+                    <p className="font5">
+                      认购额度
+                      <Tooltip placement="top" title={'是您能最多能参与认购的资金数量'}>
+                        <QuestionCircleOutlined className="tipIcon" />
+                      </Tooltip>
+                    </p>
+                    <p className="font6">无限制</p>
+                  </div>
+                }
                 {joinState&&<div className="infoItem">
                   <p className="font5">我的份额</p>
                   <p className="font8">1USDT</p>
                 </div>}
-                <div className="infoItem">
-                  <p className="font5">距离开始</p>
-                  <p className="font5">23h:24m:34s</p>
-                </div>
-                {joinState&&<div className="infoItem">
+                {/* 已结束 */}
+                {
+                  !timeState&&
+                  <div className="infoItem">
+                    <p className="font5">流动性保护期</p>
+                    <p className="font5">23h:24m:34s</p>
+                  </div>
+                }
+                {/* 已结束 */}
+                {
+                  !timeState&&
+                  <div className="infoItem">
+                    <p className="font5">收入</p>
+                    <p className="font5">1USDT</p>
+                  </div>
+                }
+                {
+                  timeState&&
+                  <div className="infoItem">
+                    <p className="font5">距离开始</p>
+                    <p className="font5">23h:24m:34s</p>
+                  </div>
+                }
+                {timeState&&joinState&&<div className="infoItem">
                   <p className="font5">预期获得</p>
                   <p className="font5">1USDT</p>
                 </div>}
               </div>
-              <div className="infoItem">
-                <p className="font4">手续费
-                  <Tooltip placement="top" title={'参与众筹建池将收取参与金额一定比例的手续费'}>
-                      <QuestionCircleOutlined className="tipIcon" />
-                  </Tooltip>
-                </p>
-                <p className="font7">免费</p>
-              </div>
-              {errTip && <div className="errTipBtn">{errTip}</div>}
-              <Button
-                className="add-button goLaunch"
-                type="primary"
-                size="large"
-                onClick={() => handlerFunc()}
-                disabled={
-                  !connected || errTip!==''
-                }
-              >{tabVal == '1' ? '参与' : '退出'}</Button>
+              {
+                timeState &&
+                <div>
+                  <div className="infoItem">
+                    <p className="font4">手续费
+                      <Tooltip placement="top" title={'参与众筹建池将收取参与金额一定比例的手续费'}>
+                          <QuestionCircleOutlined className="tipIcon" />
+                      </Tooltip>
+                    </p>
+                    <p className="font7">免费</p>
+                  </div>
+                  {errTip && <div className="errTipBtn">{errTip}</div>}
+                  <Button
+                    className="add-button goLaunch"
+                    type="primary"
+                    size="large"
+                    onClick={() => handlerFunc()}
+                    disabled={
+                      !connected || errTip!==''
+                    }
+                  >{tabVal == '1' ? '参与' : '退出'}</Button>
+                </div>
+              }
+              {
+                !timeState &&
+                <div className="goLaunchBox">
+                  <Button
+                    className="add-button goLaunch"
+                    size="large"
+                    onClick={() => goUrlFunc('/swap/')}
+                  >前往做市</Button>
+                  <Button
+                    className="add-button goLaunch"
+                    type="primary"
+                    size="large"
+                    onClick={() => goUrlFunc('/swap/add')}
+                  >前去交易</Button>
+                </div>
+              }
               <p className="font4 marginT">
               当参与众筹的资金超过100%，将根据资金占比分配额度,多余的资金将会退还。
               </p>
