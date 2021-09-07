@@ -131,7 +131,7 @@ export const ShareModel = (props: any) => {
         dataImg.src = canvas.toDataURL('image/png')
         const alink = document.createElement("a");
         alink.href = dataImg.src;
-        alink.download = "join.jpg";
+        alink.download = "join.png";
         alink.click();
     });
   }
