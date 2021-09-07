@@ -119,6 +119,15 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                   {t('Info')}
             </Link>
           </Menu.Item>
+          <Menu.Item key="/swap/NFT" icon={<img src={require('../../assets/img/nav/nav9.png')} className="navIcon" />}>
+            <Link
+                  to={{
+                    pathname: "/swap/NFT",
+                  }}
+            >
+                  {t('NFT')}
+            </Link>
+          </Menu.Item>
         </Menu>
         <div className="bottomBox">
           <div className="infor">

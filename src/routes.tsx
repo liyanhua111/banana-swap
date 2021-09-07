@@ -17,6 +17,7 @@ import { Info } from "./components/page/Info";
 import { Pool } from "./components/page/pool";
 import { Jungles } from "./components/page/Jungles";
 import { Trading } from "./components/page/Trading";
+import { NFTView } from "./components/page/nft";
 
 export function Routes() {
   return (
@@ -38,6 +39,7 @@ export function Routes() {
                   <Route exact path="/swap/pool" component={() => <Pool />} />
                   <Route exact path="/swap/Jungles" component={() => <Jungles />} />
                   <Route exact path="/swap/Trading" component={() => <Trading />} />
+                  <Route exact path="/swap/NFT" component={() => <NFTView />} />
                   <Route
                     exact
                     path="/swap/myPool"
