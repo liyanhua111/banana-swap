@@ -1,43 +1,54 @@
 .ComingSoonPage{
-  width: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 240px;
   height: 100vh;
-  background: url(../../assets/img/comingSoon/bg2.png) #F5C51D no-repeat center bottom;
-  background-size: 98%;
-  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.6);
   .ComingSoon{
-    height: 100vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 720px;
+    height: 240px;
     margin: 0 auto;
-    background: url(../../assets/img/comingSoon/bg1.png) no-repeat center top;
-    background-size: 98%;
+    top: 35vh;
+    background: url(../../assets/img/page/btn.png) no-repeat center;
+    margin-top: 35vh;
+    padding-right: 64px;
     .font1{
-      font-size: 2rem;
-      font-weight: 900;
-      color: #141414;
-      margin-bottom: 15px;
-      margin-top: 6%;
-    }
-    .font2{
-      font-size: 0.5rem;
-      font-weight: 900;
+      width: 427px;
+      height: 129px;
+      line-height: 129px;
+      font-size: 48px;
       color: #fff;
-      margin-bottom: 80px;
+      background: url(../../assets/img/page/btn3.png) no-repeat center;
+      background-size: cover;
+      margin-bottom: 0;
     }
-    .relativeBox{
-      max-width: 1040px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .ComingSoonPage{
+    left: 0;
+    .ComingSoon{
+      width: 96%;
+      background-size: contain;
       margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      img{
-        width: 0.8rem;
-      }
-    }
-    .logoBox{
-      text-align: left;
-      padding-left: 158px;
-      padding-top: 30px;
-      img{
-        width: 267px;
+      margin-top: 35vh;
+      .font1{
+        width: 50vw;
+        height: 20vw;
+        line-height: 20vw;
+        font-size: 16px;
+        background-size: contain;
+        // position: absolute;
+        // right: 25vw;
+        // top: 11vw;
+        // font-size: 18px;
+        // color: #fff;
       }
     }
   }
+  
 }

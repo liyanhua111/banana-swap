@@ -18,7 +18,7 @@ export const Settings = () => {
         </div>
       </div>
 
-      {!document.domain.includes('.net')?<div style={{ display: "grid" }}>
+      {(true||!document.domain.includes('.net'))?<div style={{ display: "grid" }}>
         {t("Network")}
         <Select
           onSelect={setEndpoint}

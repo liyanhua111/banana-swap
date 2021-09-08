@@ -13,9 +13,9 @@ const Address = (props: {
   label?: string;
 }) => {
   return (
-    <Row style={{ width: "100%", ...props.style }}>
-      {props.label && <Col span={6}>{props.label}:</Col>}
-      <Col span={16}>
+    <Row style={{ width: "300px", ...props.style }}>
+      {props.label && <Col span={8} style={{textAlign:'right'}}>{props.label}:</Col>}
+      <Col span={14}>
         <ExplorerLink address={props.address} code={true} type="address" />
       </Col>
       <Col span={2} style={{ display: "flex" }}>
@@ -23,7 +23,7 @@ const Address = (props: {
           shape="round"
           icon={<CopyOutlined />}
           size={"small"}
-          style={{ marginLeft: "auto", marginRight: 0 }}
+          style={{ marginLeft: "auto", marginRight: "10px" }}
           onClick={() => navigator.clipboard.writeText(props.address)}
         />
       </Col>

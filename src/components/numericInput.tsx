@@ -12,7 +12,7 @@ export class NumericInput extends React.Component<any, any> {
 
   // '.' at the end or only '-' in the input box.
   onBlur = () => {
-    // const { value, onBlur, onChange } = this.props;
+    const { value, onBlur, onChange } = this.props;
     // let valueTemp = value;
     // if (value.charAt(value.length - 1) === "." || value === "-") {
     //   valueTemp = value.slice(0, -1);
@@ -21,9 +21,9 @@ export class NumericInput extends React.Component<any, any> {
     //   valueTemp = valueTemp.replace(".", "0.");
     // }
     // onChange(valueTemp.replace(/0*(\d+)/, "$1"));
-    // if (onBlur) {
-    //   onBlur();
-    // }
+    if (onBlur) {
+      onBlur();
+    }
   };
 
   render() {
@@ -32,7 +32,7 @@ export class NumericInput extends React.Component<any, any> {
         {...this.props}
         onChange={this.onChange}
         onBlur={this.onBlur}
-        maxLength={25}
+        maxLength={this.props.maxLength||25}
       />
     );
   }

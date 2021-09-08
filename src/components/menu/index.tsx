@@ -17,11 +17,11 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const current = location.pathname;
-  const handleClick = function (data: any) {
-    if (data.key.indexOf('developing')>-1) {
-      message.info(t('developing'))
-    }
-  }
+  // const handleClick = function (data: any) {
+    // if (data.key.indexOf('developing')>-1) {
+    //   message.info(t('developing'))
+    // }
+  // }
   useEffect(()=>{
     dispatch(changeHamburgerFunc(true))
 	},[location])
@@ -29,7 +29,6 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
     <div className="App-Menu">
       <div className="App-Menu-left">
         <Menu
-          onClick={handleClick}
           inlineCollapsed={collapsed}
           style={{ width: 240 }}
           defaultSelectedKeys={['/']}
@@ -66,29 +65,68 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                 </Link>
               </Menu.Item>
           </SubMenu>
-          <Menu.Item key="/swap/developing1" icon={<img src={require('../../assets/img/nav/nav2.png')} className="navIcon" />}>
-            <span>Trading</span>
-          </Menu.Item>
-          <Menu.Item key="/swap/developing2" icon={<img src={require('../../assets/img/nav/nav4.png')} className="navIcon" />}>
-              <span>{t("farm")}</span>
-          </Menu.Item>
-          <Menu.Item key="/swap/developing3" icon={<img src={require('../../assets/img/nav/nav5.png')} className="navIcon" />}>
-              <span>{t("pool")}</span>
-          </Menu.Item>
-          <Menu.Item key="/swap/developing4" icon={<img src={require('../../assets/img/nav/nav6.png')} className="navIcon" />}>
-              <span>Jungles</span>
-          </Menu.Item>
-          <Menu.Item key="/swap/IDO" icon={<img src={require('../../assets/img/nav/nav7.png')} className="navIcon" />}>
+          <Menu.Item key="/swap/Trading" icon={<img src={require('../../assets/img/nav/nav2.png')} className="navIcon" />}>
             <Link
-                  to={{
-                    pathname: "/swap/IDO",
-                  }}
+              to={{
+                pathname: "/swap/Trading",
+              }}
             >
-                  IDO
+              Trading
             </Link>
           </Menu.Item>
-          <Menu.Item key="/swap/developing6" icon={<img src={require('../../assets/img/nav/nav8.png')} className="navIcon" />}>
-            <span>{t('Info')}</span>
+          <Menu.Item key="/swap/farm" icon={<img src={require('../../assets/img/nav/nav4.png')} className="navIcon" />}>
+            <Link
+              to={{
+                pathname: "/swap/farm",
+              }}
+            >
+              {t("farm")}
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="/swap/pool" icon={<img src={require('../../assets/img/nav/nav5.png')} className="navIcon" />}>
+            <Link
+              to={{
+                pathname: "/swap/pool",
+              }}
+            >
+              {t("pool")}
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="/swap/Jungles" icon={<img src={require('../../assets/img/nav/nav6.png')} className="navIcon" />}>
+            <Link
+              to={{
+                pathname: "/swap/Jungles",
+              }}
+            >
+              Jungles
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="/swap/IBO" icon={<img src={require('../../assets/img/nav/nav7.png')} className="navIcon" />}>
+            <Link
+                  to={{
+                    pathname: "/swap/IBO",
+                  }}
+            >
+                  IBO
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="/swap/Info" icon={<img src={require('../../assets/img/nav/nav8.png')} className="navIcon" />}>
+            <Link
+                  to={{
+                    pathname: "/swap/Info",
+                  }}
+            >
+                  {t('Info')}
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="/swap/NFT" icon={<img src={require('../../assets/img/nav/nav9.png')} className="navIcon" />}>
+            <Link
+                  to={{
+                    pathname: "/swap/NFT",
+                  }}
+            >
+                  {t('NFT')}
+            </Link>
           </Menu.Item>
         </Menu>
         <div className="bottomBox">
