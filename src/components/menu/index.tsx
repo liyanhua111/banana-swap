@@ -71,7 +71,7 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                 pathname: "/swap/Trading",
               }}
             >
-              Trading
+              {t("Dashboard")}
             </Link>
           </Menu.Item>
           <Menu.Item key="/swap/farm" icon={<img src={require('../../assets/img/nav/nav4.png')} className="navIcon" />}>
@@ -83,7 +83,27 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               {t("farm")}
             </Link>
           </Menu.Item>
-          <Menu.Item key="/swap/pool" icon={<img src={require('../../assets/img/nav/nav5.png')} className="navIcon" />}>
+          <SubMenu key="sub1" icon={<img src={require('../../assets/img/nav/nav6.png')} className="navIcon" />} title='Peel'>
+              <Menu.Item key="/swap/pool">
+                <Link
+                  to={{
+                    pathname: "/swap/pool",
+                  }}
+                >
+                  Stake $BANA
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="/swap/Jungles">
+                <Link
+                  to={{
+                    pathname: "/swap/Jungles",
+                  }}
+                >
+                  Farm $BANA
+                </Link>
+              </Menu.Item>
+          </SubMenu>
+          {/* <Menu.Item key="/swap/pool" icon={<img src={require('../../assets/img/nav/nav5.png')} className="navIcon" />}>
             <Link
               to={{
                 pathname: "/swap/pool",
@@ -100,7 +120,7 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
             >
               Jungles
             </Link>
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item key="/swap/IBO" icon={<img src={require('../../assets/img/nav/nav7.png')} className="navIcon" />}>
             <Link
                   to={{
@@ -125,7 +145,7 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                     pathname: "/swap/NFT",
                   }}
             >
-                  {t('NFT')}
+                  {t('BANAClub')}
             </Link>
           </Menu.Item>
         </Menu>
