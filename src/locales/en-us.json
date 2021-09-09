@@ -40,9 +40,9 @@
   "IndexTip3":"It's appreciated if you can leave your feedback.",
   "MiningandDeposit":"Mining and Deposit",
   "announcement":"Announcement",
-  "Fortheharvest":"For the harvest",
+  "Fortheharvest":"Claimable $BANA:",
   "locked":"Locked",
-  "InWallet":"In Wallet",
+  "InWallet":"$BANA Balance:",
   "TVL":"TVL",
   "DEX":"DEX Stats",
   "TotalLiquidity":"Total Liquidity",
@@ -126,7 +126,7 @@
   "estimated":"estimated",
   "MyPools":"My Pools",
   "developing":"Function development, stay tuned!",
-  "farm":"Farm",
+  "farm":"BANAField",
   "pool":"Pool",
   "IBO1":"My Crowdpooling List",
   "IBO2":"Launch a Crowdpooling Campaign",
@@ -147,5 +147,5 @@
   "SlipeTip1":"Enter a valid slippage percentage",
   "SlipeTip2":"Your transaction may fail",
   "SlipeTip3":"Enter a valid number less than ",
-  "NFT":"NFT Market Place"
+  "NFT":"BANA Club"
 }

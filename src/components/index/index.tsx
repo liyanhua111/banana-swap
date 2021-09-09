@@ -68,10 +68,10 @@ export const IndexPage = (props: { left?: JSX.Element; right?: JSX.Element }) =>
           <div className="card indexPageL">
             <p className="title">{t("MiningandDeposit")}</p>
             {/* <img src={require("../../assets/img/nav/logo.png")} className="logo" alt="" /> */}
-            <p className="font1">{t("Fortheharvest")} Banana:</p>
+            <p className="font1">{t("Fortheharvest")}</p>
             <p className="font2 locked">{ t("locked")}</p>
             <p className="font3">~$ 0</p>
-            <p className="font1">{t("InWallet")} Banana:</p>
+            <p className="font1">{t("InWallet")}</p>
             <p className="font2 locked">{ t("locked")}</p>
             <p className="font3" style={{marginBottom:'15px'}}>~$ 0</p>
             {!connected&&<Button
