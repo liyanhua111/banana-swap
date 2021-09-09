@@ -127,6 +127,8 @@
   "MyPools":"My Pools",
   "developing":"Function development, stay tuned!",
   "farm":"BANAField",
+  "BANAClub":"BANA Club",
+  "Dashboard ":"Dashboard",
   "pool":"Pool",
   "IBO1":"My Crowdpooling List",
   "IBO2":"Launch a Crowdpooling Campaign",
@@ -146,6 +148,6 @@
   "COMINGSOON":"COMING SOON...",
   "SlipeTip1":"Enter a valid slippage percentage",
   "SlipeTip2":"Your transaction may fail",
-  "SlipeTip3":"Enter a valid number less than ",
-  "NFT":"BANA Club"
+  "SlipeTip3":"Enter a valid number less than "
+  
 }

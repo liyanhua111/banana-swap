@@ -71,7 +71,7 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                 pathname: "/swap/Trading",
               }}
             >
-              Dashboard
+              {t("Dashboard")}
             </Link>
           </Menu.Item>
           <Menu.Item key="/swap/farm" icon={<img src={require('../../assets/img/nav/nav4.png')} className="navIcon" />}>
@@ -145,7 +145,7 @@ export const AppMenu = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                     pathname: "/swap/NFT",
                   }}
             >
-                  {t('NFT')}
+                  {t('BANAClub')}
             </Link>
           </Menu.Item>
         </Menu>

@@ -1,7 +1,7 @@
 {
   "home":"首页",
   "Trade":"交易",
-  "Info":"图表",
+  "Info":"信息表",
   "Pool":"资金池",
   "Exchange":"兑换",
   "Liquidity":"流动性",
@@ -127,6 +127,8 @@
   "MyPools":"我的流动池",
   "developing":"正在开发中，敬请期待!",
   "farm":"农场",
+  "BANAClub":"香蕉俱乐部",
+  "Dashboard":"资产看板",
   "pool":"矿池",
   "IBO1":"我的众筹建池列表",
   "IBO2":"发起众筹建池",
@@ -146,6 +148,5 @@
   "COMINGSOON":"正在开发中...",
   "SlipeTip1":"输入一个大于0的有效值",
   "SlipeTip2":"设置太小，交易可能会失败",
-  "SlipeTip3":"输入的有效值不得大于 ",
-  "NFT":"NFT交易市场"
+  "SlipeTip3":"输入的有效值不得大于 "
 }
