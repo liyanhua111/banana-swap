@@ -15,6 +15,7 @@ import {
   PhantomWalletAdapter,
   MathWalletAdapter,
 } from "../wallet-adapters";
+// import { Coin98WalletAdapter } from "@solana/wallet-adapter-coin98";
 import { useConnectionConfig } from "../utils/connection";
 import { useLocalStorageState } from "../utils/utils";
 import { notify } from "../utils/notifications";
@@ -30,6 +31,12 @@ export const WALLET_PROVIDERS = [
     url: "https://solflare.com/access-wallet",
     icon: require("../assets/img/wallet/Solflare.png"),
   },
+  // {
+  //   name: "C98",
+  //   url: "https://www.coin98.com",
+  //   icon: require("../assets/img/wallet/Ledger.png"),
+  //   adapter: Coin98WalletAdapter,
+  // },
   // {
   //   name: "Ledger",
   //   url: "https://www.ledger.com",
