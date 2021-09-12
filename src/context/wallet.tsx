@@ -13,7 +13,6 @@ import {
   LedgerWalletAdapter,
   SolongWalletAdapter,
   PhantomWalletAdapter,
-  C98WalletAdapter,
   MathWalletAdapter,
 } from "../wallet-adapters";
 import { Coin98WalletAdapter } from '@solana/wallet-adapter-coin98'
