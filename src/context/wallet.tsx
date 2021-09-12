@@ -13,23 +13,31 @@ import {
   LedgerWalletAdapter,
   SolongWalletAdapter,
   PhantomWalletAdapter,
+  C98WalletAdapter,
   MathWalletAdapter,
 } from "../wallet-adapters";
+import { Coin98WalletAdapter } from '@solana/wallet-adapter-coin98'
 import { useConnectionConfig } from "../utils/connection";
 import { useLocalStorageState } from "../utils/utils";
 import { notify } from "../utils/notifications";
 
 export const WALLET_PROVIDERS = [
-  {
-    name: "sollet.io",
-    url: "https://www.sollet.io",
-    icon: require("../assets/img/wallet/Sollet.png"),
-  },
+  // {
+  //   name: "sollet.io",
+  //   url: "https://www.sollet.io",
+  //   icon: require("../assets/img/wallet/Sollet.png"),
+  // },
   {
     name: "Solflare",
     url: "https://solflare.com/access-wallet",
     icon: require("../assets/img/wallet/Solflare.png"),
   },
+  // {
+  //   name: 'Sollet Extension',
+  //   url: 'https://www.sollet.io/extension',
+  //   icon: require("../assets/img/wallet/Sollet.png"),
+  //   adapter: SolletExtensionAdapter as any,
+  // },
   // {
   //   name: "Ledger",
   //   url: "https://www.ledger.com",
@@ -54,6 +62,12 @@ export const WALLET_PROVIDERS = [
   //   icon: require("../assets/img/wallet/Phantom.png"),
   //   adapter: PhantomWalletAdapter,
   // },
+    {
+    name: "C98",
+    url: "https://wallet.coin98.com/",
+    icon: require("../assets/img/wallet/c98.png"),
+    adapter: Coin98WalletAdapter,
+  },
 ];
 
 const WalletContext = React.createContext<any>(null);
