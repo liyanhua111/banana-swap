@@ -43,8 +43,8 @@ export const TokenSwapLayoutLegacyV0 = BufferLayout.struct([
   uint64("feesDenominator"),
 ]);
 
-export const TokenSwapLayoutV1: typeof BufferLayout.Structure = BufferLayout.struct(
-  [
+export const TokenSwapLayoutV1: typeof BufferLayout.Structure =
+  BufferLayout.struct([
     BufferLayout.u8("isInitialized"),
     BufferLayout.u8("nonce"),
     publicKey("tokenProgramId"),
@@ -62,8 +62,7 @@ export const TokenSwapLayoutV1: typeof BufferLayout.Structure = BufferLayout.str
     uint64("ownerWithdrawFeeNumerator"),
     uint64("ownerWithdrawFeeDenominator"),
     BufferLayout.blob(16, "padding"),
-  ]
-);
+  ]);
 
 const CURVE_NODE = BufferLayout.union(
   BufferLayout.u8(),
@@ -83,8 +82,8 @@ CURVE_NODE.addVariant(
   "offset"
 );
 
-export const TokenSwapLayout: typeof BufferLayout.Structure = BufferLayout.struct(
-  [
+export const TokenSwapLayout: typeof BufferLayout.Structure =
+  BufferLayout.struct([
     // BufferLayout.u8("version"),
     BufferLayout.u8("isInitialized"),
     BufferLayout.u8("nonce"),
@@ -97,8 +96,21 @@ export const TokenSwapLayout: typeof BufferLayout.Structure = BufferLayout.struc
     publicKey("feeAccount"),
     FEE_LAYOUT,
     // CURVE_NODE,
-  ]
-);
+  ]);
+export const IBOLayout: typeof BufferLayout.Structure = BufferLayout.struct([
+  // BufferLayout.u8("version"),
+  BufferLayout.u8("isInitialized"),
+  BufferLayout.u8("nonce"),
+  publicKey("tokenProgramId"),
+  publicKey("tokenAccountA"),
+  publicKey("tokenAccountB"),
+  publicKey("tokenPoolMint"),
+  publicKey("mintA"),
+  publicKey("mintB"),
+  publicKey("feeAccount"),
+  FEE_LAYOUT,
+  // CURVE_NODE,
+]);
 
 export const createInitSwapInstruction = (
   tokenSwapAccount: Account,
@@ -142,7 +154,7 @@ export const createInitSwapInstruction = (
     const commandDataLayout = BufferLayout.struct(fields);
     data = Buffer.alloc(commandDataLayout.span);
     const { fees, ...rest } = config;
-    console.log(fees,"=========");
+    console.log(fees, "=========");
     const encodeLength = commandDataLayout.encode(
       {
         instruction: 0, // InitializeSwap instruction
@@ -151,7 +163,7 @@ export const createInitSwapInstruction = (
       },
       data
     );
-    console.log(encodeLength,"======");
+    console.log(encodeLength, "======");
     data = data.slice(0, encodeLength);
   } else {
     const commandDataLayout = BufferLayout.struct([
@@ -228,28 +240,28 @@ export const depositInstruction = (
 
   const keys = isLatest
     ? [
-      { pubkey: tokenSwap, isSigner: false, isWritable: false },
-      { pubkey: authority, isSigner: false, isWritable: false },
-      { pubkey: transferAuthority, isSigner: true, isWritable: false },
-      { pubkey: sourceA, isSigner: false, isWritable: true },
-      { pubkey: sourceB, isSigner: false, isWritable: true },
-      { pubkey: intoA, isSigner: false, isWritable: true },
-      { pubkey: intoB, isSigner: false, isWritable: true },
-      { pubkey: poolToken, isSigner: false, isWritable: true },
-      { pubkey: poolAccount, isSigner: false, isWritable: true },
-      { pubkey: tokenProgramId, isSigner: false, isWritable: false },
-    ]
+        { pubkey: tokenSwap, isSigner: false, isWritable: false },
+        { pubkey: authority, isSigner: false, isWritable: false },
+        { pubkey: transferAuthority, isSigner: true, isWritable: false },
+        { pubkey: sourceA, isSigner: false, isWritable: true },
+        { pubkey: sourceB, isSigner: false, isWritable: true },
+        { pubkey: intoA, isSigner: false, isWritable: true },
+        { pubkey: intoB, isSigner: false, isWritable: true },
+        { pubkey: poolToken, isSigner: false, isWritable: true },
+        { pubkey: poolAccount, isSigner: false, isWritable: true },
+        { pubkey: tokenProgramId, isSigner: false, isWritable: false },
+      ]
     : [
-      { pubkey: tokenSwap, isSigner: false, isWritable: false },
-      { pubkey: authority, isSigner: false, isWritable: false },
-      { pubkey: sourceA, isSigner: false, isWritable: true },
-      { pubkey: sourceB, isSigner: false, isWritable: true },
-      { pubkey: intoA, isSigner: false, isWritable: true },
-      { pubkey: intoB, isSigner: false, isWritable: true },
-      { pubkey: poolToken, isSigner: false, isWritable: true },
-      { pubkey: poolAccount, isSigner: false, isWritable: true },
-      { pubkey: tokenProgramId, isSigner: false, isWritable: false },
-    ];
+        { pubkey: tokenSwap, isSigner: false, isWritable: false },
+        { pubkey: authority, isSigner: false, isWritable: false },
+        { pubkey: sourceA, isSigner: false, isWritable: true },
+        { pubkey: sourceB, isSigner: false, isWritable: true },
+        { pubkey: intoA, isSigner: false, isWritable: true },
+        { pubkey: intoB, isSigner: false, isWritable: true },
+        { pubkey: poolToken, isSigner: false, isWritable: true },
+        { pubkey: poolAccount, isSigner: false, isWritable: true },
+        { pubkey: tokenProgramId, isSigner: false, isWritable: false },
+      ];
   return new TransactionInstruction({
     keys,
     programId: swapProgramId,
@@ -290,26 +302,26 @@ export const depositExactOneInstruction = (
 
   const keys = isLatest
     ? [
-      { pubkey: tokenSwap, isSigner: false, isWritable: false },
-      { pubkey: authority, isSigner: false, isWritable: false },
-      { pubkey: transferAuthority, isSigner: true, isWritable: false },
-      { pubkey: source, isSigner: false, isWritable: true },
-      { pubkey: intoA, isSigner: false, isWritable: true },
-      { pubkey: intoB, isSigner: false, isWritable: true },
-      { pubkey: poolToken, isSigner: false, isWritable: true },
-      { pubkey: poolAccount, isSigner: false, isWritable: true },
-      { pubkey: tokenProgramId, isSigner: false, isWritable: false },
-    ]
+        { pubkey: tokenSwap, isSigner: false, isWritable: false },
+        { pubkey: authority, isSigner: false, isWritable: false },
+        { pubkey: transferAuthority, isSigner: true, isWritable: false },
+        { pubkey: source, isSigner: false, isWritable: true },
+        { pubkey: intoA, isSigner: false, isWritable: true },
+        { pubkey: intoB, isSigner: false, isWritable: true },
+        { pubkey: poolToken, isSigner: false, isWritable: true },
+        { pubkey: poolAccount, isSigner: false, isWritable: true },
+        { pubkey: tokenProgramId, isSigner: false, isWritable: false },
+      ]
     : [
-      { pubkey: tokenSwap, isSigner: false, isWritable: false },
-      { pubkey: authority, isSigner: false, isWritable: false },
-      { pubkey: source, isSigner: false, isWritable: true },
-      { pubkey: intoA, isSigner: false, isWritable: true },
-      { pubkey: intoB, isSigner: false, isWritable: true },
-      { pubkey: poolToken, isSigner: false, isWritable: true },
-      { pubkey: poolAccount, isSigner: false, isWritable: true },
-      { pubkey: tokenProgramId, isSigner: false, isWritable: false },
-    ];
+        { pubkey: tokenSwap, isSigner: false, isWritable: false },
+        { pubkey: authority, isSigner: false, isWritable: false },
+        { pubkey: source, isSigner: false, isWritable: true },
+        { pubkey: intoA, isSigner: false, isWritable: true },
+        { pubkey: intoB, isSigner: false, isWritable: true },
+        { pubkey: poolToken, isSigner: false, isWritable: true },
+        { pubkey: poolAccount, isSigner: false, isWritable: true },
+        { pubkey: tokenProgramId, isSigner: false, isWritable: false },
+      ];
   return new TransactionInstruction({
     keys,
     programId: swapProgramId,
@@ -355,26 +367,26 @@ export const withdrawInstruction = (
 
   const keys = isLatest
     ? [
-      { pubkey: tokenSwap, isSigner: false, isWritable: false },
-      { pubkey: authority, isSigner: false, isWritable: false },
-      { pubkey: transferAuthority, isSigner: true, isWritable: false },
-      { pubkey: poolMint, isSigner: false, isWritable: true },
-      { pubkey: sourcePoolAccount, isSigner: false, isWritable: true },
-      { pubkey: fromA, isSigner: false, isWritable: true },
-      { pubkey: fromB, isSigner: false, isWritable: true },
-      { pubkey: userAccountA, isSigner: false, isWritable: true },
-      { pubkey: userAccountB, isSigner: false, isWritable: true },
-    ]
+        { pubkey: tokenSwap, isSigner: false, isWritable: false },
+        { pubkey: authority, isSigner: false, isWritable: false },
+        { pubkey: transferAuthority, isSigner: true, isWritable: false },
+        { pubkey: poolMint, isSigner: false, isWritable: true },
+        { pubkey: sourcePoolAccount, isSigner: false, isWritable: true },
+        { pubkey: fromA, isSigner: false, isWritable: true },
+        { pubkey: fromB, isSigner: false, isWritable: true },
+        { pubkey: userAccountA, isSigner: false, isWritable: true },
+        { pubkey: userAccountB, isSigner: false, isWritable: true },
+      ]
     : [
-      { pubkey: tokenSwap, isSigner: false, isWritable: false },
-      { pubkey: authority, isSigner: false, isWritable: false },
-      { pubkey: poolMint, isSigner: false, isWritable: true },
-      { pubkey: sourcePoolAccount, isSigner: false, isWritable: true },
-      { pubkey: fromA, isSigner: false, isWritable: true },
-      { pubkey: fromB, isSigner: false, isWritable: true },
-      { pubkey: userAccountA, isSigner: false, isWritable: true },
-      { pubkey: userAccountB, isSigner: false, isWritable: true },
-    ];
+        { pubkey: tokenSwap, isSigner: false, isWritable: false },
+        { pubkey: authority, isSigner: false, isWritable: false },
+        { pubkey: poolMint, isSigner: false, isWritable: true },
+        { pubkey: sourcePoolAccount, isSigner: false, isWritable: true },
+        { pubkey: fromA, isSigner: false, isWritable: true },
+        { pubkey: fromB, isSigner: false, isWritable: true },
+        { pubkey: userAccountA, isSigner: false, isWritable: true },
+        { pubkey: userAccountB, isSigner: false, isWritable: true },
+      ];
 
   if (feeAccount) {
     keys.push({ pubkey: feeAccount, isSigner: false, isWritable: true });
@@ -422,24 +434,24 @@ export const withdrawExactOneInstruction = (
 
   const keys = isLatest
     ? [
-      { pubkey: tokenSwap, isSigner: false, isWritable: false },
-      { pubkey: authority, isSigner: false, isWritable: false },
-      { pubkey: transferAuthority, isSigner: true, isWritable: false },
-      { pubkey: poolMint, isSigner: false, isWritable: true },
-      { pubkey: sourcePoolAccount, isSigner: false, isWritable: true },
-      { pubkey: fromA, isSigner: false, isWritable: true },
-      { pubkey: fromB, isSigner: false, isWritable: true },
-      { pubkey: userAccount, isSigner: false, isWritable: true },
-    ]
+        { pubkey: tokenSwap, isSigner: false, isWritable: false },
+        { pubkey: authority, isSigner: false, isWritable: false },
+        { pubkey: transferAuthority, isSigner: true, isWritable: false },
+        { pubkey: poolMint, isSigner: false, isWritable: true },
+        { pubkey: sourcePoolAccount, isSigner: false, isWritable: true },
+        { pubkey: fromA, isSigner: false, isWritable: true },
+        { pubkey: fromB, isSigner: false, isWritable: true },
+        { pubkey: userAccount, isSigner: false, isWritable: true },
+      ]
     : [
-      { pubkey: tokenSwap, isSigner: false, isWritable: false },
-      { pubkey: authority, isSigner: false, isWritable: false },
-      { pubkey: poolMint, isSigner: false, isWritable: true },
-      { pubkey: sourcePoolAccount, isSigner: false, isWritable: true },
-      { pubkey: fromA, isSigner: false, isWritable: true },
-      { pubkey: fromB, isSigner: false, isWritable: true },
-      { pubkey: userAccount, isSigner: false, isWritable: true },
-    ];
+        { pubkey: tokenSwap, isSigner: false, isWritable: false },
+        { pubkey: authority, isSigner: false, isWritable: false },
+        { pubkey: poolMint, isSigner: false, isWritable: true },
+        { pubkey: sourcePoolAccount, isSigner: false, isWritable: true },
+        { pubkey: fromA, isSigner: false, isWritable: true },
+        { pubkey: fromB, isSigner: false, isWritable: true },
+        { pubkey: userAccount, isSigner: false, isWritable: true },
+      ];
 
   if (feeAccount) {
     keys.push({ pubkey: feeAccount, isSigner: false, isWritable: true });
@@ -478,34 +490,88 @@ export const swapInstruction = (
 
   const keys = isLatest
     ? [
-      { pubkey: tokenSwap, isSigner: false, isWritable: false },
-      { pubkey: authority, isSigner: false, isWritable: false },
-      { pubkey: transferAuthority, isSigner: true, isWritable: false },
-      { pubkey: userSource, isSigner: false, isWritable: true },
-      { pubkey: poolSource, isSigner: false, isWritable: true },
-      { pubkey: poolDestination, isSigner: false, isWritable: true },
-      { pubkey: userDestination, isSigner: false, isWritable: true },
-      { pubkey: poolMint, isSigner: false, isWritable: true },
-      { pubkey: feeAccount, isSigner: false, isWritable: true },
-      { pubkey: tokenProgramId, isSigner: false, isWritable: false },
-    ]
+        { pubkey: tokenSwap, isSigner: false, isWritable: false },
+        { pubkey: authority, isSigner: false, isWritable: false },
+        { pubkey: transferAuthority, isSigner: true, isWritable: false },
+        { pubkey: userSource, isSigner: false, isWritable: true },
+        { pubkey: poolSource, isSigner: false, isWritable: true },
+        { pubkey: poolDestination, isSigner: false, isWritable: true },
+        { pubkey: userDestination, isSigner: false, isWritable: true },
+        { pubkey: poolMint, isSigner: false, isWritable: true },
+        { pubkey: feeAccount, isSigner: false, isWritable: true },
+        { pubkey: tokenProgramId, isSigner: false, isWritable: false },
+      ]
     : [
-      { pubkey: tokenSwap, isSigner: false, isWritable: false },
-      { pubkey: authority, isSigner: false, isWritable: false },
-      { pubkey: userSource, isSigner: false, isWritable: true },
-      { pubkey: poolSource, isSigner: false, isWritable: true },
-      { pubkey: poolDestination, isSigner: false, isWritable: true },
-      { pubkey: userDestination, isSigner: false, isWritable: true },
-      { pubkey: poolMint, isSigner: false, isWritable: true },
-      { pubkey: feeAccount, isSigner: false, isWritable: true },
-      { pubkey: tokenProgramId, isSigner: false, isWritable: false },
-    ];
+        { pubkey: tokenSwap, isSigner: false, isWritable: false },
+        { pubkey: authority, isSigner: false, isWritable: false },
+        { pubkey: userSource, isSigner: false, isWritable: true },
+        { pubkey: poolSource, isSigner: false, isWritable: true },
+        { pubkey: poolDestination, isSigner: false, isWritable: true },
+        { pubkey: userDestination, isSigner: false, isWritable: true },
+        { pubkey: poolMint, isSigner: false, isWritable: true },
+        { pubkey: feeAccount, isSigner: false, isWritable: true },
+        { pubkey: tokenProgramId, isSigner: false, isWritable: false },
+      ];
 
   // optional depending on the build of token-swap program
   if (programOwner) {
     keys.push({ pubkey: programOwner, isSigner: false, isWritable: true });
   }
 
+  const data = Buffer.alloc(dataLayout.span);
+  dataLayout.encode(
+    {
+      instruction: 1, // Swap instruction
+      amountIn: new Numberu64(amountIn).toBuffer(),
+      minimumAmountOut: new Numberu64(minimumAmountOut).toBuffer(),
+    },
+    data
+  );
+
+  return new TransactionInstruction({
+    keys,
+    programId: swapProgramId,
+    data,
+  });
+};
+
+export const IBOCreateInstruction = (
+  poolAccount: PublicKey,
+  poolSigner: PublicKey,
+  redeemableMint: PublicKey,
+  raisingMint: PublicKey,
+  offeringMint: PublicKey,
+  poolRaising: PublicKey,
+  poolOffering: PublicKey,
+  distributionAuthority: PublicKey,
+  creatorRaising: PublicKey,
+  swapProgramId: PublicKey,
+  creatorOffering: PublicKey,
+  bananaSwapProgram: number | Numberu64,
+  tokenProgram: number | Numberu64,
+  clock: PublicKey | undefined
+): TransactionInstruction => {
+  const dataLayout = BufferLayout.struct([
+    BufferLayout.u8("instruction"),
+    uint64("amountIn"),
+    uint64("minimumAmountOut"),
+  ]);
+
+  const keys = [
+    { pubkey: poolAccount, isSigner: false, isWritable: false },
+    { pubkey: poolSigner, isSigner: false, isWritable: false },
+    { pubkey: redeemableMint, isSigner: true, isWritable: false },
+    { pubkey: raisingMint, isSigner: false, isWritable: true },
+    { pubkey: offeringMint, isSigner: false, isWritable: true },
+    { pubkey: poolRaising, isSigner: false, isWritable: true },
+    { pubkey: poolOffering, isSigner: false, isWritable: true },
+    { pubkey: distributionAuthority, isSigner: true, isWritable: true },
+    { pubkey: creatorRaising, isSigner: false, isWritable: true },
+    { pubkey: creatorOffering, isSigner: false, isWritable: false },
+    { pubkey: bananaSwapProgram, isSigner: false, isWritable: true },
+    { pubkey: tokenProgram, isSigner: false, isWritable: true },
+    { pubkey: clock, isSigner: false, isWritable: true },
+  ];
   const data = Buffer.alloc(dataLayout.span);
   dataLayout.encode(
     {
