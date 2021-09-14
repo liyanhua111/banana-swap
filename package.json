@@ -17,6 +17,7 @@
     "@solana/spl-token-swap": "0.0.2",
     "@solana/wallet-adapter-base": "^0.5.2",
     "@solana/wallet-adapter-coin98": "^0.1.2",
+    "@solana/wallet-adapter-slope": "^0.1.2",
     "@solana/web3.js": "1.24.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",

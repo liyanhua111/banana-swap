@@ -522,3 +522,56 @@ export const swapInstruction = (
     data,
   });
 };
+export const IBOCreateInstruction = (
+  poolAccount: PublicKey,
+  poolSigner: PublicKey,
+  redeemableMint: PublicKey,
+  raisingMint: PublicKey,
+  offeringMint: PublicKey,
+  poolRaising: PublicKey,
+  poolOffering: PublicKey,
+  distributionAuthority: PublicKey,
+  creatorRaising: PublicKey,
+  swapProgramId: PublicKey,
+  creatorOffering: PublicKey,
+  bananaSwapProgram: number | Numberu64,
+  tokenProgram: number | Numberu64,
+  clock: PublicKey | undefined
+): TransactionInstruction => {
+  const dataLayout = BufferLayout.struct([
+    BufferLayout.u8("instruction"),
+    uint64("amountIn"),
+    uint64("minimumAmountOut"),
+  ]);
+
+  const keys = [
+    { pubkey: poolAccount, isSigner: false, isWritable: false },
+    { pubkey: poolSigner, isSigner: false, isWritable: false },
+    { pubkey: redeemableMint, isSigner: true, isWritable: false },
+    { pubkey: raisingMint, isSigner: false, isWritable: true },
+    { pubkey: offeringMint, isSigner: false, isWritable: true },
+    { pubkey: poolRaising, isSigner: false, isWritable: true },
+    { pubkey: poolOffering, isSigner: false, isWritable: true },
+    { pubkey: distributionAuthority, isSigner: true, isWritable: true },
+    { pubkey: creatorRaising, isSigner: false, isWritable: true },
+    { pubkey: creatorOffering, isSigner: false, isWritable: false },
+    { pubkey: bananaSwapProgram, isSigner: false, isWritable: true },
+    { pubkey: tokenProgram, isSigner: false, isWritable: true },
+    { pubkey: clock, isSigner: false, isWritable: true },
+  ];
+  const data = Buffer.alloc(dataLayout.span);
+  dataLayout.encode(
+    {
+      instruction: 1, // Swap instruction
+      // amountIn: new Numberu64(amountIn).toBuffer(),
+      // minimumAmountOut: new Numberu64(minimumAmountOut).toBuffer(),
+    },
+    data
+  );
+
+  return new TransactionInstruction({ // @ts-ignore
+    keys,
+    programId: swapProgramId,
+    data,
+  });
+};
