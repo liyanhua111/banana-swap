@@ -15,7 +15,8 @@ import {
   PhantomWalletAdapter,
   MathWalletAdapter,
 } from "../wallet-adapters";
-import { Coin98WalletAdapter } from '@solana/wallet-adapter-coin98'
+import { Coin98WalletAdapter } from "@solana/wallet-adapter-coin98";
+import { SlopeWalletAdapter } from "@solana/wallet-adapter-slope";
 import { useConnectionConfig } from "../utils/connection";
 import { useLocalStorageState } from "../utils/utils";
 import { notify } from "../utils/notifications";
@@ -61,11 +62,17 @@ export const WALLET_PROVIDERS = [
   //   icon: require("../assets/img/wallet/Phantom.png"),
   //   adapter: PhantomWalletAdapter,
   // },
-    {
+  {
     name: "C98",
     url: "https://wallet.coin98.com/",
     icon: require("../assets/img/wallet/c98.png"),
     adapter: Coin98WalletAdapter,
+  },
+  {
+    name: "slope",
+    url: "https://chrome.google.com/webstore/detail/slope-finance-wallet/pocmplpaccanhmnllbbkpgfliimjljgo",
+    icon: require("../assets/img/wallet/slope.png"),
+    adapter: SlopeWalletAdapter,
   },
 ];
 
