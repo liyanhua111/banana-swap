@@ -63,7 +63,7 @@ export const WALLET_PROVIDERS = [
   //   adapter: PhantomWalletAdapter,
   // },
   {
-    name: "C98",
+    name: "Coin98",
     url: "https://wallet.coin98.com/",
     icon: require("../assets/img/wallet/c98.png"),
     adapter: Coin98WalletAdapter,
