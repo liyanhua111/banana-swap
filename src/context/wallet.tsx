@@ -64,12 +64,12 @@ export const WALLET_PROVIDERS = [
   // },
   {
     name: "Coin98",
-    url: "https://wallet.coin98.com/",
+    url: "https://chrome.google.com/webstore/detail/coin98-wallet/aeachknmefphepccionboohckonoeemg",
     icon: require("../assets/img/wallet/c98.png"),
     adapter: Coin98WalletAdapter,
   },
   {
-    name: "slope",
+    name: "Slope",
     url: "https://chrome.google.com/webstore/detail/slope-finance-wallet/pocmplpaccanhmnllbbkpgfliimjljgo",
     icon: require("../assets/img/wallet/slope.png"),
     adapter: SlopeWalletAdapter,
@@ -151,6 +151,7 @@ export function WalletProvider({ children = null as any }) {
   }, [wallet]);
 
   useEffect(() => {
+    console.log(window as any, wallet, autoConnect, "========");
     if (wallet && autoConnect) {
       wallet.connect();
       setAutoConnect(false);
@@ -189,6 +190,13 @@ export function WalletProvider({ children = null as any }) {
       >
         {WALLET_PROVIDERS.map((provider) => {
           const onClick = function () {
+            if (
+              (provider.name === "Coin98" && !(window as any).coin98) ||
+              (provider.name === "Slope" && !(window as any).Slope)
+            ) {
+              window.location.href = provider.url;
+              return;
+            }
             setProviderUrl(provider.url);
             setAutoConnect(true);
             close();
