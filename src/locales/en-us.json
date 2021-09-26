@@ -43,6 +43,7 @@
   "Fortheharvest":"Claimable $BANA:",
   "locked":"Locked",
   "InWallet":"$BANA Balance:",
+  "AcrossFarmsPools":"Across all Farms and Pools",
   "TVL":"TVL",
   "DEX":"DEX Stats",
   "TotalLiquidity":"Total Liquidity",
@@ -149,5 +150,4 @@
   "SlipeTip1":"Enter a valid slippage percentage",
   "SlipeTip2":"Your transaction may fail",
   "SlipeTip3":"Enter a valid number less than "
-  
 }

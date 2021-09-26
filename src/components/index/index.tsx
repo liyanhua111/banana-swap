@@ -89,7 +89,7 @@ export const IndexPage = (props: { left?: JSX.Element; right?: JSX.Element }) =>
             <div className="card indexPageL">
               <p className="font1">{t("TVL")}</p>
               <p className="font2">{formatUSD.format(totals.liquidity)}</p>
-              <p className="font3">Across all Farms and Pools</p>
+              <p className="font3">{t("AcrossFarmsPools")}</p>
             </div>
             <div className="card indexPageR">
               <p className="font1">{t("DEX")}</p>
