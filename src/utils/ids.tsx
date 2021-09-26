@@ -5,7 +5,7 @@ export const WRAPPED_SOL_MINT = new PublicKey(
   "So11111111111111111111111111111111111111112"
 );
 let TOKEN_PROGRAM_ID = new PublicKey(
-  "E1V6WhooVWxBHzR4GPN1MJzuyKjX9g32yWEUGU9uhtY4"
+  "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
 );
 
 let SWAP_PROGRAM_ID: PublicKey;
@@ -34,7 +34,7 @@ export const PROGRAM_IDS = [
         pubkey: new PublicKey("E1V6WhooVWxBHzR4GPN1MJzuyKjX9g32yWEUGU9uhtY4"),
         layout: TokenSwapLayout,
       },
-      legacy: [new PublicKey("9qvG1zUp8xF1Bi4m6UdRNby1BAAuaDrUxSpv4CmRRMjL")],
+      legacy: [],
     }),
   },
   {
