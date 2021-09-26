@@ -5,7 +5,7 @@ export const WRAPPED_SOL_MINT = new PublicKey(
   "So11111111111111111111111111111111111111112"
 );
 let TOKEN_PROGRAM_ID = new PublicKey(
-  "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+  "E1V6WhooVWxBHzR4GPN1MJzuyKjX9g32yWEUGU9uhtY4"
 );
 
 let SWAP_PROGRAM_ID: PublicKey;
@@ -13,7 +13,7 @@ let SWAP_PROGRAM_LEGACY_IDS: PublicKey[];
 let SWAP_PROGRAM_LAYOUT: any;
 
 export const SWAP_PROGRAM_OWNER_FEE_ADDRESS = new PublicKey(
-  "92qjbpxkBgfco4PtoFNXLGVQ88iQyeg2Cs9nLiRWDV14"
+  "DGeXtDToEN2naGpPyzSMmEotUPpVKp8kKd6hULd1gH9C"
 );
 
 export const SWAP_HOST_FEE_ADDRESS = process.env.REACT_APP_SWAP_HOST_FEE_ADDRESS
@@ -31,7 +31,7 @@ export const PROGRAM_IDS = [
     name: "mainnet-beta",
     swap: () => ({
       current: {
-        pubkey: new PublicKey("SwaPpA9LAaLfeLi3a68M4DjnLqgtticKg6CnyNwgAC8"),
+        pubkey: new PublicKey("E1V6WhooVWxBHzR4GPN1MJzuyKjX9g32yWEUGU9uhtY4"),
         layout: TokenSwapLayout,
       },
       legacy: [new PublicKey("9qvG1zUp8xF1Bi4m6UdRNby1BAAuaDrUxSpv4CmRRMjL")],
