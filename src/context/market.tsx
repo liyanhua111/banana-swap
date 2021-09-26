@@ -1,4 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
+import axios from "axios";
 import { POOLS_WITH_AIRDROP } from "./../models/airdrops";
 import { MINT_TO_MARKET } from "./../models/marketOverrides";
 import {
@@ -56,9 +57,10 @@ export function MarketProvider({ children = null as any }) {
     new Map()
   );
 
-  const connection = useMemo(() => new Connection(endpoint, "recent"), [
-    endpoint,
-  ]);
+  const connection = useMemo(
+    () => new Connection(endpoint, "recent"),
+    [endpoint]
+  );
 
   const marketByMint = useMemo(() => {
     return [
@@ -137,7 +139,7 @@ export function MarketProvider({ children = null as any }) {
         allMarkets.filter((a) => cache.get(a) === undefined),
         "single"
       ).then(({ keys, array }) => {
-        allMarkets.forEach(() => { });
+        allMarkets.forEach(() => {});
 
         return array.map((item, index) => {
           const marketAddress = keys[index];
@@ -228,7 +230,7 @@ export function MarketProvider({ children = null as any }) {
       const info = marketByMint.get(mintAddress);
       const market = cache.get(info?.marketInfo.address.toBase58() || "");
       if (!market) {
-        return () => { };
+        return () => {};
       }
 
       // TODO: get recent volume
@@ -435,7 +437,7 @@ function createEnrichedPools(
             // Aproximation not true for all pools we need to fine a better way
             const daysSinceInception = Math.floor(
               (TODAY.getTime() - INITAL_LIQUIDITY_DATE.getTime()) /
-              (24 * 3600 * 1000)
+                (24 * 3600 * 1000)
             );
             const apy0 =
               parseFloat(
@@ -522,7 +524,7 @@ function calculateAirdropYield(
           acc +
           // airdrop yield
           ((item.amount * midPrice) / (baseReserveUSD + quoteReserveUSD)) *
-          (365 / 30);
+            (365 / 30);
       }
 
       return acc;
@@ -549,9 +551,13 @@ const getMidPrice = (marketAddress?: string, mintAddress?: string) => {
   // const SERUM_TOKEN = TOKEN_MINTS.find(
   //   (a) => a.address.toBase58() === mintAddress
   // );
+  // @ts-ignore
+  const priceListLocal =  // @ts-ignore
+    JSON.parse(window.localStorage.getItem("token_price_list")) || {};
+  const priceListFromAPI = priceListLocal;
   const priceList = {
-    "So11111111111111111111111111111111111111112": 133,
-    "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": 1,
+    So11111111111111111111111111111111111111112: 133,
+    EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v: 1,
     "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E": 41617,
     "7dLVkUfBVfCGkFhSXDCq1ukM9usathSgS716t643iFGF": 2927,
     // "4k9s5D7b3LWQ3ByyGiFhRqRi47NjsrjEYrT8XWGyuiDW": 12,
@@ -569,9 +575,9 @@ const getMidPrice = (marketAddress?: string, mintAddress?: string) => {
     // "Da8A9pM6Sfz2Cxce2V6szHoXE6K3DNR7natCHW7P6XWU":25.7,
     // "884XYVwEX51J7g9gXcrn2NK75pwXSUnLK2HFd6aaxA8R":0.14,
     // "E9tCeMVUPUGFDhUj9EcofNpkNCHbZLaSyS68kuXRN2vZ":1,
-  }
-    // @ts-ignore
-  return priceList[mintAddress] || priceList[marketAddress] || 0;
+  };
+  // @ts-ignore
+  return priceListFromAPI[mintAddress] || priceListFromAPI[marketAddress] || 0;
   // if (STABLE_COINS.has(SERUM_TOKEN?.name || "")) {
   //   return 1.0;
   // }

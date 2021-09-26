@@ -3,7 +3,7 @@ import {Link,Route,Switch,Redirect} from 'react-router-dom'
 import "./App.less";
 import Main from "./components/main/main";
 import { Home } from "./components/home";
-import {ComingSoon} from "./components/comingSoon"
+import {ComingSoon} from "./components/comingSoon";
 function App() {
   return (
     <div className="App">

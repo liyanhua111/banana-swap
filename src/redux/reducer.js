@@ -4,11 +4,11 @@ const init = {
   hamburger: true,
   collapsed: false,
   myPoolsLoading: false,
+  tokenPriceList:[]
 };
 
 const hamburger = (state = init.hamburger, action) => {
   const { data } = action;
-  console.log(data);
   switch (action.type) {
     case "changeHamburger":
       return data;
