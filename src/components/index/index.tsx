@@ -27,6 +27,7 @@ export const IndexPage = (props: { left?: JSX.Element; right?: JSX.Element }) =>
   }));
   const { pools } = usePools();
   const enriched = useEnrichedPools(pools);
+  console.log(enriched,"----------")
   useEffect(() => {
     setTotals(
       enriched.reduce(
