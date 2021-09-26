@@ -12,7 +12,7 @@ import axios from "axios";
 const setPriceToken = async function () {
   setInterval(async () => {
     const priceApiList = await axios.get(
-      "http://www.banana-swap.com:4001/api/v2/tokenList"
+      "https://www.bananaswap.net:4002/api/v2/tokenList"
     );
     localStorage.setItem(
       "token_price_list",
