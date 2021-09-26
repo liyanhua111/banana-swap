@@ -11,11 +11,17 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 import { setProgramIds } from "./ids";
 import { notify } from "./notifications";
 import { ExplorerLink } from "../components/explorerLink";
+// import {
+//   TokenListProvider,
+//   ENV as ChainID,
+//   TokenInfo,
+// } from "@hurryfire/spl-token-registry";
 import {
   TokenListProvider,
   ENV as ChainID,
   TokenInfo,
-} from "@hurryfire/spl-token-registry";
+} from "@solana/spl-token-registry";
+
 import { cache, getMultipleAccounts } from "./accounts";
 
 export type ENV = "mainnet-beta" | "testnet" | "devnet" | "localnet";
@@ -26,21 +32,21 @@ export const ENDPOINTS = [
     endpoint: "https://solana-api.projectserum.com/",
     chainID: ChainID.MainnetBeta,
   },
-  {
-    name: "testnet" as ENV,
-    endpoint: clusterApiUrl("testnet"),
-    chainID: ChainID.Testnet,
-  },
-  {
-    name: "devnet" as ENV,
-    endpoint: "https://api.devnet.solana.com",
-    chainID: ChainID.Devnet,
-  },
-  {
-    name: "localnet" as ENV,//http://45.77.106.109:8899
-    endpoint: "http://47.243.60.172:8899",
-    chainID: ChainID.Devnet,
-  },
+  // {
+  //   name: "testnet" as ENV,
+  //   endpoint: clusterApiUrl("testnet"),
+  //   chainID: ChainID.Testnet,
+  // },
+  // {
+  //   name: "devnet" as ENV,
+  //   endpoint: "https://api.devnet.solana.com",
+  //   chainID: ChainID.Devnet,
+  // },
+  // {
+  //   name: "localnet" as ENV,//http://45.77.106.109:8899
+  //   endpoint: "http://47.243.60.172:8899",
+  //   chainID: ChainID.Devnet,
+  // },
 ];
 
 const DEFAULT = ENDPOINTS[0].endpoint;
