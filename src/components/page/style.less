@@ -1,3 +1,259 @@
 .soonPage{
   margin-top: -60px;
 }
+.farmPage{
+  .farmHeader{
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+    .tabBox{
+      margin-left: 33px;
+      display: flex;
+      min-width: 170px;
+      height: 40px;
+      line-height: 40px;
+      background: #222222;
+      border-radius: 20px;
+      p{
+        width: 50%;
+        color: #FFC000;
+        text-align: center;
+        cursor: pointer;
+      }
+      .active{
+        height: 40px;
+        line-height: 40px;
+        background: #FFC000;
+        color: #fff;
+        border-radius: 20px;
+      }
+    }
+    .ant-switch{
+      min-width: 66px;
+      height: 40px;
+      line-height: 40px;
+      background-color:rgba(34,34,34,1);
+      margin-right: 5px;
+      &.ant-switch-checked{
+        background-color: #FFC000;
+        .ant-switch-handle::before{
+          background-color: #fff;
+        }
+        .ant-switch-handle {
+          left: calc(100% - 34px - 2px);
+      }
+      }
+      .ant-switch-handle{
+        top: 6px;
+        left: 6px;
+        width: 28px;
+        height: 28px;
+      }
+      .ant-switch-handle::before{
+        background-color:#FAE169;
+        border-radius: 50%;
+      }
+    }
+  }
+  .farmCardBox{
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    margin-top: 45px;
+    .subCard{
+      width: 362px;
+      background: #fff;
+      padding: 25px 23px;
+      border-radius: 10px;
+      margin-right: 24px;
+      margin-bottom: 25px;
+      .subHeader{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .iconCurrencyBox{
+          position: relative;
+          width: 66px;
+          height: 66px;
+          .img1{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width:47px;
+            height: 56px;
+          }
+          .img2{
+            position: absolute;
+            right: 0;
+            top: 0;
+            width:28px;
+            height: 28px;
+          }
+        }
+        .subHeaderR{
+          .font1{
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 3px;
+          }
+          .subHeaderRB{
+            display: flex;
+            align-items: center;
+            .label{
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              min-width: 88px;
+              height: 30px;
+              padding: 0 8px;
+              color: #68CF29;
+              border: 1px solid #68CF29;
+              border-radius: 15px;
+              img{
+                width: 20px;
+                height: 20px;
+                margin-right: 7px;
+              }
+            }
+            .font2{
+              width: 44px;
+              height: 30px;
+              line-height: 30px;
+              background: #FFC000;
+              border-radius: 15px;
+              color: #fff;
+              margin-left: 3px;
+            }
+          }
+        }
+      }
+      .inforBox{
+        margin-top: 10px;
+        &.show{
+          display: block;
+        }
+        .hide{
+          display: none;
+        }
+        .subInfor{
+          display: flex;
+          justify-content: space-between;
+          font-size: 16px;
+          margin-bottom: 10px;
+          p{
+            margin-bottom: 0;
+          }
+          .calculate{
+            width: 20px;
+            height: 20px;
+            margin-right: 3px;
+            cursor: pointer;
+          }
+          .val{
+            font-weight: 600;
+          }
+          .color1{
+            color: #FFC000;
+            margin-left: 5px;
+          }
+          .color2{
+            color: #FFC000;
+          }
+          .font1{
+            font-size: 12px;
+          }
+          .font2{
+            font-size: 20px;
+            font-weight: 600;
+            text-align: left;
+          }
+          .hanlerBtn{
+            min-width: 122px;
+            height: 48px;
+            line-height: 48px;
+            background: #FFC000;
+            border-radius: 10px;
+            color: #fff;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            &.hanlerBtnDisable{
+              background: #F4F5FD;
+              color: #D7D8DD;
+            }
+          }
+        }
+      }
+      .detailed{
+        display: flex;
+        justify-content: center;
+        color:#FFC000;
+        font-size: 16px;
+        cursor: pointer;
+        padding-right: 30px;
+        &::after{
+          position: relative;
+          display: inline-block;
+          content: "";
+          width: 22px;
+          height: 22px;
+          top: 3px;
+          right: 0;
+          background: url(../../assets/img/farm/arrow.png);
+          background-size: contain;
+        }
+        &.active::after{
+          transform: rotate(180deg);
+        }
+      }
+      .color2{
+        color: #FFC000;
+        font-size: 16px;
+      }
+      .watch{
+        text-align: left;
+      }
+    }
+  }
+}
+.earningsContent{
+
+  .rowContentBox{
+    display: flex;
+  }
+  .rowContent{
+    flex: 1;
+    text-align: left;
+    font-weight: 600;
+    .title{
+      color: #FFC000;
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+    p{
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+  }
+  .tip{
+    color: #FFC000;
+    font-weight: 600;
+    font-size: 12px;
+    margin-bottom: 27px;
+    margin-top: 23px;
+  }
+  .watch{
+    color: #FFC000;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    img{
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
