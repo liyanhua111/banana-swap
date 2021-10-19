@@ -257,3 +257,145 @@
     }
   }
 }
+
+.pledgeContent{
+  .inputBoxBox{
+     border: 3px solid #FAC9E2;
+     border-radius: 10px;
+    .inputBox{
+      border: 1px solid #F173B3;
+      border-radius: 8px;
+      padding: 16px ;
+      font-weight: 600;
+    }
+    .titleBox{
+      display: flex;
+      justify-content: space-between;
+    }
+    .input{
+      display: flex;
+      justify-content: space-between;
+      &>div{
+        display: flex;
+        align-items: center;
+      }
+      .max{
+        min-width: 72px;
+        height: 34px;
+        line-height: 32px;
+        border-radius: 17px;
+        background: #FFC000;
+        color: #fff;
+        font-size: 20px;
+        text-align: center;
+        margin-right: 15px;
+        margin-bottom: 0;
+        cursor: pointer;
+      }
+      input{
+        width: 120px;
+        height: 40px;
+        line-height: 40px;
+        color: #FFC000;
+        font-size: 16px;
+        font-weight: 600;
+        border: none;
+        outline: none;
+      }
+    }
+  }
+  .font1{
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+  .font2{
+    color: #ED4B9E;
+    margin-top: 3px;
+    margin-bottom: 18px;
+  }
+  .subInfor{
+      display: flex;
+      justify-content: space-between;
+      font-size: 18px;
+      margin-bottom: 25px;
+      p{
+        margin-bottom: 0;
+      }
+      .calculate{
+        width: 20px;
+        height: 20px;
+        margin-right: 3px;
+        cursor: pointer;
+      }
+      .val{
+        font-weight: 600;
+      }
+    }
+    .watch{
+      color: #FFC000;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+      img{
+        width: 20px;
+      }
+    }
+}
+@media only screen and (max-width: 600px) {
+  #root .farmPage{
+    flex-wrap: wrap;
+    padding: 10px;
+    .farmHeader{
+      font-size: 14px;
+      .tabBox{
+        min-width: 150px;
+      }
+    }
+    .subCard{
+      width: 100%;
+      margin-right: 0;
+      .hanlerBtn{
+        min-width: 100px;
+        height: 40px;
+        line-height: 40px;
+      }
+      .subInfor{
+        font-size: 14px;
+      }
+    }
+  }
+  .farmModel{
+    .pledgeContent{
+      .titleBox{
+        .font1{
+          font-size: 14px;
+        }
+      }
+      .inputBoxBox .input {
+        .max{
+          min-width: 58px;
+          font-size: 14px;
+        }
+        .font1{
+          font-size: 12px;
+        }
+        input{
+          width: 65px;
+        }
+      }
+      .subInfor{
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+
+.ant-modal-footer{
+  display: flex;
+  padding: 20px 15px;
+  .ant-btn{
+    flex: 1;
+    border-radius: 10px;
+  }
+}

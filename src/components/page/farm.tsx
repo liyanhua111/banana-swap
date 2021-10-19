@@ -11,7 +11,7 @@ import './style.less'
 export const Farm = (props: { left?: JSX.Element; right?: JSX.Element }) => {
   const [pledgedChecked, setPledgedChecked] = useState(false)
   const [tabActive, setTabActive] = useState(0)
-  const [isModalVisible1, setIsModalVisible1] = useState(true)
+  const [isModalVisible1, setIsModalVisible1] = useState(false)
   const [isModalVisible2, setIsModalVisible2] = useState(false)
   const [isModalVisible3, setIsModalVisible3] = useState(false)
   const [tableData, setTableData] = useState([{inforArrowState:false},{inforArrowState:false},{inforArrowState:false},{inforArrowState:false},{inforArrowState:false}])
@@ -51,6 +51,14 @@ export const Farm = (props: { left?: JSX.Element; right?: JSX.Element }) => {
     } else if (type == 3) {
       setIsModalVisible3(false);
     } 
+  }
+  // 质押lp代币
+  const pledgeFunc = function () {
+    
+  }
+  // 取消质押lp代币
+  const cancelPledgeFunc = function () {
+    
   }
   const farmPage = (
     <>
@@ -120,7 +128,7 @@ export const Farm = (props: { left?: JSX.Element; right?: JSX.Element }) => {
                       <p className="font1"><span className="color2">bana-BNB LP</span> 已质押</p>
                       <p className="font2">0.000</p>
                     </div>
-                    <p className="hanlerBtn">质押LP</p>
+                    <p className="hanlerBtn" onClick={()=>showModal(2)}>质押LP</p>
                   </div>
                   <div className="subInfor">
                     <p>banana-USDC LP <span className="color1">STAKED</span></p>
@@ -200,6 +208,93 @@ export const Farm = (props: { left?: JSX.Element; right?: JSX.Element }) => {
           <div className="watch">
             获取banana-sol LP
             <img src={require('../../assets/img/farm/share.png')} alt="" />
+          </div>
+        </div>
+      </Modal>
+      <Modal
+        className="farmModel"
+        title="质押lp代币"
+        visible={isModalVisible2}
+        centered
+        onCancel={()=>{handleCancel(2)}}
+        footer={[
+          <Button size="large" key="back" onClick={() => { handleCancel(2) }}>
+            取消
+          </Button>,
+          <Button
+            size="large"
+            key="link"
+            type="primary"
+            onClick={()=>{pledgeFunc()}}
+          >
+            确认
+          </Button>,
+        ]}
+        width="436px"
+      >
+        <div className="pledgeContent">
+          <div className="inputBoxBox">
+            <div className="inputBox">
+              <div className="titleBox">
+                <p>质押</p>
+                <p className="font1">余额：0</p>
+              </div>
+              <div className="input">
+                <input type="number" placeholder="0.0" />
+                <div>
+                  <p className="max">最大</p>
+                  <p className="font1">BANA-BNB LP</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p className="font2">没有可质押的代币：获取 bana-bnb lp</p>
+          <div className="subInfor">
+            <p>当前汇率下的年度投资回报率:</p>
+            <p className="val"><img src={require('../../assets/img/farm/calculate.png')} alt="" className="calculate" onClick={()=>showModal(1)}/>283.37%</p>
+          </div>
+          <div className="watch">
+            获取banana-sol LP
+            <img src={require('../../assets/img/farm/share.png')} alt="" />
+          </div>
+        </div>
+      </Modal>
+      <Modal
+        className="farmModel"
+        title="取消质押lp代币"
+        visible={isModalVisible3}
+        centered
+        onCancel={()=>{handleCancel(3)}}
+        footer={[
+          <Button size="large" key="back" onClick={() => { handleCancel(3) }}>
+            取消
+          </Button>,
+          <Button
+            size="large"
+            key="link"
+            type="primary"
+            onClick={()=>{cancelPledgeFunc()}}
+          >
+            确认
+          </Button>,
+        ]}
+        width="436px"
+      >
+        <div className="pledgeContent">
+          <div className="inputBoxBox">
+            <div className="inputBox">
+              <div className="titleBox">
+                <p>质押</p>
+                <p className="font1">余额：0</p>
+              </div>
+              <div className="input">
+                <input type="number" placeholder="0.0" />
+                <div>
+                  <p className="max">最大</p>
+                  <p className="font1">BANA-BNB LP</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </Modal>
